@@ -9,7 +9,7 @@
 
 **Comprehensive documentation for the Excellent Data Filler browser extension**
 
-[🌐 Live Documentation](https://efiller-doc.netlify.app/) • [📦 Download Extension](https://chrome.google.com/webstore/detail/excellent-data-filler-cth/abafaagbfhobgjkcepckbnadafflkdea) • [🐛 Report Issues](https://github.com/jeevan-lal/excellent-data-filler-docs/issues)
+[🌐 Live Documentation](https://docs.edfiller.in/) • [📦 Download Extension](https://chrome.google.com/webstore/detail/excellent-data-filler-cth/abafaagbfhobgjkcepckbnadafflkdea) • [🐛 Report Issues](https://github.com/jeevan-lal/excellent-data-filler-docs/issues)
 
 </div>
 
@@ -175,7 +175,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ by [Jeevan Lal](https://github.com/jeevan-lal)**
 
-[📚 Documentation](https://efiller-doc.netlify.app/) • [📦 Download](https://chrome.google.com/webstore/detail/excellent-data-filler-cth/abafaagbfhobgjkcepckbnadafflkdea) • [⭐ Star on GitHub](https://github.com/jeevan-lal/excellent-data-filler-docs)
+[📚 Documentation](https://docs.edfiller.in/) • [📦 Download](https://chrome.google.com/webstore/detail/excellent-data-filler-cth/abafaagbfhobgjkcepckbnadafflkdea) • [⭐ Star on GitHub](https://github.com/jeevan-lal/excellent-data-filler-docs)
 
 </div>
 
