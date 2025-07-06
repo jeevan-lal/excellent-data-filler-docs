@@ -280,7 +280,7 @@ const sideBarList = [
 export default {
   lang: 'en-US',
   title: 'Excellent Data Filler',
-  description: 'Excellent Data Filler is a form auto filler. With the help of which you can fill the form through excel template and it is all automatic.',
+  description: 'Excellent Data Filler is a powerful browser extension that automates form filling and data scraping across multiple browsers.',
   appearance: true,
   lastUpdated: true,
   outDir: '../dist',
@@ -290,11 +290,11 @@ export default {
     ['meta', { name: 'title', content: 'Excellent Data Filler 4 - C Tech Hindi' }],
     ['meta', { name: 'og:locale', content: 'en_US' }],
     ['meta', { name: 'og:type', content: 'website' }],
-    ['meta', { name: 'og:url', content: 'https://efiller-doc.netlify.app/' }],
+    ['meta', { name: 'og:url', content: 'https://docs.edfiller.in/' }],
     ['meta', { name: 'og:title', content: 'Excellent Data Filler 4' }],
     ['meta', { name: 'og:site_name', content: 'Excellent Data Filler' }],
-    ['meta', { name: 'og:description', content: "Excellent Data Filler is a form auto filler. With the help of which you can fill the form through excel template and it is all automatic." }],
-    ['meta', { name: 'og:image', content: 'https://efiller-doc.netlify.app/512x512.png' }],
+    ['meta', { name: 'og:description', content: "Excellent Data Filler is a powerful browser extension that automates form filling and data scraping across multiple browsers." }],
+    ['meta', { name: 'og:image', content: 'https://edfiller.in/logo/logo-500x.png' }],
     ['meta', { name: 'og:image:type', content: 'image/png' }],
   ],
   themeConfig: {
@@ -306,7 +306,7 @@ export default {
     // logo: '/32x32.png',
     socialLinks: [
       { icon: "youtube", link: "https://www.youtube.com/@ctechhindi" },
-      { icon: "github", link: "https://github.com/jeevan-lal/Excel-Data-Filler-V4" },
+      { icon: "github", link: "https://github.com/jeevan-lal/excellent-data-filler-docs" },
     ],
     nav: [
       { text: 'Home', link: '/' },
@@ -315,13 +315,13 @@ export default {
       {
         text: `v${version}`,
         items: [
-          {
-            text: 'Changelog',
-            link: 'https://efiller.netlify.app/changelog',
-          },
+          // {
+          //   text: 'Changelog',
+          //   link: 'https://efiller.netlify.app/changelog',
+          // },
           {
             text: 'Report Issues',
-            link: 'https://github.com/jeevan-lal/Excel-Data-Filler-V4/issues',
+            link: 'https://github.com/jeevan-lal/excellent-data-filler-docs/issues',
           }
         ],
       },
@@ -339,7 +339,7 @@ export default {
       copyright: `Copyright © 2021-${new Date().getFullYear()} C Tech Hindi`,
     },
     editLink: {
-      pattern: 'https://github.com/jeevan-lal/Excel-Data-Filler-V4/blob/master/docs/:path',
+      pattern: 'https://github.com/jeevan-lal/excellent-data-filler-docs/blob/master/docs/:path',
       text: 'Edit this page on GitHub'
     },
   },

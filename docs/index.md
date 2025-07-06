@@ -4,16 +4,16 @@ title: Home
 hero:
   name: Excellent Data Filler
   image:
-    src: /180x180.png
+    src: /logo-white.svg
   text: "Auto Filler and Clicker"
   tagline: Excellent Data Filler is a form auto filler and Scraper Data. With the help of which you can fill the form through excel template and it is all automatic.
   actions:
     - theme: brand
       text: Get Started
       link: /documentation/
-    - theme: alt
-      text: Changelog
-      link: https://efiller.netlify.app/changelog
+    # - theme: alt
+    #   text: Changelog
+    #   link: https://efiller.netlify.app/changelog
     - theme: alt
       text: Download
       link: /documentation/#download-extension
