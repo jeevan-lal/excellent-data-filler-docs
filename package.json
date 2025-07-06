@@ -1,0 +1,32 @@
+{
+  "name": "excellent-data-filler-docs",
+  "version": "4.8.6",
+  "description": "Documentation site for Excellent Data Filler - a powerful browser extension that automates form filling and data scraping",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs"
+  },
+  "keywords": [
+    "ctechhindi",
+    "jeevan-lal",
+    "excellent-data-filler-docs",
+    "edfiller",
+    "extension",
+    "excellent-data-filler"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeevan-lal/excellent-data-filler-docs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeevan-lal/excellent-data-filler-docs/issues"
+  },
+  "dependencies": {
+    "extra-javascript-functions": "file:../../../Javascript/_lib/_extra-javascript-funs",
+    "vitepress": "^2.0.0-alpha.7",
+    "vue": "^3.4.15"
+  },
+  "author": "Jeevan Lal",
+  "license": "MIT"
+}

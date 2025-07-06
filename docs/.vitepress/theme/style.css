@@ -1,0 +1,66 @@
+/* Custom theme styles */
+:root {
+  /* Brand colors */
+  --vp-c-brand: #646cff;
+  --vp-c-brand-light: #747bff;
+  --vp-c-brand-lighter: #9499ff;
+  --vp-c-brand-dark: #535bf2;
+  --vp-c-brand-darker: #454ce1;
+
+  /* Layout */
+  --vp-layout-max-width: 1440px;
+
+  /* Component styles */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-dark);
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-bg: var(--vp-c-brand-darker);
+}
+
+/* Dark mode adjustments */
+.dark {
+  --vp-c-bg: #1a1a1a;
+  --vp-c-bg-soft: #242424;
+  --vp-c-bg-mute: #2f2f2f;
+}
+
+/* Typography */
+.vp-doc h1 {
+  font-size: 2.6rem;
+  font-weight: 600;
+}
+
+.vp-doc h2 {
+  font-size: 2rem;
+  border-top: none;
+  margin-top: 2rem;
+}
+
+/* Links */
+.vp-doc a {
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.vp-doc a:hover {
+  text-decoration: underline;
+}
+
+/* Code blocks */
+.vp-doc div[class*='language-'] {
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Tables */
+.vp-doc table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+} 
