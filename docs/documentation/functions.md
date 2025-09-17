@@ -124,6 +124,24 @@ If you want to check an element whether the element is in the page or not and th
 | Selector Query           | true     |
 | Wait Until Element Found | false    |
 
+## elementVisible
+
+If there is any element in the page and that element is invisible to us then you can use this function to make that element visible.
+
+| Options        | Required |
+| -------------- | -------- |
+| Selector Type  | true     |
+| Selector Query | true     |
+
+## elementInvisible
+
+If there is any element in the page and that element is visible to us then you can use this function to make that element invisible.
+
+| Options        | Required |
+| -------------- | -------- |
+| Selector Type  | true     |
+| Selector Query | true     |
+
 ## removeElement
 
 If you want to remove element from page.

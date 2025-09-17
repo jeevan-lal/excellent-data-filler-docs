@@ -19,8 +19,8 @@ const sideBarList = [
         link: '/documentation/#video-tutorial'
       },
       {
-        text: 'Join',
-        link: '/documentation/#join'
+        text: 'Need Help?',
+        link: '/documentation/#need-help'
       },
     ]
   },
@@ -30,11 +30,11 @@ const sideBarList = [
     items: [
       {
         text: 'Icon',
-        link: '/documentation/extension#icon'
+        link: '/documentation/icon'
       },
       {
         text: 'Settings',
-        link: '/documentation/extension#settings'
+        link: '/documentation/settings'
       },
       {
         text: 'Log',
@@ -165,6 +165,10 @@ const sideBarList = [
       {
         text: 'Save as PDF',
         link: '/documentation/field-types/save-as-pdf'
+      },
+      {
+        text: 'More Field Types',
+        link: '/documentation/form-fields/field-types'
       }
     ]
   },

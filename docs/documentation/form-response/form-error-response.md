@@ -60,7 +60,7 @@ You can also give the address of the element of error message. By default error 
 
 ### Matching Message In Alert Message
 
-If the response of the entry comes in the form of **javascript dialog** (Browser Alert), you can hide the dialog from [extension settings](/documentation/extension#hide-javascript-dialog) and fetch the response to match against given [Enter Error Message](#enter-error-message).
+If the response of the entry comes in the form of **javascript dialog** (Browser Alert), you can hide the dialog from [extension settings](/documentation/settings#hide-javascript-dialog) and fetch the response to match against given [Enter Error Message](#enter-error-message).
 
 <img src="/image/entry-response-09.png" alt="Alert Dialog">
 

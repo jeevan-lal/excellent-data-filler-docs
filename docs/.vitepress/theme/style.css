@@ -63,4 +63,11 @@
   width: 100%;
   display: table;
   border-collapse: collapse;
-} 
+}
+
+input,
+textarea,
+button {
+  background-color: initial !important;
+  /* border: initial !important; */
+}

@@ -22,6 +22,8 @@ This field type is designed for handling `dropdown` elements in web applications
 | Before selecting the dropdown option, check that option is already selected?                          | Specifies whether the field should check if the option is already selected before attempting to select it again.                                                                                         |
 | Before selecting the dropdown option, uncheck the already selected options                            | Determines whether the field should uncheck any already selected options before selecting the new one.                                                                                                   |
 | Trigger event on dropdown matched option                                                              | Specifies whether an event should be triggered when the matched option is found in the dropdown.                                                                                                         |
+| Trigger event for open dropdown option list                                  | Specifies whether an event should be triggered for opening the dropdown option list.                                                                                                          |
+| After choosing the dropdown option, don't close the dropdown                 | Specifies whether the dropdown should remain open after selecting an option.                                                                                                                  |
 
 ## Match options as
 

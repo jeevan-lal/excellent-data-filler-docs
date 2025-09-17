@@ -1,75 +1,169 @@
-# Site Form
+# 📋 Site Form {#site-form}
 
-The part of the site on which you want to execute the extension is called a form. This form is inserted in the [site](/documentation/site/site).
+Forms are the specific pages on your website where you want to execute the extension for automated data filling. Each form is configured with URL matching rules and field definitions.
 
 <img src="/image/form-01.png" alt="Form">
 
-## Insert Site Form
+## 📋 Form Options {#form-options}
 
-First we have to [insert the site](/documentation/site/site#insert-site), after that by editing the site, you can also insert the form of the site, in this you can also insert **multiple** forms.
+Essential form configuration options for automated form filling.
 
-- First [Insert Site](/documentation/site/site#insert-site).
-- Click the edit site button.
-- Open **Site Form Pages** tab and click insert form button and fill page **Page URL** and [**URL Match Type**](#form-url-match-types).
-- Click Save Button.
-- DONE 🎉
+| Form Options                            | Required | Description                                  | Example Values                                      |
+| --------------------------------------- | -------- | -------------------------------------------- | --------------------------------------------------- |
+| **Page URL**                            | Yes      | Target page URL for form execution           | `https://example.com/contact`                       |
+| **URL Match Type**                      | Yes      | Method for matching page URLs                | **Full URL**, **Pathname**, **Hostname**, **RegEx** |
+| **Description**                         | No       | Optional description for form identification | `Contact Form`, `Registration Page`                 |
+| **Active/Inactive**                     | Yes      | Enable or disable form processing            | **Active**, **Inactive**                            |
+| **Delay Time Before Running This Form** | No       | Wait time before form execution              | `0`, `500`, `1000` (milliseconds)                   |
+| **Delay Time After Running This Form**  | No       | Wait time after form execution               | `0`, `500`, `1000` (milliseconds)                   |
 
-<img src="/image/insert-site-form-manually-01.png" alt="Insert Site Manually">
-<br>
+## 🚀 Insert Site Form {#insert-site-form}
 
-- Page URL
-- Match URL Types
-- Description
-- Active/Deactivate
-- Move Up/Down
-- Form Fields
-- Edit Form
-- Duplicate
-- Copy Form
-- Paste Form
-- Delete Form
+Create and configure forms for automated data filling on your website.
 
-#### Form URL Match Types
+### 📝 Step-by-Step Process
 
-- Match with Full URL
-- Match with URL pathname
-- Match with URL hostname
-- Match with RegEx
+- **First [Insert Site](/documentation/site/site#insert-site)**
+- **Click the edit site button**
+- **Open Site Form Pages tab** and click `insert form` button left side of the delete button
+- **Fill Page URL** and [**URL Match Type**](#form-url-match-types)
+- **Click Save Button**
 
-::: tip
+<img src="/image/insert-site-form.gif" width="650" height="650" alt="Insert Site Manually">
 
-Match with RegEx (Two RegEx)
+### ⚙️ Form Management Options
 
-- (:any)
-- (:any(:end))
+| Option                | Description               | Use Case                     |
+| --------------------- | ------------------------- | ---------------------------- |
+| **Page URL**          | Target page URL           | Specify which page to fill   |
+| **Match URL Types**   | URL matching method       | Flexible page targeting      |
+| **Description**       | Form identification       | Organize multiple forms      |
+| **Active/Deactivate** | Enable/disable form       | Control form processing      |
+| **Move Up/Down**      | Reorder forms             | Prioritize form execution    |
+| **Form Fields**       | Manage field definitions  | Configure data filling       |
+| **Edit Form**         | Modify form settings      | Update form configuration    |
+| **Duplicate**         | Copy form settings        | Create similar forms quickly |
+| **Copy Form**         | Copy form to clipboard    | Share form configurations    |
+| **Paste Form**        | Paste form from clipboard | Import form configurations   |
+| **Delete Form**       | Remove form               | Clean up unused forms        |
 
-:::
+## 🔗 Form URL Match Types {#form-url-match-types}
 
-| SITE FORM URL WITH REGEX        | SITE FORM URL                    | IS MATCHED |
-| ------------------------------- | -------------------------------- | ---------- |
-| http://demo.in/new/(:any)/edit  | http://demo.in/new/jK33k3ui/edit | ✔          |
-| http://demo.in/new/(:any(:end)) | http://demo.in/new/jK33k3ui      | ✔          |
+Configure how the extension identifies and matches target pages for form execution.
+
+| Match Type                  | Description              | Use Case                    | Example                       |
+| --------------------------- | ------------------------ | --------------------------- | ----------------------------- |
+| **Match with Full URL**     | Exact URL match          | Specific page targeting     | `https://example.com/contact` |
+| **Match with URL pathname** | Match URL path only      | Multiple domains, same path | `/contact`, `/register`       |
+| **Match with URL hostname** | Match domain only        | All pages on domain         | `example.com`                 |
+| **Match with RegEx**        | Regular expression match | Complex URL patterns        | `.*\/user\/\d+\/edit`         |
+
+### 🎯 RegEx Matching Examples {#regex-matching-examples}
+
+**Special RegEx Patterns:**
+
+| Pattern        | Description                                                                | Matches             |
+| -------------- | -------------------------------------------------------------------------- | ------------------- |
+| `(:any)`       | Match any characters                                                       | `abc`, `123`, `xyz` |
+| `(:any(:end))` | Match any characters to end <br> **(Don't use this is middle of the url)** | `abc`, `123xyz`     |
+
+**URL Matching Examples:**
+
+| SITE FORM URL WITH REGEX          | SITE FORM URL                      | IS MATCHED |
+| --------------------------------- | ---------------------------------- | ---------- |
+| `http://demo.in/new/(:any)/edit`  | `http://demo.in/new/jK33k3ui/edit` | ✔          |
+| `http://demo.in/new/(:any(:end))` | `http://demo.in/new/jK33k3ui`      | ✔          |
 
 <img src="/image/form-url-with-regex.png" width="500" height="500" alt="RegEx">
 
-> [Online Test RegEx](/documentation/regex)
+:::info Note
+You can test the RegEx [here](/documentation/regex).
+:::
 
-## Insert Multiple Form
+## ⏱️ Form Timing Configuration {#form-timing-configuration}
 
-If your site has multiple forms, then you can insert all the forms in the same site, for this you have to first [insert the main form of the site](/documentation/site/site#insert-site).
+Control form execution timing for optimal performance and reliability.
 
-After the site is inserted, you will have to copy the id of the site with the help of the image given below.
+| Setting                                 | Description                     | Example Values                    | Impact                                   |
+| --------------------------------------- | ------------------------------- | --------------------------------- | ---------------------------------------- |
+| **Delay Time Before Running This Form** | Wait time before form execution | `0`, `500`, `1000` (milliseconds) | Prevents timing issues with page loading |
+| **Delay Time After Running This Form**  | Wait time after form execution  | `0`, `500`, `1000` (milliseconds) | Ensures form data is properly submitted  |
+
+:::info Note
+:::v-pre
+For random time delay, you can use [Random Integer Variable](/documentation/variable#generate-random-value). Use variable `{{random.integer[1000][2000]}}` for random milliseconds.
+:::
+
+:::info Pro Tip
+Use the browser console to monitor form filling timing and adjust delays accordingly.
+:::
+
+## 🔄 Insert Multiple Forms {#insert-multiple-forms}
+
+Add multiple forms to the same site for comprehensive automation coverage.
+
+### 📋 Prerequisites
+
+1. **First [insert the main form of the site](/documentation/site/site#insert-site)**
+2. **Copy the site ID** using the method below
+
+### 🆔 Copy Site ID
+
+After the site is inserted, copy the site ID using the extension interface:
 
 <img src="/image/copy_site_id.png" width="350" height="350" alt="Copy Site ID">
 
-After the site id is copied, you will open the form which you have to insert, after opening, right click on the icon of Extension and select the option of **Insert Form** like the image given below.
+**Steps to Copy Site ID:**
+
+1. Navigate to the site management page
+2. Locate the target site
+3. Click the copy ID button
+4. Site ID is copied to clipboard
+
+### ➕ Insert Additional Forms
+
+After copying the site ID, insert additional forms:
 
 <img src="/image/insert-site-form-01.png" width="350" height="350" alt="Insert Site Form">
 
-After this, you have to paste the site id in the prompt box and press it ok, your form will be inserted in that site.
+**Steps to Insert Form:**
 
-DONE 🎉
+1. **Open the target form page** in your browser
+2. **Right-click on the extension icon**
+3. **Select "Insert Form"** from the context menu
+4. **Paste the site ID** in the prompt box
+5. **Press OK** to confirm
+6. **Form is inserted** into the specified site
 
-## Insert Form Field
+**DONE 🎉**
 
-After filling the form of the site, you have to insert the field of the form, this field is automatic fill. After entering the field name or field type, you can insert the field. [more details](/documentation/form-fields/field)
+## 📝 Insert Form Fields {#insert-form-fields}
+
+Configure individual fields within each form for precise data filling automation.
+
+**Purpose:** Define which form fields to fill and how to fill them with data from Excel templates.
+
+**Process:**
+
+1. **Fill the form** on the target website
+2. **Insert form fields** using the extension
+3. **Configure field properties** (name, type, selector)
+4. **Test field filling** to ensure accuracy
+
+**Field Configuration Options:**
+
+- **Field Name** - Unique identifier for Excel column
+- **Field Type** - Data type and validation rules
+- **Field Selector** - Element location method
+- **Field Value** - Data source (Excel or default)
+- **Timing Settings** - Before/after delays
+
+[**More Details**](/documentation/form-fields/field)
+
+:::info Pro Tip
+Start with the most important fields first, then add additional fields as needed for complete automation.
+:::
+
+:::warning Important
+Ensure field selectors are unique and reliable to prevent filling errors during automation.
+:::

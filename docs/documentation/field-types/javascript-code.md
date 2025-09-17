@@ -1,6 +1,8 @@
 # Javascript Code
 
-You can use Javascript code in any field or you can give any field only in **Javascript type**. We have used [Monaco Editor](https://microsoft.github.io/monaco-editor/) to edit Javascript code.
+Execute custom JavaScript code in any field using the powerful Monaco Editor. Create advanced automation scripts, manipulate page elements, and integrate with external APIs.
+
+You can use JavaScript code in any field or set a field to **JavaScript Code** type only. We use [Monaco Editor](https://microsoft.github.io/monaco-editor/) for professional code editing experience.
 
 ```js
 // Where your code is ending, add this line only then the form will run further.
@@ -9,7 +11,20 @@ $fns.return("1");
 
 - You can set `default value` in the field type.
 
+## How to open the editor?
+
+Click on the `Action` button of the field. Image given below.
+
+<img src="/image/js-code-01.png" width="300" height="300" alt="Javascript Code">
+
 ## Global Variable
+
+Access entry data and predefined functions using global variables in your JavaScript code.
+
+| Variable   | Type   | Description                  | Usage                  |
+| ---------- | ------ | ---------------------------- | ---------------------- |
+| **$entry** | Object | Current entry and Excel data | `console.log($entry);` |
+| **$fns**   | Object | Predefined functions library | `console.log($fns);`   |
 
 Use `$entry` variable in the javascript code for access entry and excel data.
 
@@ -47,85 +62,102 @@ var response = { status: false, message: "Error Message" };
 $fns.return(JSON.stringify(response));
 ```
 
-## Editor Shortcut keys
+## Editor Shortcut Keys {#editor-shortcut-keys}
 
-- `F11` = Full Screen
-- `Ctrl + S` = Save
-- `Ctrl + Z` = Word Wrap
-- `Shift + Alt + L` = Debug Console Log
+| Shortcut          | Action            | Description                    |
+| ----------------- | ----------------- | ------------------------------ |
+| `F11`             | Full Screen       | Toggle full-screen editor mode |
+| `Ctrl + S`        | Save              | Save current code              |
+| `Ctrl + Z`        | Word Wrap         | Toggle word wrapping           |
+| `Shift + Alt + L` | Debug Console Log | Insert console.log statement   |
 
 ## Predefine Functions
 
-- `triggerEvent`
+Access powerful built-in functions through the `$fns` object.
+
+### Event Functions {#event-functions}
+
+| Function                  | Description                                  | Parameters                      |
+| ------------------------- | -------------------------------------------- | ------------------------------- |
+| **triggerEvent**          | Trigger DOM events on elements               | `element`, `eventArray`         |
+| **triggerMouseEvent**     | Trigger mouse events on elements             | `element`, `eventArray`         |
+| **wait**                  | Pause execution for specified milliseconds   | `milliseconds`                  |
+| **trim**                  | Advanced text manipulation                   | `text`, `options`               |
+| **elementExists**         | Check if element exists in DOM               | `selectorQuery`                 |
+| **elementVisible**        | Check if element is visible                  | `selectorQuery`                 |
+| **elementInvisible**      | Check if element is invisible                | `selectorQuery`                 |
+| **checkElementVisible**   | Check element visibility with force option   | `selectorQuery`, `isForceCheck` |
+| **checkElementInvisible** | Check element invisibility with force option | `selectorQuery`, `isForceCheck` |
+| **checkElementExists**    | Check element existence with force option    | `selectorQuery`, `isForceCheck` |
+| **randomHexColor**        | Generate random hex color                    | None                            |
+| **getRandomString**       | Generate random string                       | `length`                        |
+| **randomBoolean**         | Generate random boolean                      | None                            |
+| **randomUniqueID**        | Generate random unique ID                    | `length`                        |
+| **randomInteger**         | Generate random integer                      | `min`, `max`                    |
+| **randomFloat**           | Generate random float                        | `min`, `max`, `fixed`           |
 
 ```js
+// triggerEvent
 await $fns.triggerEvent(element, ["change", "focus"]);
-```
 
-- `triggerMouseEvent`
-
-```js
+// triggerMouseEvent
 await $fns.triggerMouseEvent(element, ["mousedown", "mouseup"]);
-```
 
-- `wait`
-
-```js
+// wait
 await $fns.wait(1000);
-```
 
-- `trim`
-
-```js
+// trim
 await $fns.trim(text, isRemoveAllSpace: Boolean, isLowerCase: Boolean, {
   isUpperCase: Boolean,
   isRemoveSpecialChar: Boolean,
   isRemoveExtraSpace: Boolean,
   replaceChar: Array[2]
 });
-```
 
-- `randomHexColor`
+// elementExists
+$fns.elementExists(selectorQuery);
 
-```js
+// elementVisible
+$fns.elementVisible(selectorQuery);
+
+// elementInvisible
+$fns.elementInvisible(selectorQuery);
+
+// checkElementVisible
+$fns.checkElementVisible(selectorQuery, isForceCheck = false);
+
+// checkElementInvisible
+$fns.checkElementInvisible(selectorQuery, isForceCheck = false);
+
+// checkElementExists
+await $fns.checkElementExists(selectorQuery, isForceCheck = false);
+
+// randomHexColor
 await $fns.randomHexColor();
-```
 
-- `getRandomString`
-
-```js
+// getRandomString
 await $fns.getRandomString(length: Number);
-```
 
-- `randomBoolean`
-
-```js
+// randomBoolean
 await $fns.randomBoolean();
-```
 
-- `randomUniqueID`
-
-```js
+// randomUniqueID
 await $fns.randomUniqueID(length: Number);
-```
 
-- `randomInteger`
-
-```js
+// randomInteger
 await $fns.randomInteger(min: Number, max: Number);
-```
 
-- `randomFloat`
-
-```js
+// randomFloat
 await $fns.randomFloat(min: Number, max: Number, fixed: Number);
 ```
 
-## Custom Javascript Code
+## Custom JavaScript Examples {#custom-javascript-examples}
 
-### Fill value in `jQuery Slider`
+### 🎚️ jQuery Slider Integration {#jquery-slider-integration}
 
-https://jqueryui.com/slider/
+Fill values in jQuery UI sliders programmatically.
+
+**Reference:** https://jqueryui.com/slider/
 
 ```js
 $slider = $(".bar");
@@ -133,9 +165,17 @@ $slider.slider("value", 100);
 $slider.slider("option", "slide").apply($slider, [null, { value: $slider.slider("value") }]);
 ```
 
-### Override Existing JavaScript Code
+### 🔄 Override Existing JavaScript Code {#override-existing-javascript-code}
 
-How to modify or replace existing JavaScript code within the target website. This is useful for scenarios where you need to change the `behavior` of a button, function, or any other code snippet on the page.
+Modify or replace existing JavaScript code within the target website. Useful for changing button behavior, functions, or any code snippet on the page.
+
+| Method       | Description                                     | Use Case                         |
+| ------------ | ----------------------------------------------- | -------------------------------- |
+| **Method 1** | Remove onclick attribute and add event listener | Simple button behavior changes   |
+| **Method 2** | Remove element and inject new HTML              | Complete element replacement     |
+| **Method 3** | Override JS code by script injection            | Function or variable replacement |
+
+**Complete Implementation Example:**
 
 ```js
 function submitAction() {
@@ -184,3 +224,7 @@ script.remove();
 // Return
 $fns.return("1");
 ```
+
+:::warning Important
+Always test your JavaScript code in the browser console before implementing in production forms.
+:::

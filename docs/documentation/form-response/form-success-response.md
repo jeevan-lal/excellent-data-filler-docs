@@ -61,7 +61,7 @@ You can also give the address of the element of success message. By default succ
 
 ### Matching Message In Alert Message
 
-If the response of the entry comes in the form of **javascript dialog** (Browser Alert), you can hide the dialog from [extension settings](/documentation/extension#hide-javascript-dialog) and fetch the response to match against given [Enter Success Message](#enter-success-message).
+If the response of the entry comes in the form of **javascript dialog** (Browser Alert), you can hide the dialog from [extension settings](/documentation/settings#hide-javascript-dialog) and fetch the response to match against given [Enter Success Message](#enter-success-message).
 
 <img src="/image/js-alert-dialog.png" alt="Alert Dialog">
 

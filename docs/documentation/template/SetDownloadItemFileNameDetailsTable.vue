@@ -15,6 +15,17 @@
           </ul>
         </td>
       </tr>
+      <tr style="background-color: var(--vp-c-bg) !important;">
+        <th>
+          Ways to save the file?
+        </th>
+        <td>
+          <ul>
+            <li><strong>Uniquify</strong> : If you want to save the file with a unique name</li>
+            <li><strong>Overwrite</strong> : If you want to overwrite the file</li>
+          </ul>
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>
