@@ -227,7 +227,7 @@ Excel Column Value: "UnitedStates" → Matches "UnitedStates"
 
 ## Next Steps
 
-- [Field Types](/documentation/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/field-types/field-response-action) - Configure response behaviors
+- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
+- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
 - [Variables](/documentation/variable) - Use variables in field settings
 - [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
