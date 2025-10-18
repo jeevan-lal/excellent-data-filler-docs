@@ -6,12 +6,14 @@ Loops can execute a [segment](/documentation/segment) a number of times. Loops a
 
 ## Options
 
-| Options                                                                                   | Required |
-| ----------------------------------------------------------------------------------------- | -------- |
-| [**Which segment do you want to execute**](#which-segment-do-you-want-to-execute)         | **Yes**  |
-| [**How many times the segment has to be run**](#how-many-times-the-segment-has-to-be-run) | **Yes**  |
-| [**If field value is multiline**](#if-field-value-is-multiline)                           | No       |
-| [**Store Loop Index**](#store-loop-index)                                                 | No       |
+| Options                                                                                                                                         | Required |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [**Which segment do you want to execute**](#which-segment-do-you-want-to-execute)                                                               | **Yes**  |
+| [**How many times the segment has to be run**](#how-many-times-the-segment-has-to-be-run)                                                       | **Yes**  |
+| [**If field value is multiline**](#if-field-value-is-multiline)                                                                                 | No       |
+| [**Character that splits field value into multiline**](#character-that-splits-field-value-into-multiline)                                       | No       |
+| [**Store Loop Index**](#store-loop-index)                                                                                                       | No       |
+| [**Delete store loop index data before execution of last index of loop**](#delete-store-loop-index-data-before-execution-of-last-index-of-loop) | No       |
 
 ## Which segment do you want to execute
 
@@ -52,9 +54,27 @@ To skip any loop index (1,2,3,..), use the `Field Success Response` or `Field Er
 
 ## If field value is multiline
 
+This option allows you to handle multiline field values. When enabled, the loop will process each line of a multiline field value separately.
+
+### Character that splits field value into multiline
+
+This option specifies the character that will be used to split field values into multiple lines. By default, this is set to an string `,,`, which typically means newline characters are used for splitting.
+
+:::info Note
+If there are values in new line then use `\r\n` for split values.
+:::
+
 ## Store Loop Index
 
 If the page on which you are using the loop is **refreshed** after the loop's action and the Loop starts from again the first number then you can use this option.
+
+:::info Remove Store Loop Index Data
+You can remove stored loop index data using the "Remove Store Loop Index Data" button. This clears any previously stored index information.
+:::
+
+## Delete store loop index data before execution of last index of loop
+
+This option allows you to automatically delete the stored loop index data before executing the last index of the loop. When enabled, the stored index data will be cleared just before the final iteration runs.
 
 ## Form Field has multiple elements
 
