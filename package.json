@@ -1,6 +1,6 @@
 {
   "name": "excellent-data-filler-docs",
-  "version": "4.9.6",
+  "version": "4.9.19",
   "description": "Documentation site for Excellent Data Filler - a powerful browser extension that automates form filling and data scraping",
   "scripts": {
     "dev": "vitepress dev docs",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "extra-javascript-functions": "file:../../../Javascript/_lib/_extra-javascript-funs",
-    "vitepress": "^2.0.0-alpha.12",
+    "vitepress": "^2.0.0-alpha.15",
     "vue": "^3.4.15"
   },
   "author": "Jeevan Lal",

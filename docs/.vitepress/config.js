@@ -167,7 +167,7 @@ const sideBarList = [
         link: '/documentation/field-types/save-as-pdf'
       },
       {
-        text: 'More Field Types',
+        text: 'More..',
         link: '/documentation/form-fields/field-types'
       }
     ]
@@ -219,6 +219,10 @@ const sideBarList = [
       {
         text: 'cleanLocalStorage',
         link: '/documentation/functions#cleanlocalstorage'
+      },
+      {
+        text: 'More..',
+        link: '/documentation/functions'
       }
     ]
   },
@@ -252,6 +256,28 @@ const sideBarList = [
   },
 
   {
+    text: 'Services',
+    collapsed: true,
+    items: [
+      {
+        text: 'Google Service',
+        link: '/documentation/services/google-service'
+      },
+    ]
+  },
+
+  {
+    text: 'Task Scheduler',
+    collapsed: true,
+    items: [
+      {
+        text: 'Task Scheduler',
+        link: '/documentation/scheduler/scheduler'
+      }
+    ]
+  },
+
+  {
     text: 'Locate Element',
     collapsed: true,
     items: [
@@ -278,6 +304,10 @@ const sideBarList = [
   {
     text: 'Browser Bus',
     link: '/documentation/browser-bus'
+  },
+  {
+    text: 'Question & Answer',
+    link: '/documentation/question-answer/question-answer'
   },
 ];
 
@@ -316,6 +346,7 @@ export default {
       { text: 'Home', link: '/' },
       { text: 'Documentation', link: '/documentation/' },
       { text: 'Download', link: '/documentation/#download-extension' },
+      { text: 'DeepWiki', link: 'https://deepwiki.com/jeevan-lal/excellent-data-filler-docs' },
       {
         text: `v${version}`,
         items: [
@@ -326,6 +357,14 @@ export default {
           {
             text: 'Report Issues',
             link: 'https://github.com/jeevan-lal/excellent-data-filler-docs/issues',
+          },
+          {
+            text: 'Privacy Policy',
+            link: 'https://edfiller.in/privacy-policy/',
+          },
+          {
+            text: 'Terms and Conditions',
+            link: 'https://edfiller.in/terms-and-conditions/',
           }
         ],
       },

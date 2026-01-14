@@ -228,3 +228,225 @@ $fns.return("1");
 :::warning Important
 Always test your JavaScript code in the browser console before implementing in production forms.
 :::
+
+
+## Examples {#examples}
+
+Learn how to write JavaScript code for common automation tasks like filling inputs, clicking buttons, and interacting with page elements.
+
+### 📝 Fill Input Field {#fill-input-field}
+
+Fill text into an input field and trigger necessary events.
+
+```js
+(async () => {
+  // Select the input field
+  const inputField = document.querySelector("#username");
+
+  // Set the value
+  inputField.value = "john.doe@example.com";
+
+  // Trigger events to notify the page
+  await $fns.triggerEvent(inputField, ["input", "change"]);
+
+  // Return success
+  $fns.return("1");
+})();
+```
+
+### 🖱️ Click Button {#click-button}
+
+Click a button and wait for the action to complete.
+
+```js
+(async () => {
+  // Find the submit button
+  const submitButton = document.querySelector("#submit-btn");
+
+  // Click the button
+  submitButton.click();
+
+  // Wait for 1 second to allow the action to complete
+  await $fns.wait(1000);
+
+  // Return success
+  $fns.return("1");
+})();
+```
+
+### 📋 Select Dropdown Option {#select-dropdown}
+
+Select an option from a dropdown menu by value or text.
+
+```js
+(async () => {
+  // Select by value
+  const dropdown = document.querySelector("#country");
+  dropdown.value = "USA";
+  await $fns.triggerEvent(dropdown, ["change"]);
+
+  // OR Select by visible text
+  const options = dropdown.querySelectorAll("option");
+  for (let option of options) {
+    if (option.textContent.trim() === "United States") {
+      dropdown.value = option.value;
+      await $fns.triggerEvent(dropdown, ["change"]);
+      break;
+    }
+  }
+
+  $fns.return("1");
+})();
+```
+
+### ☑️ Check Checkbox or Radio Button {#check-checkbox}
+
+Check or uncheck checkboxes and select radio buttons.
+
+```js
+(async () => {
+  // Check a checkbox
+  const checkbox = document.querySelector("#terms-checkbox");
+  checkbox.checked = true;
+  await $fns.triggerEvent(checkbox, ["change", "click"]);
+
+  // Select a radio button
+  const radioButton = document.querySelector('input[name="gender"][value="male"]');
+  radioButton.checked = true;
+  await $fns.triggerEvent(radioButton, ["change", "click"]);
+
+  $fns.return("1");
+})();
+```
+
+### ⏳ Wait for Element to Appear {#wait-for-element}
+
+Wait for an element to appear on the page before interacting with it.
+
+```js
+(async () => {
+  // Wait for element to exist (max 10 seconds)
+  const elementExists = await $fns.checkElementExists("#dynamic-content", true);
+
+  if (elementExists) {
+    const element = document.querySelector("#dynamic-content");
+    element.click();
+    $fns.return("1");
+  } else {
+    // Return error if element not found
+    const response = { status: false, message: "Element not found" };
+    $fns.return(JSON.stringify(response));
+  }
+})();
+```
+
+### 🔄 Fill Multiple Fields {#fill-multiple-fields}
+
+Fill multiple form fields in sequence.
+
+```js
+(async () => {
+  // Fill first name
+  const firstName = document.querySelector("#first-name");
+  firstName.value = $entry.firstName;
+  await $fns.triggerEvent(firstName, ["input", "change"]);
+
+  // Fill last name
+  const lastName = document.querySelector("#last-name");
+  lastName.value = $entry.lastName;
+  await $fns.triggerEvent(lastName, ["input", "change"]);
+
+  // Fill email
+  const email = document.querySelector("#email");
+  email.value = $entry.email;
+  await $fns.triggerEvent(email, ["input", "change"]);
+
+  // Wait a bit before submitting
+  await $fns.wait(500);
+
+  // Click submit
+  const submitBtn = document.querySelector("#submit");
+  submitBtn.click();
+
+  $fns.return("1");
+})();
+```
+
+### 🎯 Conditional Logic {#conditional-logic}
+
+Execute different actions based on page conditions.
+
+```js
+// Check if error message is visible
+const errorExists = $fns.elementVisible(".error-message");
+
+if (errorExists) {
+  // Skip this form if there's an error
+  const response = { skipForm: true };
+  $fns.return(JSON.stringify(response));
+} else {
+  // Continue with normal flow
+  const submitBtn = document.querySelector("#submit");
+  submitBtn.click();
+  $fns.return("1");
+}
+```
+
+### 💾 Store Data from Page {#store-data}
+
+Extract data from the page and store it in Excel.
+
+```js
+// Extract data from the page
+const productName = document.querySelector(".product-name")?.textContent.trim();
+const productPrice = document.querySelector(".product-price")?.textContent.trim();
+const productRating = document.querySelector(".rating")?.textContent.trim();
+
+// Store data in the current entry row (landscape mode)
+const response = {
+  storeDataInEntry: {
+    productName: productName,
+    productPrice: productPrice,
+    productRating: productRating,
+  },
+};
+
+$fns.return(JSON.stringify(response));
+```
+
+### 🔍 Advanced Element Selection {#advanced-selection}
+
+Use various methods to find and interact with elements.
+
+```js
+// By ID
+const elementById = document.querySelector("#my-id");
+
+// By Class
+const elementByClass = document.querySelector(".my-class");
+
+// By Attribute
+const elementByAttr = document.querySelector('[data-test="submit-button"]');
+
+// By XPath (using document.evaluate)
+const xpath = "//button[contains(text(), 'Submit')]";
+const xpathResult = document.evaluate(
+  xpath,
+  document,
+  null,
+  XPathResult.FIRST_ORDERED_NODE_TYPE,
+  null
+);
+const elementByXPath = xpathResult.singleNodeValue;
+
+// Click the found element
+if (elementByXPath) {
+  elementByXPath.click();
+}
+
+$fns.return("1");
+```
+
+:::tip Pro Tip
+Always use `await` with asynchronous functions like `$fns.wait()`, `$fns.triggerEvent()`, and `$fns.checkElementExists()` to ensure proper execution order.
+:::

@@ -155,21 +155,21 @@ Refresh the page and the extension will automatically fill the form fields. If a
 
 ## Common Use Cases
 
-### 📝 Data Entry Automation
+### 📝 Data Entry Automation {#data-entry-automation}
 
 - **Survey Responses** - Automatically fill out surveys with predefined answers
 - **Registration Forms** - Streamline user registration processes
 - **Contact Forms** - Populate contact forms with customer data
 - **Application Forms** - Fill job applications or service requests
 
-### 📊 Data Management
+### 📊 Data Management {#data-management}
 
 - **Excel Integration** - Import/export data between Excel and web forms
 - **Database Population** - Transfer data from spreadsheets to web databases
 - **Report Generation** - Create automated reports from form submissions
 - **Data Migration** - Move data between different systems
 
-### 🔄 Workflow Automation
+### 🔄 Workflow Automation {#workflow-automation}
 
 - **Testing Scenarios** - Automate form testing with various data sets
 - **Bulk Operations** - Process large volumes of data efficiently
@@ -186,25 +186,25 @@ Refresh the page and the extension will automatically fill the form fields. If a
 
 ## Need Help?
 
-### 📚 Documentation
+### 📚 Documentation {#documentation}
 
 - Browse our comprehensive [documentation](/documentation/) for detailed guides
 - Check out [field types](/documentation/form-fields/field-types) for advanced configurations
 - Learn about [functions and variables](/documentation/functions) for dynamic data
 
-### 🆘 Support Channels
+### 🆘 Support Channels {#support-channels}
 
 - [📺 YouTube Channel](https://www.youtube.com/@ctechhindi) - Video tutorials and updates
 - [❔ Google Group](https://groups.google.com/g/excellent-data-filler) - Community discussions
 - [👨‍👧‍👧 WhatsApp Group](https://chat.whatsapp.com/F2AdHoZRvr8HiAbvWqKlVS) - Real-time support
 - [📦 Report Issues](https://github.com/jeevan-lal/excellent-data-filler-docs/issues) - Report issues
 
-### 🧪 Testing & Development
+### 🧪 Testing & Development {#testing-development}
 
 - [💻 Testing Site](/documentation/testing-site) - Try the extension with sample forms
 - [🔧 Development Version](https://chromewebstore.google.com/detail/excellent-data-filler-dev/pkcdniljhopkooejgnidnfahljpnopgn) - Latest features and updates
 
-### 💳 Support the Project
+### 💳 Support the Project {#support-the-project}
 
 - [💳 PayPal Donation](https://www.paypal.com/paypalme/ctechhindi) - Help us maintain and improve the extension
 - ⭐ Star our [GitHub repository](https://github.com/jeevan-lal/excellent-data-filler-docs) if you find it useful

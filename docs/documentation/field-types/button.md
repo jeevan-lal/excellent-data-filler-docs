@@ -78,6 +78,21 @@ Configure JavaScript events to be triggered on the button element.
 - **Event Selection**: Choose specific events to trigger
 - **Multiple Events**: Can select multiple events simultaneously
 
+:::tip Submit Form Without Clicking Submit Button
+If you need to submit a form using `form.submit()` without clicking the submit button, use the **Button** field type with these settings:
+
+1. Set the **form query** in the **Field Selector Query** option (e.g., `#myForm` or `form.login-form`)
+2. Enable **Trigger Javascript Event** option
+3. Select **submit** event from the event list
+
+This will trigger the form's submit event programmatically without requiring a click on the submit button.
+
+**Example:**
+- **Field Selector Query**: `#loginForm`
+- **Trigger Javascript Event**: Enabled
+- **Event**: `submit`
+:::
+
 ## Button Interaction Types
 
 ### Standard Click

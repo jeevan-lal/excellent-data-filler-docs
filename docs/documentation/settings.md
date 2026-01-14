@@ -238,6 +238,56 @@ Use in the field options value or field value with `{$variable_name$}`. Like thi
 
 ---
 
+### 🔐 Captcha Solution {#captcha-solution}
+
+Configure Captcha Solution API Keys for the extension to automatically solve captchas during automation.
+
+#### 🔑 API Configuration {#api-configuration}
+
+Set up your captcha solving service API credentials.
+
+| Field Options                        | Description                                    | Example Values                            |
+| ------------------------------------ | ---------------------------------------------- | ----------------------------------------- |
+| **Use Captcha Solution Service API** | Enable/disable captcha solving service         | Toggle ON/OFF                             |
+| **Service Name**                     | Captcha solving service provider               | `2Captcha`                                |
+| **API Key**                          | Your captcha service API key                   | `a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6`        |
+
+#### ⚙️ Service Options {#service-options}
+
+Configure additional captcha solving options.
+
+| Option                                              | Description                                      |
+| --------------------------------------------------- | ------------------------------------------------ |
+| **Solve Cloudflare Challenge Page with 2Captcha**  | Automatically solve Cloudflare Turnstile captcha |
+
+**How to Use:**
+
+1. Toggle **"Use Captcha Solution Service API"** to **ON**
+2. Select **Service Name**: `2Captcha`
+3. Enter your **API Key** from your 2Captcha account
+4. (Optional) Enable **"Solve Cloudflare Challenge Page with 2Captcha"** for Cloudflare Turnstile support
+5. API key will be used globally across all sites
+
+:::tip Get API Key
+Sign up at [2Captcha](https://2captcha.com/) to get your API key. You can find it in your account dashboard after signing up.
+:::
+
+:::info Priority
+API keys can be configured at three levels:
+- **Global Settings** (this page) - Applies to all sites
+- **Site Settings** - Applies to specific site
+- **Field Settings** - Applies to specific field
+
+**Priority Order**: Field Settings > Site Settings > Global Settings
+:::
+
+#### 📚 Related Documentation {#captcha-related-docs}
+
+- [Captcha Solution Field Type](/documentation/field-types/captcha-solution)
+- [2Captcha Documentation](/documentation/field-types/captcha-solution/2captcha)
+
+---
+
 ## 🏢 Microsoft Form {#microsoft-form}
 
 Configure Microsoft Forms integration and field selector customization for optimal compatibility.

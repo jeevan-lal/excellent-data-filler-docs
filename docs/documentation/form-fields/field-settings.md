@@ -411,6 +411,8 @@ Executes field actions based on text search results.
 - **Conditional Execution** - Execute actions based on search results
 - **Pattern Matching** - Use regex or exact matching
 
+More details in [Search Strings and Execute Field Action](/documentation/field-options/search-and-action)
+
 ---
 
 ### 📊 Execute Action on fields like Row Type {#execute-action-on-fields-like-row-type}

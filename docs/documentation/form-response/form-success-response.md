@@ -25,6 +25,9 @@ When It matches with given success response, entry will be marked as **Entry Sav
 | If last excel entry completed then don't execute the action  | If the last entry of excel has been saved and you do not want the [action](#action) not to be executed after the last entry, then you can do it by turning on this option.                                                        |
 | If there is no Excel data, update only scraper data in Excel | If you are [scraping data](/documentation/form-fields/field-types#scraper-data) from the site and you are not using Excel template in the extension, then the data being scraped from that option will be saved in the extension. |
 | Can success message be anything in this element              | If the success message of the entry is always changing then using this option matches **any type of message** in the given element.                                                                                               |
+| Remove excel column value from current entry?                | If you fetch large data but don't need it in Excel, enable this option to remove the column value from the current entry after processing.                                                                                        |
+| Set custom message after success message matched?            | If your success message is large, you can set a custom short message to store in Excel instead of the full success message.                                                                                                       |
+
 
 ## Success Page URL
 

@@ -1,4 +1,4 @@
-# 📋 Types of Field {#types-of-field}
+# Types of Field {#types-of-field}
 
 This page provides a comprehensive overview of all available field types in Excellent Data Filler. Field types are categorized based on their functionality and complexity level.
 
@@ -54,6 +54,12 @@ Powerful field types for complex automation, scripting, and advanced form contro
 - **⏭️ Next Excel Entry Exists** - Verify if next Excel entry is available
 - [**🗃️ Execute Segment**](/documentation/field-types/execute-segment) - Execute a segment of the form
 - [**➕ Set Environment**](/documentation/field-types/set-environment) - Set the environment of the form
+
+## 🤖 AI {#ai}
+
+Field types powered by artificial intelligence for advanced automation and intelligent data processing.
+
+- [**🤖 AI**](/documentation/field-types/ai) - AI-powered field automation and intelligent form filling
 
 ## 🔍 Google Field {#google-field}
 
@@ -187,6 +193,8 @@ Field types for handling and interacting with JavaScript dialog boxes and popups
 Field types for handling and simulating JavaScript events and user interactions.
 
 - [**Keyboard Event**](/documentation/field-types/javascript-events#keyboard-event) - Simulate keyboard events and key presses
+- [**Pointer Event**](/documentation/field-types/javascript-events#pointer-event) - Simulate mouse and pointer events
+- [**Focus Event**](/documentation/field-types/javascript-events#focus-event) - Simulate focus and blur events
 
 ## 📅 Date and Time {#date-and-time}
 
@@ -219,11 +227,31 @@ Field types for performing mathematical calculations and operations on numeric d
 - [**Count**](/documentation/field-types/math-actions#count) - Count the number of items or elements
 - [**Calculate Math Query**](/documentation/field-types/math-actions#calculate-math-query) - Execute complex mathematical expressions
 
+## 📊 Google Service - Sheet {#google-service-sheet}
+
+Field types for integrating with Google Sheets API to read and write spreadsheet data.
+
+- [**Fetch Google Sheet Data**](/documentation/field-types/google-service-sheet#fetch-google-sheet-data) - Retrieve data from Google Sheets
+
+## 📧 Google Service - Gmail {#google-service-gmail}
+
+Field types for integrating with Gmail API to manage emails and messages.
+
+- [**Fetch Mail (Gmail)**](/documentation/field-types/google-service-gmail#fetch-mail-gmail) - Retrieve multiple emails from Gmail
+- [**Fetch Single Mail (Gmail)**](/documentation/field-types/google-service-gmail#fetch-single-mail-gmail) - Retrieve a specific email from Gmail
+- [**Send Mail (Gmail)**](/documentation/field-types/google-service-gmail#send-mail-gmail) - Send emails through Gmail
+
+## 🔐 Captcha Solution {#captcha-solution}
+
+Field types for solving captcha challenges using third-party services.
+
+- [**2Captcha**](/documentation/field-types/captcha-solution#2captcha) - Solve captchas using 2Captcha service
+
 ## 🔧 Others {#others}
 
 Miscellaneous field types for various utility functions, web interactions, and content manipulation.
 
-- **Insert/Remove HTML** - Add or remove HTML content from pages
+- [**Insert & Remove HTML**](/documentation/field-types/others/insert-remove-html) - Add or remove HTML content from pages
 - [**URL Matching**](/documentation/field-types/url-matching) - Match and validate URL patterns
 - [**URL Open**](/documentation/field-types/url-open) - Open URLs in new tabs or windows
 - [**Send Request**](/documentation/field-types/send-request) - Send HTTP requests to external APIs
@@ -233,7 +261,7 @@ Miscellaneous field types for various utility functions, web interactions, and c
 - [**String Manipulation**](/documentation/field-types/string-manipulation) - Transform and process text strings
 - [**Copy**](/documentation/field-types/copy) - Copy content to clipboard
 - [**Save as PDF**](/documentation/field-types/save-as-pdf) - Convert pages or content to PDF format
-- **Page Loading** - Monitor and respond to page load events
-- **Toast Notification** - Display temporary notification messages
+- [**Page Loading**](/documentation/field-types/others/page-loading) - Monitor and respond to page load events
+- [**Toast Notification**](/documentation/field-types/others/toast-notification) - Display temporary notification messages
 - [**Target Element For Print**](/documentation/field-types/target-element-for-print) - Print specific page elements
 - [**Insert Iframe**](/documentation/field-types/insert-iframe) - Embed iframe content in pages

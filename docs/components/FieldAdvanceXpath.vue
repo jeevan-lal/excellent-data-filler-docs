@@ -157,12 +157,57 @@
             <thead>
               <tr>
                 <th>XPath</th>
+                <th>Description</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
                   <strong>//td[text() =' SHG']/parent::*/td[position()=6]/a</strong> <br />
+                </td>
+                <td>
+                  Find a td element with text "SHG", navigate to its parent, then select the 6th td child and get the anchor tag
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code><strong>Text Matching with OR</strong></code>
+        </td>
+        <td>
+          <table style="width: max-content;">
+            <thead>
+              <tr>
+                <th>XPath</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>//*[contains(text(),'Partial Text 1') or contains(text(),'Partial Text 2')]</strong> <br />
+                </td>
+                <td>
+                  Match elements containing either "Partial Text 1" or "Partial Text 2"
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>//*[text()='Exact Text 1' or text()='Exact Text 2']</strong> <br />
+                </td>
+                <td>
+                  Match elements with exact text "Exact Text 1" or "Exact Text 2"
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>//*[text()='Exact Text' or contains(text(),'Partial Text')]</strong> <br />
+                </td>
+                <td>
+                  Match elements with exact text "Exact Text" or containing "Partial Text"
                 </td>
               </tr>
             </tbody>

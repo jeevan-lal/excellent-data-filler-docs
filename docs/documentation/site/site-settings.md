@@ -62,6 +62,41 @@ Configure how dates and data are formatted and displayed.
 Default Date Format: `yyyy-mm-dd`
 :::
 
+## 🔐 Captcha Solution {#captcha-solution}
+
+Configure Captcha Solution API Keys for this specific site.
+
+| Field Options                                | Description                                | Example Values                     |
+| -------------------------------------------- | ------------------------------------------ | ---------------------------------- |
+| **Use Captcha Solution API Keys in this Site** | Enable/disable captcha solving for this site | Toggle ON/OFF                      |
+| **Service Name**                             | Captcha solving service provider           | `2captcha`                         |
+| **Service API Key**                          | Your captcha service API key               | `a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6` |
+
+**How to Use:**
+
+1. Toggle **"Use Captcha Solution API Keys in this Site"** to **ON**
+2. **Service Name** will show `2captcha`
+3. Enter your **Service API Key** from your 2Captcha account
+4. API key will be used for all captcha solving on this site
+
+:::tip Get API Key
+Sign up at [2Captcha](https://2captcha.com/) to get your API key. You can find it in your account dashboard after signing up.
+:::
+
+:::info Priority
+API keys can be configured at three levels:
+- **Global Settings** - Applies to all sites
+- **Site Settings** (this page) - Applies to this specific site
+- **Field Settings** - Applies to specific field
+
+**Priority Order**: Field Settings > Site Settings > Global Settings
+:::
+
+**Related Documentation:**
+- [Captcha Solution Field Type](/documentation/field-types/captcha-solution)
+- [2Captcha Documentation](/documentation/field-types/captcha-solution/2captcha)
+- [Global Captcha Settings](/documentation/settings#captcha-solution)
+
 ## 📤 Export Site Data {#export-site-data}
 
 Site data export functionality.

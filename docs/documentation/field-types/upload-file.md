@@ -1,4 +1,4 @@
-# 📁 Upload File {#upload-file}
+# Upload File {#upload-file}
 
 You can use this field when you want to upload files through web forms. It works with various form platforms including _Google Forms_, _Microsoft Forms_, and other web-based file upload interfaces.
 

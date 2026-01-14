@@ -9,6 +9,10 @@ The `<video>` HTML element embeds a media player. You can control the video thro
 | Play/Pause     |
 | Playback Speed |
 
-:::tip
-To autoplay video, it is necessary to have sound permission in the site.
+:::tip Autoplay Video - Sound Permission Required
+If you want video to play automatically, you must turn on **sound permission** for the site.
+
+<img src="/image/sound-permission.png" alt="Sound Permission" />
+
+Without sound permission enabled, browsers will block autoplay functionality to prevent unwanted audio from playing.
 :::

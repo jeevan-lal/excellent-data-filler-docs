@@ -1,4 +1,4 @@
-# 🔤 String Manipulation {#string-manipulation}
+# String Manipulation {#string-manipulation}
 
 If you want to modify the value of any text or any field in the page, then you can use this **String Manipulation** Field Type. This powerful field type allows you to transform, clean, and manipulate text content in various ways.
 
