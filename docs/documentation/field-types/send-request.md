@@ -509,7 +509,7 @@ Save Request Data: Save in Scraper Data
 
 - [Field Settings](/documentation/form-fields/field-settings)
 - [Default Value](/documentation/form-fields/field-settings#default-value)
-- [Scraper Data](/documentation/field-types/scraper)
+- [Scraper Data](/documentation/form-fields/field-types#scraper-data)
 - [HTTP Methods - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 - [JSONPath-Plus](https://github.com/JSONPath-Plus/JSONPath)
 

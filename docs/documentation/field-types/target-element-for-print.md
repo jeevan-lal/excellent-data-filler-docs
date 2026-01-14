@@ -143,4 +143,4 @@ document.querySelectorAll('your-selector-here')
 
 - [CSS Selector Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)
 - [Locate Element](/documentation/locate-element)
-- [Field Types](/documentation/field-types/)
+- [Field Types](/documentation/form-fields/field-types)
