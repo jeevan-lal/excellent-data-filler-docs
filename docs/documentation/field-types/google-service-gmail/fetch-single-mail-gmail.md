@@ -339,69 +339,85 @@ is:unread from:noreply@service.com subject:"reset password"
 
 ## Custom Filter {#custom-filter}
 
-If you want to apply custom filtering on the fetched mail, you can use a JavaScript event listener in a separate **JavaScript Code** field type.
+For advanced filtering of Gmail data, use a JavaScript event listener in a separate **JavaScript Code** field type.
 
-### How It Works
+### Implementation Steps
 
-The `Fetch Single Mail (Gmail)` field type triggers a custom event `EDF-SINGLE-GMAIL-RESPONSE` when an email is found. You can listen to this event and apply your own custom logic to filter or process the email data.
+Use three field types in sequence:
+1. **JavaScript Code** - Add event listener
+2. **Fetch Single Mail (Gmail)** - Trigger event and pass email details
+3. **getLocalStorage** function - Check if filter is complete
 
-### Setup
-
-1. Add a **Fetch Single Mail (Gmail)** field type
-2. Add a **JavaScript Code** field type after it
-3. Use the following script in the JavaScript Code field:
+### JavaScript Event Listener
 
 ```js
-// RECEIVER: Listen for Gmail response and apply custom filtering
+// Listen Event
 window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
   if (e && e.detail) {
-    console.log(e.detail);
+    console.log("Email Data:", e.detail);
     
     // Apply your custom filtering logic here
     // Example: Check if email contains specific text
     if (e.detail.body && e.detail.body.includes('verification code')) {
-      // Process the email
-      console.log('Verification email found!');
-      
-      // Extract data or perform actions
-      // ...
+      // If match found, store value in local storage
+      $fns.setLocalStorage("gmail-verification-found", "1");
     }
   }
 });
+
+// RETURN - if don't use this line then extension will pause on this field
+$fns.return("1");
 ```
 
-### Event Data Structure
+### Event Variable Structure
 
-The event detail (`e.detail`) contains the complete email data:
+**Event Variable:** `e.detail`
 
-```js
+**Data Type:** Email object
+
+**Example Response:**
+
+```json
 {
-  id: "message-id",
-  threadId: "thread-id",
-  subject: "Email subject",
-  from: "sender@example.com",
-  to: "recipient@example.com",
-  body: "Email body content",
-  snippet: "Email preview text",
-  date: "2024-01-15T10:30:00Z",
-  // ... other email properties
+  "id": "18d4f2a1b3c5e6f7",
+  "threadId": "18d4f2a1b3c5e6f7",
+  "subject": "Your Verification Code",
+  "from": "noreply@example.com",
+  "to": "user@gmail.com",
+  "body": "Your verification code is: 123456",
+  "snippet": "Your verification code is: 123456",
+  "date": "2024-01-15T10:30:00Z",
+  "labelIds": ["UNREAD", "INBOX"],
+  "internalDate": "1705318200000"
 }
 ```
 
-### Use Cases
+### Email Properties
 
-- **Custom validation** - Verify email content before processing
-- **Complex filtering** - Apply filters beyond regex patterns
-- **Data transformation** - Transform email data before using
-- **Conditional actions** - Trigger different actions based on email content
-- **Multi-step processing** - Chain multiple processing steps
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | string | Unique message ID |
+| `threadId` | string | Thread ID the message belongs to |
+| `subject` | string | Email subject line |
+| `from` | string | Sender email address |
+| `to` | string | Recipient email address |
+| `body` | string | Email body content (plain text or HTML) |
+| `snippet` | string | Short preview of email content |
+| `date` | string | ISO timestamp when email was sent |
+| `labelIds` | array | Gmail labels applied to the email |
+| `internalDate` | string | Internal date timestamp |
 
-### Example: Extract and Validate OTP
+---
 
+## Usage Examples
+
+### Example 1: Extract and Validate OTP
+
+**Field 1 - JavaScript Code:**
 ```js
 window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
   if (e && e.detail && e.detail.body) {
-    // Extract OTP code
+    // Extract OTP code (6 digits)
     const otpMatch = e.detail.body.match(/\d{6}/);
     
     if (otpMatch) {
@@ -410,18 +426,36 @@ window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
       
       // Validate OTP format
       if (otp.length === 6) {
-        // Store in variable or use directly
-        // $fns.return(otp);
+        // Store OTP in local storage
+        $fns.setLocalStorage("email-otp-code", otp);
       }
     } else {
       console.log('No OTP found in email');
     }
   }
 });
+
+$fns.return("1");
 ```
 
-### Example: Filter by Sender and Subject
+**Field 2 - Fetch Single Mail (Gmail):**
+```
+Search Query: from:noreply@example.com subject:verification
+Max Results: 1
+```
 
+**Field 3 - getLocalStorage Function:**
+```
+Function Value: [email-otp-code][true][true]
+```
+
+**Result:** Extracts OTP from email, stores it, and retrieves it for use.
+
+---
+
+### Example 2: Filter by Sender and Subject
+
+**Field 1 - JavaScript Code:**
 ```js
 window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
   if (e && e.detail) {
@@ -435,12 +469,120 @@ window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
       const amountMatch = body.match(/\$(\d+\.\d{2})/);
       
       if (amountMatch) {
-        console.log('Transaction amount:', amountMatch[1]);
+        const amount = amountMatch[1];
+        console.log('Transaction amount:', amount);
+        
+        // Store amount in local storage
+        $fns.setLocalStorage("transaction-amount", amount);
       }
     }
   }
 });
+
+$fns.return("1");
 ```
+
+**Field 2 - Fetch Single Mail (Gmail):**
+```
+Search Query: from:noreply@bank.com subject:"Transaction Alert"
+Max Results: 1
+```
+
+**Field 3 - getLocalStorage Function:**
+```
+Function Value: [transaction-amount][true][true]
+```
+
+**Result:** Filters bank transaction emails and extracts amount.
+
+---
+
+### Example 3: Verify Email Content
+
+**Field 1 - JavaScript Code:**
+```js
+window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
+  if (e && e.detail) {
+    // Check if email contains required keywords
+    const hasKeywords = e.detail.body.includes('password reset') && 
+                        e.detail.body.includes('click here');
+    
+    if (hasKeywords) {
+      // Extract reset link
+      const linkMatch = e.detail.body.match(/https:\/\/[^\s]+/);
+      
+      if (linkMatch) {
+        const resetLink = linkMatch[0];
+        console.log('Reset link found:', resetLink);
+        
+        // Store link in local storage
+        $fns.setLocalStorage("password-reset-link", resetLink);
+      }
+    }
+  }
+});
+
+$fns.return("1");
+```
+
+**Field 2 - Fetch Single Mail (Gmail):**
+```
+Search Query: subject:"Password Reset"
+Max Results: 1
+```
+
+**Field 3 - getLocalStorage Function:**
+```
+Function Value: [password-reset-link][true][false]
+```
+
+**Result:** Extracts password reset link from email.
+
+---
+
+### Example 4: Multi-Condition Filtering
+
+**Field 1 - JavaScript Code:**
+```js
+window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
+  if (e && e.detail) {
+    const { from, subject, body, date } = e.detail;
+    
+    // Check multiple conditions
+    const isRecent = new Date(date) > new Date(Date.now() - 3600000); // Last hour
+    const isFromSupport = from.includes('support@example.com');
+    const hasTicketNumber = /Ticket #\d+/.test(subject);
+    
+    if (isRecent && isFromSupport && hasTicketNumber) {
+      // Extract ticket number
+      const ticketMatch = subject.match(/Ticket #(\d+)/);
+      
+      if (ticketMatch) {
+        const ticketNumber = ticketMatch[1];
+        console.log('Ticket number:', ticketNumber);
+        
+        // Store ticket number
+        $fns.setLocalStorage("support-ticket-number", ticketNumber);
+      }
+    }
+  }
+});
+
+$fns.return("1");
+```
+
+**Field 2 - Fetch Single Mail (Gmail):**
+```
+Search Query: from:support@example.com newer_than:1h
+Max Results: 1
+```
+
+**Field 3 - getLocalStorage Function:**
+```
+Function Value: [support-ticket-number][true][true]
+```
+
+**Result:** Filters recent support emails and extracts ticket number.
 
 ---
 

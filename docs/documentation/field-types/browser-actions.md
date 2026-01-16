@@ -102,29 +102,11 @@ if `element value` is `false` then skip this action (also set tab id in the `ele
 
 ## Check Downloads
 
-This field type allows you to monitor the status of download items in the browser. It provides a way to pause your automation flow until a specific download status is reached.
+Monitor and verify download status in the browser's download list with support for filename pattern matching and custom filtering.
 
-### Options
+[More Details](/documentation/field-types/browser-actions/check-downloads.md)
 
-| Options                                           | Description                                                                                                                                                                                                |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Downloads Item Status**                         | Specify the desired download item status you are waiting for. Choose from the following options:                                                                                                           |
-|                                                   | - **Progress:** The download is in progress.                                                                                                                                                               |
-|                                                   | - **Complete:** The download is complete.                                                                                                                                                                  |
-|                                                   | - **Broke Connection:** The download has encountered a broken connection.                                                                                                                                  |
-| **Wait until the download items stratus matches** | This option determines whether the field waits until the specified download item status is reached. If unchecked, the field will simply report the current download item status without pausing execution. |
-
-### Usage
-
-1. **Set the desired download item status.** Choose from the available options: `Progress`, `Complete`, or `Broke Connection`.
-2. **Optionally, enable the "Wait until the download items status matches" option.** This will pause the automation flow until the specified status is reached.
-
-### Example
-
-If you want to wait for a specific download to complete, configure the field as follows:
-
-- **Downloads Item Status:** Complete
-- **Wait until the download items stratus matches:** Checked
+---
 
 ## Reload Tab
 
@@ -229,7 +211,7 @@ Inserts a CSS stylesheet into page. You can set css in the `field value` or `def
 
 ## Set Local Data
 
-It is used to store any **data** in **browser storage**. The data is stored in a **unique key**. With this unique key you can [Get/Fetch](#get-local-data) or [Remove](#remove-local-data) that data.
+Store data in the browser's extension storage using the `chrome.storage.local` API. The data is stored with a **unique key** and can be retrieved or removed later using [Get Local Data](#get-local-data) or [Remove Local Data](#remove-local-data).
 
 | Options            | Description                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------------- |
@@ -240,18 +222,26 @@ It is used to store any **data** in **browser storage**. The data is stored in a
 
 1. **Set Store Key Name**: Enter a unique key name with the recommended prefix `CTH_EDF_DB_LOCAL_`
 2. **Set Data Value**: Enter the data you want to store (text, variables, etc.)
-3. **Store Data**: The data will be stored in browser storage and can be retrieved later
+3. **Store Data**: The data will be stored in browser extension storage and can be retrieved later
 
 ### Example
 
 - **Store Key Name**: `CTH_EDF_DB_LOCAL_user_email`
 - **Data Value**: `john@example.com`
 
+### Technical Notes
+
+- **Storage API**: Uses `chrome.storage.local` API (not `localStorage`)
+- **Persistence**: Data persists across browser sessions
+- **Scope**: Data is accessible across all pages where the extension is active
+- **Storage Limit**: Chrome extension storage typically allows up to 10MB
+- **Synchronous Access**: Data retrieval is asynchronous
+
 --- 
 
 ## Get Local Data
 
-We can **fetch** the data stored through [Set Local Data](#set-local-data) through the **unique key** of that data.
+Retrieve data from the browser's extension storage (stored via [Set Local Data](#set-local-data)) using the `chrome.storage.local` API and the **unique key** of that data.
 
 | Options                                        | Description                                                                                         |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -271,11 +261,18 @@ We can **fetch** the data stored through [Set Local Data](#set-local-data) throu
 - **Wait until the given key data is received**: ✅ Enabled
 - **Delete the data after getting the key data**: ❌ Disabled (keep data for reuse)
 
+### Technical Notes
+
+- **Storage API**: Uses `chrome.storage.local` API (not `localStorage`)
+- **Asynchronous**: Data retrieval is asynchronous
+- **Wait Option**: When enabled, field waits until data becomes available
+- **Delete Option**: Automatically removes data after retrieval when enabled
+
 ---
 
 ## Remove Local Data
 
-We can **delete** the data stored through [Set Local Data](#set-local-data) through the **unique key** of that data.
+Delete data from the browser's extension storage (stored via [Set Local Data](#set-local-data)) using the `chrome.storage.local` API and the **unique key** of that data.
 
 | Options            | Description                                                                                               |
 | ------------------ | --------------------------------------------------------------------------------------------------------- |
@@ -284,9 +281,15 @@ We can **delete** the data stored through [Set Local Data](#set-local-data) thro
 ### Usage
 
 1. **Set Store Key Name**: Enter the exact key name that was used when storing the data with "Set Local Data"
-2. **Remove Data**: The data associated with that key will be permanently deleted from browser storage
+2. **Remove Data**: The data associated with that key will be permanently deleted from browser extension storage
 
 ### Example
 
 - **Store Key Name**: `CTH_EDF_DB_LOCAL_user_profile`
-- **Result**: The user profile data will be permanently removed from browser storage
+- **Result**: The user profile data will be permanently removed from browser extension storage
+
+### Technical Notes
+
+- **Storage API**: Uses `chrome.storage.local` API (not `localStorage`)
+- **Permanent Deletion**: Data is permanently removed and cannot be recovered
+- **Immediate Effect**: Deletion happens immediately

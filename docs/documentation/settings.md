@@ -164,10 +164,11 @@ Configure visual feedback, performance settings, and form filling behavior for o
 
 Configure visual indicators during form filling.
 
-| Option                           | Description                                          |
-| -------------------------------- | ---------------------------------------------------- |
-| **Show Response Color in Field** | Display response color in fields while filling forms |
-| **Show Entry's Status Bar**      | Display status bar showing entry progress            |
+| Option                                | Description                                          |
+| ------------------------------------- | ---------------------------------------------------- |
+| **Show Response Color in Field**      | Display response color in fields while filling forms |
+| **Show Entry's Status Bar**           | Display status bar showing entry progress            |
+| **Show Extension Logs in Status Bar** | Display latest extension logs in the status bar      |
 
 **Look like this: Status Bar**
 
@@ -175,6 +176,87 @@ Configure visual indicators during form filling.
 
 :::info
 If click `Mark as Saved` button on the status bar then execute `{MARK AS SAVED}` segment. If segment exists then execute.
+:::
+
+#### 📊 Show Entry's Status Bar {#show-entrys-status-bar}
+
+**Description:** Display a status bar at the top or bottom of the page showing entry progress and navigation controls.
+
+**Purpose:** The status bar provides real-time information about the current automation entry and allows quick navigation between entries.
+
+**Features:**
+
+| Feature | Description |
+|---------|-------------|
+| **Current Entry Row Index** | Shows the current entry row number being processed |
+| **Total Entries** | Displays the total number of entries in the Excel sheet |
+| **Fill Next Entry** | Button to navigate to and fill the next entry |
+| **Fill Previous Entry** | Button to navigate to and fill the previous entry |
+| **Mark as Saved** | Button to mark the current entry as saved (executes `{MARK AS SAVED}` segment if exists) |
+| **Extension Logs** | Displays latest extension logs (when enabled) |
+
+**Display Format:**
+
+```
+Entry: [Current Row] / [Total Entries]  [◀ Previous] [Next ▶] [Mark as Saved]
+```
+
+**Example:**
+
+```
+Entry: 5 / 100  [◀ Previous] [Next ▶] [Mark as Saved]
+```
+
+**How to Use:**
+
+1. Enable **"Show Entry's Status Bar"** option in settings
+2. Status bar appears at configured position (Top or Bottom)
+3. View current entry progress during automation
+4. Click navigation buttons to move between entries
+5. Click "Mark as Saved" to execute save segment
+
+**Navigation Controls:**
+
+- **◀ Previous:** Navigate to and fill the previous entry row
+- **Next ▶:** Navigate to and fill the next entry row
+- **Mark as Saved:** Execute the `{MARK AS SAVED}` segment (if defined in form)
+
+**Benefits:**
+
+- **Track Progress:** See which entry is currently being processed
+- **Quick Navigation:** Move between entries without opening Excel
+- **Manual Control:** Override automatic entry progression
+- **Save Tracking:** Mark entries as completed/saved
+- **Visual Feedback:** Monitor automation status in real-time
+
+**Related Settings:**
+
+- **Status Bar Position:** Configure whether status bar appears at Top or Bottom
+- **Show Extension Logs in Status Bar:** Display logs alongside entry information
+
+:::tip Entry Navigation
+Use the Previous/Next buttons to manually navigate between entries during automation. This is useful for testing specific entries or handling errors.
+:::
+
+#### 📊 Show Extension Logs in Status Bar {#show-extension-logs-in-status-bar}
+
+**Description:** When enabled, the latest extension logs will be displayed in the status bar at the bottom of the page.
+
+**Requirements:**
+- **Show Entry's Status Bar** must be enabled
+- Status bar must be visible on the page
+
+**How to Use:**
+
+1. Enable **"Show Entry's Status Bar"** option
+2. Enable **"Show Extension Logs in Status Bar"** option
+3. Status bar will display latest extension logs during automation
+4. Logs update in real-time as operations occur
+
+**Related:** [Logs Monitor](/documentation/log#logs-monitor)
+
+:::tip
+Use this feature during development and testing to monitor automation without switching between tabs or opening the browser console.
 :::
 
 ### ⚡ Performance Settings {#performance-settings}

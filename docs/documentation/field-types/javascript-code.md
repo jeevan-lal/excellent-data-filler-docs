@@ -95,6 +95,8 @@ Access powerful built-in functions through the `$fns` object.
 | **randomUniqueID**        | Generate random unique ID                    | `length`                        |
 | **randomInteger**         | Generate random integer                      | `min`, `max`                    |
 | **randomFloat**           | Generate random float                        | `min`, `max`, `fixed`           |
+| **setSessionStorage**     | Sets a value in session storage              | `key`, `value`                  |
+| **setLocalStorage**       | Sets a value in local storage                | `key`, `value`                  |
 
 ```js
 // triggerEvent
@@ -149,6 +151,12 @@ await $fns.randomInteger(min: Number, max: Number);
 
 // randomFloat
 await $fns.randomFloat(min: Number, max: Number, fixed: Number);
+
+// setSessionStorage - Sets a value in the session storage for the current domain
+$fns.setSessionStorage(key, value);
+
+// setLocalStorage - Sets a value in the local storage for the current domain
+$fns.setLocalStorage(key, value);
 ```
 
 ## Custom JavaScript Examples {#custom-javascript-examples}

@@ -1,4 +1,4 @@
-# 🔧 Program Helper - Field Types {#program-helper-field-types}
+# Program Helper - Field Types {#program-helper-field-types}
 
 Program Helper field types allow you to interact with external applications, system functions, and perform advanced automation tasks beyond web browser capabilities. These field types require a helper program to be installed on your operating system.
 
@@ -10,9 +10,7 @@ To use these fields, you will first have to install the helper program in the OS
 
 The [**Helper Program**](/documentation/program#download-and-install) is required to enable system-level automation and external application interactions. Download and install the appropriate version for your operating system:
 
-## 🎯 Field Types {#field-types}
-
-### 🖥️ X-Focus Application Window {#x-focus-application-window}
+## 🖥️ X-Focus Application Window {#x-focus-application-window}
 
 Focus on a specific application window to bring it to the foreground.
 
@@ -26,7 +24,7 @@ Focus on a specific application window to bring it to the foreground.
 - `ahk_exe notepad.exe` - Focus Notepad
 - `Untitled - Notepad` - Focus window by title
 
-### ⌨️ X-Click (Space Key) {#x-click-space-key}
+## ⌨️ X-Click (Space Key) {#x-click-space-key}
 
 Simulate a space key press on the currently focused element.
 
@@ -36,7 +34,7 @@ Simulate a space key press on the currently focused element.
 - Automatically sends a space key press to the focused element
 - Useful for activating buttons or toggling checkboxes
 
-### 📝 X-Paste Text {#x-paste-text}
+## 📝 X-Paste Text {#x-paste-text}
 
 Paste text content into the currently focused element.
 
@@ -50,7 +48,7 @@ Paste text content into the currently focused element.
 - **Field Value**: `Hello World` - Pastes "Hello World"
 - **Field Value**: `{$variable$}` - Pastes dynamic variable content
 
-### 📌 X-WinAlwaysOnTop (Activate) {#x-winalwaysontop-activate}
+## 📌 X-WinAlwaysOnTop (Activate) {#x-winalwaysontop-activate}
 
 Set the current window to always stay on top of other windows.
 
@@ -60,7 +58,7 @@ Set the current window to always stay on top of other windows.
 - Makes the current window stay above all other windows
 - Useful for keeping important dialogs visible
 
-### 📌 X-WinAlwaysOnTop (Deactivate) {#x-winalwaysontop-deactivate}
+## 📌 X-WinAlwaysOnTop (Deactivate) {#x-winalwaysontop-deactivate}
 
 Remove the always-on-top property from the current window.
 
@@ -70,7 +68,7 @@ Remove the always-on-top property from the current window.
 - Returns the window to normal layering behavior
 - Use after completing tasks that required always-on-top
 
-### ⏳ X-KeyWait {#x-keywait}
+## ⏳ X-KeyWait {#x-keywait}
 
 Wait for a specific key to be released before proceeding.
 
@@ -88,7 +86,7 @@ Wait for a specific key to be released before proceeding.
 If you need to send multiple keystrokes, like `"alt+a"`, you will need to insert two `X-KeyWait` field types in the extension form: one for `"alt"` and one for `"a"`.
 :::
 
-### ⌨️ X-Send {#x-send}
+## ⌨️ X-Send {#x-send}
 
 Send keystrokes, special keys, or text to the currently focused element.
 
@@ -113,7 +111,7 @@ Send keystrokes, special keys, or text to the currently focused element.
 - **Field Value**: `^s` - Sends Ctrl+S (save)
 - **Field Value**: `Hello World` - Types "Hello World"
 
-### 🖱️ X-MouseClick {#x-mouseclick}
+## 🖱️ X-MouseClick {#x-mouseclick}
 
 Simulate mouse clicks at specific coordinates or on the current cursor position.
 
@@ -134,7 +132,7 @@ Simulate mouse clicks at specific coordinates or on the current cursor position.
 - `right,100,200,1` - Right click at coordinates (100, 200)
 - `left,,,2` - Double left click at current position
 
-### 🎯 X-ControlClick {#x-controlclick}
+## 🎯 X-ControlClick {#x-controlclick}
 
 Click on specific control elements within applications.
 
@@ -153,7 +151,7 @@ Click on specific control elements within applications.
 - `x100 y200,Untitled - Notepad` - Click at (100, 200) in Notepad window
 - `x50 y50,Calculator` - Click at (50, 50) in Calculator window
 
-### 🔍 X-ImageSearch {#x-imagesearch}
+## 🔍 X-ImageSearch {#x-imagesearch}
 
 Search for images on the screen and perform actions based on their location.
 
@@ -168,7 +166,94 @@ Search for images on the screen and perform actions based on their location.
 - The system will locate the image on screen
 - Perform actions based on the found coordinates
 
-### 📁 X-FileGetSize {#x-filegetsize}
+---
+
+## 📂 FileExist {#fileexist}
+
+Check for the existence of a file or folder on your PC using file patterns and wildcards.
+
+| Option          | Description                                | Example              |
+| --------------- | ------------------------------------------ | -------------------- |
+| **Field Value** | File pattern to search for (path + pattern) | `C:\Temp\*.tmp`      |
+
+**Set in:** Field Default Value or Excel Field Column
+
+**File Pattern Examples:**
+
+| Pattern | Description | Matches |
+|---------|-------------|---------|
+| `*.*` or `*` | All files | Any file with or without extension |
+| `*.htm` | Files with .htm extension | `index.htm`, `page.html`, `file.htm` |
+| `*.` | Files without extension | `README`, `LICENSE`, `Makefile` |
+| `log?.txt` | Single character wildcard | `log1.txt`, `log2.txt` (not `log10.txt`) |
+| `*report*` | Contains word "report" | `report.pdf`, `monthly_report.xlsx`, `report_2024.doc` |
+
+**Wildcard Characters:**
+
+- `*` - Matches zero or more characters
+- `?` - Matches exactly one character
+- `*.ext` - Matches all files with specific extension
+- `prefix*` - Matches files starting with prefix
+- `*suffix` - Matches files ending with suffix
+
+**Usage Examples:**
+
+```
+# Check for temporary files
+C:\Temp\*.tmp
+
+# Check for log files with single digit
+C:\Logs\log?.txt
+
+# Check for any report files
+C:\Documents\*report*
+
+# Check for all files in directory
+C:\Users\Public\*.*
+
+# Check for files without extension
+C:\Scripts\*.
+
+# Check for specific file
+C:\Users\Username\Desktop\file.txt
+
+# Using variable
+{$filePath$}\*.pdf
+```
+
+**Return Value:**
+
+- Returns `1` (true) if file/folder exists
+- Returns `0` (false) if file/folder does not exist
+
+**Use Cases:**
+
+- Verify file downloads completed
+- Check if required files exist before processing
+- Validate folder structure
+- Monitor file creation
+- Conditional logic based on file existence
+
+**Example Workflow:**
+
+```
+1. Set Field Value: C:\Downloads\*.pdf
+2. FileExist checks for any PDF files
+3. If found (returns 1), proceed with next action
+4. If not found (returns 0), skip or show error
+```
+
+:::tip Pattern Matching
+Use wildcards to check for multiple files at once. For example, `C:\Logs\*.log` will return true if any .log file exists in the Logs directory.
+:::
+
+:::info Case Sensitivity
+File patterns on Windows are case-insensitive. `*.TXT` and `*.txt` will match the same files.
+:::
+
+---
+
+## 📁 X-FileGetSize {#x-filegetsize}
 
 Get the file size in bytes for local files or remote URLs.
 
@@ -191,7 +276,7 @@ C:\Users\P1\Pictures\photo.jpg
 https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg
 ```
 
-### 📄 X-FileExtension {#x-fileextension}
+## 📄 X-FileExtension {#x-fileextension}
 
 Get the file extension from a file path or URL.
 

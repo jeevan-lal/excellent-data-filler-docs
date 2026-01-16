@@ -35,6 +35,7 @@ The Program Helper is essential for:
 
 | Platform    | Download Link                                             | File Size | Version |
 | ----------- | --------------------------------------------------------- | --------- | ------- |
+| **Windows** | [Download v2.7](/edf-extension-helper-installer-v2.7.exe) | ~3 MB     | 2.7     |
 | **Windows** | [Download v2.6](/edf-extension-helper-installer-v2.6.exe) | ~3 MB     | 2.6     |
 
 **Step 2: Installation Process**

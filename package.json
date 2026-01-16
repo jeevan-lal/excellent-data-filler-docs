@@ -1,6 +1,6 @@
 {
   "name": "excellent-data-filler-docs",
-  "version": "4.9.19",
+  "version": "4.10.0",
   "description": "Documentation site for Excellent Data Filler - a powerful browser extension that automates form filling and data scraping",
   "scripts": {
     "dev": "vitepress dev docs",

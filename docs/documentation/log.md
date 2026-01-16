@@ -31,8 +31,7 @@ Access real-time log messages directly from your browser's developer console for
 
 1. Open browser console using any method above
 2. Navigate to the **Console** tab
-3. Look for messages prefixed with `[EDF]` or `[Excellent Data Filler]`
-4. Filter logs by typing `EDF` in the console filter
+3. Look for messages 
 
 ### 📊 Log Message Types {#log-message-types}
 
@@ -47,6 +46,83 @@ Access real-time log messages directly from your browser's developer console for
 Keep the browser console open while using the extension to monitor real-time operations and quickly identify any issues during form filling.
 :::
 
-:::warning Note
-Log messages are only visible in the browser console and are not stored permanently. For persistent logging, consider using the extension's built-in logging features.
+---
+
+## 📋 Logs Monitor {#logs-monitor}
+
+Access a comprehensive logging interface directly from the extension site page to monitor and track all extension activities in real-time.
+
+**Location:** Extension Site Page → Logs
+
+**Description:** The Logs Monitor provides a centralized interface to view, filter, search, and export extension logs with detailed information about each operation.
+
+### Features
+
+**Log Table Columns:**
+
+| Column | Description |
+|--------|-------------|
+| **Time** | Timestamp of when the log was created |
+| **Type** | Log level (Success, Info, Warning, Error) |
+| **URL** | The page URL where the log was generated |
+| **Message** | Detailed log message describing the operation |
+| **Variable** | Associated variables or data |
+| **Actions** | Available actions for the log entry |
+
+**Available Actions:**
+
+| Action | Icon | Description |
+|--------|------|-------------|
+| **Start** | ▶ Start | Start logging/monitoring |
+| **Clear** | 🗑 Clear | Clear all current logs |
+| **Export** | 📥 Export | Export logs to file |
+
+**Filter Options:**
+
+- **Success** - Show only successful operations
+- **Info** - Show informational messages
+- **Warning** - Show warning messages
+- **Error** - Show error messages
+
+**Search:** Use the search box to filter logs by message content, URL, or variables.
+
+### How to Access Logs Monitor
+
+1. Open the extension site page
+2. Navigate to the **Logs** tab
+3. Click **Start** to begin monitoring
+4. View real-time logs as they appear
+5. Use filters to focus on specific log types
+6. Search for specific messages or URLs
+7. Export logs for analysis or sharing
+
+### Status Bar Logging
+
+**Enable in Settings:** [Settings → Form Filler → Show Extension Logs in Status Bar](/documentation/settings#show-extension-logs-in-status-bar)
+
+When enabled, the latest extension logs will be displayed in the status bar at the bottom of the page (if status bar is active).
+
+**Benefits:**
+- View logs without opening the Logs Monitor
+- See real-time updates during automation
+- Quick access to latest log messages
+- Non-intrusive monitoring
+
+**Requirements:**
+- Status bar must be enabled
+- "Show Extension Logs in Status Bar" setting must be turned on
+
+:::tip Real-time Monitoring
+The Logs Monitor updates in real-time as operations occur. Keep it open during automation to track progress and identify issues immediately.
 :::
+
+:::warning Note
+Log messages in the Logs Monitor are session-based and will be cleared when you close the extension site page. Export important logs before closing.
+:::
+
+---
+### Related Documentation
+
+- [Settings - Form Filler](/documentation/settings#form-filler)
+- [Settings - Show Extension Logs in Status Bar](/documentation/settings#show-extension-logs-in-status-bar)
+- [Testing Site](/documentation/testing-site)

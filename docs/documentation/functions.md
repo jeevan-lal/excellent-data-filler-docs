@@ -159,6 +159,211 @@ This method removes all the Session Storage Object item for this domain.
 
 This method removes all the Local Storage Object item for this domain.
 
+---
+
+## setLocalStorage
+
+Store data in the browser's localStorage for the current domain.
+
+| Options     | Required | Description                         | Value          |
+| ----------- | -------- | ----------------------------------- | -------------- |
+| Field Value | true     | Key and value to store in localStorage | [key][value] |
+
+### Structure of Field Value
+
+- **[parameter-1][parameter-2]**
+- **[key][value]**
+- **[string][string]**
+
+### Value Examples
+
+```
+[user_id][user01]
+[session_token][abc123xyz]
+[user_name][John Doe]
+```
+
+**Set in:** Field Default Value or Excel Field Column
+
+**Notes:**
+- Uses browser `localStorage` API
+- Data persists across browser sessions (not removed after browser close)
+- Data is domain-specific (cannot access data from other domains)
+- Storage limit is typically 5-10MB per domain
+
+**Example Usage:**
+
+```
+// Store user ID
+[user_id][user123]
+
+// Store with variable
+[auth_token][{$token$}]
+```
+
+---
+
+## getLocalStorage
+
+Retrieve data from the browser's localStorage for the current domain.
+
+| Options     | Required | Description                                    | Value                        |
+| ----------- | -------- | ---------------------------------------------- | ---------------------------- |
+| Field Value | true     | Key, force check, and delete options | [key][force_check][is_delete] |
+
+### Structure of Field Value
+
+- **[parameter-1][parameter-2][parameter-3]**
+- **[key][force_check][is_delete]**
+- **[string][boolean][boolean]**
+
+### Value Examples
+
+```
+[user_id][true][true]   - Get key 'user_id' value, wait until key exists, then delete the key after retrieval
+[user_id][true][false]  - Get key 'user_id' value, wait until key exists, don't delete the key
+[user_id][false][false] - Get key 'user_id' value, if found return value, if not return error
+```
+
+**Set in:** Field Default Value or Excel Field Column
+
+**Parameters:**
+- **key** (string): The localStorage key to retrieve
+- **force_check** (boolean): 
+  - `true` - Wait until the key exists in storage before returning
+  - `false` - Return immediately (error if key doesn't exist)
+- **is_delete** (boolean):
+  - `true` - Delete the key after retrieving its value
+  - `false` - Keep the key in storage after retrieval
+
+**Notes:**
+- Uses browser `localStorage` API
+- Data is domain-specific (cannot access data from other domains)
+- Returns the stored value or error if key doesn't exist (when force_check is false)
+
+**Example Usage:**
+
+```
+// Get and delete
+[user_id][true][true]
+
+// Get and keep
+[session_token][true][false]
+
+// Get without waiting
+[user_name][false][false]
+```
+
+---
+
+## setSessionStorage
+
+Store data in the browser's sessionStorage for the current domain.
+
+| Options     | Required | Description                              | Value          |
+| ----------- | -------- | ---------------------------------------- | -------------- |
+| Field Value | true     | Key and value to store in sessionStorage | [key][value] |
+
+### Structure of Field Value
+
+- **[parameter-1][parameter-2]**
+- **[key][value]**
+- **[string][string]**
+
+### Value Examples
+
+```
+[user_id][user01]
+[temp_token][xyz789]
+[form_state][active]
+```
+
+**Set in:** Field Default Value or Excel Field Column
+
+**Notes:**
+- Uses browser `sessionStorage` API
+- Data is automatically removed when browser/tab is closed
+- Data is domain-specific (cannot access data from other domains)
+- Storage limit is typically 5-10MB per domain
+- Each tab has its own sessionStorage
+
+**Example Usage:**
+
+```
+// Store temporary user ID
+[user_id][temp123]
+
+// Store with variable
+[page_state][{$state$}]
+```
+
+---
+
+## getSessionStorage
+
+Retrieve data from the browser's sessionStorage for the current domain.
+
+| Options     | Required | Description                                       | Value                        |
+| ----------- | -------- | ------------------------------------------------- | ---------------------------- |
+| Field Value | true     | Key, force check, and delete options | [key][force_check][is_delete] |
+
+### Structure of Field Value
+
+- **[parameter-1][parameter-2][parameter-3]**
+- **[key][force_check][is_delete]**
+- **[string][boolean][boolean]**
+
+### Value Examples
+
+```
+[user_id][true][true]   - Get key 'user_id' value, wait until key exists, then delete the key after retrieval
+[user_id][true][false]  - Get key 'user_id' value, wait until key exists, don't delete the key
+[user_id][false][false] - Get key 'user_id' value, if found return value, if not return error
+```
+
+**Set in:** Field Default Value or Excel Field Column
+
+**Parameters:**
+- **key** (string): The sessionStorage key to retrieve
+- **force_check** (boolean): 
+  - `true` - Wait until the key exists in storage before returning
+  - `false` - Return immediately (error if key doesn't exist)
+- **is_delete** (boolean):
+  - `true` - Delete the key after retrieving its value
+  - `false` - Keep the key in storage after retrieval
+
+**Notes:**
+- Uses browser `sessionStorage` API
+- Data is domain-specific (cannot access data from other domains)
+- Data is automatically removed when browser/tab is closed
+- Returns the stored value or error if key doesn't exist (when force_check is false)
+
+**Example Usage:**
+
+```
+// Get and delete
+[temp_token][true][true]
+
+// Get and keep
+[form_state][true][false]
+
+// Get without waiting
+[user_session][false][false]
+```
+
+---
+
+## Storage Comparison
+
+| Feature | localStorage | sessionStorage |
+|---------|-------------|----------------|
+| **Persistence** | Survives browser close | Cleared on browser/tab close |
+| **Scope** | Domain-wide, all tabs | Per tab/window |
+| **Storage Limit** | ~5-10MB | ~5-10MB |
+| **Use Case** | Long-term data | Temporary session data |
+
+---
+
 ## countCharLength
 
 You can count given character in the element string.

@@ -1,4 +1,4 @@
-# Timer Action ⏰ {#timer-action}
+# Timer Action {#timer-action}
 
 Execute specific actions after a specified time delay. Set the action type and timer duration in seconds to trigger automated operations.
 
