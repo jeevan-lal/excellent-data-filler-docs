@@ -17,7 +17,7 @@ If you want to check [attribute](https://www.w3schools.com/html/html_attributes.
 | Selector Type            | true     | Element Selector Type     |                                                |
 | Selector Query           | true     | Element Selector Query    |                                                |
 | Field Value              | true     | Fill Value with Condition | [attribute_name][attribute_value][force_check] |
-| Wait Until Element Found | false    |                           |                                                |
+| Wait until element is found in the page. | false    |                           |                                                |
 
 - **Field Value** - [string][string][boolean]
 
@@ -30,7 +30,7 @@ If you want to check [attribute](https://www.w3schools.com/html/html_attributes.
 | Selector Type            | true     | Element Selector Type     |                                                |
 | Selector Query           | true     | Element Selector Query    |                                                |
 | Field Value              | true     | Fill Value with Condition | [attribute_name][attribute_value][force_check] |
-| Wait Until Element Found | false    |                           |                                                |
+| Wait until element is found in the page. | false    |                           |                                                |
 
 - **Field Value** - [string][string][boolean]
 - `[name][][true]`, if name attribute not exists in element then return true
@@ -45,7 +45,7 @@ To match the **text/value** of an element according to the condition, then you c
 | Selector Type                                           | true     | Element Selector Type     |                                           |
 | Selector Query                                          | true     | Element Selector Query    |                                           |
 | Field Value                                             | true     | Fill Value with Condition | [comparison_operators][text][force_check] |
-| Wait Until Element Found                                | false    |                           |                                           |
+| Wait until element is found in the page.                                | false    |                           |                                           |
 | Execute the action of the function on multiple elements | false    |                           |                                           |
 
 ### Structure of Field Value
@@ -67,7 +67,7 @@ To match the **length** of an element according to the condition, then you can u
 | Selector Type            | true     | Element Selector Type     |                                                    |
 | Selector Query           | true     | Element Selector Query    |                                                    |
 | Field Value              | true     | Fill Value with Condition | [comparison_operators][length_number][force_check] |
-| Wait Until Element Found | false    |                           |                                                    |
+| Wait until element is found in the page. | false    |                           |                                                    |
 
 ### Structure of Field Value
 
@@ -92,17 +92,22 @@ If you want to check an element whether the element is in the page or not, then 
 | ------------------------ | -------- |
 | Selector Type            | true     |
 | Selector Query           | true     |
-| Wait Until Element Found | false    |
+| Wait until element is found in the page. | false    |
 
 ## checkElementDestroy
 
-If you want to check an element whether the element is in the page or not, then you can use it.
+If you want to check whether an element has been **removed/destroyed** from the page, then you can use this function. This is useful for waiting until an element disappears from the DOM.
 
-| Options                  | Required |
-| ------------------------ | -------- |
-| Selector Type            | true     |
-| Selector Query           | true     |
-| Wait Until Element Found | false    |
+| Options                  | Required | Description                                                                                           |
+| ------------------------ | -------- | ----------------------------------------------------------------------------------------------------- |
+| Selector Type            | true     | Element Selector Type                                                                                 |
+| Selector Query           | true     | Element Selector Query                                                                                |
+| Wait until element is destroy in the page | false    | If enabled, waits for the element to be destroyed before executing below fields. |
+
+### Behavior
+
+- **When "Wait until element is destroy in the page" is enabled (true)**: The function waits until the specified element is destroyed/removed from the page. Once the element is destroyed, it executes the fields below.
+- **When "Wait until element is destroy in the page" is disabled (false)**: The function immediately checks if the element exists. Returns true if element is not found (destroyed), false if element still exists.
 
 ## checkElementVisible
 
@@ -112,7 +117,7 @@ If you want to check an element whether the element is there in the page or not 
 | ------------------------ | -------- |
 | Selector Type            | true     |
 | Selector Query           | true     |
-| Wait Until Element Found | false    |
+| Wait until element is found in the page. | false    |
 
 ## checkElementInvisible
 
@@ -122,7 +127,7 @@ If you want to check an element whether the element is in the page or not and th
 | ------------------------ | -------- |
 | Selector Type            | true     |
 | Selector Query           | true     |
-| Wait Until Element Found | false    |
+| Wait until element is found in the page. | false    |
 
 ## elementVisible
 
@@ -373,7 +378,7 @@ You can count given character in the element string.
 | Selector Type            | true     | Element Selector Type     |                            |
 | Selector Query           | true     | Element Selector Query    |                            |
 | Field Value              | true     | Fill Value with Condition | [a][true] <br> [In][false] |
-| Wait Until Element Found | false    |                           |                            |
+| Wait until element is found in the page. | false    |                           |                            |
 
 ### Structure of Field Value
 
@@ -398,7 +403,7 @@ You can count total characters in string.
 | ------------------------ | -------- | ---------------------- | ----- |
 | Selector Type            | true     | Element Selector Type  |       |
 | Selector Query           | true     | Element Selector Query |       |
-| Wait Until Element Found | false    |                        |       |
+| Wait until element is found in the page. | false    |                        |       |
 
 ::: info Example
 If element string is `"India"` then this function return 5;
@@ -413,7 +418,7 @@ You can count split array length.
 | Selector Type            | true     | Element Selector Type  |              |
 | Selector Query           | true     | Element Selector Query |              |
 | Field Value              | true     | Split String           | ,, <br> \r\n |
-| Wait Until Element Found | false    |                        |              |
+| Wait until element is found in the page. | false    |                        |              |
 
 ::: info Example
 If element string is `"India,,Israel"` and field value is `",,"` then this function return 2;
@@ -432,7 +437,7 @@ You can check the rows of the table according to the condition.
 | Selector Type            | true     | Element Selector Type     |                                   |
 | Selector Query           | true     | Element Selector Query    |                                   |
 | Field Value              | true     | Fill Value with Condition | [==][2][true] <br> [<=][3][false] |
-| Wait Until Element Found | false    |                           |                                   |
+| Wait until element is found in the page. | false    |                           |                                   |
 
 ### Structure of Field Value
 
@@ -502,7 +507,7 @@ The `insertClassName` method adds one or more CSS class names to the element. Th
 | Selector Type                                           | true     | Element Selector Type  |                         |
 | Selector Query                                          | true     | Element Selector Query |                         |
 | Field Value                                             | true     | Fill css class name    | bg-danger,text-white,.. |
-| Wait Until Element Found                                | false    |                        |                         |
+| Wait until element is found in the page.                                | false    |                        |                         |
 | Execute the action of the function on multiple elements | false    |                        |                         |
 
 ## removeClassName
@@ -514,7 +519,7 @@ This `removeClassName` method removes one or more the element CSS class name.
 | Selector Type                                           | true     | Element Selector Type  |                         |
 | Selector Query                                          | true     | Element Selector Query |                         |
 | Field Value                                             | true     | Fill CSS class name    | bg-danger,text-white,.. |
-| Wait Until Element Found                                | false    |                        |                         |
+| Wait until element is found in the page.                                | false    |                        |                         |
 | Execute the action of the function on multiple elements | false    |                        |                         |
 
 :::info
@@ -530,7 +535,7 @@ The `insertCSSText` method sets the text of the element's inline style. This met
 | Selector Type                                           | true     | Element Selector Type  |                             |
 | Selector Query                                          | true     | Element Selector Query |                             |
 | Field Value                                             | true     | Fill CSS style name    | float:left;margin-top:75px; |
-| Wait Until Element Found                                | false    |                        |                             |
+| Wait until element is found in the page.                                | false    |                        |                             |
 | Execute the action of the function on multiple elements | false    |                        |                             |
 
 ## removeCSSText
@@ -542,7 +547,7 @@ The `removeCSSText` method remove the text of the element's inline style.
 | Selector Type                                           | true     | Element Selector Type  |                     |
 | Selector Query                                          | true     | Element Selector Query |                     |
 | Field Value                                             | true     | Fill CSS style name    | float,margin-top,.. |
-| Wait Until Element Found                                | false    |                        |                     |
+| Wait until element is found in the page.                                | false    |                        |                     |
 | Execute the action of the function on multiple elements | false    |                        |                     |
 
 :::info
@@ -558,7 +563,7 @@ The `insertElementAttribute` method sets the value of an attribute on the elemen
 | Selector Type                                           | true     | Element Selector Type         |                  |
 | Selector Query                                          | true     | Element Selector Query        |                  |
 | Field Value                                             | true     | Fill attribute name and value | attName,attValue |
-| Wait Until Element Found                                | false    |                               |                  |
+| Wait until element is found in the page.                                | false    |                               |                  |
 | Execute the action of the function on multiple elements | false    |                               |                  |
 
 ## removeElementAttribute
@@ -570,7 +575,7 @@ If you want to remove the attribute of an element then you can use it one or mor
 | Selector Type                                           | true     | Element Selector Type  |                             |
 | Selector Query                                          | true     | Element Selector Query |                             |
 | Field Value                                             | true     | Fill attribute name    | attName,attName,attName,... |
-| Wait Until Element Found                                | false    |                        |                             |
+| Wait until element is found in the page.                                | false    |                        |                             |
 | Execute the action of the function on multiple elements | false    |                        |                             |
 
 ## scrollToTopLeft
@@ -600,7 +605,7 @@ The `scrollIntoView` method scrolls an element into the visible area of the brow
 | Selector Type            | true     | Element Selector Type                                                                        |
 | Selector Query           | true     | Element Selector Query                                                                       |
 | Field Value              | true     | [Params](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView#parameters) |
-| Wait Until Element Found | false    |                                                                                              |
+| Wait until element is found in the page. | false    |                                                                                              |
 
 ## playSound
 

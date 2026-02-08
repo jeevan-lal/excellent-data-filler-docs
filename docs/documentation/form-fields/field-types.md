@@ -48,8 +48,8 @@ Powerful field types for complex automation, scripting, and advanced form contro
 - [**👩‍💻 Javascript Code**](/documentation/field-types/javascript-code) - Execute custom JavaScript code
 - [**🚀 Function**](/documentation/functions#predefined-function) - Use predefined functions for data manipulation
 - [**🔑 Keys**](/documentation/keys#special-key) - Simulate keyboard input and special keys
-- [**🛑 Form Error Message**](/documentation/field-types/form-error-message) - Display custom error messages
-- **✅ Current Entry as Saved** - Mark current Excel entry as completed
+- [**🛑 Form Error Message**](/documentation/field-types/advance/form-error-message) - Display custom error messages
+- [**✅ Current Entry as Saved**](/documentation/field-types/advance/current-entry-as-saved) - Mark current Excel entry as completed
 - **📃 Field Action Status Checker** - Check the status of field actions
 - **⏭️ Next Excel Entry Exists** - Verify if next Excel entry is available
 - [**🗃️ Execute Segment**](/documentation/field-types/execute-segment) - Execute a segment of the form
@@ -115,12 +115,12 @@ Field types for extracting and processing data from web pages and documents.
 
 - **Fetch Text** - Extract plain text content from elements
 - **Fetch HTML** - Extract HTML content from elements
-- [**Scraping Data**](/documentation/field-types/scraper-data#scraping-data) - Advanced web scraping functionality
-- **Scraping Page URL** - Extract current page URL
-- **Fetch Table Data in Scraper Data (Vertical)** - Extract table data in vertical format
-- **Fetch Table Data in the Response Excel (Horizontal)** - Extract table data in horizontal format
-- [**Fetch Header-Value Data**](/documentation/field-types/scraper-data#fetch-header-value-data) - Extract key-value pairs from elements
-- **Fetch Multiple Data (Vertical)** - Extract multiple data points in vertical format
+- [**Scraping Data**](/documentation/field-types/scraper-data/scraping-data) - Advanced web scraping functionality
+- [**Scraping Page URL**](/documentation/field-types/scraper-data/scraping-page-url) - Extract current page URL
+- [**Fetch Table Data in Scraper Data (Vertical)**](/documentation/field-types/scraper-data/fetch-table-data-vertical) - Extract table data in vertical format
+- [**Fetch Table Data in the Response Excel (Horizontal)**](/documentation/field-types/scraper-data/fetch-table-data-horizontal) - Extract table data in horizontal format
+- [**Fetch Header-Value Data**](/documentation/field-types/scraper-data/fetch-header-value-data) - Extract key-value pairs from elements
+- [**Fetch Multiple Data (Vertical)**](/documentation/field-types/scraper-data/fetch-multiple-data-vertical) - Extract multiple data points in vertical format
 
 ## 🔧 Program Helper {#program-helper}
 

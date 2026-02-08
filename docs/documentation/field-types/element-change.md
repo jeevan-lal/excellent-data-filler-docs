@@ -9,6 +9,8 @@ On which element it is used, if that element **changes** then this Field Type re
 | [Which DOM mutations should be reported to](#which-dom-mutations-should-be-reported-to)                                                            |
 | [Timeout to Check Element Change (Seconds)](#timeout-to-check-element-change)                                                                      |
 | [Whether the element is modified or not, do it in the background process](#whether-the-element-is-modified-or-not-do-it-in-the-background-process) |
+| [Do you want to click on an element?](#do-you-want-to-click-on-an-element)                                                                         |
+| [Enter Element Selector/Xpath](#enter-element-selector-xpath)                                                                                      |
 
 ## Which DOM mutations should be reported to
 
@@ -31,8 +33,27 @@ By default it waits for the field element to change and the filler does not move
 
 In which next field you want to check whether the element has changed, you can use the option given below in the settings of the field in which you want to check.
 
+
 [Wait until the response status of the given element change fields comes](/documentation/form-fields/field-settings#wait-until-the-response-status-of-the-given-element-change-fields-comes)
 :::
+
+## Do you want to click on an element?
+
+This is a **switch field** that allows you to trigger a click action on a specific element before monitoring for changes. When enabled, the extension will click on the specified element and then wait for the DOM mutations to occur.
+
+This is useful when:
+- You need to trigger an action (like clicking a button) that causes the element to change
+- The element change only occurs after user interaction
+- You want to automate the click and monitor the result in a single field
+
+## Enter Element Selector/Xpath
+
+When the **"Do you want to click on an element?"** option is enabled, this field becomes available. Here you can specify the target element that should be clicked using either:
+
+- **CSS Selector**: e.g., `#submitButton`, `.action-btn`, `button[type="submit"]`
+- **XPath**: e.g., `//button[@id='submitButton']`, `//div[@class='action-btn']`
+
+The extension will locate this element and click it before starting to monitor the element changes specified in the main field configuration.
 
 ## Tips
 

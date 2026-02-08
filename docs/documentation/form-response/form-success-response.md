@@ -27,6 +27,7 @@ When It matches with given success response, entry will be marked as **Entry Sav
 | Can success message be anything in this element              | If the success message of the entry is always changing then using this option matches **any type of message** in the given element.                                                                                               |
 | Remove excel column value from current entry?                | If you fetch large data but don't need it in Excel, enable this option to remove the column value from the current entry after processing.                                                                                        |
 | Set custom message after success message matched?            | If your success message is large, you can set a custom short message to store in Excel instead of the full success message.                                                                                                       |
+| Do not mark the entry as saved, simply execute the action    | When enabled, the extension will execute the specified [action](#action) when the success response matches, but **will not mark the entry as saved**. This is useful when you want to perform an action without completing the entry. |
 
 
 ## Success Page URL

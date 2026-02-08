@@ -116,6 +116,50 @@ Extension allow you to use file path with `starts` and `ends` with quotes, for e
 - **Use Case**: Helps identify the correct upload window in multi-window scenarios
 - **Default**: "Open" (standard file dialog title)
 
+## 📢 Handling Empty Excel Field Values {#handling-empty-values}
+
+When working with Excel data, you may encounter situations where the file path field is empty for certain rows. By default, the extension will attempt to process the upload action even when the Excel field value is empty, which can cause errors or unwanted behavior.
+
+### ⚙️ Skip Action for Empty Values {#skip-empty-values}
+
+To skip the upload file action when the Excel field value is empty, use the **"Skip field action if given field value matches"** field option:
+
+1. **Enable the Option**: Check the "Skip field action if given field value matches" checkbox in the field options
+2. **Set Empty Value Pattern**: Enter `''` (two single quotes) in the value field
+3. **How It Works**: When the Excel field value is empty, the extension will skip the entire upload action for that row
+
+:::tip Best Practice
+This is especially useful when:
+- You're using the **"Set File/Folder Base Path"** option
+- Some rows in your Excel sheet have files to upload while others don't
+- You want to avoid errors from attempting to upload non-existent files
+:::
+
+### 📝 Configuration Example {#empty-value-example}
+
+**Field Options Setup:**
+```
+✅ Set File/Folder Base Path
+   Base Path: D:\Documents\Uploads\
+
+✅ Skip field action if given field value matches
+   Value: ''
+```
+
+**Excel Data:**
+| Row | File Name    | Result                          |
+|-----|-------------|---------------------------------|
+| 1   | document.pdf | ✅ Uploads D:\Documents\Uploads\document.pdf |
+| 2   | (empty)      | ⏭️ Skips upload action          |
+| 3   | image.jpg    | ✅ Uploads D:\Documents\Uploads\image.jpg    |
+| 4   | (empty)      | ⏭️ Skips upload action          |
+
+:::info Note
+- The value `''` represents an empty string
+- This works with both file name and file path configurations
+- You can combine this with other field options for more complex scenarios
+:::
+
 ## 💡 Usage Examples {#usage-examples}
 
 ### 📄 Single File Upload {#single-file-upload}

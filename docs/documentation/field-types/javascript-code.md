@@ -422,6 +422,35 @@ const response = {
 $fns.return(JSON.stringify(response));
 ```
 
+### 🌐 Request Monitoring Script {#request-monitoring}
+
+Use the following event listener to intercept request details and return custom success/error responses.
+
+```javascript
+async function getDetails(e) {
+  var data = e.detail;
+  data = JSON.parse(data);
+  console.log("CTH: data", data);
+
+  // Return logic
+  $fns.return(JSON.stringify({ status: false, message: "Error Message" }));
+  // $fns.return(JSON.stringify({ status: true, message: "Success Message" }));
+}
+
+// Get Web Request Data
+document.addEventListener('CTH-EXCELLENT-FILLER-REQUEST-EVENT', getDetails);
+```
+
+**Event Data Output Schema:**
+```json
+{
+  "headers": "object",
+  "method": "string",
+  "status": "number",
+  "url": "string"
+}
+```
+
 ### 🔍 Advanced Element Selection {#advanced-selection}
 
 Use various methods to find and interact with elements.

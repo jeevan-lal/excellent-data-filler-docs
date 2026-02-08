@@ -71,3 +71,9 @@ button {
   background-color: initial !important;
   /* border: initial !important; */
 }
+
+/* Search Input - Set white color in dark theme */
+html.dark div.VPLocalSearchBox input,
+button {
+  color: white !important;
+}

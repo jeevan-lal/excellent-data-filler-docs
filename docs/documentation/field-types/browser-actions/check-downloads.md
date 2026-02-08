@@ -7,6 +7,8 @@ Monitor and verify download status in the browser's download list with support f
 | Option | Description | Required |
 |--------|-------------|----------|
 | **Run the action process in the background?** | If enabled, this field runs in background while next field executes | No |
+| **Do you want to click on an element?** | Enable to click on an element before checking downloads | No |
+| **Enter Element Selector/Xpath** | Selector or XPath for the element to click (when click option is enabled) | Conditional |
 | **Filename** | Check specific file name in browser download list using regex patterns | No |
 | **Downloads Item Status** | Desired download status to check for | Yes |
 | **Wait until the download items status matches** | Wait until specified status is reached | No |
@@ -20,6 +22,49 @@ Monitor and verify download status in the browser's download list with support f
 **Description:** When enabled, this field action runs in the background and the next field action executes immediately without waiting for download completion.
 
 **Use Case:** When you want to continue automation while monitoring downloads in parallel.
+
+---
+
+### Click on Element
+
+**Toggle:** Do you want to click on an element?
+
+**Description:** When enabled, the extension will click on a specified element before checking the download status. This is useful when you need to trigger a download by clicking a button or link before monitoring the download.
+
+**Element Selector/Xpath:** Enter the CSS selector or XPath for the element you want to click.
+
+**Use Cases:**
+- Click a download button that initiates a file download
+- Click a link that triggers a download
+- Interact with elements that start the download process
+
+**Examples:**
+
+**CSS Selector:**
+```
+#download-btn
+.download-button
+button[data-action="download"]
+a.pdf-download
+```
+
+**XPath:**
+```
+//button[@id='download-btn']
+//a[contains(text(), 'Download')]
+//button[contains(@class, 'download')]
+//div[@class='actions']//button[1]
+```
+
+:::tip Workflow
+1. The extension clicks the specified element
+2. Waits for the download to start
+3. Monitors the download status based on your configuration
+:::
+
+:::info Important
+Make sure the element selector is accurate and the element is visible/clickable on the page before the field executes.
+:::
 
 ---
 
@@ -226,7 +271,39 @@ Wait until status matches: ✅ Enabled
 
 ---
 
-### Example 4: Custom Filter Workflow
+### Example 4: Click Download Button and Wait
+
+```
+Field Type: Check Downloads
+Do you want to click on an element?: ✅ Enabled
+Enter Element Selector/Xpath: #download-report-btn
+Filename: .*monthly-report\\.pdf$
+Downloads Item Status: Complete
+Wait until status matches: ✅ Enabled
+```
+
+**Result:** Clicks the download button, then waits until the monthly report PDF is completely downloaded.
+
+**Use Case:** Automate clicking download buttons and verify the download completes successfully.
+
+---
+
+### Example 5: Click Link with XPath and Monitor
+
+```
+Field Type: Check Downloads
+Do you want to click on an element?: ✅ Enabled
+Enter Element Selector/Xpath: //a[contains(text(), 'Download Invoice')]
+Filename: .*invoice_\\d+\\.pdf$
+Downloads Item Status: Complete
+Wait until status matches: ✅ Enabled
+```
+
+**Result:** Clicks the "Download Invoice" link using XPath, then monitors until the invoice PDF download completes.
+
+---
+
+### Example 6: Custom Filter Workflow
 
 **Field 1 - JavaScript Code:**
 ```js
@@ -277,6 +354,32 @@ Wait until status matches: ✅ Enabled
 
 ---
 
+## Tips
+
+:::tip Click on Element
+When using "Do you want to click on an element?", ensure the element is visible and clickable before the field executes. Use specific selectors to avoid clicking the wrong element.
+:::
+
+:::info Selector Testing
+Test your CSS selectors or XPath expressions in the browser console before using them:
+- **CSS**: `document.querySelector('#download-btn')`
+- **XPath**: `$x("//button[text()='Download']")`
+:::
+
+:::warning Download Timing
+After clicking an element to trigger a download, there may be a slight delay before the download appears in the browser's download list. The extension will wait for the download to start before checking its status.
+:::
+
+:::tip Regex Patterns
+Use regex patterns in the Filename field for flexible matching. Test your patterns at [regex101.com](https://regex101.com) before using them.
+:::
+
+:::info Background Processing
+Enable "Run in background" when you want to continue automation while monitoring downloads. This is useful for long-running downloads that shouldn't block other actions.
+:::
+
+---
+
 ## Use Cases
 
 #### Verify File Download Completion
@@ -320,6 +423,21 @@ Wait until status matches: ✅ Enabled
 - Run in background: Enabled
 - Filename: `.*data\.csv$`
 - Status: Complete
+
+---
+
+#### Automated Download Triggering
+
+**Scenario:** Click a download button and wait for the file to complete downloading.
+
+**Configuration:**
+- Do you want to click on an element?: Enabled
+- Enter Element Selector/Xpath: `#download-btn` or `//button[text()='Download']`
+- Filename: `.*report\\.pdf$`
+- Status: Complete
+- Wait: Enabled
+
+**Use Case:** Automate the entire download process from clicking the button to verifying completion.
 
 ## Related Field Types
 

@@ -39,6 +39,14 @@ const sideBarList = [
       {
         text: 'Log',
         link: '/documentation/log#log'
+      },
+      {
+        text: 'Context Menu',
+        link: '/documentation/extension/context-menu'
+      },
+      {
+        text: 'Keyboard Shortcuts',
+        link: '/documentation/extension/keyboard-shortcuts'
       }
     ]
   },
