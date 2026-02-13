@@ -11,6 +11,7 @@ The Scraping Page URL field type allows you to capture the current web page's UR
 | Option | Description | Required |
 |--------|-------------|----------|
 | **Field Default Value** | Optional default URL value | No |
+| **Are you using custom javascript function for return field responses?** | Enable custom JavaScript to modify the scraped URL | No |
 
 ---
 
@@ -92,6 +93,44 @@ Default Value: {$baseURL$}/page
 **Excel Column `baseURL`:** `https://example.com`
 
 **Result:** Stores `https://example.com/page` in Excel column `currentURL`
+
+---
+
+### Example 5: Custom JavaScript Function to Modify URL
+
+You can use a custom JavaScript function to modify the fetched URL before it's stored.
+
+**Setup:**
+1. Add a **JavaScript Code** field type **above** the Scraping Page URL field
+2. Enable the option: **"Are you using custom javascript function for return field responses?"** in the Scraping Page URL field
+3. Use the field listener to modify the URL
+
+**JavaScript Code:**
+```js
+$fns.field.listener('EDF-FIELD-SCRAPING-PAGE-URL', (output, callback) => {
+  console.log("REQUEST:", output);
+
+  // Use custom actions - Example: Convert URL to uppercase
+  let newText = output.response.toUpperCase();
+
+  // Return modified data
+  callback({ status: true, message: "DONE", data: newText });
+  // Or return error: callback({ status: false, message: "ERROR" });
+});
+
+$fns.return("1");
+```
+
+**Current Page:** `https://example.com/page`
+
+**Result:** Stores `HTTPS://EXAMPLE.COM/PAGE` in Excel column
+
+**Use Cases:**
+- Normalize URLs (convert to lowercase/uppercase)
+- Extract specific URL components
+- Add tracking parameters
+- Transform URL format
+- Validate URL patterns
 
 ---
 

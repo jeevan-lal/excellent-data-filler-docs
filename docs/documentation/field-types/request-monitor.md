@@ -121,3 +121,8 @@ This makes it easy to identify which field captured the request data and allows 
 - Storing dynamic data returned from server requests
 - Logging request data for debugging or analysis
 - Extracting specific information from network responses
+
+## Related Documentation
+
+For advanced request monitoring using JavaScript code, see:
+- [JavaScript Code - Request Monitoring](/documentation/field-types/javascript-code.html#request-monitoring)

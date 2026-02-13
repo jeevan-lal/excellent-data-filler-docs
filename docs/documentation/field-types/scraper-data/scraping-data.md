@@ -14,6 +14,7 @@ The Scraping Data field type allows you to extract various types of information 
 | **Selector Query** | The selector to locate the element | Yes |
 | **Which Element Option Scraping** | Type of data to extract from the element | Yes |
 | **Wait until element is found in the page** | Wait for the element to appear before scraping | No |
+| **Are you using custom javascript function for return field responses?** | Enable custom JavaScript to modify the scraped data | No |
 
 ---
 
@@ -29,6 +30,7 @@ Choose what type of data you want to extract from the target element:
 - [Element Attribute](#element-attribute)
 - [Element Selected Option Text](#element-selected-option-text)
 - [Element Selected Option Value](#element-selected-option-value)
+- [Set Field Default Value](#set-field-default-value)
 
 ---
 
@@ -141,6 +143,49 @@ Extracts the **value attribute** of the currently selected option in a dropdown/
 
 ---
 
+### Set Field Default Value
+
+Stores a **default value or Excel column value** directly to the specified column name without requiring any element selector query.
+
+**Key Features:**
+- ✅ **No element selector required** - This option doesn't need a selector query
+- ✅ **Variable support** - Use variables like `{$fieldName$}` in the value
+- ✅ **Excel column support** - Reference Excel column values
+- ✅ **Direct storage** - Value is stored directly to the column name
+
+**Configuration:**
+- **Column Name:** The Excel column where the value will be stored
+- **Default Value:** The value to store (supports variables and Excel column references)
+
+**Example 1: Static Default Value**
+```
+Field Type: Scraping Data
+Which Element Option: Set Field Default Value
+Column Name: status
+Default Value: pending
+```
+**Result:** Stores "pending" in the "status" column.
+
+**Example 2: Using Variables**
+```
+Field Type: Scraping Data
+Which Element Option: Set Field Default Value
+Column Name: fullName
+Default Value: {$firstName$} {$lastName$}
+```
+**Result:** Combines firstName and lastName variables and stores in "fullName" column.
+
+**Example 3: Excel Column Reference**
+```
+Field Type: Scraping Data
+Which Element Option: Set Field Default Value
+Column Name: processedEmail
+Default Value: {$email$}
+```
+**Result:** Stores the value from the "email" Excel column into "processedEmail" column.
+
+---
+
 ## Usage Examples
 
 ### Example 1: Scrape User Profile Name
@@ -194,6 +239,57 @@ Which Element Option: Element Value
 ```
 
 **Result:** Extracts the current value from the email input field.
+
+---
+
+### Example 5: Custom JavaScript Function to Modify Scraped Data
+
+You can use a custom JavaScript function to modify the scraped data before it's stored.
+
+**Setup:**
+1. Add a **JavaScript Code** field type **above** the Scraping Data field
+2. Enable the option: **"Are you using custom javascript function for return field responses?"** in the Scraping Data field
+3. Use the field listener to modify the scraped data
+
+**JavaScript Code:**
+```js
+$fns.field.listener('EDF-FIELD-SCRAPING-DATA', (output, callback) => {
+  console.log("REQUEST:", output);
+
+  // Use custom actions - Example: Convert to lowercase
+  let newText = output.response.toLocaleLowerCase();
+
+  // Return modified data
+  callback({ status: true, message: "DONE", data: newText });
+  // Or return error: callback({ status: false, message: "ERROR" });
+});
+
+$fns.return("1");
+```
+
+**Configuration:**
+```
+Field Type: Scraping Data
+Selector Type: CSS Selector
+Selector Query: .product-name
+Which Element Option: Element Text
+Are you using custom javascript function: ✅ Enabled
+```
+
+**HTML:**
+```html
+<div class="product-name">LAPTOP PRO 2024</div>
+```
+
+**Result:** Stores `laptop pro 2024` (converted to lowercase) in Excel column
+
+**Use Cases:**
+- Format scraped text (uppercase, lowercase, title case)
+- Clean and sanitize data (remove extra spaces, special characters)
+- Parse and extract specific patterns (emails, phone numbers)
+- Transform data format (date formatting, number formatting)
+- Validate and filter scraped content
+- Combine multiple scraped values
 
 ---
 

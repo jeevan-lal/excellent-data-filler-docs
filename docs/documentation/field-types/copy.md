@@ -1,4 +1,4 @@
-# 📋 Copy {#copy}
+# Copy {#copy}
 
 It is used to copy any **text** from the page.
 

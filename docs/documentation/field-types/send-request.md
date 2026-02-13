@@ -6,19 +6,26 @@ Send HTTP requests to external APIs and save the response data.
 
 The Send Request field type allows you to make HTTP requests to external servers and process the response. You can save the response in different formats and extract specific data using JSONPath.
 
-<img src="/image/send-request-01.png" width="400" alt="Send Request">
-
 ## Configuration Options
 
 | Option | Type | Description | Required |
 |--------|------|-------------|----------|
 | **Request URL** | Text Input (via Default Value or Excel) | The URL to send the request to | Yes |
 | **Request Method** | Dropdown | HTTP method for the request | Yes |
+| **Content Type** | Dropdown | Content type for the request | Yes |
+| **Do you want to set Headers in the request?** | Switch | Enable custom request headers | No |
+| **Headers** | Textarea (JSON) | Custom headers in JSON format | No |
+| **Do you want to set body payload in the request?** | Switch | Enable request body payload | No |
+| **Payload** | Textarea (JSON) | Request body in JSON format | No |
+| **Do you want to send request to the same site origin?** | Switch | Send request to same origin | No |
+| **Retry request on Error?** | Switch | Enable retry mechanism on failure | No |
+| **Max Retry (Times)** | Number | Maximum number of retry attempts | No |
+| **Interval (Seconds)** | Number | Delay between retry attempts | No |
+| **Are you using custom javascript function for return field responses?** | Switch | Enable custom JavaScript to modify response | No |
 | **Request Output Type** | Dropdown | Format of the response data | Yes |
 | **JSON Path Parameters** | Text Input | JSONPath expression to extract data | No |
 | **Save Request Data** | Dropdown | Where to save the response data | Yes |
 
----
 
 ## Request URL
 
@@ -70,8 +77,6 @@ https://api.example.com/users/{$userId$}/posts
 // Sends request to: https://api.example.com/users/456/posts
 ```
 
----
-
 ## Request Method
 
 **Field:** Dropdown
@@ -104,7 +109,264 @@ Request Method: POST
 Request URL: https://api.example.com/users
 ```
 
----
+## Content Type
+
+**Field:** Dropdown
+
+**Description:** Specify the content type for the request. This determines how the request body is formatted and sent.
+
+**Available Options:**
+
+| Content Type | Value | Description | Use Case |
+|--------------|-------|-------------|----------|
+| **application/json** | json | Send data as JSON | API requests, structured data |
+| **text/plain** | text | Send data as plain text | Simple text data |
+| **multipart/form-data** | form-data | Send data as form data with files | File uploads, complex forms |
+| **application/x-www-form-urlencoded** | form | Send data as URL-encoded form | Standard HTML forms |
+
+**Example:**
+
+```javascript
+// JSON Content Type
+Content Type: application/json
+Payload: {"name": "John", "email": "john@example.com"}
+
+// Form Data Content Type
+Content Type: multipart/form-data
+Payload: name=John&email=john@example.com
+
+// Plain Text Content Type
+Content Type: text/plain
+Payload: Hello World
+```
+
+## Request Headers
+
+**Field:** Switch + Textarea (JSON)
+
+**Description:** Add custom HTTP headers to your request.
+
+**Enable:** Turn on "Do you want to set Headers in the request?"
+
+**Format:** JSON object with header key-value pairs
+
+**Example:**
+
+```json
+{
+  "Authorization": "Bearer YOUR_TOKEN_HERE",
+  "X-Custom-Header": "custom-value",
+  "Accept": "application/json"
+}
+```
+
+**Common Headers:**
+
+| Header | Description | Example |
+|--------|-------------|---------|
+| **Authorization** | Authentication token | `Bearer abc123...` |
+| **Content-Type** | Request content type | `application/json` |
+| **Accept** | Expected response type | `application/json` |
+| **X-API-Key** | API key authentication | `your-api-key` |
+| **User-Agent** | Client identification | `MyApp/1.0` |
+
+**Use Cases:**
+- API authentication with tokens
+- Custom API headers
+- Content negotiation
+- CORS headers
+- Rate limiting headers
+
+## Request Payload
+
+**Field:** Switch + Textarea (JSON)
+
+**Description:** Send data in the request body (for POST, PUT, PATCH requests).
+
+**Enable:** Turn on "Do you want to set body payload in the request?"
+
+**Format:** JSON object or string depending on content type
+
+**Example 1: JSON Payload**
+
+```json
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "age": 30,
+  "active": true
+}
+```
+
+**Example 2: Using Variables**
+
+```json
+{
+  "name": "{$firstName$} {$lastName$}",
+  "email": "{$email$}",
+  "phone": "{$phone$}"
+}
+```
+
+**Example 3: Nested Objects**
+
+```json
+{
+  "user": {
+    "name": "{$name$}",
+    "contact": {
+      "email": "{$email$}",
+      "phone": "{$phone$}"
+    }
+  },
+  "metadata": {
+    "source": "extension",
+    "timestamp": "{$currentTime$}"
+  }
+}
+```
+
+## Same Origin Request
+
+**Field:** Switch
+
+**Description:** Send the request to the same site origin as the current page.
+
+**Enable:** Turn on "Do you want to send request to the same site origin?"
+
+**Use Cases:**
+- Internal API calls
+- Same-domain requests
+- Avoid CORS issues
+- Session-based authentication
+
+## Retry Mechanism
+
+**Field:** Switch + Number Inputs
+
+**Description:** Automatically retry failed requests with configurable attempts and intervals.
+
+**Enable:** Turn on "Retry request on Error?"
+
+**Configuration:**
+
+| Option | Description | Default | Range |
+|--------|-------------|---------|-------|
+| **Max Retry (Times)** | Maximum number of retry attempts | 5 | 1-10 |
+| **Interval (Seconds)** | Delay between retry attempts | 2 | 1-60 |
+
+**Example:**
+
+```
+Retry request on Error: ✅ Enabled
+Max Retry (Times): 5
+Interval (Seconds): 2
+```
+
+**Behavior:**
+1. Initial request fails
+2. Wait 2 seconds
+3. Retry request (attempt 1)
+4. If fails, wait 2 seconds
+5. Retry request (attempt 2)
+6. Continue up to 5 retry attempts
+7. If all retries fail, field returns error
+
+**Use Cases:**
+- Unstable network connections
+- Rate-limited APIs
+- Temporary server errors
+- Timeout handling
+
+## Custom JavaScript Function
+
+**Field:** Switch
+
+**Description:** Use custom JavaScript to modify the response before it's saved.
+
+**Enable:** Turn on "Are you using custom javascript function for return field responses?"
+
+**Setup:**
+1. Add a **JavaScript Code** field type **above** the Send Request field
+2. Enable the custom function option in Send Request field
+3. Use the field listener to process the response
+
+**JavaScript Code:**
+
+```js
+$fns.field.listener('EDF-FIELD-SEND-REQUEST', (output, callback) => {
+  console.log("REQUEST:", output);
+  
+  // If custom function option is enabled, callback will work
+  // You can set field error/success response like this
+  
+  // Success with modified data
+  callback({ status: true, message: "DONE", data: output.response });
+  
+  // Or return error
+  // callback({ status: false, message: "ERROR" });
+});
+
+$fns.return("1");
+```
+
+**Output Object Structure:**
+
+```json
+{
+  "type": "EDF-FIELD-SEND-REQUEST",
+  "response": {
+    // The actual response from the API
+  }
+}
+```
+
+**Properties:**
+- `type` - Listener type identifier
+- `response` - Field type response data
+
+**Example Use Cases:**
+
+**1. Transform Response Data**
+```js
+$fns.field.listener('EDF-FIELD-SEND-REQUEST', (output, callback) => {
+  // Extract specific field from response
+  let userData = output.response.data.user;
+  callback({ status: true, message: "User extracted", data: userData });
+});
+$fns.return("1");
+```
+
+**2. Validate Response**
+```js
+$fns.field.listener('EDF-FIELD-SEND-REQUEST', (output, callback) => {
+  if (output.response.status === "success") {
+    callback({ status: true, message: "Valid response", data: output.response });
+  } else {
+    callback({ status: false, message: "Invalid response" });
+  }
+});
+$fns.return("1");
+```
+
+**3. Format Response**
+```js
+$fns.field.listener('EDF-FIELD-SEND-REQUEST', (output, callback) => {
+  // Convert to uppercase
+  let formatted = JSON.stringify(output.response).toUpperCase();
+  callback({ status: true, message: "Formatted", data: formatted });
+});
+$fns.return("1");
+```
+
+**4. Combine Multiple Values**
+```js
+$fns.field.listener('EDF-FIELD-SEND-REQUEST', (output, callback) => {
+  let fullName = output.response.firstName + " " + output.response.lastName;
+  callback({ status: true, message: "Combined", data: fullName });
+});
+$fns.return("1");
+```
 
 ## Request Output Type
 
@@ -117,7 +379,10 @@ Request URL: https://api.example.com/users
 | Output Type | Description | Use Case |
 |-------------|-------------|----------|
 | **json** | Parse response as JSON | API responses, structured data |
-| **text** | Treat response as plain text | HTML, XML, plain text responses |
+| **text** | Treat response as plain text | Plain text responses |
+| **xml** | Parse response as XML | XML API responses, SOAP services |
+| **html** | Parse response as HTML | HTML pages, web scraping |
+| **blob** | Treat response as binary data | File downloads, images, PDFs |
 
 **Example:**
 
@@ -131,9 +396,22 @@ Result: Parsed as JSON object
 Request Output Type: text
 Response: <html><body>Hello</body></html>
 Result: Treated as plain text string
-```
 
----
+// XML response
+Request Output Type: xml
+Response: <?xml version="1.0"?><user><name>John</name></user>
+Result: Parsed as XML document
+
+// HTML response
+Request Output Type: html
+Response: <div class="content">Hello World</div>
+Result: Parsed as HTML document
+
+// Blob response
+Request Output Type: blob
+Response: Binary file data
+Result: Treated as binary blob
+```
 
 ## JSON Path Parameters
 
@@ -261,8 +539,6 @@ $..email
 
 **Reference:** [JSONPath-Plus Documentation](https://github.com/JSONPath-Plus/JSONPath)
 
----
-
 ## Save Request Data
 
 **Field:** Dropdown
@@ -273,22 +549,25 @@ $..email
 
 | Option | Description | Use Case |
 |--------|-------------|----------|
-| **Save in Text Format** | Save response as plain text | Simple text responses, debugging |
+| **Do nothing** | Don't save the response | When you only need to trigger the request |
+| **Save in Field** | Save response in the field column | Store response as text in Excel column |
 | **Save in Scraper Data** | Save response in scraper data format | Structured data extraction, further processing |
 
 **Example:**
 
 ```javascript
-// Save in Text Format
+// Do nothing
 Response: {"name": "John", "age": 30}
-Saved as: '{"name": "John", "age": 30}'
+Result: Request is sent but response is not saved
+
+// Save in Field
+Response: {"name": "John", "age": 30}
+Saved as: '{"name": "John", "age": 30}' in the field's Excel column
 
 // Save in Scraper Data
 Response: {"name": "John", "age": 30}
 Saved as: Structured data accessible by other fields
 ```
-
----
 
 ## Use Cases
 
@@ -350,8 +629,6 @@ Saved as: Structured data accessible by other fields
 
 **Result:** Saves status value for verification.
 
----
-
 ## Best Practices
 
 ### ✅ Do's
@@ -371,8 +648,6 @@ Saved as: Structured data accessible by other fields
 - **Don't use complex JSONPath unnecessarily** - Keep expressions simple
 - **Don't forget output type** - Match output type with actual response
 - **Don't hardcode URLs** - Use variables for flexibility
-
----
 
 ## Troubleshooting
 
@@ -419,8 +694,6 @@ Saved as: Structured data accessible by other fields
 - Test JSONPath with sample response
 - Ensure array indices are correct
 - Verify filter expressions work as expected
-
----
 
 ## Examples
 
@@ -503,7 +776,113 @@ Save Request Data: Save in Scraper Data
 // Result: Saves [1, 3]
 ```
 
----
+### Example 5: Advanced Request with All Features
+
+This example demonstrates using headers, payload, retry mechanism, and custom JavaScript function together.
+
+**Step 1: Add JavaScript Code Field (Above Send Request)**
+
+```js
+$fns.field.listener('EDF-FIELD-SEND-REQUEST', (output, callback) => {
+  console.log("API Response:", output);
+  
+  // Validate response
+  if (output.response && output.response.success) {
+    // Extract user data
+    let userData = {
+      id: output.response.data.id,
+      name: output.response.data.name,
+      email: output.response.data.email
+    };
+    
+    callback({ 
+      status: true, 
+      message: "User data extracted successfully", 
+      data: JSON.stringify(userData) 
+    });
+  } else {
+    callback({ 
+      status: false, 
+      message: "API returned error: " + (output.response.error || "Unknown error")
+    });
+  }
+});
+
+$fns.return("1");
+```
+
+**Step 2: Configure Send Request Field**
+
+```javascript
+// Configuration
+Request URL: https://api.example.com/users
+Request Method: POST
+Content Type: application/json
+
+// Headers
+Do you want to set Headers in the request?: ✅ Enabled
+Headers:
+{
+  "Authorization": "Bearer {$apiToken$}",
+  "X-API-Key": "{$apiKey$}",
+  "Content-Type": "application/json"
+}
+
+// Payload
+Do you want to set body payload in the request?: ✅ Enabled
+Payload:
+{
+  "username": "{$username$}",
+  "email": "{$email$}",
+  "firstName": "{$firstName$}",
+  "lastName": "{$lastName$}",
+  "metadata": {
+    "source": "extension",
+    "timestamp": "{$currentTimestamp$}"
+  }
+}
+
+// Retry Settings
+Retry request on Error?: ✅ Enabled
+Max Retry (Times): 3
+Interval (Seconds): 5
+
+// Custom Function
+Are you using custom javascript function for return field responses?: ✅ Enabled
+
+// Output Settings
+Request Output Type: json
+JSON Path: $
+Save Request Data: Save in Field
+```
+
+**API Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 12345,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "createdAt": "2024-01-15T10:30:00Z"
+  }
+}
+```
+
+**Result:**
+
+The custom JavaScript function extracts and formats the user data, saving:
+```json
+{"id":12345,"name":"John Doe","email":"john@example.com"}
+```
+
+**Behavior:**
+1. Sends POST request with custom headers and payload
+2. If request fails, retries up to 3 times with 5-second intervals
+3. On success, custom JavaScript validates and extracts specific fields
+4. Saves formatted data to Excel column
+
 
 ## Related Documentation
 
@@ -512,8 +891,6 @@ Save Request Data: Save in Scraper Data
 - [Scraper Data](/documentation/form-fields/field-types#scraper-data)
 - [HTTP Methods - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 - [JSONPath-Plus](https://github.com/JSONPath-Plus/JSONPath)
-
----
 
 ## Notes
 
