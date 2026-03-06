@@ -273,6 +273,16 @@ const sideBarList = [
       },
     ]
   },
+  {
+    text: 'Local Server',
+    collapsed: true,
+    items: [
+      {
+        text: 'Overview',
+        link: '/documentation/local-server/local-server'
+      },
+    ]
+  },
 
   {
     text: 'Task Scheduler',

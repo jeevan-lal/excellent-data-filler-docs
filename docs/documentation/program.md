@@ -1,4 +1,4 @@
-# 🔧 Program Helper {#program-helper}
+# Program Helper {#program-helper}
 
 The Program Helper is a required companion application that enables advanced automation features in the Excellent Data Filler extension. It provides system-level access for file operations, PDF generation, and other automation tasks that require elevated permissions.
 

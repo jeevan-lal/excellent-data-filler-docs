@@ -61,6 +61,13 @@ Field types powered by artificial intelligence for advanced automation and intel
 
 - [**🤖 AI**](/documentation/field-types/ai) - AI-powered field automation and intelligent form filling
 
+## 🏢 Local Server {#local-server}
+
+Field types for interacting with a locally hosted server for various automation tasks and data operations.
+
+- [**Get Mail from Local Server**](/documentation/field-types/local-server/get-mail-from-local-server) - Retrieve emails from local server
+- [**Send Mail from Local Server**](/documentation/field-types/local-server/send-mail-from-local-server) - Send emails through local server
+
 ## 🔍 Google Field {#google-field}
 
 Field types specifically designed for Google Forms integration and compatibility.

@@ -1,40 +1,44 @@
-# 📝 Form Field {#form-field}
+# Form Field {#form-field}
 
 Form fields that can be automatically filled through Excel templates. Configure field properties, selectors, and timing to create powerful automation workflows.
 
 <img src="/image/field-01.png" alt="Field">
 
-## 📋 Field Options {#field-options}
+## Field Options {#field-options}
 
 Essential field configuration options required for automatic form filling.
 
 | Field Options                                             | Required | Description                                                                                      | Example Values                                   |
 | --------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| **Field Name**                                            | Yes      | Unique identifier for the field in Excel template                                                | `firstName`, `email`, `phone`                    |
-| [**Field Type**](/documentation/form-fields/field-types)  | Yes      | Type of form field for data handling                                                             | **Text**, **Number**, **Date**, **Select**       |
-| **Field Selector Type**                                   | Yes      | Method for locating the field element                                                            | **Selector**, **Id**, **XPath**                  |
-| **Field Selector Query**                                  | Yes      | Unique address/query to locate the field                                                         | `#firstName`, `input[name="email"]`, `//input`   |
-| **Field Value**                                           | Yes      | Two types of value to fill in the field <br> `1- field default value` `2- in excel column value` | `John Doe`, `john.doe@example.com`, `1234567890` |
-| **Active/Inactive**                                       | Yes      | Enable or disable field processing                                                               | **Active**, **Inactive**                         |
+| [**Field Name**](#field-name)                             | Yes      | Unique identifier for the field in Excel template                                                | `firstName`, `email`, `phone`                    |
+| [**Field Type**](#field-type)                             | Yes      | Type of form field for data handling                                                             | **Text**, **Number**, **Date**, **Select**       |
+| [**Field Selector Type**](#field-selector-type)           | Yes      | Method for locating the field element                                                            | **Selector**, **Id**, **XPath**                  |
+| [**Field Selector Query**](#field-selector-query)         | Yes      | Unique address/query to locate the field                                                         | `#firstName`, `input[name="email"]`, `//input`   |
+| [**Field Value**](#field-value)                           | Yes      | Two types of value to fill in the field <br> `1- field default value` `2- in excel column value` | `John Doe`, `john.doe@example.com`, `1234567890` |
+| [**Active/Inactive**](#active-inactive)                   | Yes      | Enable or disable field processing                                                               | **Active**, **Inactive**                         |
 | **Delay Time Before Running This Form**                   | No       | Wait time before field execution                                                                 | `0`, `500`, `1000` (milliseconds)                |
 | **Delay Time After Running This Form**                    | No       | Wait time after field execution                                                                  | `0`, `500`, `1000` (milliseconds)                |
-| [More Options](/documentation/form-fields/field-settings) |          |
+| **More Options**                                          |          |                                                                                                  |                                                  |
 
-## ⚙️ Field Configuration {#field-configuration}
-
-### 📝 Field Name {#field-name}
+## Field Name {#field-name}
 
 **Purpose:** Unique identifier that appears in your Excel template column headers.
 
 **Important Notes:**
 
-- Field names must be **unique** within each site
-- Names will appear exactly as entered in the Excel template
-- Use descriptive names for easy identification
-- Avoid special characters and spaces
-- Use descriptive names for easy identification: `firstName`, `lastName`, `emailAddress`
+- Field names must be **unique** within each site.
+- Names will appear exactly as entered in the Excel template.
+- Use descriptive names for easy identification: `firstName`, `lastName`, `emailAddress`.
+- Avoid special characters and spaces (unless using variables).
 
-### 🎯 Field Type {#field-type}
+:::v-pre
+**Using Variables in Field Name:**
+You can use [Variables](/documentation/variable) within the Field Name to create dynamic identifiers. This is particularly useful for loop operations.
+- Example: `field-{{loop.index[loop]}}`
+- Resulting names: `field-1`, `field-2`, `field-3`, etc.
+:::
+
+## Field Type {#field-type}
 
 **Purpose:** Defines how data is processed and validated for the field.
 
@@ -54,7 +58,7 @@ Essential field configuration options required for automatic form filling.
 2. Consider data validation requirements
 3. Ensure compatibility with Excel data format
 
-### 🔍 Field Selector Type {#field-selector-type}
+## Field Selector Type {#field-selector-type}
 
 **Purpose:** Determines the method used to locate the field element on the page.
 
@@ -64,7 +68,7 @@ Essential field configuration options required for automatic form filling.
 | **Id**        | Element ID attribute | Fast, unique elements     | `#firstName`            |
 | **XPath**     | XML Path Language    | Complex element selection | `//input[@type='text']` |
 
-### 🎯 Field Selector Query {#field-selector-query}
+## Field Selector Query {#field-selector-query}
 
 **Purpose:** The unique address/query used to locate the field element on the page.
 
@@ -132,7 +136,7 @@ After installing the extension, you can copy the Field Selector Query by right-c
 3. Paste into the Field Selector Query field
 4. Test the selector to ensure it works
 
-### 📋 Field Value {#field-value}
+## Field Value {#field-value}
 
 **Purpose:** The value to fill in the field.
 
@@ -154,6 +158,10 @@ You can use [Variable](/documentation/variable) in the field value.
 :::info Pro Tip
 Use the browser console to monitor field filling timing and adjust delays accordingly.
 :::
+
+## Active/Inactive {#active-inactive}
+
+**Purpose:** Controls whether the field is processed during automation.
 
 :::warning Important
 Inactive fields will not appear in the Excel template and will not be processed during form filling.

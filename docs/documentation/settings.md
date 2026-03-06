@@ -370,7 +370,7 @@ API keys can be configured at three levels:
 
 ---
 
-## 🏢 Microsoft Form {#microsoft-form}
+## 📄 Microsoft Form {#microsoft-form}
 
 Configure Microsoft Forms integration and field selector customization for optimal compatibility.
 
@@ -385,6 +385,30 @@ Configure Microsoft Forms integration and field selector customization for optim
 1. **Import Settings**: Upload a previously exported Microsoft Form configuration
 2. **Export Settings**: Download current settings for backup or sharing
 3. **Custom Selector Query**: Enter custom CSS selectors for problematic fields
+
+---
+
+## 🏢 Extension Server {#extension-server}
+
+Configure the connection to your local server to enable advanced automation features, such as email operations and local data processing. See [Local Server](/documentation/local-server/local-server) for more details.
+
+<img src="/image/local-server-01.png" height="400" width="400" alt="Extension Server Settings">
+
+### Server Details
+
+Manage your local server authentication and monitor connection health.
+
+| Option | Description |
+|--------|-------------|
+| **X-API-Token** | Enter the API token provided by your local server. You can generate this at [http://127.0.0.10:8080/settings/api](http://127.0.0.10:8080/settings/api). |
+| **Check Server Status** | Click this button to verify if the extension can communicate with your local server. |
+| **Remove server connection** | Click this to clear the API token and disconnect from the local server. |
+
+**Connection Status:**
+The settings page displays "Server is Connected: Yes/No" in real-time to indicate the current status of the link between the extension and your local server.
+
+**Response Details:**
+When you check the server status, a detailed JSON response from the server is displayed, allowing you to verify the server's health and uptime.
 
 ---
 

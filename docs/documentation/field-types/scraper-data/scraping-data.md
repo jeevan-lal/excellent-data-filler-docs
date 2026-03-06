@@ -12,9 +12,14 @@ The Scraping Data field type allows you to extract various types of information 
 |--------|-------------|----------|
 | **Selector Type** | Type of selector (CSS or XPath) | Yes |
 | **Selector Query** | The selector to locate the element | Yes |
-| **Which Element Option Scraping** | Type of data to extract from the element | Yes |
+| [**Which Element Option Scraping**](#which-element-option-scraping) | Type of data to extract from the element | Yes |
 | **Wait until element is found in the page** | Wait for the element to appear before scraping | No |
-| **Are you using custom javascript function for return field responses?** | Enable custom JavaScript to modify the scraped data | No |
+| [**Are you using custom javascript function for return field responses?**](#example-5-custom-javascript-function-to-modify-scraped-data) | Enable custom JavaScript to modify the scraped data | No |
+| [**Download a file with scraped data?**](#download-a-file-with-scraped-data) | Enable downloading the scraped data as a file | No |
+| **File Type** | Choose between Text File, CSV File, or JSON File | No |
+| [**Wait, the unit file download is complete?**](#wait-the-unit-file-download-is-complete) | Wait for the file download to finish before proceeding | No |
+| [**Do you want to set the custom name of the file?**](#do-you-want-to-set-the-custom-name-of-the-file) | Enable setting a custom name for the file | No |
+| **Enter file name** | Specify the name for the downloaded file | No |
 
 ---
 
@@ -184,7 +189,26 @@ Default Value: {$email$}
 ```
 **Result:** Stores the value from the "email" Excel column into "processedEmail" column.
 
----
+## File Download Options
+
+These options allow you to save the scraped data directly to your local machine as a file.
+
+### Download a file with scraped data?
+When enabled, the extension will download the scraped content. You can choose from several file formats to store your data.
+
+**File Types:**
+- **Text File**: Saves the data as a `.txt` file.
+- **CSV File**: Saves the data in Comma-Separated Values format (`.csv`).
+- **JSON File**: Saves the data as a structured JSON object (`.json`).
+
+### Wait, the unit file download is complete?
+If this option is enabled, the automation will pause and wait for the browser to confirm that the file download has successfully completed before proceeding to the next field or action.
+
+### Do you want to set the custom name of the file?
+By default, the extension generates a filename automatically. Enable this option if you want to provide a specific name for the downloaded file.
+
+**Enter file name:**
+Enter the desired filename (e.g., `extracted_data`). Note that the appropriate file extension will be added automatically based on the selected **File Type**.
 
 ## Usage Examples
 

@@ -1,6 +1,6 @@
 # Loop
 
-Loops can execute a [segment](/documentation/segment) a number of times. Loops are handy, if you want to run the same segment over and over again, each time.
+Loops can execute a [segment](/documentation/segment) a number of times. Loops are handy, if you want to run the same segment over and over again, each time. You can use [Loop Variables](/documentation/variable#loop-variable) to access information about the current loop iteration.
 
 <img src="/image/loop-01.png" alt="Loop">
 
@@ -18,6 +18,13 @@ Loops can execute a [segment](/documentation/segment) a number of times. Loops a
 ## Which segment do you want to execute
 
 The name of the [segment](/documentation/segment) which is to be executed in the loop comes in this option.
+
+:::v-pre
+**Using Variables in Segment Name:**
+You can use [Loop Variables](/documentation/variable#loop-variable) within the segment name to dynamically execute different segments in each iteration.
+- Example: `segment-{{loop.index[loop]}}`
+- Segment execution: `segment-1`, `segment-2`, `segment-3`, etc.
+:::
 
 ## How many times the segment has to be run
 

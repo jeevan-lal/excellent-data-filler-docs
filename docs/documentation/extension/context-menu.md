@@ -25,6 +25,7 @@ The Excellent Data Filler extension provides a comprehensive context menu that a
 - [Copy name of selected option](#copy-name-of-selected-option)
 - [Copy value of selected option](#copy-value-of-selected-option)
 - [Download select box options](#download-select-box-options)
+- [Allow Right Click?](#allow-right-click)
 
 ---
 
@@ -256,6 +257,19 @@ The Excellent Data Filler extension provides a comprehensive context menu that a
 **Use Case:** Extract all dropdown options for analysis, documentation, or bulk processing.
 
 **Output Format:** CSV or JSON file with option names and values
+
+---
+
+### Allow Right Click?
+
+**Description:** Forcefully enables the right-click context menu on websites that have disabled it using JavaScript or other techniques.
+
+**How to Use:**
+1. Right-click on the browser's extension icon or within the extension interface
+2. Select **"Allow Right Click?"**
+3. The extension will re-enable the context menu functionality for the current page
+
+**Use Case:** Use this when a website blocks the standard right-click menu, preventing you from using extension features like "Inspect Elements" or "Copy Field Selector Address."
 
 ---
 

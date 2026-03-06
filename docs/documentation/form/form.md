@@ -1,4 +1,4 @@
-# 📋 Site Form {#site-form}
+# Site Form {#site-form}
 
 Forms are the specific pages on your website where you want to execute the extension for automated data filling. Each form is configured with URL matching rules and field definitions.
 
