@@ -34,6 +34,29 @@ You can control which emails are retrieved by setting a query in the **Field Def
 - **Example:** `UNSEEN`
 - **Example:** `UNSEEN FROM:ctechhindi@gmail.com`
 
+#### Common Search Queries
+
+| Query | Description |
+|-------|-------------|
+| `UNSEEN` | Get unread emails |
+| `SEEN` | Get read emails |
+| `FROM:amazon.com` | Emails from amazon.com domain |
+| `FROM:newsletter@example.com` | Emails from specific sender |
+| `SUBJECT:invoice` | Emails with "invoice" in subject |
+| `invoice` | Emails containing "invoice" anywhere |
+| `SINCE 1-Feb-2026` | Emails since February 1st, 2026 |
+| `BEFORE 1-Jan-2026` | Emails before January 1st, 2026 |
+
+#### Combined Queries
+
+| Query | Description |
+|-------|-------------|
+| `UNSEEN FROM:sender@example.com` | Unread emails from specific sender |
+| `SEEN SUBJECT:order` | Read emails with "order" in subject |
+| `UNSEEN SINCE 1-Mar-2026` | Unread emails since March 1st, 2026 |
+| `FROM:amazon.com SUBJECT:delivery` | Emails from Amazon about delivery |
+
+
 ### Filter with Regular Expression {#filter-with-regular-expression}
 When enabled, you can use standard Regex to extract parts of the email body, such as verification codes.
 - **Regular Expression:** `OTP: (\d{4,6})`
