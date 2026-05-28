@@ -12,7 +12,7 @@ You can set target element selector query in the field.
 
 You can find the element selector query by right-clicking on the element and selecting "Copy Element Selector Address" or "Copy Element XPath Selector Address".
 
-### 🎯 Which Element Option Replace {#which-element-option-replace}
+### 🎯 Which element option needs to be changed? {#which-element-option-needs-to-be-changed}
 
 Choose what type of content you want to replace or modify:
 
@@ -68,18 +68,22 @@ If you want to change this "**Ben002**" string into this "**002_g.pdf**" then yo
 **Replace String**: `$1_g.pdf`  
 **Result**: `Ben002` → `002_g.pdf`
 
+### 💾 Save New Value Option {#save-new-value-option}
+
+- **Do you want to save the new value in the field?**: An on/off option. When enabled, the newly manipulated value is saved directly to the field, allowing other actions or variables to refer to this updated value.
+
 ## 💡 Usage Examples {#usage-examples}
 
 ### 📝 Basic Text Replacement
 
-1. **Which Element Option Replace**: Element Text
+1. **Which element option needs to be changed?**: Element Text
 2. **Target**: Select the element containing the text to replace
 3. **New Content**: Enter the replacement text
 4. **Result**: The visible text will be updated
 
 ### 🔧 Attribute Value Replacement
 
-1. **Which Element Option Replace**: Element Attribute
+1. **Which element option needs to be changed?**: Element Attribute
 2. **Element Attribute Name**: `href`
 3. **New Value**: Enter the new URL
 4. **Result**: The link's href attribute will be updated

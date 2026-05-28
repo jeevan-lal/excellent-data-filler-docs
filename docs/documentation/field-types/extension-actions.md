@@ -8,6 +8,7 @@ Extension Actions provide the following capabilities:
 
 - **🔹 Single Row Operations**: Perform actions on individual Excel rows
 - **📦 Bulk Operations**: Apply actions to multiple Excel rows simultaneously
+- **❄️ Row Freezing**: Freeze the current Excel row for a specified duration
 - **⚙️ Data Manipulation**: Set, get, and modify Excel column values
 - **🗂️ Data Management**: Mark entries as saved, delete entries, and refresh data
 - **🔄 Refresh Excel Data**: Reload the Excel data in the extension
@@ -57,6 +58,26 @@ This field type applies actions to all entries in your Excel file. **⚠️ Warn
 - Use with caution on large datasets
 - Consider using Excel Row for individual operations when possible
 - Bulk operations may take several minutes depending on data size
+
+---
+
+## ❄️ Excel Row Freeze {#excel-row-freeze}
+
+Freezes the current Excel row for a specified duration in minutes.
+
+### 📝 Description {#excel-row-freeze-description}
+
+This field type allows you to temporarily freeze the current Excel row. During the specified period, the row is locked or ignored to prevent other instances of the extension or concurrent runs from accessing or processing the same entry.
+
+### ⚙️ Field Options {#excel-row-freeze-field-options}
+
+| Field Options | Required | Example Values | Description                                                               |
+| ------------- | -------- | -------------- | ------------------------------------------------------------------------- |
+| **Minutes**   | Yes      | `1`, `2`, `5`  | The duration (in minutes) for which the current Excel row remains frozen |
+
+### 💡 Usage Examples {#excel-row-freeze-usage-examples}
+
+- **❄️ Temp Lock Row**: Freeze a row for `2` minutes to avoid duplicate processing in concurrent execution environments.
 
 ---
 
