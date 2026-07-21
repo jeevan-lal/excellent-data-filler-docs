@@ -6,6 +6,9 @@ Field Response Actions allow you to define specific behaviors that execute based
 
 When configuring a Field Response Action, you can choose from the following predefined actions:
 
+- 🌐 **Open a URL** - Open or navigate to a specified web URL
+- 🔄 **Reload Page** - Reload the current browser page
+- 🔁 **Re-Execute Form** - Re-execute the form automation from the beginning
 - 🖱️ **Click on Element** - Simulate a click on a specified web element
 - ➡️ **Execute Segment** - Run a predefined segment of your automation workflow
 - 💾 **Set Local Data** - Store a value in local data for later use

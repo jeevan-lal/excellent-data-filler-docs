@@ -66,6 +66,7 @@ Connect to Google Sheets for cloud-based data management.
 
 | Button | Description |
 |--------|-------------|
+| **💾 Save Excel Template** | Save and update the uploaded Excel data template |
 | **📥 Download Excel Template** | Download template with your form field structure |
 | **🗑️ Delete Excel** | Remove the currently uploaded Excel file |
 

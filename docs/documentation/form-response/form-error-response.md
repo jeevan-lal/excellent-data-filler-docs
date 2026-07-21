@@ -26,7 +26,7 @@ When It matches with given error response, entry will be marked as **Entry Saved
 | Can error message be anything in this element                | If the error message of the entry is always changing then using this option matches **any type of message** in the given element.                                                                                                 |
 | Remove excel column value from current entry?                | If you fetch large data but don't need it in Excel, enable this option to remove the column value from the current entry after processing.                                                                                        |
 | Set custom message after error message matched?              | If your error message is large, you can set a custom short message to store in Excel instead of the full error message.                                                                                                           |
-| Do not mark the entry as saved, simply execute the action    | When enabled, the extension will execute the specified [action](#action) when the error response matches, but **will not mark the entry as saved**. This is useful when you want to perform an action without completing the entry. |
+| Do not update the Excel data; simply execute the action      | When enabled, the extension will execute the specified [action](#action) when the error response matches, but **will not update the Excel data**. This is useful when you want to perform an action without completing the entry. |
 
 
 ## Error Page URL

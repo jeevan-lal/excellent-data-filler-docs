@@ -25,8 +25,9 @@ You can insert public special key but you cannot insert private special key. Pri
 ::: warning INFO
 
 - If using `{PRINT-ENTRY-ERRORS}` key is not working, firstly add `{FORM-FILLED}` key in form then use it.
-- If are you using `{ENTRY-ALL-DONE}` key then turn `off` site setting [When Excel Data not found or all rows has been marked as "Filled", Stop Form Filler](/documentation/site/site-settings.html#when-excel-data-not-found-or-all-rows-has-been-marked-as-filled-stop-form-filler)
-  :::
+- If you are using `{ENTRY-ALL-DONE}` key then turn `off` site setting [When Excel Data not found or all rows has been marked as "Filled", Stop Form Filler](/documentation/site/site-settings.html#when-excel-data-not-found-or-all-rows-has-been-marked-as-filled-stop-form-filler).
+- If using `{ENTRY-ALL-DONE}` predefined key and seeing the field response `'IGNORE PREDEFINE KEY'`, it is not a problem. While Excel entries are still remaining, this key displays this message and will automatically execute when all entries are completed.
+:::
 
 ## Private Keys
 

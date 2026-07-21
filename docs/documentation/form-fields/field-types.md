@@ -219,6 +219,7 @@ Field types for direct interaction with Excel data, enabling powerful spreadshee
 - [**Excel Row**](/documentation/field-types/extension-actions#excel-row) - Perform actions on individual Excel rows
 - [**Excel Rows**](/documentation/field-types/extension-actions#excel-rows) - Perform bulk actions on multiple Excel rows
 - [**Excel Row Freeze**](/documentation/field-types/extension-actions#excel-row-freeze) - Freeze the current Excel row for a specified duration in minutes
+- [**Excel Rows Unfreeze**](/documentation/field-types/extension-actions#excel-rows-unfreeze) - Unfreeze Excel rows with optional expiration check
 - [**Set Excel Column**](/documentation/field-types/extension-actions#set-excel-column) - Write data to specific Excel cells
 - [**Get Excel Column**](/documentation/field-types/extension-actions#get-excel-column) - Read data from specific Excel cells
 - [**Modify Excel Column**](/documentation/field-types/extension-actions#modify-excel-column) - Modify existing Excel cell values

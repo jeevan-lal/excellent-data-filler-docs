@@ -9,6 +9,7 @@ Extension Actions provide the following capabilities:
 - **🔹 Single Row Operations**: Perform actions on individual Excel rows
 - **📦 Bulk Operations**: Apply actions to multiple Excel rows simultaneously
 - **❄️ Row Freezing**: Freeze the current Excel row for a specified duration
+- **🔓 Row Unfreezing**: Unfreeze frozen Excel rows
 - **⚙️ Data Manipulation**: Set, get, and modify Excel column values
 - **🗂️ Data Management**: Mark entries as saved, delete entries, and refresh data
 - **🔄 Refresh Excel Data**: Reload the Excel data in the extension
@@ -80,6 +81,24 @@ This field type allows you to temporarily freeze the current Excel row. During t
 - **❄️ Temp Lock Row**: Freeze a row for `2` minutes to avoid duplicate processing in concurrent execution environments.
 
 ---
+
+## 🔓 Excel Rows Unfreeze {#excel-rows-unfreeze}
+
+Unfreezes frozen Excel rows in the dataset.
+
+### 📝 Description {#excel-rows-unfreeze-description}
+
+This field type allows you to unfreeze Excel rows that were previously frozen. You can configure it to unfreeze only those rows whose freeze time has expired, or unfreeze all frozen rows.
+
+### ⚙️ Field Options {#excel-rows-unfreeze-field-options}
+
+| Field Options | Required | Example Values | Description |
+| ------------- | -------- | -------------- | ----------- |
+| **Unfreeze only those rows whose freeze time has expired?** | No | Toggle ON/OFF | When enabled, only unfreezes rows whose freeze time limit has expired |
+
+### 💡 Usage Examples {#excel-rows-unfreeze-usage-examples}
+
+- **🔓 Unfreeze Expired Rows**: Automatically unfreeze rows whose freeze duration has expired so they become available for processing again.
 
 ## ✏️ Set Excel Column {#set-excel-column}
 

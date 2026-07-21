@@ -24,6 +24,7 @@ The Fetch Table Data in the Response Excel (Horizontal) field type allows you to
 | **Do we have to wait for the data to appear in the table?** | Wait for table data to load before scraping | No |
 | **Waiting for total maximum table rows** | Specify the number of rows to wait for (if wait is enabled) | No |
 | **If you want to take data only from the rows of the table** | Enable to provide a specific row selector instead of table selector | No |
+| **Are you using custom javascript function for return field responses?** | Enable to modify fetched table data using custom JavaScript function | No |
 
 :::warning Important
 One of the **Prefix** or **Suffix** options must be enabled, otherwise only the data from the first row of the table will be fetched.
@@ -37,6 +38,29 @@ When "If you want to take data only from the rows of the table" is enabled, you 
 - ✅ Row selector: `#product-details tr` or `.detail-row`
 :::
 
+## 🛠️ Custom JavaScript Field Response Modification
+
+If you enable **"Are you using custom javascript function for return field responses?"**, you can intercept and modify the fetched table data in your own way.
+
+### Setup Instructions:
+
+1. Add a **Javascript** field type **above** the `Fetch Table Data in the Response Excel (Horizontal)` field.
+2. Use the following JavaScript code in that Javascript field:
+
+```js
+$fns.field.listener('EDF-FIELD-FETCH-TABLE-DATA-HORIZONTAL', (output, callback) => {
+  console.log("TABLE DATA:", output.response);
+
+  // use custom actions
+
+  // return new data
+  callback({ status: true, message: "DONE", data: output.response });
+  // callback({ status: false, message: "ERROR" });
+});
+
+$fns.return("1");
+```
+
 :::tip Column Naming with Prefix/Suffix
 When prefix or suffix is enabled, column names are generated as:
 - **With Prefix**: `Prefix1TableHeaderName`, `Prefix2TableHeaderName`, etc.
@@ -48,8 +72,6 @@ When prefix or suffix is enabled, column names are generated as:
 - **Words Ordinal Numbers**: First, Second, Third, Fourth...
 - **Words Numbers**: One, Two, Three, Four...
 :::
-
----
 
 ## How Horizontal Format Works
 

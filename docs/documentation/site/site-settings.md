@@ -16,6 +16,8 @@ Configure how the extension handles form filling operations and data processing.
 | **If you want to see Entry's status bar, then turn it on**                              | Display status bar showing current entry progress                 | Toggle ON/OFF            |
 | **Set delay time when filling out the form**                                            | Enable delay between form field fills                             | Toggle ON/OFF            |
 | **Tab-Specific Excel Data Filler**                                                      | Use Excel data specific to current tab                            | Toggle ON/OFF            |
+| **Refill Excel frozen rows after all rows are completed.**                              | Refill frozen Excel rows automatically once all rows are completed| Toggle ON/OFF            |
+| **Site Startup URL**                                                                    | Configure site launch URL for one-click opening and filler startup | `https://example.com`    |
 
 :::info Note
 When **Ignore field default value** is active, field default values will not be filled.
@@ -29,6 +31,10 @@ If there are values in new line then use `\r\n` for split values.
 
 :::info Note
 If **Tab-Specific Excel Data Filler** is active, then each tab is assigned unique data for filling.
+:::
+
+:::info Note
+If **Site Startup URL** is filled, an **"Open Site"** button appears in the site. Clicking this button opens the URL in a new tab and automatically starts the form filler.
 :::
 
 ## ⚡ Performance Settings {#performance-settings}

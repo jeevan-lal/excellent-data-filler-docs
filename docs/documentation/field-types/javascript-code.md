@@ -159,6 +159,23 @@ $fns.setSessionStorage(key, value);
 $fns.setLocalStorage(key, value);
 ```
 
+### Excel Data Functions {#excel-data-functions}
+
+Functions for reading and adding Excel data dynamically within JavaScript code.
+
+| Function | Description | Parameters |
+| -------- | ----------- | ---------- |
+| **$fns.excel.add** | Add a new entry to the site Excel data | `dataArray`, `isOverwrite` |
+| **$fns.excel.get** | Retrieve current site Excel data | None |
+
+```js
+// Add new entry in site excel data
+let isUpdated = await $fns.excel.add([{ column: "Value" }], false);
+
+// Get site excel data
+let excelData = await $fns.excel.get();
+```
+
 ## Custom JavaScript Examples {#custom-javascript-examples}
 
 ### 🎚️ jQuery Slider Integration {#jquery-slider-integration}

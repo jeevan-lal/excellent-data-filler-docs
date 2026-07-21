@@ -11,7 +11,7 @@ next:
 
 The Settings page provides comprehensive control over the Excellent Data Filler extension's behavior, allowing you to customize its functionality according to your specific needs and preferences.
 
-<img src="/image/extension-settings-01.png" width="500" height="500" alt="Extension Settings Interface">
+<img src="/image/extension-settings-01.png" width="700" height="500" alt="Extension Settings Interface">
 
 ## 🔧 Extension Settings {#extension-settings}
 

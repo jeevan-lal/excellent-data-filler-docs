@@ -16,6 +16,7 @@ The Fetch Table Data in Scraper Data (Vertical) field type allows you to extract
 | **Do we have to wait for the data to appear in the table?** | Wait for table data to load before scraping | No |
 | **Waiting for total maximum table rows** | Specify the number of rows to wait for (if wait is enabled) | No |
 | **If you want to take data only from the rows of the table** | Enable to provide a specific row selector instead of table selector | No |
+| **Are you using custom javascript function for return field responses?** | Enable to modify fetched table data using custom JavaScript function | No |
 
 :::info Row-Specific Scraping
 When "If you want to take data only from the rows of the table" is enabled, you must provide the **selector query of the rows** of the table, not the selector query of the table itself.
@@ -25,7 +26,28 @@ When "If you want to take data only from the rows of the table" is enabled, you 
 - ✅ Row selector: `#users-table tbody tr` or `.data-row`
 :::
 
----
+## 🛠️ Custom JavaScript Field Response Modification
+
+If you enable **"Are you using custom javascript function for return field responses?"**, you can intercept and modify the fetched table data in your own way.
+
+### Setup Instructions:
+
+1. Add a **Javascript** field type **above** the `Fetch Table Data in Scraper Data (Vertical)` field.
+2. Use the following JavaScript code in that Javascript field:
+
+```js
+$fns.field.listener('EDF-FIELD-FETCH-TABLE-DATA-VERTICAL', (output, callback) => {
+  console.log("TABLE DATA:", output.response);
+
+  // use custom actions
+
+  // return new data
+  callback({ status: true, message: "DONE", data: output.response });
+  // callback({ status: false, message: "ERROR" });
+});
+
+$fns.return("1");
+```
 
 ## How Vertical Format Works
 

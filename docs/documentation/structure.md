@@ -67,7 +67,7 @@ A **Site Form** represents a specific web page or form within a site that you wa
 - Login forms
 - Multi-step wizards
 
-<img src="/image/form-01.png" alt="Form Configuration Interface">
+<img src="/image/form-01.png" width="700" alt="Form Configuration Interface">
 
 ### 🔧 Site Form Fields
 
@@ -75,7 +75,7 @@ A **Site Form** represents a specific web page or form within a site that you wa
 
 [**Type of Fields**](/documentation/form-fields/field-types)
 
-<img src="/image/field-01.png" alt="Field Configuration Interface">
+<img src="/image/field-01.png" width="700" alt="Field Configuration Interface">
 
 ### 📊 Excel Template Management
 
@@ -85,7 +85,7 @@ Excel templates provide a powerful way to manage and organize your data for auto
 
 If you want to download the excel template of any site, then you have to insert the Site's Form and Form Field. Excel sheet can be downloaded only if the field is present in the form. You can download the excel sheet from the image given below. 📥
 
-<img src="/image/download-excel-template-01.png" alt="Download Excel Template Interface">
+<img src="/image/download-excel-template-01.png" width="700" alt="Download Excel Template Interface">
 
 #### 📤 Upload Excel Template
 
@@ -95,7 +95,15 @@ Import existing Excel files or upload prepared data templates:
 
 - **Excel Files** - .xlsx formats
 
-<img src="/image/upload-excel-template.png" alt="Upload Excel Template Interface">
+**Saving Excel Data:**
+
+- **Save Excel Template** - Click this button to save and update your Excel data after uploading or modifying it.
+
+:::tip Saving Excel Data vs Site Settings
+Use the **Save Excel Template** button specifically for saving Excel data, and the **Save Changes** button for saving site configuration and settings.
+:::
+
+<img src="/image/upload-excel-template.png" width="700" alt="Upload Excel Template Interface">
 
 ## Workflow Structure
 
