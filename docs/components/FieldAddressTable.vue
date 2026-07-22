@@ -320,7 +320,7 @@
   </table>
 </template>
 
-<style>
+<style scoped>
 input,
 textarea,
 button {

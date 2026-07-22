@@ -70,7 +70,7 @@
         <td>
           <code><strong>OR & AND</strong></code>
         </td>
-        <td style="background-color: white">
+        <td>
           <table style="width: max-content;">
             <thead>
               <tr>
@@ -217,3 +217,28 @@
     </tbody>
   </table>
 </template>
+
+<style scoped>
+input,
+textarea,
+button {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 8px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  display: inherit;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+</style>
