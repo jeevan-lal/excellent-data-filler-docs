@@ -8,16 +8,16 @@ Customize site-specific settings for optimal form filling behavior and data hand
 
 Configure how the extension handles form filling operations and data processing.
 
-| Setting                                                                                 | Description                                                       | Example Values           |
-| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------ |
-| **Ignore field default value**                                                          | Skip filling default values in form fields                        | Toggle ON/OFF            |
-| **When Excel Data not found or all rows has been marked as "Filled", Stop Form Filler** | Stop form filling when no data available or all entries completed | Toggle ON/OFF            |
-| **Separator (Used to Split Value)**                                                     | Global separator for splitting values across all fields           | `\r\n` <br> `,` <br> `;` |
-| **If you want to see Entry's status bar, then turn it on**                              | Display status bar showing current entry progress                 | Toggle ON/OFF            |
-| **Set delay time when filling out the form**                                            | Enable delay between form field fills                             | Toggle ON/OFF            |
-| **Tab-Specific Excel Data Filler**                                                      | Use Excel data specific to current tab                            | Toggle ON/OFF            |
-| **Refill Excel frozen rows after all rows are completed.**                              | Refill frozen Excel rows automatically once all rows are completed| Toggle ON/OFF            |
-| **Site Startup URL**                                                                    | Configure site launch URL for one-click opening and filler startup | `https://example.com`    |
+| Setting                        | Description                                                       | Example Values           |
+| ------------------------------ | ----------------------------------------------------------------- | ------------------------ |
+| **Ignore field default value** | Skip filling default values in form fields                        | Toggle ON/OFF            |
+| **Stop Filler on Missing Data**| Stop form filling when no data available or all entries completed | Toggle ON/OFF            |
+| **Use Value Separator**        | Global separator for splitting values across all fields           | `\r\n` <br> `,` <br> `;` |
+| **Show Entry Status Bar**      | Display status bar showing current entry progress                 | Toggle ON/OFF            |
+| **Set Form Filling Speed**     | Enable delay between form field fills                             | Toggle ON/OFF            |
+| **Tab-Specific Data Filler**   | Use Excel data specific to current tab                            | Toggle ON/OFF            |
+| **Refill Frozen Rows**         | Refill frozen Excel rows automatically once all rows are completed| Toggle ON/OFF            |
+| **Site Startup URL**           | Configure site launch URL for one-click opening and filler startup | `https://example.com`    |
 
 :::info Note
 When **Ignore field default value** is active, field default values will not be filled.
@@ -30,7 +30,7 @@ If there are values in new line then use `\r\n` for split values.
 :::
 
 :::info Note
-If **Tab-Specific Excel Data Filler** is active, then each tab is assigned unique data for filling.
+If **Tab-Specific Data Filler** is active, then each tab is assigned unique data for filling.
 :::
 
 :::info Note
@@ -74,13 +74,13 @@ Configure Captcha Solution API Keys for this specific site.
 
 | Field Options                                | Description                                | Example Values                     |
 | -------------------------------------------- | ------------------------------------------ | ---------------------------------- |
-| **Use Captcha Solution API Keys in this Site** | Enable/disable captcha solving for this site | Toggle ON/OFF                      |
+| **Use Captcha Solution** | Enable/disable captcha solving for this site | Toggle ON/OFF                      |
 | **Service Name**                             | Captcha solving service provider           | `2captcha`                         |
 | **Service API Key**                          | Your captcha service API key               | `a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6` |
 
 **How to Use:**
 
-1. Toggle **"Use Captcha Solution API Keys in this Site"** to **ON**
+1. Toggle **"Use Captcha Solution"** to **ON**
 2. **Service Name** will show `2captcha`
 3. Enter your **Service API Key** from your 2Captcha account
 4. API key will be used for all captcha solving on this site
