@@ -18,13 +18,13 @@ Text fields are the most commonly used field type for single-line text input in 
 
 ## Text Field Settings
 
-### ⌨️ Fill the values like a typing tutor {#fill-the-values-like-a-typing-tutor}
+### ⌨️ Simulate Human Typing Speed {#simulate-human-typing-speed}
 
 Enable human-like typing behavior to simulate realistic user input patterns.
 
 **Configuration:**
 
-- **Toggle Switch**: Enable/disable typing tutor mode
+- **Toggle Switch**: "Simulate Human Typing Speed" (formerly "Fill the values like a typing tutor")
 - **Typing Time**: Set delay in milliseconds between keystrokes
   - Default: `100` milliseconds
   - Range: `50` - `2000` milliseconds
@@ -92,13 +92,33 @@ Configure JavaScript events to be triggered on the field element.
 - **keydown** - Triggers on key press
 - **keyup** - Triggers on key release
 
-### 🔧 If Form is ASPX then Remove Input Behavior {#if-form-is-aspx-then-remove-input-behavior}
+### ✍️ Text editor mode {#text-editor-mode}
+
+Enable text editor mode for enhanced rich text or custom editor text input handling with natural human typing speed simulation.
+
+**Configuration:**
+
+- **Text editor mode**: Toggle ON/OFF to enable text editor mode.
+
+#### ⚙️ Settings (when enabled):
+
+- **Min Key Delay (ms)**: Minimum delay in milliseconds between key presses (e.g., `50` ms)
+- **Max Key Delay (ms)**: Maximum delay in milliseconds between key presses (e.g., `120` ms)
+- **Enable Random Pause**: Toggle ON/OFF to simulate natural typing pauses
+  - **Pause Chance (0 to 1)**: Probability of inserting a pause between keystrokes (e.g., `0.2`)
+  - **Pause Min (ms)**: Minimum pause duration in milliseconds (e.g., `300` ms)
+  - **Pause Max (ms)**: Maximum pause duration in milliseconds (e.g., `600` ms)
+- **Human Typing**: Toggle ON/OFF to enable human typing variations
+
+---
+
+### 🔧 If form is ASPX, remove the input behavior {#if-form-is-aspx-remove-the-input-behavior}
 
 Special handling for ASPX (Active Server Pages Extended) forms.
 
 **Configuration:**
 
-- **Toggle Switch**: "If Form is ASPX then Remove Input Behavior"
+- **Toggle Switch**: "If form is ASPX, remove the input behavior"
 - **Purpose**: Modifies input behavior specifically for ASPX forms
 - **Use Case**: Compatibility with Microsoft ASP.NET web applications
 

@@ -16,6 +16,13 @@ The Fetch Table Data in Scraper Data (Vertical) field type allows you to extract
 | **Do we have to wait for the data to appear in the table?** | Wait for table data to load before scraping | No |
 | **Waiting for total maximum table rows** | Specify the number of rows to wait for (if wait is enabled) | No |
 | **If you want to take data only from the rows of the table** | Enable to provide a specific row selector instead of table selector | No |
+| **Rename table headers based on excel data?** | Prevents table header names from matching the column headers of the uploaded Excel file (keeps headers unique) | No |
+| **Combine the site's Excel data with the data from the table rows?** | Adds the Excel data to the data in every row of the extracted table | No |
+| **Exclude table column data using the table column name** | Exclude specific table columns from extraction using column names | No |
+| **Should hyperlinks also be extracted from the table?** | Extract hyperlink URLs from table cells | No |
+| **Should image url also be extracted from the table?** | Extract image URLs from table cells | No |
+| **Should input's value also be extracted from the table?** | Extract input field values from table cells | No |
+| **Should select's value also be extracted from the table?** | Extract select dropdown values from table cells | No |
 | **Are you using custom javascript function for return field responses?** | Enable to modify fetched table data using custom JavaScript function | No |
 
 :::info Row-Specific Scraping

@@ -8,9 +8,11 @@ Save web pages as PDF files using the browser's print functionality. Configure P
 | --------------------------------------------------------------- | -------- | --------------------------------------------------------- | ------------------------------------- |
 | **Press Ctrl + P**                                              | No       | Automatically trigger print dialog                        | Toggle ON/OFF                         |
 | **Press Ctrl + S**                                              | No       | Use Ctrl+S shortcut for saving                            | Toggle ON/OFF                         |
-| **Do not identify print window as per image**                   | No       | Skip print window detection                               | Toggle ON/OFF                         |
-| **Set Image Path to Identify Print Window**                     | No       | Custom image for print window detection                   | `/path/to/image.png`                  |
+| **Set the image path to identify the print preview window.**    | No       | Custom image for print preview window detection           | `/path/to/image.png`                  |
+| **Set the image path to identify the print button.**            | No       | Custom image to identify and click print button           | `/path/to/print_btn.png`              |
 | **Set delay time after opening print window**                   | No       | Wait time after print dialog opens                        | `1000`, `2000` (milliseconds)         |
+| **Set delay time after pdf saved.**                             | No       | Wait time after PDF is saved                              | `1000`, `2000` (milliseconds)         |
+| **Wait until the print page title matches?**                    | No       | Regex pattern to wait for matching print page title       | `.*\.pdf$`, `(?i)^Application.*`      |
 | **If file already exists in the save location then replace it** | No       | Overwrite existing files with same name                   | Toggle ON/OFF                         |
 | **Set the `confirm replace save as browser window` title name** | No       | Set the confirm replace save as browser window title name | Toggle ON/OFF                         |
 | **Set the `save as browser window` title name**                 | No       | Set the save as browser window title name                 | Toggle ON/OFF                         |
@@ -36,19 +38,7 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 
 ---
 
-#### 📌 Do not identify print window as per image {#do-not-identify-print-window-as-per-image}
-
-**Purpose:** Skip automatic detection of print preview window.
-
-**When to use:**
-
-- When print window detection causes issues
-- For faster execution without image matching
-- When print preview appears differently
-
----
-
-#### 📌 Set Image Path to Identify Print Window {#set-image-path-to-identify-print-window}
+#### 📌 Set the image path to identify the print preview window. {#set-the-image-path-to-identify-the-print-preview-window}
 
 **Purpose:** Use custom image to detect when print preview window is ready.
 
@@ -77,6 +67,18 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 
 ---
 
+#### 📌 Set the image path to identify the print button. {#set-the-image-path-to-identify-the-print-button}
+
+**Purpose:** Use custom image to locate and click the print button in the print window.
+
+**How to configure:**
+
+1. **Save an image** of the print button on your PC
+2. **Provide the image path** in this option
+3. **Extension waits** until the button image is detected and clicked
+
+---
+
 #### 📌 Set delay time after opening print window {#set-delay-time-after-opening-print-window}
 
 **Purpose:** Add wait time between opening print window and saving the PDF.
@@ -86,6 +88,70 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 - **Delay time** in milliseconds
 - **Recommended values:** 3000-5000ms
 - **Adjust based on** page complexity and loading time
+
+---
+
+#### 📌 Set delay time after pdf saved. {#set-delay-time-after-pdf-saved}
+
+**Purpose:** Add wait time after the PDF file has been saved before proceeding further.
+
+**Configuration:**
+
+- **Delay time** in milliseconds (e.g. `2000`)
+
+---
+
+#### 📌 Wait until the print page title matches? {#wait-until-the-print-page-title-matches}
+
+**Purpose:** Wait until the browser page or print title matches a specified regex pattern before saving.
+
+Here are some useful regex examples for matching browser page titles.
+
+| Regex                            | Matches                     | Description                                        |
+| -------------------------------- | --------------------------- | -------------------------------------------------- |
+| `.*`                             | Any title                   | Match every page title.                            |
+| `(?i).*`                         | Any title                   | Match every title (case-insensitive).              |
+| `^My Page$`                      | `My Page`                   | Exact title match.                                 |
+| `(?i)^My Page$`                  | `my page`, `MY PAGE`        | Exact title, ignore case.                          |
+| `Invoice`                        | `Invoice 123`               | Title contains `Invoice`.                          |
+| `(?i)Invoice`                    | `invoice`, `INVOICE`        | Contains `Invoice`, ignore case.                   |
+| `^Invoice`                       | `Invoice #123`            | Title starts with `Invoice`.                       |
+| `Invoice$`                       | `Final Invoice`             | Title ends with `Invoice`.                         |
+| `(?i)\.pdf$`                     | `form.pdf`                  | Ends with `.pdf` (ignore case).                    |
+| `(?i)^.*\.pdf$`                  | `Application.pdf`           | Any PDF filename.                                  |
+| `(?i)^Application\.pdf$`         | `Application.pdf`           | Exact PDF filename.                                |
+| `(?i)^Application.*\.pdf$`       | `Application_v2.pdf`        | PDF beginning with `Application`.                  |
+| `(?i)Application.*`              | `Application Form - Chrome` | Title contains `Application` followed by anything. |
+| `(?i)^.*Google Chrome$`          | `form.pdf - Google Chrome`  | Any Chrome window.                                 |
+| `(?i)^.*Microsoft Edge$`         | `form.pdf - Microsoft Edge` | Any Edge window.                                   |
+| `(?i)^.*(Chrome\|Edge)$`         | Chrome or Edge              | Match either browser.                              |
+| `(?i)^.*\.pdf - Google Chrome$`  | `abc.pdf - Google Chrome`   | Any PDF opened in Chrome.                          |
+| `(?i)^.*\.pdf - Microsoft Edge$` | `abc.pdf - Microsoft Edge`  | Any PDF opened in Edge.                            |
+| `(?i)^.*.(pdf\|docx)$`           | `a.pdf`, `b.docx`           | Match PDF or DOCX.                                 |
+| `(?i)success\|completed`         | `Completed Successfully`    | Contains either `success` or `completed`.          |
+| `(?i)(login\|signin)`            | `Login`, `Sign In`          | Match either word.                                 |
+| `^[0-9]+$`                       | `12345`                     | Numbers only.                                      |
+| `^[A-Za-z]+$`                    | `Welcome`                   | Letters only.                                      |
+| `^[A-Za-z0-9 _-]+$`              | `Invoice_2026-01`           | Letters, numbers, spaces, `_` and `-`.             |
+
+##### Regex symbols
+
+| Symbol   | Meaning                      | Example          |
+| -------- | ---------------------------- | ---------------- |
+| `^`      | Start of text                | `^Invoice`       |
+| `$`      | End of text                  | `\.pdf$`         |
+| `.`      | Any single character         | `a.c`            |
+| `.*`     | Any number of any characters | `Invoice.*`      |
+| `+`      | One or more                  | `[0-9]+`         |
+| `?`      | Zero or one                  | `colou?r`        |
+| `\.`     | Literal dot (`.`)            | `\.pdf`          |
+| `\d`     | Digit                        | `\d{4}`          |
+| `[abc]`  | One of the listed characters | `[AB]`           |
+| `[A-Z]`  | Uppercase letter             | `[A-Z]{3}`       |
+| `[0-9]`  | Digit                        | `[0-9]{6}`       |
+| `[^0-9]` | Not a digit                  | `[^0-9]+`        |
+| `(A\|B)` | A or B                       | `(Chrome\|Edge)` |
+| `(?i)`   | Ignore case                  | `(?i)\.pdf$`     |
 
 ---
 

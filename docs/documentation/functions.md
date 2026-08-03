@@ -652,3 +652,66 @@ To count the **length** of an element then you can use this function.
 | -------------- | -------- | ---------------------- |
 | Selector Type  | true     | Element Selector Type  |
 | Selector Query | true     | Element Selector Query |
+
+## checkRadioState
+
+Use this function to determine whether a radio button or an entire radio button group is checked or unchecked.
+
+| Options                  | Required | Description               | Value |
+| ------------------------ | -------- | ------------------------- | ----- |
+| Selector Type            | true     | Element Selector Type     |       |
+| Selector Query           | true     | Element Selector Query    |       |
+| Field Value              | true     | Radio State Configuration | `[state][is_group][force_check]` |
+| Wait until element is found in the page. | false | | |
+
+### Structure of Field Value
+
+- **[parameter-1][parameter-2][parameter-3]**
+- **[state][is_group][force_check]**
+- **[boolean][boolean][boolean]**
+
+### Value Examples
+
+```
+[true][true][false]
+[false][false][false]
+```
+
+## addRandomTableRows
+
+Use this function to dynamically insert random placeholder rows with custom text at the top or bottom of a target table.
+
+| Options                  | Required | Description               | Value |
+| ------------------------ | -------- | ------------------------- | ----- |
+| Selector Type            | true     | Target Table Selector Type |      |
+| Selector Query           | true     | Target Table Selector Query |     |
+| Field Value              | true     | Row Configuration         | `[row_count][position][placeholder]` |
+
+### Structure of Field Value
+
+- **[parameter-1][parameter-2][parameter-3]**
+- **[row_count][position][placeholder]**
+- **[number][string][string]**
+
+### Value Examples
+
+```
+[2][bottom][--]
+[5][top][--]
+```
+
+## waitForPageLoad
+
+Use this function to wait until a web page or iframe finishes loading completely before proceeding with execution.
+
+| Options                  | Required | Description               | Value |
+| ------------------------ | -------- | ------------------------- | ----- |
+| Selector Type            | false    | Optional iframe selector type |   |
+| Selector Query           | false    | Optional iframe selector query |  |
+| Field Value              | true     | Timeout in milliseconds   | `timeout` |
+
+### Configuration
+
+- Set **timeout** in milliseconds in **Field Value**
+- Set **iframe selector** in **Field Selector Query** (optional, when waiting for a specific iframe)
+

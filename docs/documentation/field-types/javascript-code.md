@@ -62,6 +62,10 @@ var response = { status: false, message: "Error Message" };
 $fns.return(JSON.stringify(response));
 ```
 
+:::warning Important Note
+When using `storeDataInScraper`, `storeDataInEntry`, or `storeDataInField` to store Excel data, you must add the [**Current Entry as Saved**](/documentation/field-types/advance/current-entry-as-saved) field type **below the JavaScript field** in your form sequence to save the Excel data. Otherwise, data will be inserted but will not update in the extension.
+:::
+
 ## Editor Shortcut Keys {#editor-shortcut-keys}
 
 | Shortcut          | Action            | Description                    |
@@ -97,6 +101,7 @@ Access powerful built-in functions through the `$fns` object.
 | **randomFloat**           | Generate random float                        | `min`, `max`, `fixed`           |
 | **setSessionStorage**     | Sets a value in session storage              | `key`, `value`                  |
 | **setLocalStorage**       | Sets a value in local storage                | `key`, `value`                  |
+| **toast**                 | Display a toast notification message         | `message`, `duration`           |
 
 ```js
 // triggerEvent
@@ -157,6 +162,9 @@ $fns.setSessionStorage(key, value);
 
 // setLocalStorage - Sets a value in the local storage for the current domain
 $fns.setLocalStorage(key, value);
+
+// toast - Display a toast notification message
+$fns.toast("Hi, Excellent Data Filler", 3000);
 ```
 
 ### Excel Data Functions {#excel-data-functions}

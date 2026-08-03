@@ -93,6 +93,16 @@ This will trigger the form's submit event programmatically without requiring a c
 - **Event**: `submit`
 :::
 
+### 🔗 Open Links in New Tab? {#open-links-in-new-tab}
+
+Configure whether links clicked by the button open in a new tab.
+
+**Configuration:**
+
+- **Toggle Switch**: Enable/disable opening links in a new browser tab.
+
+---
+
 ## Button Interaction Types
 
 ### Standard Click
@@ -106,6 +116,17 @@ This will trigger the form's submit event programmatically without requiring a c
 - **Behavior**: Button is ignored when Excel value is "not-click"
 - **Use Case**: Optional form steps, conditional workflows
 - **Configuration**: Excel value "not-click" skips button
+
+### Automatic Click Confirm Dialog {#automatic-click-confirm-dialog}
+
+When executing a button field, a confirm dialog may appear asking: **"Do you want the button to be clicked automatically in the next entry?"** with two buttons:
+
+- **No**: If you click **No**, then after page reload, this confirm dialog will appear again on the next entry.
+- **Yes**: If you click **Yes**, then after page reload, the dialog will not appear and the button will be clicked directly.
+
+:::note
+If the user closes the tab or browser, this confirm dialog will appear again on restart.
+:::
 
 ## Troubleshooting {#troubleshooting}
 
