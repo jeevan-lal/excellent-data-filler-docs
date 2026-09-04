@@ -1,238 +1,208 @@
+---
+prev:
+  text: "Field Response Action"
+  link: "/documentation/form-fields/field-response-action"
+next:
+  text: "Date Picker"
+  link: "/documentation/field-types/date-picker"
+---
+
 # Upload File {#upload-file}
 
-You can use this field when you want to upload files through web forms. It works with various form platforms including _Google Forms_, _Microsoft Forms_, and other web-based file upload interfaces.
-
-## 🔧 Install Helper Program {#install-helper-program}
-
-The [**Helper Program**](/documentation/program#download-and-install) is required to automatically select and upload files from your computer. Download and install the appropriate version for your operating system:
-
-:::warning Important
-The Helper Program must be installed and running for file upload functionality to work properly.
-:::
-
-**How to check Helper Program status?**
-
-<img src="/image/upload-field-01.png" width="400" height="400" alt="Upload File Field Options">
-
-## ⚙️ Field Options {#field-options}
-
-The Upload File field provides comprehensive options for handling file uploads with various configurations:
-
-| Option                                                               | Description                                                             | Required                    |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------- |
-| **Set File/Folder Base Path**                                        | Enable to specify a base directory for file uploads                     | No                          |
-| **Base Path**                                                        | Enter the folder path where your files are located (e.g., `D:\folder\`) | When enabled                |
-| **Multiple File Upload**                                             | Enable to upload multiple files at once                                 | No                          |
-| **Separator for Multiple File Upload**                               | Specify separator for multiple file names (e.g., `\r\n`, `,`, `;`)      | When multiple files enabled |
-| **Upload all files in a folder**                                     | Enable to upload all files from the specified folder                    | No                          |
-| **First check that the file exists in the PC, then select the file** | Verify file existence before attempting upload                          | No                          |
-| **Set the uploading browser window title name**                      | Customize the browser window title during upload                        | No                          |
-| **Browser Window Title**                                             | Enter custom title for the upload window (e.g., "Open")                 | When enabled                |
-| **File Name/Path**                                                   | Enter the file name/path in the `field value` or `default value`        | Yes                         |
-
-### 📋 Configuration Details {#configuration-details}
-
-### 📌 File Name/Path {#file-name-path}
-
-- **Purpose**: Enter the file name/path in the `field value` or `default value`
-- **Format**: Use full path with backslashes (Windows) or forward slashes (Unix/Linux)
-- **Example**:
-
-:::info Note
-You can use the `{$predefine_variable$}` variable in the `File Name/Path` option.
+The **Upload File** field type automates local file selection and file uploads through web forms. It seamlessly handles native file dialogs across modern web platforms, including Google Forms, Microsoft Forms, government and banking portals, and custom web applications.
 
 ---
 
-**If using file name :**
+## Install Helper Program {#install-helper-program}
 
-You must set the file root path in the `Set File/Folder Base Path` option and set the file name in the `File Name/Path` option.
+Due to browser security sandboxes, browser extensions cannot directly interact with OS-level file dialogs without native messaging. The [Helper Program](/documentation/program#download-and-install) is a lightweight local utility required to automatically select and upload files from your local file system.
 
-for example:
+> [!IMPORTANT]
+> The Helper Program must be installed and running on your computer for automated file selection and uploads to work.
 
-```
-File Path (Set in Base Path option) : D:\Documents\Uploads\
-File Name (Set in File Name/Path option) : file.txt
-```
+### Verifying Helper Program Connection
+
+In the field configuration sidebar, check the connection status banner:
+
+<img src="/image/upload-field-01.png" alt="Helper Program Upload Connection Check" style="max-width: 420px; border-radius: 8px; margin: 16px 0;" />
+
+Click **"Click and Check File Upload Connection is Connected"** to verify active communication between the extension and the local helper program.
 
 ---
 
-**If using file path :**
+## Field Options {#field-options}
 
-If you are using file path then you must set the file path in the `File Name/Path` option. Don't set the file root path in the `Set File/Folder Base Path` option.
+The Upload File field provides granular controls for single, multiple, and batch folder uploads:
 
-for example:
+| Option | Description | Required |
+|---|---|---|
+| **Set File/Folder Base Path** | Specifies a root folder directory where your upload files reside. | No |
+| **Base Path** | Full directory path to prepend to file names (e.g., `D:\photos\`). | When Base Path enabled |
+| **Multiple File Upload** | Enables selecting and uploading multiple files in a single operation. | No |
+| **Separator for Multiple File Upload** | Character used to separate multiple file names (e.g., `\r\n`, `,`, `;`). | When multiple files enabled |
+| **Upload all files in a folder** | Automatically uploads all files contained inside the specified base folder. | No |
+| **First check that the file exists in the PC, then select the file** | Verifies file existence on disk before attempting to open the dialog. | No |
+| **Set the uploading browser window title name** | Customizes the target OS file dialog title (e.g., "Open" or "Select File"). | No |
+| **Browser Window Title** | Custom title string matching the upload dialog window. | When title customization enabled |
+| **File Name/Path** | Target file name or absolute path from the Excel column or default value. | Yes |
 
-```
-File Path (Set in File Name/Path option) : D:\Documents\Uploads\file.txt
-```
+---
 
-:::
+## Configuration Details {#configuration-details}
 
-#### 📂 Set File/Folder Base Path {#set-file-folder-base-path}
+### File Name and File Path Mapping {#file-name-path}
 
-- **Purpose**: Defines the default directory where files are located
-- **Format**: Use full path with backslashes (Windows) or forward slashes (Unix/Linux)
-- **Example**: `D:\Documents\Uploads\` or `/home/user/uploads/`
+You can specify target files using either relative file names (combined with a Base Path) or standalone absolute file paths:
 
-#### 📎 Multiple File Upload {#multiple-file-upload}
+#### Approach A: File Name with Base Path (Recommended)
 
-- **Purpose**: Allows uploading multiple files in a single operation
-- **Separator Options**:
+When all files are stored in a common directory, configure the base path once in field options and specify only the file name in your Excel spreadsheet:
 
-  - `\r\n` - Line break (newline)
-  - `,` - Comma separated
-  - `;` - Semicolon separated
-  - Custom separator as needed
+- **Base Path**: `D:\photos\`
+- **Excel Cell Value**: `profile.jpg`
+- **Resulting Full Path**: `D:\photos\profile.jpg`
 
-:::info Note
+<img src="/image/upload-field-02.png" alt="Set File/Folder Base Path Example" style="max-width: 420px; border-radius: 8px; margin: 16px 0;" />
 
-Extension allow you to use file path with `starts` and `ends` with quotes, for example
+#### Approach B: Full Absolute Path
 
-**Single File Path**
+If your files are located across different directories or drives, disable Base Path and provide the full absolute path in your spreadsheet:
 
-```
-"C:\Users\cth\OneDrive\Pictures\demo\Screenshot 2025-06-03 172854.png"
-```
+- **Base Path**: Disabled
+- **Excel Cell Value**: `C:\Users\Username\Documents\contract.pdf`
 
-**Multiple Files Path**
+> [!NOTE]
+> Predefined variables such as `{$predefine_variable$}` and dynamic path templates can be used within the `File Name/Path` field.
 
-```
-"C:\Users\cth\OneDrive\Pictures\demo\Screenshot 2025-06-03 172854.png"
-"C:\Users\cth\OneDrive\Pictures\demo\Screenshot 2025-05-30 163020.png"
-"C:\Users\cth\OneDrive\Pictures\demo\Screenshot 2025-06-03 122313.png"
-```
+---
 
-:::
+### Set File/Folder Base Path {#set-file-folder-base-path}
 
-#### ✅ File Existence Check {#file-existence-check}
+- **Purpose**: Defines the parent directory where upload assets are stored.
+- **Format**:
+  - Windows: `D:\Documents\Uploads\` or `C:\Data\Photos\`
+  - macOS / Linux: `/Users/username/uploads/`
 
-- **Purpose**: Validates that files exist on the local system before attempting upload
-- **Benefit**: Prevents upload failures due to missing files
-- **Recommended**: Keep enabled for reliable uploads
+---
 
-#### 🏷️ Browser Window Title Customization {#browser-window-title-customization}
+### Multiple File Upload {#multiple-file-upload}
 
-- **Purpose**: Sets a custom title for the file selection dialog
-- **Use Case**: Helps identify the correct upload window in multi-window scenarios
-- **Default**: "Open" (standard file dialog title)
+Allows uploading multiple files into a multi-file file input in one automated step:
 
-## 📢 Handling Empty Excel Field Values {#handling-empty-values}
+- **Supported Separators**:
+  - Line break (`\r\n` / `\n`)
+  - Comma (`,`)
+  - Semicolon (`;`)
 
-When working with Excel data, you may encounter situations where the file path field is empty for certain rows. By default, the extension will attempt to process the upload action even when the Excel field value is empty, which can cause errors or unwanted behavior.
+> [!TIP]
+> File paths containing spaces can be enclosed in double quotes:
+> ```text
+> "C:\Uploads\Document 2025.pdf"
+> "C:\Uploads\Identity Card.png"
+> ```
 
-### ⚙️ Skip Action for Empty Values {#skip-empty-values}
+---
 
-To skip the upload file action when the Excel field value is empty, use the **"Skip field action if given field value matches"** field option:
+### File Existence Check {#file-existence-check}
 
-1. **Enable the Option**: Check the "Skip field action if given field value matches" checkbox in the field options
-2. **Set Empty Value Pattern**: Enter `''` (two single quotes) in the value field
-3. **How It Works**: When the Excel field value is empty, the extension will skip the entire upload action for that row
+- **Purpose**: Checks whether the target file exists on your local storage before triggering the OS file dialog.
+- **Benefit**: Prevents the automation from hanging on broken dialogs or attempting to open non-existent files.
+- **Recommendation**: Keep this option enabled for resilient unattended automation.
 
-:::tip Best Practice
-This is especially useful when:
-- You're using the **"Set File/Folder Base Path"** option
-- Some rows in your Excel sheet have files to upload while others don't
-- You want to avoid errors from attempting to upload non-existent files
-:::
+---
 
-### 📝 Configuration Example {#empty-value-example}
+### Browser Window Title Customization {#browser-window-title-customization}
 
-**Field Options Setup:**
-```
-✅ Set File/Folder Base Path
-   Base Path: D:\Documents\Uploads\
+- **Purpose**: Specifies the exact window title of the native file selection dialog.
+- **Default Value**: `"Open"` (standard Windows file dialog title).
+- **Use Cases**: Useful when uploading via non-English operating systems, web applications with customized dialog titles (e.g. "Select an image to upload"), or when multiple dialogs are open simultaneously.
 
-✅ Skip field action if given field value matches
-   Value: ''
-```
+---
 
-**Excel Data:**
-| Row | File Name    | Result                          |
-|-----|-------------|---------------------------------|
-| 1   | document.pdf | ✅ Uploads D:\Documents\Uploads\document.pdf |
-| 2   | (empty)      | ⏭️ Skips upload action          |
-| 3   | image.jpg    | ✅ Uploads D:\Documents\Uploads\image.jpg    |
-| 4   | (empty)      | ⏭️ Skips upload action          |
+## Handling Empty Excel Field Values {#handling-empty-values}
 
-:::info Note
-- The value `''` represents an empty string
-- This works with both file name and file path configurations
-- You can combine this with other field options for more complex scenarios
-:::
+In real-world data entry, certain rows in your spreadsheet may not contain a file to upload. By default, the extension might still trigger the upload sequence, which can cause timeout warnings on blank rows.
 
-## 💡 Usage Examples {#usage-examples}
+### Skip Action for Empty Values {#skip-empty-values}
 
-### 📄 Single File Upload {#single-file-upload}
+To gracefully bypass the upload field when no file name is provided in the active spreadsheet row:
 
-1. Enable "Set File/Folder Base Path"
-2. Enter your file directory path
-3. Enable "First check that the file exists in the PC"
-4. Set your desired browser window title
+1. In the field configuration, enable **"Skip field action if given field value matches"** (or use field condition matching).
+2. Set the matching value pattern to `''` (two single quotes representing an empty string).
+3. **Execution Behavior**: If the row cell is empty, the upload step is skipped entirely and automation proceeds directly to the next field.
 
-### 📎 Multiple File Upload {#multiple-file-upload-example}
+### Configuration Example {#empty-value-example}
 
-1. Enable "Multiple File Upload"
-2. Set appropriate separator (e.g., `,` for comma-separated)
-3. Configure base path if needed
-4. Enable file existence check
+**Field Options Setup**:
+- **Set File/Folder Base Path**: `D:\Documents\Uploads\`
+- **Skip field action if given field value matches**: `''`
 
-### 📁 Upload All Files in Folder {#upload-all-files-in-folder}
+**Execution Flow**:
 
-1. Enable "Upload all files in a folder"
-2. Set the target folder path
-3. Configure other options as needed
+| Row | Spreadsheet Value | Execution Result |
+|---|---|---|
+| **1** | `document.pdf` | Uploads `D:\Documents\Uploads\document.pdf` |
+| **2** | *(empty)* | Skips upload action smoothly |
+| **3** | `photo.jpg` | Uploads `D:\Documents\Uploads\photo.jpg` |
+| **4** | *(empty)* | Skips upload action smoothly |
 
-## 🔧 Troubleshooting {#troubleshooting}
+---
 
-### ⚠️ Common Issues and Solutions {#common-issues-and-solutions}
+## Common Upload Workflows {#usage-examples}
 
-#### 🔧 Helper Program Not Working {#helper-program-not-working}
+### Workflow 1: Standard Single File Upload
 
-**Problem**: File upload fails or helper program not detected
-**Solutions**:
+1. Enable **Set File/Folder Base Path** and specify your documents folder.
+2. Enable **First check that the file exists in the PC**.
+3. Keep the default window title `"Open"`.
+4. In your `.xlsx` spreadsheet, populate the file names (e.g., `receipt_101.pdf`).
 
-- Ensure the Helper Program is installed and running
-- Check if the program is blocked by antivirus software
-- Restart the browser and extension
-- Reinstall the Helper Program if necessary
+### Workflow 2: Multi-File Batch Submission
 
-#### 📂 Files Not Found {#files-not-found}
+1. Enable **Multiple File Upload**.
+2. Set the delimiter separator (e.g., newline `\r\n` or comma `,`).
+3. Provide the list of file paths separated by the chosen delimiter in the Excel cell.
 
-**Problem**: "File not found" errors during upload
-**Solutions**:
+### Workflow 3: Upload All Files in a Folder
 
-- Verify the base path is correct and accessible
-- Check file permissions on the target directory
-- Ensure file names don't contain special characters
-- Use absolute paths instead of relative paths
+1. Enable **Upload all files in a folder**.
+2. Specify the target folder path in the Base Path configuration.
+3. The helper program reads all files in the folder and submits them collectively to the input.
 
-#### 📎 Multiple File Upload Issues {#multiple-file-upload-issues}
+---
 
-**Problem**: Multiple files not uploading correctly
-**Solutions**:
+## Troubleshooting {#troubleshooting}
 
-- Verify the separator matches your file list format
-- Check that all file names are valid
-- Ensure all files exist in the specified directory
-- Test with a small number of files first
+### Common Issues & Solutions
 
-#### 🏷️ Browser Window Title Issues {#browser-window-title-issues}
+| Issue | Likely Cause | Solution |
+|---|---|---|
+| **Helper Program not detected** | Program not running or blocked by firewall/antivirus | Ensure the Helper Program is running in your system tray. Check permissions and click "Check File Upload Connection". |
+| **File not found error** | Incorrect base path or missing file extension | Verify the directory path exists and includes the trailing slash (`D:\folder\`). Ensure the file extension matches the actual file on disk. |
+| **Wrong dialog window selected** | Multiple file dialogs open or non-standard title | Close extraneous dialog windows. Enter the exact title in **Browser Window Title** matching your OS dialog. |
+| **Upload hangs on blank rows** | Empty cell processed without skip condition | Configure **Skip field action if given field value matches** with `''` to bypass rows without files. |
 
-**Problem**: Wrong file dialog window selected
-**Solutions**:
+### Debug Checklist
 
-- Use a unique, descriptive window title
-- Close other file dialogs before running the automation
-- Check that the title matches exactly (case-sensitive)
+1. **Verify Helper Status**: Confirm the helper program icon is visible in the Windows taskbar system tray.
+2. **Validate Path Manually**: Copy the full path and paste it into Windows File Explorer to verify accessibility.
+3. **Check Execution Logs**: Open [Logs](/documentation/logs) to inspect the exact resolved file path sent to the helper program.
 
-### 🔍 Debug Steps {#debug-steps}
+---
 
-1. **Check Helper Program Status**: Verify the program is running in system tray
-2. **Test File Access**: Manually verify files can be accessed from the specified path
-3. **Check Browser Console**: Look for JavaScript errors in browser developer tools
-4. **Test with Simple Files**: Start with basic file types (txt, jpg) before complex formats
+## Online Interactive Examples {#examples}
 
-## 📚 Examples {#examples}
+Test and verify your upload configuration against our official interactive practice forms:
 
-- [Example-15](https://formfiller.ctechhindi.in/example/example-15.php) - Single file upload example
-- [Example-25](https://formfiller.ctechhindi.in/example/example-25.php) - Multiple file upload demonstration
+- [Example-15: Single File Upload](https://formfiller.ctechhindi.in/example/example-15.php) - Practice single file selection and base path mapping.
+- [Example-25: Multiple File Upload](https://formfiller.ctechhindi.in/example/example-25.php) - Practice multiple file uploads with separators.
+
+---
+
+## Related Documentation {#related-documentation}
+
+- <img src="/svg/system.svg" class="doc-icon" /> [Helper Program Download & Setup](/documentation/program)
+- <img src="/svg/form.svg" class="doc-icon" /> [Form Fields Overview](/documentation/form-fields/field)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template (.xlsx)](/documentation/site/site-excel-template)
+- <img src="/svg/beaker.svg" class="doc-icon" /> [Execution Logs](/documentation/logs)

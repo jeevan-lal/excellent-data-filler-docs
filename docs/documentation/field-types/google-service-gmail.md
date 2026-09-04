@@ -75,8 +75,14 @@ Send emails through Gmail programmatically.
 
 ## Related Documentation
 
-- [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
-- [Gmail API Search Queries](/documentation/field-types/google-service-gmail/gmail-api-search-queries)
-- [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/form.svg" class="doc-icon" /> [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
+<img src="/svg/form.svg" class="doc-icon" /> [Fetch Single Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-single-mail-gmail)
+<img src="/svg/form.svg" class="doc-icon" /> [Send Mail (Gmail)](/documentation/field-types/google-service-gmail/send-mail-gmail)
+<img src="/svg/form.svg" class="doc-icon" /> [Gmail API Search Queries](/documentation/field-types/google-service-gmail/gmail-api-search-queries)
+<img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+
 - [Variables](/documentation/variable)
 - [Gmail API Documentation](https://developers.google.com/gmail/api)
+

@@ -1,446 +1,191 @@
-# Check Downloads
+---
+prev:
+  text: "Form Error Message"
+  link: "/documentation/field-types/advance/form-error-message"
+next:
+  text: "2Captcha"
+  link: "/documentation/field-types/captcha-solution/2captcha"
+---
 
-Monitor and verify download status in the browser's download list with support for filename pattern matching and custom filtering.
+# Check Downloads {#check-downloads}
 
-## Configuration Options
-
-| Option | Description | Required |
-|--------|-------------|----------|
-| **Run the action process in the background?** | If enabled, this field runs in background while next field executes | No |
-| **Do you want to click on an element?** | Enable to click on an element before checking downloads | No |
-| **Enter Element Selector/Xpath** | Selector or XPath for the element to click (when click option is enabled) | Conditional |
-| **Filename** | Check specific file name in browser download list using regex patterns | No |
-| **Downloads Item Status** | Desired download status to check for | Yes |
-| **Wait until the download items status matches** | Wait until specified status is reached | No |
+Monitor, verify, and synchronize browser download tasks during automated workflows, with support for automated click triggers, regex filename matching, and custom status event listeners.
 
 ---
 
+## Overview {#overview}
+
+Web automation frequently involves generating and exporting files (such as reports, PDFs, exported spreadsheets, or invoices). The **Check Downloads** field type interacts directly with the browser's download manager, enabling you to:
+
+- Click download buttons or links automatically.
+- Detect when specific files begin downloading.
+- Pause execution until downloads reach completion (`complete`) or detect broken network connections.
+- Run download monitoring asynchronously in the background while subsequent fields proceed.
+
+---
+
+## Configuration Options {#configuration-options}
+
+| Option | Description | Required |
+|---|---|---|
+| **Run the action process in the background?** | Runs monitoring in the background while immediately executing the next form field. | No |
+| **Do you want to click on an element?** | Simulates a click on a target button or link before monitoring downloads. | No |
+| **Enter Element Selector/Xpath** | CSS selector or XPath targeting the download trigger button. | When click enabled |
+| **Filename** | Regex pattern used to identify specific files in the browser download list. | No |
+| **Downloads Item Status** | Target status to check (`Progress`, `Complete`, `Broke Connection`). | Yes |
+| **Wait until the download items status matches** | Blocks subsequent execution until the specified download status is achieved. | No |
+
+---
+
+## Detailed Settings Breakdown {#detailed-settings}
+
 ### Run in Background
 
-**Toggle:** Run the action process in the background?
-
-**Description:** When enabled, this field action runs in the background and the next field action executes immediately without waiting for download completion.
-
-**Use Case:** When you want to continue automation while monitoring downloads in parallel.
+- **Toggle**: `Run the action process in the background?`
+- **Behavior**: When enabled, the field initiates download tracking in a non-blocking background thread. The extension proceeds immediately to the next form field without pausing.
+- **Use Case**: Downloading large files in parallel while continuing form data entry.
 
 ---
 
 ### Click on Element
 
-**Toggle:** Do you want to click on an element?
-
-**Description:** When enabled, the extension will click on a specified element before checking the download status. This is useful when you need to trigger a download by clicking a button or link before monitoring the download.
-
-**Element Selector/Xpath:** Enter the CSS selector or XPath for the element you want to click.
-
-**Use Cases:**
-- Click a download button that initiates a file download
-- Click a link that triggers a download
-- Interact with elements that start the download process
-
-**Examples:**
-
-**CSS Selector:**
-```
-#download-btn
-.download-button
-button[data-action="download"]
-a.pdf-download
-```
-
-**XPath:**
-```
-//button[@id='download-btn']
-//a[contains(text(), 'Download')]
-//button[contains(@class, 'download')]
-//div[@class='actions']//button[1]
-```
-
-:::tip Workflow
-1. The extension clicks the specified element
-2. Waits for the download to start
-3. Monitors the download status based on your configuration
-:::
-
-:::info Important
-Make sure the element selector is accurate and the element is visible/clickable on the page before the field executes.
-:::
+- **Toggle**: `Do you want to click on an element?`
+- **Behavior**: Dispatches an authentic click event on the specified selector before initiating download checks.
+- **Selector Types**:
+  - **CSS Selector**: `#download-btn`, `button.export-pdf`, `a[data-action="download"]`
+  - **XPath**: `//button[contains(text(), 'Export Report')]`, `//a[contains(@href, '.pdf')]`
 
 ---
 
-### Filename
+### Filename Pattern Matching
 
-**Set in:** Field Default Value or Excel Field Column
+- **Input Location**: Field Default Value or Excel Column variable
+- **Behavior**: Evaluates files in the active browser download queue using Regular Expressions (RegEx). If left empty, the field monitors all active downloads.
 
-**Description:** Check for specific file name in the browser's download list (not in PC download folder). Uses regex patterns for flexible matching.
+#### Common Regex Examples
 
-:::info Important
-If you don't set a filename, the field type will check the status of **all files** in the download list.
-:::
-
-#### Regex Pattern Examples
-
-| Example Path / Filename | Regex Pattern | Description |
-|------------------------|---------------|-------------|
-| `report.pdf` | `.*report\.pdf$` | Exact file name ending with `report.pdf` |
-| `monthly-report.pdf` | `.*-report\.pdf$` | Hyphenated report file |
-| `annual_report.pdf` | `.*_report\.pdf$` | Underscore-separated report |
-| `Reports/2025/report.pdf` | `Reports/2025/.*\.pdf$` | Any PDF inside `Reports/2025` folder |
-| `Downloads/report_2024.pdf` | `.*report_\d{4}\.pdf$` | Report with 4-digit year |
-| `finance-report-v2.pdf` | `.*report-v\d+\.pdf$` | Versioned report files |
-| `report(1).pdf` | `.*report\(\d+\)\.pdf$` | Duplicate download naming |
-| `FINAL_REPORT.PDF` | `.*final_report\.pdf$` *(i)* | Case-insensitive final report |
-| `invoice_12345.pdf` | `.*invoice_\d+\.pdf$` | Invoice with numeric ID |
-| `Invoices/Jan/invoice.pdf` | `Invoices/.*/invoice\.pdf$` | Invoice inside any subfolder |
-| `notice_SH_151_196.pdf` | `.*notice_SH_\d+_\d+\.pdf$` | Structured notice file |
-| `SH_151_196_SHRD_14581300.pdf` | `.*SH_\d+_\d+_SHRD_\d+\.pdf$` | Election-style reference file |
-| `formA-2025-01.pdf` | `.*formA-\d{4}-\d{2}\.pdf$` | Date-formatted form |
-| `backup/report_old.pdf` | `.*report_.*\.pdf$` | Report with suffix |
-| `Reports/finance.xlsx` | `Reports/.*\.xlsx$` | Any Excel file in Reports folder |
-| `statement.csv` | `.*(csv\|xlsx)$` | CSV or Excel file |
-| `docs/report.pdf` | `.*/report\.pdf$` | `report.pdf` in any folder |
-| `report.pdf` | `^report\.pdf$` | Only root-level filename |
-| `2025_report_final.pdf` | `.*\d{4}_report_.*\.pdf$` | Year-prefixed report |
-| `summary-notice.pdf` | `.*(summary\|notice).pdf$` | Summary OR notice files |
-
-**Common Regex Patterns:**
-
-- `.*` - Match any characters
-- `\.` - Match literal dot (escape the dot)
-- `\d` - Match any digit (0-9)
-- `\d{4}` - Match exactly 4 digits
-- `\d+` - Match one or more digits
-- `$` - End of string
-- `^` - Start of string
-- `(a|b)` - Match 'a' OR 'b'
-- `[abc]` - Match any character in brackets
+| Target Filename / Directory | Regex Pattern | Description |
+|---|---|---|
+| `report.pdf` | `.*report\.pdf$` | Matches any file ending with `report.pdf` |
+| `monthly-report.pdf` | `.*-report\.pdf$` | Hyphenated report naming |
+| `invoice_2025_101.pdf` | `.*invoice_\d{4}_\d+\.pdf$` | Invoice containing year and dynamic ID |
+| `export_data.xlsx` | `.*export_data\.xlsx$` | Excel spreadsheet export |
+| `statement(1).pdf` | `.*statement\(\d+\)\.pdf$` | Handles duplicate browser download naming |
+| `REPORT_FINAL.PDF` | `.*report_final\.pdf$` *(i)* | Case-insensitive match |
 
 ---
 
 ### Downloads Item Status
 
-**Options:**
-- **Progress** - The download is in progress
-- **Complete** - The download is complete
-- **Broke Connection** - The download encountered a broken connection
+Select the target condition to evaluate:
 
-**Description:** Specify the desired download status you want to check for.
+- **Progress**: The file is actively transferring bytes over the network.
+- **Complete**: The download has completed and the file exists on local storage.
+- **Broke Connection**: The download stalled, timed out, or encountered an interrupted network socket.
 
 ---
 
 ### Wait Until Status Matches
 
-**Toggle:** Wait until the download items status matches
-
-**Description:** When enabled, the field waits until the specified download status is reached. If disabled, the field reports the current status without pausing execution.
+- **Toggle**: `Wait until the download items status matches`
+- **Behavior**: When enabled, execution pauses until the file matches the desired status. If disabled, the field checks the instantaneous status once and proceeds immediately.
 
 ---
 
-## Custom Filter
+## Advanced Custom Filter via JavaScript {#custom-filter}
 
-For advanced filtering of download items, use a JavaScript event listener in a separate **JavaScript Code** field type.
+For complex criteria (e.g., verifying file size thresholds, inspecting MIME types, or handling multiple files), use a **JavaScript Code** field that subscribes to the `EDF-CHECK-DOWNLOADS-RESPONSE` event.
 
-### Implementation Steps
+### Implementation Pattern
 
-Use three field types in sequence:
-1. **JavaScript Code** - Add event listener
-2. **Check Downloads** - Trigger event and pass download details
-3. **getLocalStorage** function - Check if filter is complete
+1. **Step 1: JavaScript Code Field**: Attach an event listener for `EDF-CHECK-DOWNLOADS-RESPONSE`.
+2. **Step 2: Check Downloads Field**: Trigger the download check to dispatch the event payload.
+3. **Step 3: getLocalStorage Function**: Read validation flags stored by the listener.
 
-### JavaScript Event Listener
+### Event Listener Script
 
-```js
-// Listen Event
+```javascript
+// Register event listener
 window.addEventListener('EDF-CHECK-DOWNLOADS-RESPONSE', (e) => {
   if (e && e.detail && e.detail.response) {
-
-    // Use for loop to search and match item details according to your needs
-    for (let i = 0; i < e.detail.response.length; i++) {
-      const item = e.detail.response[i];
-      console.log("Item", item)
+    const downloads = e.detail.response;
+    
+    for (let i = 0; i < downloads.length; i++) {
+      const item = downloads[i];
       
-      // Example: Check if specific file exists
-      if (item.filename.includes('report.pdf') && item.state === 'complete') {
-        // If match found, store value in local storage
-        $fns.setLocalStorage("is-found-download", "1");
+      // Example: Check for completed PDFs over 500 KB
+      if (item.filename.endsWith('.pdf') && item.state === 'complete' && item.fileSize > 500000) {
+        $fns.setLocalStorage('download-verified', '1');
         break;
       }
     }
   }
 });
 
-// RETURN - if don't use this line then extension will pause on this field
-$fns.return("1");
+// Always return a value to advance execution
+$fns.return('1');
 ```
 
-### Event Variable Structure
-
-**Event Variable:** `e.detail.response`
-
-**Data Type:** Array of download item objects
-
-**Example Response:**
-
-```json
-[
-  {
-    "bytesReceived": 707486,
-    "canResume": false,
-    "danger": "accepted",
-    "endTime": "2026-01-15T08:16:17.120Z",
-    "exists": true,
-    "fileSize": 707486,
-    "filename": "C:\\Users\\xyz\\Downloads\\dev-example.pdf",
-    "finalUrl": "https://example.com/downloads/pdf/dev-example.pdf",
-    "id": 113,
-    "incognito": false,
-    "mime": "application/pdf",
-    "paused": false,
-    "referrer": "https://example.com/downloads/pdf/",
-    "startTime": "2026-01-15T08:15:51.970Z",
-    "state": "complete",
-    "totalBytes": 707486,
-    "url": "https://example.com/downloads/pdf/dev-example.pdf"
-  }
-]
-```
-
-### Download Item Properties
+### Download Item Object Schema
 
 | Property | Type | Description |
-|----------|------|-------------|
-| `bytesReceived` | number | Number of bytes received so far |
-| `canResume` | boolean | Whether download can be resumed |
-| `danger` | string | Danger type (e.g., "accepted", "file", "url") |
-| `endTime` | string | ISO timestamp when download completed |
-| `exists` | boolean | Whether file still exists |
-| `fileSize` | number | Total file size in bytes |
-| `filename` | string | Full path to downloaded file |
-| `finalUrl` | string | Final URL after redirects |
-| `id` | number | Unique download ID |
-| `incognito` | boolean | Whether downloaded in incognito mode |
-| `mime` | string | MIME type of file |
-| `paused` | boolean | Whether download is paused |
-| `referrer` | string | Referrer URL |
-| `startTime` | string | ISO timestamp when download started |
-| `state` | string | Download state: "in_progress", "complete", "interrupted" |
-| `totalBytes` | number | Total file size in bytes |
-| `url` | string | Original download URL |
+|---|---|---|
+| `filename` | string | Full local absolute path of the downloaded file. |
+| `state` | string | Download state: `"in_progress"`, `"complete"`, or `"interrupted"`. |
+| `fileSize` | number | Total file size in bytes. |
+| `bytesReceived` | number | Bytes downloaded so far. |
+| `mime` | string | MIME type (e.g., `application/pdf`, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`). |
+| `url` | string | Original source URL of the download. |
+| `finalUrl` | string | Final download destination URL after redirects. |
+| `canResume` | boolean | Indicates if an interrupted download can resume. |
 
 ---
 
-## Usage Examples
+## Practical Examples {#usage-examples}
 
-### Example 1: Wait for Specific File Download
+### Example 1: Trigger Export and Wait for PDF
 
-```
+```text
 Field Type: Check Downloads
-Filename: .*report\.pdf$
+Do you want to click on an element?: Enabled
+Enter Element Selector/Xpath: button#btn-export-pdf
+Filename: .*monthly_summary\.pdf$
 Downloads Item Status: Complete
-Wait until status matches: ✅ Enabled
+Wait until status matches: Enabled
 ```
 
-**Result:** Waits until any file matching "report.pdf" is completely downloaded.
+### Example 2: Dynamic Filenames from Excel
 
----
-
-### Example 2: Check All Downloads (No Filename)
-
-```
+```text
 Field Type: Check Downloads
-Filename: (empty)
+Filename (Spreadsheet Column): {$InvoiceNumber$}
 Downloads Item Status: Complete
-Wait until status matches: ✅ Enabled
+Wait until status matches: Enabled
 ```
 
-**Result:** Waits until all downloads are complete.
+### Example 3: Background Batch Download Monitoring
 
----
-
-### Example 3: Background Download Monitoring
-
-```
+```text
 Field Type: Check Downloads
-Run in background: ✅ Enabled
-Filename: .*invoice_\d+\.pdf$
+Run the action process in the background?: Enabled
+Filename: .*archive_.*\.zip$
 Downloads Item Status: Complete
-Wait until status matches: ✅ Enabled
 ```
-
-**Result:** Monitors invoice downloads in background while next field executes.
 
 ---
 
-### Example 4: Click Download Button and Wait
+## Best Practices {#best-practices}
 
-```
-Field Type: Check Downloads
-Do you want to click on an element?: ✅ Enabled
-Enter Element Selector/Xpath: #download-report-btn
-Filename: .*monthly-report\\.pdf$
-Downloads Item Status: Complete
-Wait until status matches: ✅ Enabled
-```
-
-**Result:** Clicks the download button, then waits until the monthly report PDF is completely downloaded.
-
-**Use Case:** Automate clicking download buttons and verify the download completes successfully.
+- **Test Selectors First**: Ensure the button selector triggers the native browser download prompt.
+- **Escape Regex Characters**: Remember to escape dots (`\.`) and parentheses (`\(` and `\)`) when targeting filenames.
+- **Account for Network Latency**: When triggering large file exports, ensure sufficient timeouts or enable **Wait until status matches**.
+- **Inspect Browser Permissions**: Ensure the browser is configured to allow automatic downloads without blocking consecutive files.
 
 ---
 
-### Example 5: Click Link with XPath and Monitor
+## Related Documentation {#related-documentation}
 
-```
-Field Type: Check Downloads
-Do you want to click on an element?: ✅ Enabled
-Enter Element Selector/Xpath: //a[contains(text(), 'Download Invoice')]
-Filename: .*invoice_\\d+\\.pdf$
-Downloads Item Status: Complete
-Wait until status matches: ✅ Enabled
-```
-
-**Result:** Clicks the "Download Invoice" link using XPath, then monitors until the invoice PDF download completes.
-
----
-
-### Example 6: Custom Filter Workflow
-
-**Field 1 - JavaScript Code:**
-```js
-window.addEventListener('EDF-CHECK-DOWNLOADS-RESPONSE', (e) => {
-  if (e && e.detail && e.detail.response) {
-    for (let i = 0; i < e.detail.response.length; i++) {
-      const item = e.detail.response[i];
-      
-      // Check for PDF files over 1MB
-      if (item.mime === 'application/pdf' && item.fileSize > 1000000) {
-        $fns.setLocalStorage("large-pdf-found", "1");
-        break;
-      }
-    }
-  }
-});
-$fns.return("1");
-```
-
-**Field 2 - Check Downloads:**
-```
-Downloads Item Status: Complete
-Wait until status matches: ✅ Enabled
-```
-
-**Field 3 - getLocalStorage Function:**
-```
-Function Value: [large-pdf-found][true][true]
-```
-
-**Result:** Waits for large PDF download, stores result, and verifies completion.
-
----
-
-### Example 5: Pattern Matching with Variables
-
-```
-Field Type: Check Downloads
-Filename (from Excel): {$expectedFilename$}
-Downloads Item Status: Complete
-Wait until status matches: ✅ Enabled
-```
-
-**Excel Data:**
-- expectedFilename: `.*report_2025.*\.pdf$`
-
-**Result:** Dynamically matches files based on Excel data.
-
----
-
-## Tips
-
-:::tip Click on Element
-When using "Do you want to click on an element?", ensure the element is visible and clickable before the field executes. Use specific selectors to avoid clicking the wrong element.
-:::
-
-:::info Selector Testing
-Test your CSS selectors or XPath expressions in the browser console before using them:
-- **CSS**: `document.querySelector('#download-btn')`
-- **XPath**: `$x("//button[text()='Download']")`
-:::
-
-:::warning Download Timing
-After clicking an element to trigger a download, there may be a slight delay before the download appears in the browser's download list. The extension will wait for the download to start before checking its status.
-:::
-
-:::tip Regex Patterns
-Use regex patterns in the Filename field for flexible matching. Test your patterns at [regex101.com](https://regex101.com) before using them.
-:::
-
-:::info Background Processing
-Enable "Run in background" when you want to continue automation while monitoring downloads. This is useful for long-running downloads that shouldn't block other actions.
-:::
-
----
-
-## Use Cases
-
-#### Verify File Download Completion
-
-**Scenario:** Ensure a specific file has finished downloading before proceeding.
-
-**Configuration:**
-- Filename: `.*contract\.pdf$`
-- Status: Complete
-- Wait: Enabled
-
----
-
-#### Monitor Multiple Downloads
-
-**Scenario:** Check if all downloads are complete.
-
-**Configuration:**
-- Filename: (empty)
-- Status: Complete
-- Wait: Enabled
-
----
-
-#### Custom Validation
-
-**Scenario:** Verify downloaded file meets specific criteria (size, type, etc.).
-
-**Configuration:**
-- Use custom filter with JavaScript
-- Check file properties in event listener
-- Store validation result in localStorage
-
----
-
-#### Background Download Check
-
-**Scenario:** Continue automation while monitoring downloads.
-
-**Configuration:**
-- Run in background: Enabled
-- Filename: `.*data\.csv$`
-- Status: Complete
-
----
-
-#### Automated Download Triggering
-
-**Scenario:** Click a download button and wait for the file to complete downloading.
-
-**Configuration:**
-- Do you want to click on an element?: Enabled
-- Enter Element Selector/Xpath: `#download-btn` or `//button[text()='Download']`
-- Filename: `.*report\\.pdf$`
-- Status: Complete
-- Wait: Enabled
-
-**Use Case:** Automate the entire download process from clicking the button to verifying completion.
-
-## Related Field Types
-
-- [JavaScript Code](/documentation/field-types/javascript-code) - For custom filtering logic
-- [getLocalStorage](/documentation/functions) - To retrieve filter results
-- [setLocalStorage](/documentation/functions) - To store filter results
+- <img src="/svg/code.svg" class="doc-icon" /> [JavaScript Code Field](/documentation/field-types/javascript-code)
+- <img src="/svg/form.svg" class="doc-icon" /> [Form Fields Overview](/documentation/form-fields/field)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
+- <img src="/svg/beaker.svg" class="doc-icon" /> [Execution Logs](/documentation/logs)

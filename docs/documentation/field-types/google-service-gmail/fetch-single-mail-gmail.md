@@ -1,630 +1,100 @@
-# Fetch Single Mail (Gmail)
+---
+prev:
+  text: "Fetch Mail (Gmail)"
+  link: "/documentation/field-types/google-service-gmail/fetch-mail-gmail"
+next:
+  text: "Gmail API Search Queries"
+  link: "/documentation/field-types/google-service-gmail/gmail-api-search-queries"
+---
 
-Retrieve a specific email from Gmail using message ID or search parameters.
+# Fetch Single Mail (Gmail) {#fetch-single-mail-gmail}
 
-## Overview
+Retrieve a single, specific email from Gmail using a message ID or targeted search query, optimized for fast OTP extraction, authentication links, and single-record parsing.
 
-The Fetch Single Mail (Gmail) field type allows you to retrieve a single, specific email from your Gmail account. Unlike [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail) which returns multiple emails, this field type is optimized for fetching one email at a time, making it ideal for retrieving specific messages by ID or the most recent email matching your criteria.
+---
 
-## Configuration Options
+## Overview {#overview}
+
+While [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail) is engineered for processing email collections, **Fetch Single Mail (Gmail)** is tailored for point-to-point verification where you need exactly one targeted message (e.g., retrieving the latest two-factor authentication code or password reset token).
+
+---
+
+## Configuration Options {#configuration-options}
 
 | Option | Type | Description | Required |
-|--------|------|-------------|----------|
-| [Google Service Account](#google-service-account) | Dropdown | Select logged-in Google account | **Yes** |
-| [Enable Max Results](#enable-max-results) | Switch | Limit number of results | No |
-| [Max Results Count](#max-results-count) | Input | Number of results to return | No |
-| [Include Spam/Trash](#include-spam-trash) | Switch | Include spam and trash in results | No |
-| [Enable Retry on Failure](#enable-retry-on-failure) | Switch | Retry if request fails | No |
-| [Max Retries (Failure)](#max-retries-failure) | Input | Maximum retry attempts on failure | No |
-| [Retry Until Mail Received](#retry-until-mail-received) | Switch | Keep retrying until mail is found | No |
-| [Max Retries (Until Received)](#max-retries-until-received) | Input | Maximum retry attempts until mail received | No |
-| [Timeout](#timeout) | Input | Timeout duration in seconds | No |
-| [Enable Regex Filter](#enable-regex-filter) | Switch | Filter data with regular expression | No |
-| [Regular Expression](#regular-expression) | Input | Regex pattern to match | No |
-| [Regex Replace](#regex-replace) | Input | Replacement string for regex matches | No |
-| [Remove UNREAD Label](#remove-unread-label) | Switch | Mark email as read after fetching | No |
-| [Search Query](#search-query) | Default Value | Gmail search query | No |
+|---|---|---|---|
+| **Google Service Account** | Dropdown | Authorized Google account with Gmail permissions. | Yes |
+| **Enable Max Results** | Toggle Switch | Restricts results to a single message (recommended ON). | No |
+| **Max Results Count** | Number Input | Set to `1` for single-message workflows. | No |
+| **Include Spam/Trash** | Toggle Switch | Checks Spam and Trash folders. | No |
+| **Enable Retry on Failure** | Toggle Switch | Re-attempts execution on transient API connectivity errors. | No |
+| **Max Retries (Failure)** | Number Input | Number of network retry attempts. | When retry enabled |
+| **Retry Until Mail Received** | Toggle Switch | Polls the inbox until the expected email arrives. | No |
+| **Max Retries (Until Received)** | Number Input | Number of polling checks before timing out. | When polling enabled |
+| **Timeout** | Number Input | Seconds to pause between polling checks. | No |
+| **Enable Regex Filter** | Toggle Switch | Extracts targeted tokens or numbers using regex patterns. | No |
+| **Regular Expression** | Text Input | Regex query (e.g., `\b\d{6}\b`). | When regex enabled |
+| **Regex Replace** | Text Input | Optional replacement string for matched pattern. | No |
+| **Remove UNREAD Label** | Toggle Switch | Automatically marks email as read upon retrieval. | No |
+| **Search Query** | Default Value | Gmail query syntax to locate the target message. | No |
 
 ---
 
-## Option Details
+## Targeted OTP & Verification Workflows {#otp-workflows}
 
-### Google Service Account {#google-service-account}
+Extracting an automated one-time password during form execution:
 
-Select the Google account you want to use for accessing Gmail.
-
-**Type:** Dropdown
-
-**Description:** Choose from your logged-in Google accounts. Make sure the selected account has Gmail access enabled.
-
-**Example:**
-- `user@gmail.com`
-- `work@company.com`
-
----
-
-### Enable Max Results {#enable-max-results}
-
-Enable limiting the number of results returned.
-
-**Type:** Switch
-
-**Options:**
-- **ON** - Limit number of results
-- **OFF** - Return all matching results
-
-**Note:** For single mail retrieval, it's recommended to set max results to 1.
+1. **Trigger the Code**: Form action submits an input triggering an email dispatch from the target website.
+2. **Configure Single Fetch**:
+   - **Search Query**: `from:accounts@service.com is:unread`
+   - **Retry Until Mail Received**: `ON`
+   - **Max Retries**: `8`
+   - **Timeout**: `5` seconds
+   - **Enable Regex Filter**: `ON` (`\b\d{6}\b`)
+   - **Remove UNREAD Label**: `ON`
+3. **Execution**: The extension polls Gmail until the message arrives, isolates the 6 digits, and passes them directly to the subsequent OTP form field.
 
 ---
 
-### Max Results Count {#max-results-count}
+## Practical Examples {#examples}
 
-Specify the maximum number of emails to return.
+### Example 1: Extracting Latest Security Passcode
 
-**Type:** Input
-
-**Description:** Set how many emails should be fetched (Return Max Results).
-
-**Recommended Value:**
+```text
+Google Service Account: user@example.com
+Enable Max Results: ON
+Max Results Count: 1
+Retry Until Mail Received: ON
+Max Retries (Until Received): 6
+Timeout: 5
+Enable Regex Filter: ON
+Regular Expression: (?<=Your code is )\d{6}
+Remove UNREAD Label: ON
+Search Query: from:security@bank.com is:unread
 ```
-1    (Return only 1 email - most recent)
-```
 
-**Note:** This option only works when [Enable Max Results](#enable-max-results) is turned ON.
+### Example 2: Extracting Account Activation URL
+
+```text
+Google Service Account: user@example.com
+Enable Regex Filter: ON
+Regular Expression: https://app\.domain\.com/activate\?key=[A-Za-z0-9]+
+Search Query: subject:"Activate your account" newer_than:1d
+```
 
 ---
 
-### Include Spam/Trash {#include-spam-trash}
+## Best Practices {#best-practices}
 
-Include emails from Spam and Trash folders in the results.
-
-**Type:** Switch
-
-**Options:**
-- **ON** - Include spam and trash
-- **OFF** - Exclude spam and trash (default)
+- **Combine `is:unread` with `newer_than`**: Always add `newer_than:1d` or `newer_than:1h` to ensure outdated historical emails are never matched accidentally.
+- **Always Mark as Read**: Keep **Remove UNREAD Label** enabled so subsequent test runs or loop iterations don't re-read past tokens.
+- **Use Lookbehind in Regex**: Regex lookarounds like `(?<=code:\s*)\d{6}` allow you to isolate raw numeric tokens cleanly.
 
 ---
 
-### Enable Retry on Failure {#enable-retry-on-failure}
-
-Automatically retry the request if it fails.
-
-**Type:** Switch
-
-**Description:** When enabled, the system will retry fetching emails if an error occurs.
-
-**Options:**
-- **ON** - Enable retry on failure
-- **OFF** - Don't retry on failure
-
-**Use Cases:**
-- Network connectivity issues
-- Temporary API errors
-- Rate limiting scenarios
-
----
-
-### Max Retries (Failure) {#max-retries-failure}
-
-Maximum number of retry attempts if the request fails.
-
-**Type:** Input
-
-**Description:** Specify how many times the system should retry before giving up.
-
-**Example:**
-```
-3    (Retry up to 3 times)
-5    (Retry up to 5 times)
-10   (Retry up to 10 times)
-```
-
-**Note:** This option only works when [Enable Retry on Failure](#enable-retry-on-failure) is turned ON.
-
----
-
-### Retry Until Mail Received {#retry-until-mail-received}
-
-Keep retrying until the expected email is received.
-
-**Type:** Switch
-
-**Description:** Useful for waiting for verification emails, OTPs, or confirmation messages.
-
-**Options:**
-- **ON** - Retry until mail is found
-- **OFF** - Don't retry if mail not found
-
-**Use Cases:**
-- Waiting for verification codes
-- Expecting confirmation emails
-- Polling for specific messages
-
----
-
-### Max Retries (Until Received) {#max-retries-until-received}
-
-Maximum number of retry attempts when waiting for mail.
-
-**Type:** Input
-
-**Description:** Specify how many times to retry before giving up.
-
-**Example:**
-```
-10   (Retry up to 10 times)
-20   (Retry up to 20 times)
-50   (Retry up to 50 times)
-```
-
-**Note:** This option only works when [Retry Until Mail Received](#retry-until-mail-received) is turned ON.
-
----
-
-### Timeout {#timeout}
-
-Timeout duration in seconds between retry attempts.
-
-**Type:** Input
-
-**Description:** Specify how long to wait between each retry attempt.
-
-**Example:**
-```
-5     (Wait 5 seconds between retries)
-10    (Wait 10 seconds between retries)
-30    (Wait 30 seconds between retries)
-```
-
-**Note:** This option only works when [Retry Until Mail Received](#retry-until-mail-received) is turned ON.
-
----
-
-### Enable Regex Filter {#enable-regex-filter}
-
-Filter email data using regular expressions.
-
-**Type:** Switch
-
-**Description:** Apply regex patterns to extract or transform email content.
-
-**Options:**
-- **ON** - Enable regex filtering
-- **OFF** - Return raw email data
-
----
-
-### Regular Expression {#regular-expression}
-
-Regular expression pattern to match in email content.
-
-**Type:** Input
-
-**Description:** Define a regex pattern to extract specific data from emails.
-
-**Example:**
-```
-\d{6}                    (Match 6-digit codes)
-[A-Z0-9]{8}              (Match 8-character alphanumeric codes)
-verification code: (\d+) (Extract verification code)
-```
-
-**Note:** This option only works when [Enable Regex Filter](#enable-regex-filter) is turned ON.
-
----
-
-### Regex Replace {#regex-replace}
-
-Replacement string for regex matches.
-
-**Type:** Input
-
-**Description:** Define what to replace matched patterns with. Use `$1`, `$2` for capture groups.
-
-**Example:**
-```
-$1                (Use first capture group)
-Code: $1          (Prefix with "Code: ")
-$1-$2             (Combine capture groups)
-```
-
-**Note:** This option only works when [Enable Regex Filter](#enable-regex-filter) is turned ON.
-
----
-
-### Remove UNREAD Label {#remove-unread-label}
-
-Automatically mark email as read after fetching.
-
-**Type:** Switch
-
-**Description:** Remove the UNREAD label from emails after they are retrieved.
-
-**Options:**
-- **ON** - Mark as read after fetching
-- **OFF** - Keep email as unread
-
-**Use Cases:**
-- Prevent duplicate processing
-- Clean up inbox automatically
-- Track processed emails
-
----
-
-### Search Query {#search-query}
-
-Gmail search query to filter emails.
-
-**Type:** Default Value Field
-
-**Description:** Use Gmail's powerful search syntax to find specific emails.
-
-:::tip Set Query in Default Value
-You can set the search query in the **"If excel column value is empty then fill this default value"** field option.
-
-**Example:**
-```
-from:noreply@example.com subject:verification
-is:unread after:2024/01/01
-has:attachment larger:5M
-```
-:::
-
-**Learn More:** See [Gmail API Search Queries](/documentation/field-types/google-service-gmail/gmail-api-search-queries) for detailed search syntax and examples.
-
----
-
-## Differences from Fetch Mail (Gmail)
-
-| Feature | Fetch Single Mail | Fetch Mail |
-|---------|------------------|------------|
-| **Purpose** | Retrieve one specific email | Retrieve multiple emails |
-| **Mail Parts Selection** | Returns complete email | Select specific parts (body, subject, etc.) |
-| **Use Case** | Get latest/specific message | Search and filter multiple messages |
-| **Performance** | Faster for single email | Better for bulk operations |
-
-## Use Cases
-
-- **Fetch latest verification code** - Get the most recent OTP email
-- **Retrieve specific email by ID** - Fetch email using message ID
-- **Get confirmation email** - Wait for and retrieve confirmation messages
-- **Extract single data point** - Get one specific piece of information
-- **Monitor for specific message** - Poll for expected email
-
-## Practical Examples
-
-### Example 1: Get Latest OTP Email
-
-**Search Query:**
-```
-is:unread from:noreply@bank.com subject:OTP
-```
-
-**Max Results:** `1`
-
-**Regex Pattern:** `\d{6}`
-
-**Remove UNREAD:** `ON`
-
----
-
-### Example 2: Wait for Verification Email
-
-**Search Query:**
-```
-is:unread subject:"verify your email"
-```
-
-**Retry Until Received:** `ON`
-
-**Max Retries:** `20`
-
-**Timeout:** `10` seconds
-
----
-
-### Example 3: Get Password Reset Link
-
-**Search Query:**
-```
-is:unread from:noreply@service.com subject:"reset password"
-```
-
-**Regex Pattern:** `https://[^\s]+`
-
-**Max Results:** `1`
-
----
-
-## Custom Filter {#custom-filter}
-
-For advanced filtering of Gmail data, use a JavaScript event listener in a separate **JavaScript Code** field type.
-
-### Implementation Steps
-
-Use three field types in sequence:
-1. **JavaScript Code** - Add event listener
-2. **Fetch Single Mail (Gmail)** - Trigger event and pass email details
-3. **getLocalStorage** function - Check if filter is complete
-
-### JavaScript Event Listener
-
-```js
-// Listen Event
-window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
-  if (e && e.detail) {
-    console.log("Email Data:", e.detail);
-    
-    // Apply your custom filtering logic here
-    // Example: Check if email contains specific text
-    if (e.detail.body && e.detail.body.includes('verification code')) {
-      // If match found, store value in local storage
-      $fns.setLocalStorage("gmail-verification-found", "1");
-    }
-  }
-});
-
-// RETURN - if don't use this line then extension will pause on this field
-$fns.return("1");
-```
-
-### Event Variable Structure
-
-**Event Variable:** `e.detail`
-
-**Data Type:** Email object
-
-**Example Response:**
-
-```json
-{
-  "id": "18d4f2a1b3c5e6f7",
-  "threadId": "18d4f2a1b3c5e6f7",
-  "subject": "Your Verification Code",
-  "from": "noreply@example.com",
-  "to": "user@gmail.com",
-  "body": "Your verification code is: 123456",
-  "snippet": "Your verification code is: 123456",
-  "date": "2024-01-15T10:30:00Z",
-  "labelIds": ["UNREAD", "INBOX"],
-  "internalDate": "1705318200000"
-}
-```
-
-### Email Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `id` | string | Unique message ID |
-| `threadId` | string | Thread ID the message belongs to |
-| `subject` | string | Email subject line |
-| `from` | string | Sender email address |
-| `to` | string | Recipient email address |
-| `body` | string | Email body content (plain text or HTML) |
-| `snippet` | string | Short preview of email content |
-| `date` | string | ISO timestamp when email was sent |
-| `labelIds` | array | Gmail labels applied to the email |
-| `internalDate` | string | Internal date timestamp |
-
----
-
-## Usage Examples
-
-### Example 1: Extract and Validate OTP
-
-**Field 1 - JavaScript Code:**
-```js
-window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
-  if (e && e.detail && e.detail.body) {
-    // Extract OTP code (6 digits)
-    const otpMatch = e.detail.body.match(/\d{6}/);
-    
-    if (otpMatch) {
-      const otp = otpMatch[0];
-      console.log('OTP found:', otp);
-      
-      // Validate OTP format
-      if (otp.length === 6) {
-        // Store OTP in local storage
-        $fns.setLocalStorage("email-otp-code", otp);
-      }
-    } else {
-      console.log('No OTP found in email');
-    }
-  }
-});
-
-$fns.return("1");
-```
-
-**Field 2 - Fetch Single Mail (Gmail):**
-```
-Search Query: from:noreply@example.com subject:verification
-Max Results: 1
-```
-
-**Field 3 - getLocalStorage Function:**
-```
-Function Value: [email-otp-code][true][true]
-```
-
-**Result:** Extracts OTP from email, stores it, and retrieves it for use.
-
----
-
-### Example 2: Filter by Sender and Subject
-
-**Field 1 - JavaScript Code:**
-```js
-window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
-  if (e && e.detail) {
-    const { from, subject, body } = e.detail;
-    
-    // Check if email is from trusted sender
-    if (from.includes('noreply@bank.com') && 
-        subject.includes('Transaction Alert')) {
-      
-      // Extract transaction amount
-      const amountMatch = body.match(/\$(\d+\.\d{2})/);
-      
-      if (amountMatch) {
-        const amount = amountMatch[1];
-        console.log('Transaction amount:', amount);
-        
-        // Store amount in local storage
-        $fns.setLocalStorage("transaction-amount", amount);
-      }
-    }
-  }
-});
-
-$fns.return("1");
-```
-
-**Field 2 - Fetch Single Mail (Gmail):**
-```
-Search Query: from:noreply@bank.com subject:"Transaction Alert"
-Max Results: 1
-```
-
-**Field 3 - getLocalStorage Function:**
-```
-Function Value: [transaction-amount][true][true]
-```
-
-**Result:** Filters bank transaction emails and extracts amount.
-
----
-
-### Example 3: Verify Email Content
-
-**Field 1 - JavaScript Code:**
-```js
-window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
-  if (e && e.detail) {
-    // Check if email contains required keywords
-    const hasKeywords = e.detail.body.includes('password reset') && 
-                        e.detail.body.includes('click here');
-    
-    if (hasKeywords) {
-      // Extract reset link
-      const linkMatch = e.detail.body.match(/https:\/\/[^\s]+/);
-      
-      if (linkMatch) {
-        const resetLink = linkMatch[0];
-        console.log('Reset link found:', resetLink);
-        
-        // Store link in local storage
-        $fns.setLocalStorage("password-reset-link", resetLink);
-      }
-    }
-  }
-});
-
-$fns.return("1");
-```
-
-**Field 2 - Fetch Single Mail (Gmail):**
-```
-Search Query: subject:"Password Reset"
-Max Results: 1
-```
-
-**Field 3 - getLocalStorage Function:**
-```
-Function Value: [password-reset-link][true][false]
-```
-
-**Result:** Extracts password reset link from email.
-
----
-
-### Example 4: Multi-Condition Filtering
-
-**Field 1 - JavaScript Code:**
-```js
-window.addEventListener('EDF-SINGLE-GMAIL-RESPONSE', (e) => {
-  if (e && e.detail) {
-    const { from, subject, body, date } = e.detail;
-    
-    // Check multiple conditions
-    const isRecent = new Date(date) > new Date(Date.now() - 3600000); // Last hour
-    const isFromSupport = from.includes('support@example.com');
-    const hasTicketNumber = /Ticket #\d+/.test(subject);
-    
-    if (isRecent && isFromSupport && hasTicketNumber) {
-      // Extract ticket number
-      const ticketMatch = subject.match(/Ticket #(\d+)/);
-      
-      if (ticketMatch) {
-        const ticketNumber = ticketMatch[1];
-        console.log('Ticket number:', ticketNumber);
-        
-        // Store ticket number
-        $fns.setLocalStorage("support-ticket-number", ticketNumber);
-      }
-    }
-  }
-});
-
-$fns.return("1");
-```
-
-**Field 2 - Fetch Single Mail (Gmail):**
-```
-Search Query: from:support@example.com newer_than:1h
-Max Results: 1
-```
-
-**Field 3 - getLocalStorage Function:**
-```
-Function Value: [support-ticket-number][true][true]
-```
-
-**Result:** Filters recent support emails and extracts ticket number.
-
----
-
-## Best Practices
-
-### ✅ Do's
-
-- **Set max results to 1** - Optimize for single email retrieval
-- **Use specific search queries** - Ensure you get the right email
-- **Enable retry for expected emails** - Use retry mechanism for verification emails
-- **Mark as read after processing** - Prevent duplicate processing
-- **Use regex for data extraction** - Extract specific patterns like codes or URLs
-
-### ❌ Don'ts
-
-- **Don't fetch multiple emails** - Use Fetch Mail (Gmail) for bulk operations
-- **Don't set excessive retries** - Balance between reliability and performance
-- **Don't ignore timeout settings** - Set appropriate timeout for retry scenarios
-- **Don't process without validation** - Verify email content before processing
-
-## Troubleshooting
-
-### No Email Found
-
-**Solution:** Verify your search query is correct and the email exists.
-
-### Wrong Email Retrieved
-
-**Solution:** Make your search query more specific with additional filters.
-
-### Timeout Errors
-
-**Solution:** Increase timeout duration or reduce max retry attempts.
-
-### Regex Not Matching
-
-**Solution:** Test your regex pattern and ensure it matches the email content format.
-
-## Related Documentation
-
-- [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
-- [Gmail API Search Queries](/documentation/field-types/google-service-gmail/gmail-api-search-queries)
-- [Google Service - Gmail](/documentation/field-types/google-service-gmail)
-- [Field Types](/documentation/form-fields/field-types)
-- [Gmail API Documentation](https://developers.google.com/gmail/api)
+## Related Documentation {#related-documentation}
+
+- <img src="/svg/chat.svg" class="doc-icon" /> [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
+- <img src="/svg/globe.svg" class="doc-icon" /> [Gmail API Search Queries Guide](/documentation/field-types/google-service-gmail/gmail-api-search-queries)
+- <img src="/svg/click.svg" class="doc-icon" /> [Send Mail (Gmail)](/documentation/field-types/google-service-gmail/send-mail-gmail)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Google Service Account Setup](/documentation/services/google-service)

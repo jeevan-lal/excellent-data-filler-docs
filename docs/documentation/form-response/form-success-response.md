@@ -21,13 +21,13 @@ When It matches with given success response, entry will be marked as **Entry Sav
 | Option                                                       | Description                                                                                                                                                                                                                       |
 | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Update the entry to Mark as Saved?                           | If **multiple forms** are being used in the site then it is necessary to keep this option on.                                                                                                                                     |
-| If excel data is not found then don't execute the action     | Even if there is no data in Excel, the [action](#action) is still executing, then you can turn it off with this option.                                                                                                           |
-| If last excel entry completed then don't execute the action  | If the last entry of excel has been saved and you do not want the [action](#action) not to be executed after the last entry, then you can do it by turning on this option.                                                        |
-| If there is no Excel data, update only scraper data in Excel | If you are [scraping data](/documentation/form-fields/field-types#scraper-data) from the site and you are not using Excel template in the extension, then the data being scraped from that option will be saved in the extension. |
+| If excel data is not found then don't execute the action     | Even if there is no data in Excel (.xlsx), the [action](#action) is still executing, then you can turn it off with this option.                                                                                                           |
+| If last excel entry completed then don't execute the action  | If the last entry of Excel (.xlsx) has been saved and you do not want the [action](#action) not to be executed after the last entry, then you can do it by turning on this option.                                                        |
+| If there is no Excel data, update only scraper data in Excel | If you are [scraping data](/documentation/form-fields/field-types#scraper-data) from the site and you are not using Excel (.xlsx) template in the extension, then the data being scraped from that option will be saved in the extension. |
 | Can success message be anything in this element              | If the success message of the entry is always changing then using this option matches **any type of message** in the given element.                                                                                               |
-| Remove excel column value from current entry?                | If you fetch large data but don't need it in Excel, enable this option to remove the column value from the current entry after processing.                                                                                        |
-| Set custom message after success message matched?            | If your success message is large, you can set a custom short message to store in Excel instead of the full success message.                                                                                                       |
-| Do not update the Excel data; simply execute the action      | When enabled, the extension will execute the specified [action](#action) when the success response matches, but **will not update the Excel data**. This is useful when you want to perform an action without completing the entry. |
+| Remove excel column value from current entry?                | If you fetch large data but don't need it in Excel (.xlsx), enable this option to remove the column value from the current entry after processing.                                                                                        |
+| Set custom message after success message matched?            | If your success message is large, you can set a custom short message to store in Excel (.xlsx) instead of the full success message.                                                                                                       |
+| Do not update the Excel data; simply execute the action      | When enabled, the extension will execute the specified [action](#action) when the success response matches, but **will not update the Excel (.xlsx) data**. This is useful when you want to perform an action without completing the entry. |
 
 
 ## Success Page URL
@@ -112,7 +112,7 @@ If any success message is present in the page **before** submitting the form, th
 
 ::: details How to fill dynamic success message?
 
-If server response is dynamic or changes every time or It has some data from any column from excel, then you can use variable like this.
+If server response is dynamic or changes every time or It has some data from any column from Excel (.xlsx), then you can use variable like this.
 
 <img src="/image/dynamic-response-msg-01.png" width="400" height="400" alt="Entry Response">
 
@@ -134,3 +134,11 @@ If the given [Success Response Type](#success-response-type) matches, then this 
 - Click on Button
 - Page Reload
 - Execute Segment
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Form Error Response](/documentation/form-response/form-error-response)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+- <img src="/svg/browser.svg" class="doc-icon" /> [Logs Management](/documentation/logs)
+

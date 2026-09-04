@@ -1,16 +1,16 @@
-# ➕ Set Environment {#set-environment}
+# Set Environment {#set-environment}
 
 Set local environment variables for the current form execution context. Configure dynamic values that can be accessed by other fields and segments during automation.
 
-## 📋 Field Options {#set-environment-field-options}
+## Field Options {#set-environment-field-options}
 
 | Field Options             | Required | Description                               | Example Values                                 |
 | ------------------------- | -------- | ----------------------------------------- | ---------------------------------------------- |
 | **Environment Variables** | Yes      | JSON configuration for global environment | <pre>`{"title": "EDF", "timeout": 5000}`</pre> |
 
-## ⚙️ Configuration {#set-environment-configuration}
+## Configuration {#set-environment-configuration}
 
-### 🌐 Environment Variables {#environment-variables}
+### Environment Variables {#environment-variables}
 
 **Purpose:** Define local variables that can be accessed by other fields and segments during form execution.
 
@@ -42,11 +42,11 @@ Set local environment variables for the current form execution context. Configur
 {$email$}
 ```
 
-## 🌐 Global Environment {#global-environment}
+## Global Environment {#global-environment}
 
 You can also set global environment variables in the extension settings. [**Environment Settings**](/documentation/settings#environment-settings)
 
-## ⚠️ Important Notes {#important-notes}
+## Important Notes {#important-notes}
 
 - **JSON syntax must be valid** - use proper quotes and commas
 - **Variables are local** - accessible by only the current form
@@ -60,3 +60,10 @@ Use environment variables to create reusable configurations that can be easily m
 :::warning Important
 Ensure JSON syntax is valid. Invalid JSON will cause the field to fail and may break form execution.
 :::
+
+## Next Steps
+
+<img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)

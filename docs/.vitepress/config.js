@@ -15,8 +15,8 @@ const sideBarList = [
         link: '/documentation/#quick-start'
       },
       {
-        text: 'Video Tutorial',
-        link: '/documentation/#video-tutorial'
+        text: 'Common Use Cases',
+        link: '/documentation/#common-use-cases'
       },
       {
         text: 'Need Help?',
@@ -37,8 +37,8 @@ const sideBarList = [
         link: '/documentation/settings'
       },
       {
-        text: 'Log',
-        link: '/documentation/log#log'
+        text: 'Logs',
+        link: '/documentation/logs#logs'
       },
       {
         text: 'Context Menu',
@@ -348,6 +348,9 @@ export default {
     ['meta', { name: 'og:description', content: "Excellent Data Filler is a powerful browser extension that automates form filling and data scraping across multiple browsers." }],
     ['meta', { name: 'og:image', content: 'https://edfiller.in/logo/logo-500x.png' }],
     ['meta', { name: 'og:image:type', content: 'image/png' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap' }],
   ],
   themeConfig: {
     search: {
@@ -357,7 +360,7 @@ export default {
     prevLinks: true,
     // logo: '/32x32.png',
     socialLinks: [
-      { icon: "youtube", link: "https://www.youtube.com/@ctechhindi" },
+      // { icon: "youtube", link: "https://www.youtube.com/@ctechhindi" },
       { icon: "github", link: "https://github.com/jeevan-lal/excellent-data-filler-docs" },
     ],
     nav: [
@@ -394,10 +397,6 @@ export default {
       '/field/': sideBarList,
       '/functions/': sideBarList,
       '/keys/': sideBarList,
-    },
-    footer: {
-      message: "Released under the MIT License.",
-      copyright: `Copyright © 2021-${new Date().getFullYear()} C Tech Hindi`,
     },
     editLink: {
       pattern: 'https://github.com/jeevan-lal/excellent-data-filler-docs/blob/master/docs/:path',

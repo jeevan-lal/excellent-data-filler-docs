@@ -1,235 +1,122 @@
-# Gmail API Search Queries
+---
+prev:
+  text: "Fetch Single Mail (Gmail)"
+  link: "/documentation/field-types/google-service-gmail/fetch-single-mail-gmail"
+next:
+  text: "Send Mail (Gmail)"
+  link: "/documentation/field-types/google-service-gmail/send-mail-gmail"
+---
 
-Comprehensive guide to Gmail search query syntax for filtering and finding emails.
+# Gmail API Search Queries {#gmail-api-search-queries}
 
-## Overview
+Comprehensive reference guide to Gmail search operators and syntax for filtering messages in automated workflows.
 
-Gmail search queries allow you to filter emails using powerful search operators. These queries can be used in the [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail) field type to retrieve specific emails based on various criteria.
+---
 
-## 📬 Common Gmail Query Examples
+## Overview {#overview}
 
-| Query | Meaning |
-|-------|---------|
-| `is:unread` | Shows only unread emails |
-| `is:read` | Shows only read emails |
-| `in:inbox` | Emails in Inbox |
-| `in:sent` | Sent emails |
-| `in:trash` | Emails in Trash |
-| `in:spam` | Spam emails |
-| `has:attachment` | Emails with attachments |
-| `larger:5m` | Emails larger than 5 MB |
-| `smaller:1m` | Emails smaller than 1 MB |
+Gmail queries allow you to isolate exact messages based on sender, subject, date, read status, and attachment attributes. These query expressions are configured in the **Search Query** parameter of [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail) and [Fetch Single Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-single-mail-gmail).
 
-## 📧 Sender / Receiver Filters
+---
 
-| Query | Meaning |
-|-------|---------|
-| `from:abc@gmail.com` | Emails from specific sender |
-| `to:me` | Emails sent directly to you |
-| `cc:me` | Emails where you're in CC |
-| `bcc:me` | Emails where you're in BCC |
+## Common Gmail Query Operators {#common-examples}
 
-## 🏷️ Label & Category Filters
+| Query | Function | Example |
+|---|---|---|
+| `is:unread` | Matches only unread messages. | `is:unread from:billing@service.com` |
+| `is:read` | Matches read messages. | `is:read subject:statement` |
+| `in:inbox` | Scopes search to the Inbox. | `in:inbox is:unread` |
+| `in:sent` | Scopes search to Sent mail. | `in:sent to:client@company.com` |
+| `in:trash` | Searches deleted items in Trash. | `in:trash` |
+| `in:spam` | Searches messages in Spam. | `in:spam` |
+| `has:attachment` | Matches messages containing files. | `has:attachment filename:pdf` |
+| `larger:5m` | Messages with total size over 5 megabytes. | `larger:5m` |
+| `smaller:1m` | Messages with total size under 1 megabyte. | `smaller:1m` |
 
-| Query | Meaning |
-|-------|---------|
-| `label:inbox` | Inbox label |
-| `label:unread` | Same as `is:unread` |
-| `label:important` | Marked important |
-| `category:primary` | Primary tab |
-| `category:social` | Social tab |
-| `category:promotions` | Promotions tab |
-| `category:updates` | Updates tab |
-| `category:forums` | Forums tab |
+---
 
-## ⏱️ Date / Time Filters
+## Sender & Recipient Filters {#sender-receiver-filters}
 
-| Query | Meaning |
-|-------|---------|
-| `newer_than:1d` | Emails newer than 1 day |
-| `older_than:7d` | Emails older than 7 days |
-| `after:2025/01/01` | Emails after a specific date |
-| `before:2025/01/31` | Emails before a specific date |
+| Operator | Syntax | Description |
+|---|---|---|
+| `from:` | `from:support@domain.com` | Matches emails from a specific sender address or domain. |
+| `to:` | `to:user@domain.com` | Matches emails sent directly to the specified recipient. |
+| `cc:` | `cc:manager@domain.com` | Matches emails where the address is CC'd. |
+| `bcc:` | `bcc:audit@domain.com` | Matches emails where the address is BCC'd. |
 
-**Time Units:**
-- `d` - days
-- `m` - months
-- `y` - years
+---
 
-**Examples:**
+## Label & Category Filters {#label-category-filters}
+
+| Operator | Target | Description |
+|---|---|---|
+| `label:` | `label:important`, `label:finance` | Scopes query to a specific system or user label. |
+| `category:primary` | Primary Inbox tab | Filters emails categorized as Primary by Gmail. |
+| `category:social` | Social tab | Notifications from social networks. |
+| `category:promotions` | Promotions tab | Marketing and commercial emails. |
+| `category:updates` | Updates tab | Receipts, statements, and bills. |
+| `category:forums` | Forums tab | Discussion boards and mailing lists. |
+
+---
+
+## Date & Time Filters {#date-time-filters}
+
+| Operator | Format | Description |
+|---|---|---|
+| `newer_than:` | `newer_than:1d`, `newer_than:2h` | Matches emails received within the last relative time window (`d` = days, `h` = hours, `m` = months). |
+| `older_than:` | `older_than:7d` | Matches emails older than the specified relative duration. |
+| `after:` | `after:2025/01/01` | Absolute date lower bound (YYYY/MM/DD). |
+| `before:` | `before:2025/12/31` | Absolute date upper bound (YYYY/MM/DD). |
+
+---
+
+## Attachment Filters {#attachment-filters}
+
+| Operator | Syntax | Description |
+|---|---|---|
+| `has:attachment` | `has:attachment` | Requires at least one attachment present. |
+| `filename:` | `filename:pdf`, `filename:invoice.pdf` | Matches specific file extensions or file names. |
+
+---
+
+## Content & Keyword Matching {#content-search}
+
+| Operator | Syntax | Description |
+|---|---|---|
+| `subject:` | `subject:"Verification Code"` | Matches exact subject line text when quoted. |
+| Exact phrase | `"account created"` | Matches the exact phrase anywhere in subject or body. |
+| Negation | `-from:spam.com` | Excludes matching messages using the `-` prefix. |
+
+---
+
+## Combining Operators {#combining-queries}
+
+Multiple operators can be chained with spaces (equivalent to logical `AND`) or grouped with `OR`:
+
+### Compound AND
+```text
+from:security@bank.com is:unread newer_than:1h
 ```
-newer_than:2d    (Last 2 days)
-older_than:1m    (Older than 1 month)
-newer_than:1y    (Last year)
+*Matches unread messages from `security@bank.com` received within the last hour.*
+
+### Compound OR
+```text
+from:(auth@service.com OR noreply@service.com) subject:OTP
 ```
+*Matches messages from either sender containing "OTP" in the subject.*
 
-## 🧵 Thread / Conversation Filters
+---
 
-| Query | Meaning |
-|-------|---------|
-| `is:unread is:important` | Unread & important |
-| `is:unread in:inbox` | Unread in Inbox |
-| `is:unread from:no-reply@wavespb.com` | Unread OTP mails from sender |
-| `is:unread subject:"OTP"` | Unread mails with "OTP" in subject |
+## Automation Best Practices {#automation-tips}
 
-## 🧪 OTP / Verification Use-Cases (Recommended)
+1. **Always Use `newer_than` for OTPs**: Add `newer_than:1h` or `newer_than:1d` to ensure past authentication emails are not returned.
+2. **Combine `is:unread` with Read Flagging**: Use `is:unread` alongside the **Remove UNREAD Label** setting in the field configuration to guarantee one-time processing.
+3. **Quote Multi-Word Phrases**: Wrap phrases in double quotes (`subject:"Your Security Code"`).
 
-| Use Case | Query |
-|----------|-------|
-| Latest unread OTP | `is:unread from:no-reply@wavespb.com` |
-| OTP in inbox only | `is:unread from:no-reply@wavespb.com in:inbox` |
-| OTP with keyword | `is:unread "verification code"` |
+---
 
-## Advanced Query Combinations
+## Related Documentation {#related}
 
-### Combining Multiple Conditions
-
-Use **AND** logic by separating conditions with spaces:
-
-```
-is:unread from:noreply@example.com subject:verification
-```
-
-Use **OR** logic with curly braces:
-
-```
-from:{abc@gmail.com def@gmail.com}
-subject:{OTP verification code}
-```
-
-### Negation (NOT)
-
-Use `-` (minus) to exclude results:
-
-```
--from:spam@example.com          (Exclude sender)
--subject:newsletter             (Exclude subject)
--has:attachment                 (Exclude attachments)
-```
-
-### Exact Phrase Matching
-
-Use quotes for exact phrase matching:
-
-```
-subject:"Your verification code"
-"password reset"
-```
-
-## Practical Examples
-
-### Example 1: Fetch Verification Emails
-
-```
-is:unread from:noreply@service.com subject:"verification code"
-```
-
-### Example 2: Recent Unread Emails with Attachments
-
-```
-is:unread has:attachment newer_than:1d
-```
-
-### Example 3: Important Emails from Specific Sender
-
-```
-from:boss@company.com is:important
-```
-
-### Example 4: Emails in Date Range
-
-```
-after:2024/01/01 before:2024/12/31
-```
-
-### Example 5: Large Attachments from Last Week
-
-```
-has:attachment larger:10m newer_than:7d
-```
-
-### Example 6: Unread Promotional Emails
-
-```
-is:unread category:promotions
-```
-
-### Example 7: Exclude Spam and Get Unread
-
-```
-is:unread -in:spam -in:trash
-```
-
-## Best Practices
-
-### ✅ Do's
-
-- **Be specific** - Use multiple filters to narrow down results
-- **Use date filters** - Limit search scope for better performance
-- **Test queries** - Verify queries in Gmail search before using in automation
-- **Use exact phrases** - Quote phrases for precise matching
-- **Combine conditions** - Use multiple operators for accurate results
-
-### ❌ Don'ts
-
-- **Don't use overly broad queries** - Avoid fetching too many emails
-- **Don't forget quotes** - Use quotes for multi-word phrases
-- **Don't ignore case sensitivity** - Gmail search is case-insensitive, but be consistent
-- **Don't overcomplicate** - Keep queries simple and readable
-
-## Common Use Cases
-
-### 1. Fetch OTP Codes
-
-```
-is:unread from:noreply@bank.com subject:OTP
-```
-
-### 2. Monitor Order Confirmations
-
-```
-is:unread subject:"order confirmation" newer_than:1d
-```
-
-### 3. Get Password Reset Emails
-
-```
-is:unread subject:"reset password" newer_than:1h
-```
-
-### 4. Fetch Invoices
-
-```
-has:attachment subject:invoice from:billing@company.com
-```
-
-### 5. Get Unread Important Emails
-
-```
-is:unread is:important in:inbox
-```
-
-## Troubleshooting
-
-### No Results Found
-
-**Solution:** Simplify your query and test each condition separately.
-
-### Too Many Results
-
-**Solution:** Add more specific filters like date range or sender.
-
-### Query Not Working
-
-**Solution:** Check for typos and ensure proper syntax (spaces, quotes, operators).
-
-### Special Characters Issues
-
-**Solution:** Use quotes around phrases containing special characters.
-
-## Related Documentation
-
-- [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
-- [Google Service - Gmail](/documentation/field-types/google-service-gmail)
-- [Gmail Search Operators](https://support.google.com/mail/answer/7190)
-- [Gmail API Documentation](https://developers.google.com/gmail/api)
+- <img src="/svg/chat.svg" class="doc-icon" /> [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
+- <img src="/svg/globe.svg" class="doc-icon" /> [Fetch Single Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-single-mail-gmail)
+- <img src="/svg/click.svg" class="doc-icon" /> [Send Mail (Gmail)](/documentation/field-types/google-service-gmail/send-mail-gmail)

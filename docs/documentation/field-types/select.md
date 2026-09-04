@@ -12,13 +12,13 @@ Select fields are used for single-selection dropdown menus in web forms, where u
 | **Field Type**           | Set to **Select** for dropdown elements | `Select`                              |
 | **Field Selector Type**  | Method to locate the field element      | `Selector`, `Id`, `XPath`             |
 | **Field Selector Query** | Unique address to locate the field      | `select[name="country"]`, `#category` |
-| **Field Value**          | Data source for option selection        | Excel column or default value         |
+| **Field Value**          | Data source for option selection        | Excel (.xlsx) column or default value |
 
 ## Select Field Settings
 
-### 📋 Match options as {#match-options-as}
+### Match options as {#match-options-as}
 
-Configure how dropdown options are identified and matched with Excel data.
+Configure how dropdown options are identified and matched with Excel (.xlsx) data.
 
 **Available Matching Strategies:**
 
@@ -52,7 +52,7 @@ Excel Column Value: "states" → Matches option containing "states" (search in a
 
 ---
 
-### ⏳ Wait until max options in the dropdown element {#wait-until-max-options-in-the-dropdown-element}
+### Wait until max options in the dropdown element {#wait-until-max-options-in-the-dropdown-element}
 
 Configure the system to wait until a minimum number of options are loaded in the dropdown.
 
@@ -76,7 +76,7 @@ Configure the system to wait until a minimum number of options are loaded in the
 
 ---
 
-### ✅ Wait until the dropdown option is selected {#wait-until-the-dropdown-option-is-selected}
+### Wait until the dropdown option is selected {#wait-until-the-dropdown-option-is-selected}
 
 Configure the system to wait until a specific option is successfully selected.
 
@@ -100,7 +100,7 @@ Configure the system to wait until a specific option is successfully selected.
 
 ---
 
-### 🔤 Convert the text into lowercase letters and then match the text {#convert-the-text-into-lowercase-letters-and-then-match-the-text}
+### Convert the text into lowercase letters and then match the text {#convert-the-text-into-lowercase-letters-and-then-match-the-text}
 
 Enable case-insensitive matching for dropdown options.
 
@@ -113,7 +113,7 @@ Enable case-insensitive matching for dropdown options.
 **Configuration:**
 
 - **Toggle Switch**: Enable/disable case-insensitive matching
-- **Text Processing**: Converts both Excel value and option text to lowercase
+- **Text Processing**: Converts both Excel (.xlsx) value and option text to lowercase
 - **Matching Logic**: Compares lowercase versions
 
 **Example Scenarios:**
@@ -126,7 +126,7 @@ Excel Column Value: "United States" → Matches "united states"
 
 ---
 
-### 🧹 Remove extra space from option text then match the text {#remove-extra-space-from-option-text-then-match-the-text}
+### Remove extra space from option text then match the text {#remove-extra-space-from-option-text-then-match-the-text}
 
 Normalize spacing in dropdown option text before matching.
 
@@ -152,7 +152,7 @@ Excel Column Value: " United States " → Matches "United States"
 
 ---
 
-### 🗑️ Remove all space from option text then match the text {#remove-all-space-from-option-text-then-match-the-text}
+### Remove all space from option text then match the text {#remove-all-space-from-option-text-then-match-the-text}
 
 Remove all spaces from dropdown option text before matching.
 
@@ -175,7 +175,7 @@ Excel Column Value: "UnitedStates" → Matches "United States"
 Excel Column Value: "UnitedStates" → Matches "United  States"
 Excel Column Value: "UnitedStates" → Matches "UnitedStates"
 ```
-## Excel Value Handling
+## Excel (.xlsx) Value Handling
 
 ### Text Matching
 
@@ -199,7 +199,7 @@ Excel Column Value: "UnitedStates" → Matches "UnitedStates"
 
 ### Option Not Found
 
-- Check Excel value format
+- Check Excel (.xlsx) value format
 - Verify case sensitivity settings
 - Test with different matching strategies
 - Check option text for extra spaces
@@ -227,7 +227,8 @@ Excel Column Value: "UnitedStates" → Matches "UnitedStates"
 
 ## Next Steps
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

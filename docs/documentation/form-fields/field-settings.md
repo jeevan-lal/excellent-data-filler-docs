@@ -1,540 +1,443 @@
-# Field Settings
+# Field Settings {#field-settings}
 
-Field Settings provide comprehensive configuration options for individual form fields. When you **edit** a field, a sidebar opens containing all the available settings for that specific field. Some settings are specific to particular [field types](/documentation/form-fields/field-types), while others are universal across all field types.
+Field Settings provide comprehensive configuration options for individual form fields. When you **edit** a field, a sidebar drawer opens displaying all available settings for that specific field. Some settings are tailored to particular [field types](/documentation/form-fields/field-types), while others apply across all field types.
 
-<img src="/image/field-settings-01.png" width="500" height="500" alt="Field Settings">
+---
 
-## Basic Field Settings
+## Basic Field Settings {#basic-field-settings}
 
-### ⌨️ Fill the values like a typing tutor {#fill-the-values-like-a-typing-tutor}
+### Simulate Human Typing Speed {#simulate-human-typing-speed}
 
-This setting enables **human-like typing** behavior in input fields, simulating a typing tutor with configurable typing speed.
+Enables **human-like typing** behavior in input fields, simulating realistic keystrokes with configurable typing speed.
 
-**Features:**
+- **Realistic Typing**: Mimics natural human typing cadence instead of instant value assignment.
+- **Speed Control**: Adjustable delay in milliseconds between keystrokes.
+- **Character-by-Character**: Types each character sequentially, triggering standard DOM keyboard events.
+- **Use Cases**: Bypassing anti-bot detection systems and testing client-side form validation rules.
 
-- **Realistic Typing** - Mimics human typing patterns
-- **Speed Control** - Adjustable typing speed (slow, medium, fast)
-- **Character-by-Character** - Types each character individually
-- **Natural Delays** - Includes realistic pauses between keystrokes
+> [!NOTE]
+> Formerly labeled as "Fill the values like a typing tutor". <a id="fill-the-values-like-a-typing-tutor"></a>
+
+---
+
+### Text editor mode {#text-editor-mode}
+
+A specialized simulation mode designed specifically for rich text editors (such as Quill, TinyMCE, CKEditor, CodeMirror, Slate, Draft.js, or custom `contenteditable` containers) and complex inputs that require fine-grained keystroke pacing and human pause behaviors.
+
+| Option | Default | Description |
+|---|---|---|
+| **Min Key Delay (ms)** | `50` | Minimum delay in milliseconds between consecutive key presses. |
+| **Max Key Delay (ms)** | `120` | Maximum delay in milliseconds between consecutive key presses. |
+| **Enable Random Pause** | Toggle (ON/OFF) | Enables occasional pauses while typing sentences, mirroring human thought pauses. |
+| **Pause Chance (0 to 1)** | `0.2` | Probability of triggering a pause between keystrokes (e.g., `0.2` = 20% probability). |
+| **Pause Min (ms)** | `300` | Minimum duration of a random pause in milliseconds. |
+| **Pause Max (ms)** | `600` | Maximum duration of a random pause in milliseconds. |
+| **Human Typing** | Toggle (ON/OFF) | Emits authentic keyboard dispatch cycles (`keydown`, `keypress`, `keyup`, `input`) for rich editor compatibility. |
 
 **Use Cases:**
-
-- Bypassing anti-bot detection
-- Creating more natural form interactions
-- Testing form validation with realistic input timing
-
----
-
-### 🧹 Before filling the value in the field, clear the value of the field {#before-filling-the-value-in-the-field-clear-the-value-of-the-field}
-
-Automatically clears existing field values before entering new data.
-
-**Purpose:**
-
-- **Clean Slate** - Ensures no residual data remains
-- **Data Integrity** - Prevents mixing old and new values
-- **Consistent Results** - Guarantees clean data entry
+- Populating WYSIWYG editors without losing character sequences or breaking rich text styling.
+- Simulating realistic typing cadences to avoid triggering aggressive bot heuristics.
+- Ensuring real-time word/character count listeners update accurately.
 
 ---
 
-### 🎯 If excel column value is empty then fill this default value {#if-excel-column-value-is-empty-then-fill-this-default-value}
+### Before filling the value in the field, clear the value of the field {#before-filling-the-value-in-the-field-clear-the-value-of-the-field}
 
-Sets a fallback value when the Excel column is empty or missing data.
+Automatically clears any existing or pre-populated field values before entering new data.
 
-**Configuration:**
-
-- **Default Value** - Specify the fallback value
-- **Visual Indicator** - Green edit button = default value set, Yellow = no default
-- **Site-wide Override** - Can be disabled globally in Site Settings
-
-**Visual Indicators:**
-
-- 🟢 **Green Edit Button** - Default value is configured
-- 🟡 **Yellow Edit Button** - No default value set
-
-<img src="/image/field-settings-02.png" width="" height="" alt="Field Default Value">
-
-**Removing Default Values:**
-
-1. **Individual Field** - Edit the field and disable default settings
-2. **Site-wide** - Enable `Ignore field default value` in Site Settings
-
-<img src="/image/site-settings-01.png" width="400" height="400" alt="Site Settings">
+- **Clean Slate**: Ensures no residual data or placeholder text remains in the input.
+- **Data Integrity**: Prevents concatenating new spreadsheet values onto existing text.
+- **Consistent Results**: Guarantees clean and predictable data entry across repeated runs.
 
 ---
 
-### 🔗 Take the value of this field from another excel column {#take-the-value-of-this-field-from-another-excel-column}
+### If excel column value is empty then fill this default value {#if-excel-column-value-is-empty-then-fill-this-default-value}
 
-Links field values to other Excel columns, eliminating data duplication.
+Sets a fallback value when the Excel column cell is empty or missing data.
 
-**Benefits:**
+- **Default Value**: Specify the fallback string, number, or predefined variable to enter.
+- **Visual Indicator**:
+  - Green Edit Button: Default value is active and configured.
+  - Yellow Edit Button: No fallback value configured.
+- **Site-Wide Override**: Can be disabled globally by toggling `Ignore field default value` in [Site Settings](/documentation/site/site-settings#site-configuration-toggles).
 
-- **Data Consistency** - Single source of truth for shared values
-- **Reduced Redundancy** - No need to duplicate data in Excel
-- **Easier Maintenance** - Update once, applies everywhere
-
-**Example:** If both "First Name" and "Full Name" fields need the same value, create one Excel column and reference it in both fields.
-
----
-
-## Data Processing Settings
-
-### 🔄 Replace the field value according to the custom values {#replace-the-field-value-according-to-the-custom-values}
-
-Transforms field values using custom mapping rules.
-
-**Configuration:**
-
-- **Field Value** - Original value from Excel
-- **Custom Value** - Replacement value to use
-- **Multiple Mappings** - Support for multiple value transformations
-
-**Example Mapping:**
-
-- `"Yes/Y"` → `"0"`
-- `"No/N"` → `"1"`
-
-<img src="/image/replace-field-value-01.png" width="400" height="400" alt="Replace Field Value">
-
-**Excel Template Integration:**
-Custom values appear in the `Field Custom Values` column in the `HELPING` sheet of the Excel template.
-
-<img src="/image/field-settings-03.png" width="600" height="600" alt="Field Custom Values">
+<img src="/image/field-settings-02.png" alt="Field Default Value" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-### 📋 Paste Copied Value {#paste-copied-value}
+### Take the value of this field from another excel column {#take-the-value-of-this-field-from-another-excel-column}
 
-Pastes values copied using the [Copy Field Type](/documentation/field-types/copy).
+Links the field's data value to a different Excel column in your `.xlsx` worksheet, eliminating duplicate columns.
 
-**Prerequisites:**
-
-- Must use Copy Field Type first
-- Text modification options available before pasting
-
-**Modification Options:**
-
-- **Text Transformations** - Case changes, trimming, formatting
-- **Custom Processing** - Apply custom text modifications
-- **Validation** - Ensure copied data meets requirements
-
-<img src="/image/field-settings-04.png" width="500" height="500" alt="Paste Settings">
+- **Data Consistency**: Maintain a single column in your spreadsheet (e.g., `Full Name`) and reference it across multiple form fields.
+- **Reduced Redundancy**: Avoid creating duplicate columns with identical data in your Excel file.
+- **Centralized Updates**: Changing the value in the master column automatically updates all dependent fields during execution.
 
 ---
 
-## Element Detection Settings
+## Data Processing Settings {#data-processing-settings}
 
-### 🔍 Wait until element is found in the page {#wait-until-element-is-found-in-the-page}
+### Replace the field value according to the custom values {#replace-the-field-value-according-to-the-custom-values}
 
-Prevents field action execution until the target element is located on the page.
+Transforms spreadsheet values into target form values using custom replacement mappings.
 
-**Use Cases:**
+- **Field Value**: The original value present in the Excel spreadsheet row.
+- **Custom Value**: The replacement value that will actually be filled into the web element.
+- **Multiple Mappings**: Supports defining multiple substitution pairs (e.g., `"Yes/Y"` → `"0"`, `"No/N"` → `"1"`).
 
-- **Dynamic Content** - Wait for AJAX-loaded elements
-- **Page Transitions** - Ensure elements are present before interaction
-- **Reliability** - Prevents errors from missing elements
+<img src="/image/replace-field-value-01.png" alt="Replace Field Value Configuration" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
 
----
+**Excel Template Integration**:
+Configured custom mappings automatically appear in the `Field Custom Values` reference column within the `HELPING` sheet of downloaded Excel templates.
 
-### 👁️ Wait until element is visible in the page {#wait-until-element-is-visible-in-the-page}
-
-Waits for elements to be both found and visible before proceeding.
-
-**Enhanced Detection:**
-
-- **Element Exists** - Element is present in DOM
-- **Element Visible** - Element is actually visible to users
-- **Interaction Ready** - Element is ready for user interaction
+<img src="/image/field-settings-03.png" alt="Field Custom Values in Helping Sheet" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-## JavaScript Event Settings
+### Paste Copied Value {#paste-copied-value}
 
-### ⚡ Trigger Javascript Event {#trigger-javascript-event}
+Pastes data previously captured using the [Copy Field Type](/documentation/field-types/copy).
 
-Executes JavaScript events when keyboard or mouse actions occur.
+- **Prerequisites**: A Copy Field must execute earlier in the form or routine.
+- **Text Transformations**: Apply casing adjustments, whitespace trimming, or substring operations prior to pasting.
+- **Custom Processing**: Modify the copied buffer dynamically using string functions.
 
-**Supported Events:**
-
-- **Keyboard Events** - keydown, keyup, keypress
-- **Mouse Events** - click, mousedown, mouseup
-- **Form Events** - focus, blur, change, submit
-
-**Configuration:**
-
-- **Event Type** - Select specific JavaScript event
-- **Element Targeting** - Apply to specific elements
-- **Event Parameters** - Customize event properties
-
-<img src="/image/field-settings-05.png" width="500" height="500" alt="JavaScript Events">
+<img src="/image/field-settings-04.png" alt="Paste Settings Configuration" style="max-width: 500px; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-### 🖱️ Trigger Javascript Mouse Event {#trigger-javascript-mouse-event}
+## Element & Detection Settings {#element-detection-settings}
 
-Specialized mouse event triggering for enhanced interaction simulation.
+### Selector Query of Element's Child Element {#selector-query-of-elements-child-element}
 
-**Mouse Events:**
+Specifies a secondary selector targeting a nested child element located inside the primary field element.
 
-- **Click Events** - Single, double, right-click
-- **Hover Events** - Mouse enter, leave, over
-- **Drag Events** - Drag start, drag end, drop
-
-<img src="/image/field-settings-06.png" width="500" height="500" alt="Mouse Events">
-
----
-
-## Conditional Logic Settings
-
-### ⏭️ Skip field action if any condition is true {#skip-field-action-if-any-condition-is-true}
-
-Skips field execution when specified conditions are met.
-
-**Condition Types:**
-
-- **Element Visibility** - Skip if element is visible/not visible
-- **Element Existence** - Skip if element exists/doesn't exist
-- **Value Matching** - Skip based on element values
-- **Text Matching** - Skip based on element text content
-- **Attribute Matching** - Skip based on element attributes
-- **HTML Matching** - Skip based on element HTML content
-- **Image Matching** - Skip based on image file names
-
-<img src="/image/field-settings-07.png" width="500" height="500" alt="Skip Conditions">
+- **How It Works**:
+  1. The extension locates the parent container using the field's primary CSS Selector or XPath.
+  2. It then evaluates the child query relative to that parent node (equivalent to `parent.querySelector(childSelector)`).
+- **Benefits**:
+  - **Component Frameworks**: Target a stable outer wrapper (e.g., `.custom-input-wrapper` or `#billing-address`) while directing input actions to an inner `<input>` or `[contenteditable]`.
+  - **Table Grids & Lists**: Target a specific row or cell container and dynamically locate the interactive button or input inside.
+  - **Shadow DOM / Web Components**: Bridges container boundaries when standard single selectors fail.
 
 ---
 
-### 🔄 Wait until the response status of the given element change fields comes {#wait-until-the-response-status-of-the-given-element-change-fields-comes}
+### Wait until element is found in the page {#wait-until-element-is-found-in-the-page}
 
-Waits for [Element Change](/documentation/field-types/element-change) field status before proceeding.
+Pauses automation until the target element is detected in the DOM.
 
-**Configuration:**
-
-- **Field Reference** - Specify Element Change field name
-- **Status Check** - Before Field or After Field status
-- **Conditional Proceeding** - Only proceeds when status is true
-
-<img src="/image/field-settings-11.png" alt="Element Change Wait">
+- **Dynamic Content**: Ideal for Single Page Applications (SPAs) and elements loaded via asynchronous fetch/XHR requests.
+- **Page Transitions**: Prevents execution errors caused by interacting before DOM nodes are mounted.
 
 ---
 
-### 📡 Wait until the response status of the given request monitor fields comes {#wait-until-the-response-status-of-the-given-request-monitor-fields-comes}
+### Wait until element is visible in the page {#wait-until-element-is-visible-in-the-page}
 
-Waits for [Request Monitor](/documentation/field-types/request-monitor) field status before proceeding.
+Waits until the target element is both present in the DOM and visibly rendered on screen.
 
-**Use Cases:**
-
-- **API Responses** - Wait for server responses
-- **Network Requests** - Monitor HTTP request completion
-- **Data Loading** - Ensure data is fully loaded
-
-<img src="/image/field-settings-12.png" alt="Request Monitor Wait">
+- **Visibility Criteria**: Ensures `display !== 'none'`, `visibility !== 'hidden'`, and element dimensions are greater than zero.
+- **Interaction Readiness**: Guarantees modal dialogs, flyout menus, and animations have finished rendering before attempting clicks or text input.
 
 ---
 
-### ✅ If element value matches then fill the value otherwise skip the field {#if-element-value-matches-then-fill-the-value-otherwise-skip-the-field}
+## JavaScript & Mouse Event Settings {#javascript-event-settings}
 
-Conditional field execution based on element value matching.
+### Trigger Javascript Event {#trigger-javascript-event}
 
-**Logic:**
+Dispatches native JavaScript events on the target element after data is filled.
 
-- **Value Match** - Execute field action if values match
-- **Value Mismatch** - Skip field if values don't match
-- **Empty Value Check** - Use `''` to check for empty values
+- **Supported Events**: `change`, `focus`, `blur`, `input`, `keydown`, `keyup`, `submit`.
+- **Framework Reactivity**: Forces modern reactive frameworks (React, Vue, Angular, Svelte) to recognize programmatic DOM updates and trigger state changes.
 
-<img src="/image/field-settings-08.png" width="500" height="500" alt="Value Matching">
-
-:::info
-To check for empty values, use `''` (empty string) in the configuration.
-:::
+<img src="/image/field-settings-05.png" alt="JavaScript Events Configuration" style="max-width: 500px; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-### 🚫 Skip field action if condition is true {#skip-field-action-if-condition-is-true}
+### Trigger Javascript Mouse Event {#trigger-javascript-mouse-event}
 
-Advanced conditional skipping with multiple condition types.
+Simulates specialized mouse interaction events on target elements.
 
-**Available Conditions:**
+- **Supported Mouse Events**: `click`, `mousedown`, `mouseup`, `mouseenter`, `mouseleave`, `mouseover`.
+- **Use Cases**: Useful for custom dropdowns, hover triggers, or custom button elements that rely strictly on mouse listener signatures.
 
-- **Element Visible** - Skip if element is visible
-- **Element Not Visible** - Skip if element is hidden
-- **Element Exists** - Skip if element exists in DOM
-- **Element Not Exists** - Skip if element is missing
-- **Element Value Matched** - Skip if element value matches
-- **Element Text Matched** - Skip if element text matches
-- **Element Attribute Matched** - Skip if element attribute matches
-- **Element HTML Matched** - Skip if element HTML matches
-- **Image File Name Matched** - Skip if image filename matches
-
-<img src="/image/field-settings-09.png" width="500" height="500" alt="Advanced Skip Conditions">
+<img src="/image/field-settings-06.png" alt="Mouse Events Configuration" style="max-width: 500px; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-### 🔍 Skip field action if given field value matches {#skip-field-action-if-given-field-value-matches}
+## Field Chaining Settings {#field-chaining-settings}
 
-Skips field execution when specific field values are present.
+### After filling the data of this field, filling the data of another field {#after-filling-the-data-of-this-field-filling-the-data-of-another-field}
 
-**Configuration:**
+Triggers immediate execution of a designated secondary field as soon as the current field operation finishes.
 
-- **Field Reference** - Specify which field to check
-- **Value List** - Values that trigger skipping
-- **Empty Value Handling** - Use `''` for blank/empty values
-
-**Example:** Skip field if "Does the Beneficiary have Aadhaar Card?" is "No/N"
-
-<img src="/image/skip-field-01.png" width="500" height="500" alt="Field Value Skip">
-
-:::info
-Use `''` to represent blank/empty values in the configuration.
-:::
-
-:::warning Note
-This option check field value according to excel sheet. if you are using variable or multiple values in single row then this option will not work.
-:::
+- **Direct Chaining**: Creates an explicit sequence between two fields, bypassing standard queue order.
+- **Cascading Dropdowns**: When selecting a parent category (e.g., Country) loads child options (e.g., State), chaining immediately executes the child field once the parent updates.
+- **Search & Select Sequences**: Execute a text search field and immediately trigger the corresponding option-selection field.
 
 ---
 
-### 🔍 Skip field action if field value matches {#skip-field-action-if-field-value-matches}
+## Conditional Logic Settings {#conditional-logic-settings}
 
-Skips field execution when specific field values are present.
+### Skip field action if any condition is true {#skip-field-action-if-any-condition-is-true}
 
-**Configuration Options:**
+Skips execution of the field when one or more configured conditions evaluate to true.
 
-- **Toggle Switch** - Enable/disable the skip field functionality
-- **Field Values** - Enter specific values that trigger field skipping
-  - Add multiple values by pressing Enter after each value
-- **Convert to lowercase** - Enable case-insensitive matching by converting text to lowercase before comparison
+- **Supported Condition Types**:
+  - Element Visibility (Visible / Not Visible)
+  - Element Existence (Exists in DOM / Does Not Exist)
+  - Value Matching (Element value matches specific string)
+  - Text Content Matching (Inner text matches specific criteria)
+  - Attribute Matching (DOM attribute matches value)
+  - HTML Matching (Inner HTML matches regex or string)
+  - Image Filename Matching (Image source name matches criteria)
 
-**Usage:**
-
-- When enabled, the field will be skipped if its current value matches any of the specified field values
-- The comparison can be case-sensitive or case-insensitive based on the lowercase conversion setting
-- Multiple values can be configured to trigger the skip action
-
-**Example:** Skip field if "Does the Beneficiary have Aadhaar Card?" is "No", "N", or any case variation
+<img src="/image/field-settings-07.png" alt="Skip Conditions Configuration" style="max-width: 500px; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-## Field Validation Settings
+### Wait until the response status of the given element change fields comes {#wait-until-the-response-status-of-the-given-element-change-fields-comes}
 
-### ⭐ Is this field Required {#is-this-field-required}
+Holds field execution until a specified [Element Change](/documentation/field-types/element-change) field resolves.
 
-Marks field as mandatory for form submission.
+- **Field Reference**: Select the designated Element Change field.
+- **Status Check**: Evaluates Before Field or After Field status conditions.
+- **Conditional Flow**: Only proceeds once the element change condition returns success.
 
-**Integration with Public Keys:**
-
-- **{FORM-FILLED} Key** - Only checks required fields
-- **Form Submission** - Prevents submission if required fields are empty
-- **Validation Logic** - Ensures all required fields are completed
+<img src="/image/field-settings-11.png" alt="Element Change Wait Configuration" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-## Response Action Settings
+### Wait until the response status of the given request monitor fields comes {#wait-until-the-response-status-of-the-given-request-monitor-fields-comes}
 
-### ✅ Field Success Response Action {#field-success-response-action}
+Waits for a network API request tracked by a [Request Monitor](/documentation/field-types/request-monitor) field to finish.
 
-Executes specific actions when field operation succeeds.
+- **API Synchronization**: Ensures asynchronous backend calculations or validation checks complete before filling subsequent inputs.
+- **Network Verification**: Eliminates race conditions on dynamic forms that perform background verification calls.
 
-**Configuration:**
-
-- **Action Selection** - Choose from available response actions
-- **Success Handling** - Define behavior on successful completion
-- **Workflow Control** - Control automation flow based on success
-
-[Field Response Action](/documentation/form-fields/field-response-action#field-success-response-action)
+<img src="/image/field-settings-12.png" alt="Request Monitor Wait Configuration" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-### ❌ Field Error Response Action {#field-error-response-action}
+### If element value matches then fill the value otherwise skip the field {#if-element-value-matches-then-fill-the-value-otherwise-skip-the-field}
 
-Handles field operation failures with custom actions.
+Conditionally executes the field action based on whether the current DOM value matches a target pattern.
 
-**Error Management:**
+- **Value Match**: Executes the field action if the element's existing value matches your criteria.
+- **Value Mismatch**: Skips the field if values do not match.
+- **Empty Check**: Use `''` (two single quotes) to specifically check for empty or unpopulated elements.
 
-- **Error Handling** - Define behavior on field failure
-- **Recovery Actions** - Attempt recovery or alternative actions
-- **Logging** - Record error details for debugging
-
-[Field Response Action](/documentation/form-fields/field-response-action#field-error-response-action)
+<img src="/image/field-settings-08.png" alt="Element Value Matching Configuration" style="max-width: 500px; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-### ⏭️ Field Skip Response Action {#field-skip-response-action}
+### Skip field action if condition is true {#skip-field-action-if-condition-is-true}
 
-Manages field skipping scenarios with appropriate actions.
+Evaluates multi-attribute rules on elements to skip field actions dynamically.
 
-**Skip Handling:**
+- **Element Visible / Not Visible**
+- **Element Exists / Not Exists**
+- **Element Value / Text Matched**
+- **Element Attribute / HTML Matched**
+- **Image File Name Matched**
 
-- **Skip Logic** - Define behavior when field is skipped
-- **Workflow Continuation** - Ensure automation continues smoothly
-- **Skip Tracking** - Monitor and log skipped fields
-
-[Field Skip Action](/documentation/form-fields/field-response-action#field-skip-response-action)
-
----
-
-## Automation Control Settings
-
-### 🛑 If error response is coming in the field then stop filler {#if-error-response-is-coming-in-the-field-then-stop-filler}
-
-Halts the entire automation process when field errors occur.
-
-**Use Cases:**
-
-- **Critical Fields** - Stop on essential field failures
-- **Error Prevention** - Prevent cascading errors
-- **Manual Intervention** - Allow manual error resolution
+<img src="/image/field-settings-09.png" alt="Advanced Skip Conditions" style="max-width: 500px; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-### ✅ If success response is coming in the field then stop filler {#if-success-response-is-coming-in-the-field-then-stop-filler}
+### Skip field action if given field value matches {#skip-field-action-if-given-field-value-matches}
 
-Stops automation after successful field completion.
+Checks the spreadsheet row value of a **different** field and skips this field if that value matches specified criteria.
 
-**Scenarios:**
+- **Field Reference**: Choose another field in the form to evaluate.
+- **Value List**: Comma-separated or line-separated values that trigger skipping.
+- **Example**: Skip the "Passport Number" field if the "Has Passport?" field is set to `"No"` or `"N"`.
 
-- **Single Operation** - Complete one task and stop
-- **Conditional Completion** - Stop based on specific success criteria
-- **Workflow Control** - Manage automation flow
+<img src="/image/skip-field-01.png" alt="Field Value Skip Configuration" style="max-width: 500px; border-radius: 8px; margin: 16px 0;" />
 
----
-
-## Advanced Settings
-
-### 🔍 Search Strings and Execute Field Action {#search-strings-and-execute-field-action}
-
-Executes field actions based on text search results.
-
-**Functionality:**
-
-- **Text Search** - Search for specific strings on the page
-- **Conditional Execution** - Execute actions based on search results
-- **Pattern Matching** - Use regex or exact matching
-
-More details in [Search Strings and Execute Field Action](/documentation/field-options/search-and-action)
+> [!WARNING]
+> This option evaluates values according to the Excel row data. If you are using dynamic variables or multiple values per row, configure individual field conditions instead.
 
 ---
 
-### 📊 Execute Action on fields like Row Type {#execute-action-on-fields-like-row-type}
+### Skip field action if field value matches {#skip-field-action-if-field-value-matches}
 
-Applies actions to multiple fields of the same type.
+Skips the field if **its own** assigned value matches any item in a configured value list.
 
-**Benefits:**
-
-- **Bulk Operations** - Apply settings to multiple similar fields
-- **Consistency** - Ensure uniform behavior across field types
-- **Efficiency** - Reduce configuration time
+- **Values List**: Define values that will cause this field to be skipped.
+- **Convert to Lowercase**: Enable case-insensitive comparison by normalizing strings to lowercase.
+- **Empty Value Handling**: Use `''` to skip the field if its value is blank or empty.
 
 ---
 
-### 🔄 If this field is being used in a loop and the field has multiple elements {#if-this-field-is-being-used-in-a-loop-and-the-field-has-multiple-elements}
+## Field Validation Settings {#field-validation-settings}
 
-Handles multiple elements in loop scenarios using index-based selection.
+### Is this field Required {#is-this-field-required}
 
-**Loop Integration:**
+Marks the field as mandatory for form completion.
 
-- **Index Selection** - Select specific element by loop index
-- **Multiple Elements** - Handle multiple matching elements
-- **Loop Context** - Work within loop iteration context
-
----
-
-### 🎨 Do not fill the Status Color, element of this field {#do-not-fill-the-status-color-element-of-this-field}
-
-Excludes field from status color updates.
-
-**Purpose:**
-
-- **Visual Control** - Prevent status color changes
-- **Custom Styling** - Maintain custom element appearance
-- **UI Consistency** - Keep specific elements unchanged
+- **Visual Badge**: Displays a red `Required` badge next to the field in the configuration table.
+- **Public Key Integration**: Evaluated by the `<code v-pre>{FORM-FILLED}</code>` key to verify that all mandatory fields contain data.
+- **Submission Safeguard**: Prevents premature form submission if mandatory fields fail to fill.
 
 ---
 
-### 📋 Ignore this field details in the Excel Template {#ignore-this-field-details-in-the-excel-template}
+## Response Action Settings {#response-action-settings}
 
-Excludes field from Excel template generation.
+Configure automated follow-up actions based on execution outcomes:
 
-**Use Cases:**
+### Field Success Response Action {#field-success-response-action}
 
-- **Internal Fields** - Hide fields not needed in Excel
-- **Temporary Fields** - Exclude test or temporary fields
-- **Template Cleanup** - Keep templates focused on essential data
+Executes a predefined action when this field completes successfully (e.g., clicking a submit button, executing a segment, or setting local data).
+
+See [Field Response Action Guide](/documentation/form-fields/field-response-action#field-success-response-action).
+
+### Field Error Response Action {#field-error-response-action}
+
+Executes fallback recovery routines if the field encounters an error (e.g., reloading the page or triggering alert notifications).
+
+See [Field Response Action Guide](/documentation/form-fields/field-response-action#field-error-response-action).
+
+### Field Skip Response Action {#field-skip-response-action}
+
+Executes specific fallback routines whenever this field is skipped by condition rules.
+
+See [Field Response Action Guide](/documentation/form-fields/field-response-action#field-skip-response-action).
 
 ---
 
-## Timing Settings
+## Automation Control Settings {#automation-control-settings}
 
-### ⏱️ Delay Time Before this field is Run {#delay-time-before-this-field-is-run}
+### If error response is coming in the field then stop filler {#if-error-response-is-coming-in-the-field-then-stop-filler}
 
-Adds delay before field execution (in milliseconds).
+Immediately stops form filling for the active site if this field triggers an error response.
 
-**Configuration:**
+- **Critical Fields**: Prevents cascading failures when a mandatory field (such as a captcha or account ID) fails.
+- **Safe Halting**: Halts execution cleanly so you can resolve the issue manually.
 
-- **Fixed Delay** - Set specific delay time
-- **Random Delay** - Use random delay for natural behavior
-- **Variable Delay** - Use variables for dynamic timing
+---
 
-**Random Delay Example:**
+### If success response is coming in the field then stop filler {#if-success-response-is-coming-in-the-field-then-stop-filler}
 
+Stops the automation process as soon as this field finishes successfully.
+
+- **Single-Action Automation**: Useful when a form only requires completing a single verification or query step.
+- **Stop on Milestone**: Safely halts automation after reaching a final confirmation step.
+
+---
+
+## Advanced Settings {#advanced-settings}
+
+### Search Strings and Execute Field Action {#search-strings-and-execute-field-action}
+
+Scans the web page for target strings or regex patterns and triggers field execution when found.
+
+- **Text Search**: Locates specific status messages, validation banners, or text tokens.
+- **Pattern Matching**: Supports exact matching and regular expressions.
+
+Learn more in [Search Strings and Execute Field Action](/documentation/field-options/search-and-action).
+
+---
+
+### Execute Action on fields like Row Type {#execute-action-on-fields-like-row-type}
+
+Applies bulk field operations across multiple fields configured with the same row structure.
+
+- **Bulk Consistency**: Ensures uniform timing and event handling across tabular inputs.
+- **Fast Configuration**: Reduces repetitive manual configuration for grid-based forms.
+
+---
+
+### If this field is being used in a loop and the field has multiple elements {#if-this-field-is-being-used-in-a-loop-and-the-field-has-multiple-elements}
+
+Manages multiple matching DOM elements when executed inside automated loops.
+
+- **Index Targeting**: Binds the target element index to the active loop counter (`index`).
+- **Dynamic Element Collections**: Reliably populates repeating table rows, dynamic lists, or repeated field sets.
+
+---
+
+### Do not fill the Status Color, element of this field {#do-not-fill-the-status-color-element-of-this-field}
+
+Disables the visual status outline and background highlight normally added to elements by the extension upon completion.
+
+- **Visual Preservation**: Maintains original element styling and border presentation.
+- **Screenshot Readiness**: Prevents green/yellow status outlines from appearing in form captures.
+
+---
+
+### Ignore this field details in the Excel Template {#ignore-this-field-details-in-the-excel-template}
+
+Excludes this field from generated `.xlsx` templates downloaded via the **Excel Template** tab.
+
+- **Static Fields**: Keep button clicks, triggers, and static fields out of data spreadsheets.
+- **Cleaner Templates**: Generates `.xlsx` files containing only the actual input columns required for data entry.
+
+---
+
+## Timing & Position Settings {#timing-position-settings}
+
+### Delay Time Before this field is Run {#delay-time-before-this-field-is-run}
+
+Specifies a waiting delay (in milliseconds) before the extension interacts with this field.
+
+- **Fixed Delay**: Enter a numerical timeout in milliseconds (e.g., `500`).
+- **Dynamic / Randomized Delay**: Use randomized template variables wrapped in double curly braces:
+
+:::v-pre
+```text
+{{random.integer[500][1500]}}
 ```
-// Random delay between 1-2 seconds
+:::
+
+---
+
+### Delay Time After this field is Run {#delay-time-after-this-field-is-run}
+
+Specifies a waiting delay (in milliseconds) after the field action finishes before moving to the next field.
+
+- **Asynchronous Processing**: Gives web applications time to process client-side calculations, trigger animations, or update dependent controls.
+- **Dynamic / Randomized Delay**:
+
+:::v-pre
+```text
 {{random.integer[1000][2000]}}
 ```
+:::
 
 ---
 
-### ⏱️ Delay Time After this field is Run {#delay-time-after-this-field-is-run}
+### Position of Field {#position-of-field}
 
-Adds delay after field execution (in milliseconds).
+Configures the execution priority and ordering position of the field within the form runner.
 
-**Benefits:**
-
-- **Page Loading** - Allow time for page updates
-- **Animation Completion** - Wait for UI animations
-- **Natural Behavior** - Simulate human-like pauses
-
-**Random Delay Example:**
-
-```
-// Random delay between 1-2 seconds
-{{random.integer[1000][2000]}}
-```
+- **Select Position of Field**: Choose the field's position to place it earlier or later in the execution sequence without recreating the field.
+- **Sequence Management**: Ensures prerequisite fields (such as agreement checkboxes or authentication triggers) execute in the required order.
 
 ---
 
-## Specialized Settings
+## Specialized Settings {#specialized-settings}
 
-### 🚫 If Form is ASPX then Remove Input Behavior {#if-form-is-aspx-then-remove-input-behavior}
+### If form is ASPX, remove the input behavior {#if-form-is-aspx-then-remove-input-behavior}
 
-Removes element behavior in ASPX forms for compatibility.
+Special compatibility mode for ASP.NET (`.aspx`) web forms.
 
-**Purpose:**
+- **ASP.NET PostBack Handling**: Removes intrusive browser input behaviors and default change event handling that can cause premature form postbacks or page resets.
+- **Compatibility Assurance**: Ensures smooth and reliable data entry on legacy enterprise ASPX systems.
 
-- **ASPX Compatibility** - Handle ASP.NET form behaviors
-- **Element Control** - Override default form behaviors
-- **Cross-Platform** - Ensure consistent behavior across form types
+---
 
-## Best Practices
+## Best Practices {#best-practices}
 
-### 🎯 Configuration Tips {#configuration-tips}
+1. **Test Dynamic Delays**: Use realistic before/after delays for AJAX and SPA applications to avoid race conditions.
+2. **Leverage Text Editor Mode**: For rich text boxes or WYSIWYG editors, enable **Text editor mode** with random pauses for optimal compatibility.
+3. **Use Child Selectors for Nested UI**: When targeting inputs inside modern web components or tables, use **Selector Query of Element's Child Element**.
+4. **Clean Excel Templates**: Enable **Ignore this field details in the Excel Template** for click triggers and navigation fields.
 
-1. **Test Settings** - Always test field settings with sample data
-2. **Use Defaults Wisely** - Set appropriate default values for reliability
-3. **Conditional Logic** - Use skip conditions to handle edge cases
-4. **Timing Considerations** - Add appropriate delays for dynamic content
-5. **Error Handling** - Configure proper error response actions
-
-### 🔧 Troubleshooting {#troubleshooting}
-
-1. **Element Detection** - Use wait settings for dynamic content
-2. **Value Matching** - Check exact value formats in conditions
-3. **Timing Issues** - Adjust delay settings for slow-loading content
-4. **Error Responses** - Monitor field response actions for debugging
+---
 
 ## Next Steps {#next-steps}
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/database.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) - Explore supported field types
+- <img src="/svg/click.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) - Configure success and error behaviors
+- <img src="/svg/code.svg" class="doc-icon" /> [Variables Reference](/documentation/variable) - Use dynamic random and time variables
+- <img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) - Configure site-wide defaults and overrides

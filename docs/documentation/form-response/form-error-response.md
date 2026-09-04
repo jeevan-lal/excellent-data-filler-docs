@@ -20,13 +20,13 @@ When It matches with given error response, entry will be marked as **Entry Saved
 
 | Option                                                       | Description                                                                                                                                                                                                                       |
 | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| If excel data is not found then don't execute the action     | Even if there is no data in Excel, the [action](#action) is still executing, then you can turn it off with this option.                                                                                                           |
-| If last excel entry completed then don't execute the action  | If the last entry of excel has been saved and you do not want the [action](#action) not to be executed after the last entry, then you can do it by turning on this option.                                                        |
-| If there is no Excel data, update only scraper data in Excel | If you are [scraping data](/documentation/form-fields/field-types#scraper-data) from the site and you are not using Excel template in the extension, then the data being scraped from that option will be saved in the extension. |
+| If excel data is not found then don't execute the action     | Even if there is no data in Excel (.xlsx), the [action](#action) is still executing, then you can turn it off with this option.                                                                                                           |
+| If last excel entry completed then don't execute the action  | If the last entry of Excel (.xlsx) has been saved and you do not want the [action](#action) not to be executed after the last entry, then you can do it by turning on this option.                                                        |
+| If there is no Excel data, update only scraper data in Excel | If you are [scraping data](/documentation/form-fields/field-types#scraper-data) from the site and you are not using Excel (.xlsx) template in the extension, then the data being scraped from that option will be saved in the extension. |
 | Can error message be anything in this element                | If the error message of the entry is always changing then using this option matches **any type of message** in the given element.                                                                                                 |
-| Remove excel column value from current entry?                | If you fetch large data but don't need it in Excel, enable this option to remove the column value from the current entry after processing.                                                                                        |
-| Set custom message after error message matched?              | If your error message is large, you can set a custom short message to store in Excel instead of the full error message.                                                                                                           |
-| Do not update the Excel data; simply execute the action      | When enabled, the extension will execute the specified [action](#action) when the error response matches, but **will not update the Excel data**. This is useful when you want to perform an action without completing the entry. |
+| Remove excel column value from current entry?                | If you fetch large data but don't need it in Excel (.xlsx), enable this option to remove the column value from the current entry after processing.                                                                                        |
+| Set custom message after error message matched?              | If your error message is large, you can set a custom short message to store in Excel (.xlsx) instead of the full error message.                                                                                                           |
+| Do not update the Excel data; simply execute the action      | When enabled, the extension will execute the specified [action](#action) when the error response matches, but **will not update the Excel (.xlsx) data**. This is useful when you want to perform an action without completing the entry. |
 
 
 ## Error Page URL
@@ -111,7 +111,7 @@ If any error message is present in the page **before** submitting the form, then
 
 ::: details How to fill dynamic error message?
 
-If server response is dynamic or changes every time or It has some data from any column from excel, then you can use variable like this.
+If server response is dynamic or changes every time or It has some data from any column from Excel (.xlsx), then you can use variable like this.
 
 <img src="/image/entry-response-11.png" alt="Entry Response">
 
@@ -140,3 +140,11 @@ If the given [Error Response Type](#error-response-type) matches, then this acti
 - Click on Button
 - Page Reload
 - Execute Segment
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Form Success Response](/documentation/form-response/form-success-response)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+- <img src="/svg/browser.svg" class="doc-icon" /> [Logs Management](/documentation/logs)
+

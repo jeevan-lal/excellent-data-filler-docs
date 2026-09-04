@@ -7,134 +7,125 @@ next:
   link: "/documentation/site/site-settings"
 ---
 
-# Site
+# Site {#site}
 
-A **Site** is the top-level container in Excellent Data Filler that represents a website or web application where you want to automate data entry tasks. It serves as an organizational unit that groups multiple related forms together under a single project.
+A **Site** is the top-level container in Excellent Data Filler representing a web application or domain where you want to automate workflows. It acts as the central hub grouping together all related **Site Forms**, **Segments**, **Excel Data Templates**, **Scraper Results**, and **Site Settings**.
 
-## Overview
+---
 
-Sites act as the foundation of your automation projects, providing:
+## Overview {#overview}
 
-- **🏢 Project Organization** - Group related forms and workflows together
-- **⚙️ Centralized Management** - Manage all forms for a website in one place
-- **🔄 Workflow Management** - Coordinate complex multi-form processes
+Sites serve as the foundational root of your automation projects:
 
-## Site Management Interface
+- **Project Organization**: Keeps forms, fields, and routines grouped under a dedicated domain profile.
+- **Centralized Control**: Manage site-wide environment variables, column mappings, and backup configurations in one location.
+- **Multi-Page Coordination**: Link multiple sequential forms and segments together using the unique Site ID.
 
-The site management interface provides a comprehensive view of all your automation projects:
+---
 
-<img src="/image/site-01.png" alt="Site Management Interface">
+## Site Management Dashboard {#site-management-dashboard}
 
-## Creating a Site
+The site management interface provides a dashboard of all registered sites:
 
-There are two primary methods to create a new site in Excellent Data Filler:
+<img src="/image/site-01.png" alt="Site Management Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
-### Method 1: Right-Click Context Menu (Recommended)
+Each site card displays its title, description, active status toggle, and quick-action buttons to access forms, settings, and templates.
 
-This is the fastest and most intuitive way to create a site:
+---
 
-1. **Navigate to Target Website** - Open the website where you want to automate forms
-2. **Right-Click on Form** - Right-click anywhere on the form you want to automate
-3. **Select "Insert Site"** - Choose the "Insert Site" option from the context menu
-4. **Auto-Detection** - The extension will automatically detect the form and create a site
-5. **Configuration** - Configure the site settings as needed
+## Insert Site {#insert-site}
 
-**Advantages:**
+There are two primary methods to register a new site in Excellent Data Filler:
 
-- ✅ Automatic form detection
-- ✅ Pre-configured with current page URL
-- ✅ Faster setup process
-- ✅ Context-aware configuration
+### Method 1: Context Menu & Keyboard Shortcut (Recommended)
+
+The quickest way to register a site while browsing:
+
+1. **Navigate to the Target Page**: Open the target website in your browser.
+2. **Trigger Site Registration**:
+   - Press the keyboard shortcut <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>, or
+   - Right-click anywhere on the page and select **Insert Site** from the context menu.
+3. **Automatic Configuration**: The extension automatically captures the current page URL, creates the root site record, and registers the initial form page schema.
+4. **Configure Settings**: Open the extension popup to customize field mappings and timing delays.
+
+> **Tip:** If a web page blocks right-clicking, ensure **Allow Right Click?** is turned ON in [Extension Settings](/documentation/settings#advanced-options), or use the keyboard shortcut <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>.
 
 ### Method 2: Manual Site Creation
 
-For more control or when working with multiple sites:
+If you prefer to create a site manually before navigating to the target website:
 
-1. **Open Extension Options** - Click on the extension icon and select "Options"
-2. **Click "Insert a new Site"** - Find and click the "Insert a new Site" button
-3. **Enter Site Details** - Fill in the required information:
-   - **Site Title** - A descriptive name for your site
-   - **Site Description** - Optional details about the site's purpose
-4. **Configure Settings** - Set up site-specific configurations
-5. **Save** - Click the "Save" button to create the site
-6. **DONE** 🎉
+1. Open the extension popup and navigate to the **Sites** dashboard.
+2. Click the **Insert a new Site** button (`+`).
+3. Fill in the site details:
+   - **Site Title**: A descriptive name identifying the project (e.g., `Customer Registration Portal`).
+   - **Site Description**: Optional notes about the site's purpose and forms.
+   - **Active Status**: Enable or disable execution for this site.
+4. Click **Save** to create the site container.
 
-<img src="/image/insert-site-manually-01.png" alt="Manual Site Creation Interface">
+<img src="/image/insert-site-manually-01.png" alt="Manual Site Creation Interface" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
 
-| Setting              | Description                     | Required |
-| -------------------- | ------------------------------- | -------- |
-| **Site Title**       | Descriptive name for the site   | ✅ Yes   |
-| **Site Description** | Optional details about the site | ✅ Yes   |
-| **Active Status**    | Enable/disable the site         | ✅ Yes   |
+| Field | Required | Description |
+|---|---|---|
+| **Site Title** | Yes | Descriptive project name (up to 100 characters). |
+| **Site Description** | No | Optional notes explaining the automation goal. |
+| **Active Status** | Yes | Toggle switch to activate or pause the site. |
 
-## Site Management Features
+---
 
-### 🎛️ Site Controls
+## Site Management Controls {#site-controls}
 
-#### Site Title
+Each site entry in the dashboard provides management actions:
 
-- **Purpose** - Identifies the site in your project list
-- **Best Practice** - Use descriptive names like "Company Contact Forms" or "E-commerce Checkout"
-- **Character Limit** - Maximum 100 characters recommended
+### Site Title & Description
 
-#### Site Description
+- **Site Title**: Identifies the project across extension views and export files.
+- **Site Description**: Provides context for team members or future reference.
 
-- **Purpose** - Provides additional context about the site's purpose
+### Active / Inactive Toggle
 
-#### Site Active/Deactivate
+- **Status Toggle**: Quickly enable or pause automation for the entire site without deleting any forms, fields, or templates.
 
-- **Toggle Control** - Enable or disable the entire site
-- **Use Cases**:
-  - Temporarily pause automation
+### Edit Site
 
-#### Edit Site
+- Opens the site workspace, containing tabs for:
+  - **Site Pages (Forms)**: Manage target URLs and page-level automation.
+  - **Segments**: Build on-demand, reusable field routines.
+  - **Excel Template**: Download/upload `.xlsx` batch data and sync Google Sheets.
+  - **Site Settings**: Toggle execution flags, define site environment variables, and export backup files.
+  - **Scraper Data**: Inspect and export extracted page data.
 
-- **Modify Settings** - Update site configuration
-- **Change Details** - Update title, description, and other settings
-- **Insert Site Form** - Insert a site form
+### Duplicate Site
 
-#### Duplicate Site
+- Creates an instant clone of the site, including all configured forms, segments, fields, and timing rules. Useful for staging vs. production environments.
 
-- **Create Copy** - Duplicate an existing site with all its forms
+### Copy Site ID
 
-#### Copy Site ID
+- Copies the unique internal alphanumeric ID for this site to your clipboard.
+- **Use Case**: When browsing to subsequent pages of a multi-step form, press <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> (or select **Insert Form** from the context menu) and paste the Site ID to link the new page to this site.
 
-- **Unique Identifier** - Copy the site's unique ID
-- **Use Cases**:
-  - Insert a site form using site id with extension context menu option `Insert Form`
+### Delete Site
 
-#### Delete Site
+- Permanently removes the site container and all associated forms, segments, and field configurations.
+- **Recommendation**: Export a site backup via [Site Settings](/documentation/site/site-settings#export-site-data) before performing permanent deletions.
 
-- **Permanent Removal** - Delete the site and all associated data
-- **⚠️ Warning** - This action cannot be undone
-- **Backup Recommended** - Export data before deletion
+---
 
-## Troubleshooting
+## Troubleshooting {#troubleshooting}
 
-### ❌ Site Creation Problems
+### Site Not Created from Context Menu
 
-**Issue:** Site not created after right-clicking
-**Solution:**
+- **Extension Disabled**: Verify that the extension is toggled **ON** in the browser toolbar.
+- **Restricted Pages**: Browser extensions cannot execute on internal pages (such as `chrome://` or `edge://`) or web store listings.
+- **Right-Click Blocked**: If the page prevents context menus via JavaScript, use the shortcut <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> or enable **Allow Right Click?** in [Settings](/documentation/settings#advanced-options).
+- **Diagnostics**: Check the built-in [Logs](/documentation/logs) dashboard for execution details.
 
-- Ensure the extension is properly installed and enabled
-- Check if the website allows right-click context menus
-- Try the manual creation method instead
-- Reload site then try again
+---
 
 ## Next Steps
 
-Once you've created your site, continue with:
+<img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure execution toggles, site environment variables, and exports  
+<img src="/svg/form.svg" class="doc-icon" /> [Insert Site Form](/documentation/form/form#insert-site-form) — Add form pages and URL matching rules  
+<img src="/svg/system.svg" class="doc-icon" /> [Segments](/documentation/segment) — Build on-demand, reusable field routines  
+<img src="/svg/code.svg" class="doc-icon" /> [Form Fields Configuration](/documentation/form-fields/field#insert-field) — Set up individual form field selectors  
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel Template Management](/documentation/site/site-excel-template) — Download and upload `.xlsx` spreadsheets  
 
-- [Site Settings](/documentation/site/site-settings) - Configure advanced site options
-- [Insert Site Form](/documentation/form/form#insert-site-form) - Add forms to your site
-- [Form Fields Configuration](/documentation/form-fields/field#insert-field) - Set up individual form fields
-- [Field Types Guide](/documentation/form-fields/field-types) - Learn about different field types
-
-## Support and Help
-
-If you encounter issues with site management:
-
-- Check the [Log](/documentation/log) for detailed error information
-- Review [Site Settings](/documentation/site/site-settings) for configuration help
-- Visit our [Support Channels](/documentation/#need-help) for community assistance
-- Report issues on our [GitHub Repository](https://github.com/jeevan-lal/excellent-data-filler-docs/issues)

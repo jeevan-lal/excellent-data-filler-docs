@@ -14,24 +14,24 @@ Radio fields are used for single-selection options in web forms, where users can
 | **Field Type**           | Set to **Radio** for radio button groups | `Radio`                            |
 | **Field Selector Type**  | Method to locate the field element       | `Selector`, `Id`, `XPath`          |
 | **Field Selector Query** | Unique address to locate the field       | `input[name="gender"]`, `#payment` |
-| **Field Value**          | Data source for radio selection          | Excel column or default value      |
+| **Field Value**          | Data source for radio selection          | Excel (.xlsx) column or default value |
 
 ## Radio Field Settings
 
-### 📻 Radio Selection Behavior
+### Radio Selection Behavior {#radio-selection-behavior}
 
-Configure how radio buttons are selected based on Excel data values.
+Configure how radio buttons are selected based on Excel (.xlsx) data values.
 
 **Core Behavior:**
 
-- **Excel Value Priority** - Radio selection depends on Excel column value
+- **Excel Value Priority** - Radio selection depends on Excel (.xlsx) column value
 - **Single Selection** - Only one radio button can be selected at a time
 - **Value Matching** - Radio button is selected when its value matches Excel data
 
 **Configuration:**
 
 - **Toggle Switch**: Enable/disable radio button selection
-- **Excel Value Check**: System matches Excel column value with radio button values
+- **Excel Value Check**: System matches Excel (.xlsx) column value with radio button values
 - **Selection Action**: Radio button is selected when value matches
 
 **Example Scenarios:**
@@ -45,7 +45,7 @@ Excel Column Value: "other" → Radio button with value "other" gets selected
 
 ---
 
-### 🏷️ Set the attribute name of the field's value {#set-the-attribute-name-of-the-fields-value}
+### Set the attribute name of the field's value {#set-the-attribute-name-of-the-fields-value}
 
 Configure which HTML attribute contains the radio button's value.
 
@@ -79,7 +79,7 @@ Custom: label="Option 1"
 
 ---
 
-### ⏳ Element Detection Settings {#element-detection-settings}
+### Element Detection Settings {#element-detection-settings}
 
 Configure how the extension waits for and interacts with radio button elements.
 
@@ -95,7 +95,7 @@ Configure how the extension waits for and interacts with radio button elements.
 - **Use Case**: Hidden radio buttons, CSS visibility controls
 - **Configuration**: Toggle ON/OFF
 
-### ⚡ Trigger Javascript Event {#javascript-event-triggering}
+### Trigger Javascript Event {#javascript-event-triggering}
 
 Configure JavaScript events to be triggered on the radio button element.
 
@@ -104,7 +104,7 @@ Configure JavaScript events to be triggered on the radio button element.
 - **click** - Triggers when radio button is clicked
 - **focus** - Triggers when radio button receives focus
 
-## Excel Value Handling
+## Excel (.xlsx) Value Handling
 
 ### Selection Values
 
@@ -165,7 +165,7 @@ Configure JavaScript events to be triggered on the radio button element.
 - Check selector accuracy
 - Verify element visibility
 - Test with different selectors
-- Check Excel value format
+- Check Excel (.xlsx) value format
 
 ### Custom Attribute Issues
 
@@ -190,7 +190,8 @@ Configure JavaScript events to be triggered on the radio button element.
 
 ## Next Steps
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

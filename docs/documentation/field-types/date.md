@@ -12,18 +12,18 @@ Date fields are specialized input fields designed for date and time data entry i
 | **Field Type**           | Set to **Date** for date input fields | `Date`                                    |
 | **Field Selector Type**  | Method to locate the field element    | `Selector`, `Id`, `XPath`                 |
 | **Field Selector Query** | Unique address to locate the field    | `#datePicker`, `input[type="date"]`       |
-| **Field Value**          | Data source for field content         | Excel column or default value             |
+| **Field Value**          | Data source for field content         | Excel (.xlsx) column or default value     |
 
 ## Date Field Settings
 
-### 📅 Convert Date Format {#convert-date-format}
+### Convert Date Format {#convert-date-format}
 
 Transform date values between different formats to match the target form's requirements.
 
 **Configuration:**
 
 - **Toggle Switch**: Enable/disable date format conversion
-- **Source Format**: Input date format from Excel data
+- **Source Format**: Input date format from Excel (.xlsx) data
   - Common formats: `DD-MM-YYYY`, `MM/DD/YYYY`, `YYYY-MM-DD`
   - Custom formats supported
 - **Target Format**: Output date format for the form field
@@ -40,20 +40,20 @@ Result: "2023-12-25"
 
 ---
 
-### 🧹 Before filling the value in the field, clear the value of the field {#before-filling-the-value-in-the-field-clear-the-value-of-the-field}
+### Before filling the value in the field, clear the value of the field {#before-filling-the-value-in-the-field-clear-the-value-of-the-field}
 
 Automatically clears existing field values before entering new date data.
 
 **Configuration:**
 
 - **Toggle Switch**: Enable/disable field clearing
-- **Empty Value Field**: Specify what to fill when Excel data is not found
+- **Empty Value Field**: Specify what to fill when Excel (.xlsx) data is not found
 
 ---
 
-### 📋 If excel column value is empty then fill this default value {#if-excel-column-value-is-empty-then-fill-this-default-value}
+### If excel column value is empty then fill this default value {#if-excel-column-value-is-empty-then-fill-this-default-value}
 
-Set fallback date values when Excel column data is not available.
+Set fallback date values when Excel (.xlsx) column data is not available.
 
 **Configuration:**
 
@@ -62,7 +62,7 @@ Set fallback date values when Excel column data is not available.
 
 ---
 
-### ⏳ Element Detection Settings {#element-detection-settings}
+### Element Detection Settings {#element-detection-settings}
 
 Configure how the extension waits for and interacts with date form elements.
 
@@ -78,7 +78,7 @@ Configure how the extension waits for and interacts with date form elements.
 - **Use Case**: Hidden date fields, CSS visibility controls
 - **Configuration**: Toggle ON/OFF
 
-### ⚡ Trigger Javascript Event {#javascript-event-triggering}
+### Trigger Javascript Event {#javascript-event-triggering}
 
 Configure JavaScript events to be triggered on the date field element.
 
@@ -116,13 +116,13 @@ Configure JavaScript events to be triggered on the date field element.
 - Verify source and target format patterns
 - Check for locale-specific date formats
 - Test with sample data
-- Ensure Excel date column format consistency
+- Ensure Excel (.xlsx) date column format consistency
 
 ## Best Practices
 
 ### Date Format Conversion
 
-1. **Consistent Source Format**: Ensure Excel data uses consistent date format
+1. **Consistent Source Format**: Ensure Excel (.xlsx) data uses consistent date format
 2. **Target Format Matching**: Match target format to form field requirements
 3. **Validation**: Test date conversion with various date values
 4. **Error Handling**: Set appropriate default values for invalid dates
@@ -135,7 +135,8 @@ Configure JavaScript events to be triggered on the date field element.
 
 ## Next Steps
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

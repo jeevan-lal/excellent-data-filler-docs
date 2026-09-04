@@ -1,61 +1,106 @@
 # Material Single Select
 
-This field type is designed for handling `dropdown` elements in web applications, particularly focusing on `search` and `selection` functionalities. The options provided allow for fine-tuning the behavior of the dropdown interaction, ensuring accurate and efficient selection of options.
+The **Material Single Select** field type is designed to handle modern, custom dropdown and combobox components in web applications (such as **Vuetify, Material-UI (MUI), React-Select, Angular Material, PrimeNG, Chosen, and Kendo UI**).
 
-![img](image/image-1.png)
+Unlike native HTML `<select>` tags, modern material UI frameworks render dropdowns using custom DOM structures (`<div>`, `<ul>`, `<li>`, `<span>`) with dynamic search inputs and animations. This field type provides automated search, option matching, and selection handling for single-choice dropdowns.
 
-## Options
+<img src="/image/image-1.png" alt="Material Single Select Options" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
 
-| Options                                                                      | Description                                                                                                                                                                                   |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Match options as](#match-options-as)                                        | How the field value should be `matched` with the dropdown options.                                                                                                                            |
-| [External Library Name](#external-library-name)                              | If you know that an external library is used in the dropdown then select that library. If the library name is not there then select [Other Material Library](#other-material-library) option. |
-| Want until max options in the dropdown element                               | Wait until the maximum number of options are available in the dropdown before proceeding.                                                                                                     |
-| Convert the text into lowercase letters and then match the text              | Convert the text to lowercase before matching it with the dropdown options.                                                                                                                   |
-| Remove extra space from option text then match the text                      | Remove any extra spaces from the option text before matching.                                                                                                                                 |
-| Remove all space from option text then match the text                        | Remove all spaces from the option text before matching.                                                                                                                                       |
-| Waiting time after dropdown is open                                          | Sets the waiting time (in milliseconds) after the dropdown is opened before any action is taken.                                                                                              |
-| If this field is to select text after the search                             | Indicates whether the field is used to select text after performing a search within the dropdown.                                                                                             |
-| Before selecting the dropdown option, check that option is already selected? | Specifies whether the field should check if the option is already selected before attempting to select it again.                                                                              |
-| Before selecting the dropdown option, uncheck the already selected options   | Determines whether the field should uncheck any already selected options before selecting the new one.                                                                                        |
-| Trigger event on dropdown matched option                                     | Specifies whether an event should be triggered when the matched option is found in the dropdown.                                                                                              |
-| Trigger event for open dropdown option list                                  | Specifies whether an event should be triggered for opening the dropdown option list.                                                                                                          |
-| After choosing the dropdown option, don't close the dropdown                 | Specifies whether the dropdown should remain open after selecting an option.                                                                                                                  |
+---
 
-## Match options as
+## Field Options
 
-This option gives the matching options available to select text based on various criteria.
+| Option | Description |
+|---|---|
+| [**Match options as**](#match-options-as) | Determines how the field value is compared against dropdown option labels (**Equal to Name**, **Search Name in Any Position**, or **Match Name from Start-End Position**). |
+| [**External Library Name**](#external-library-name) | Select a pre-configured library preset (e.g., MUI, React Select, Chosen). If the library is not listed, select [Other Material Library](#other-material-library). |
+| **Wait until max options in the dropdown element** | Waits for all dropdown option elements to finish rendering in the DOM before attempting to match. |
+| **Convert the text into lowercase letters and then match the text** | Converts both the target value and dropdown option text to lowercase for case-insensitive matching. |
+| **Remove extra space from option text then match the text** | Normalizes multiple consecutive spaces into a single space before comparison. |
+| **Remove all space from option text then match the text** | Strips all spaces from option text before comparison (useful for formatted or padded items). |
+| **Waiting time after dropdown is open** | Sets a delay (in milliseconds) after the dropdown opens to allow animations or asynchronous options to load. |
+| [**If this field is to select text after the search**](#search-and-select) | Enables search-and-select workflow: types the search query into the combobox input first, then selects the matching item from the filtered list. |
+| **Before selecting the dropdown option, check that option is already selected?** | Verifies whether the option is already selected before attempting a click, preventing unwanted toggle-offs. |
+| **Before selecting the dropdown option, uncheck the already selected options** | Unselects any currently selected option before choosing the new one. |
+| **Trigger event on dropdown matched option** | Dispatches standard DOM events (such as `click` or `change`) on the matched option element. |
+| **Trigger event for open dropdown option list** | Dispatches required mouse events to trigger the dropdown menu to open. |
+| **After choosing the dropdown option, don't close the dropdown** | Keeps the dropdown popup open after selection (useful for chained form interactions). |
 
-| Options                                | Description                                                                 | Example                                                                                       |
-| -------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| **Equal to Name**                      | Select an option that exactly matches the provided field value.             | Select the option only if it matches the field value `exactly`.                               |
-| **Search Name in Any Position**        | Search for the provided field value at any position within the option text. | Select the option if the field value appears `anywhere` in the option text.                   |
-| **Match Name from Start-End Position** | Field value to match the option text entirely, from start to end.           | Select the option only if the field value matches the entire option text from `start to end`. |
+---
 
-## External Library Name
+## Match Options as {#match-options-as}
 
-Specifies the name of the external library used for handling dropdown interactions. If the library name is not there then select [Other Material Library](#other-material-library) option.
+Defines the text comparison strategy used to identify the target option:
 
-#### Other Material Library
+| Matching Strategy | Description | Example Behavior |
+|---|---|---|
+| **Equal to Name** | Exact match only. | Value `"Sales"` matches `"Sales"` but not `"Sales Department"`. |
+| **Search Name in Any Position** | Substring match anywhere in the label. | Value `"Sales"` matches `"International Sales Team"`. |
+| **Match Name from Start-End Position** | Matches the entire text from start to end, ignoring minor punctuation. | Strict full-string comparison across the entire option element. |
 
-If you select the `Other Material Library` option, you'll need to define the following values, with `Dropdown Options List Query` being **essential**:
+---
 
-| Options                         | Description                                                                                                 |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **Dropdown Options List Query** | Specifies the query selector for the elements that represent the selection `options` within the `dropdown`. |
-| Dropdown Open Element Query     | Defines the query selector for the element that triggers the opening of the dropdown.                       |
-| Dropdown Close Element Query    | Specifies the query selector for the element that triggers the closing of the dropdown.                     |
-| Selected Value Element Query    | Specifies the query selector for the element that displays the currently selected value.                    |
+## Search and Select (Select Text After Search) {#search-and-select}
 
-## Other Material Libraries
+Many modern dropdowns (like autocomplete comboboxes or searchable select fields) require users to **type a query first** before the desired option appears in the list.
 
-::: details MUI Autocomplete
-Dropdown options list selector query is `ul > li.MuiAutocomplete-option` for [MUI Autocomplete](https://mui.com/material-ui/react-autocomplete/).
+### How It Works
+
+When **"If this field is to select text after the search"** is enabled:
+
+1. **Target the Search Input**: Set the field's **Field Selector Query** to the dropdown's `<input>` element (e.g. `input[role="combobox"]` or `.select-search-input`).
+2. **Enter Field Value**: Provide the search keyword (from your `.xlsx` Excel column or default value).
+3. **Automated Search Execution**:
+   - The extension clicks the input element and types the search text character-by-character.
+   - It triggers necessary `input` and `keyup` events to activate autocomplete filtering.
+4. **Automated Selection**:
+   - Once the options list updates, the extension searches the rendered options for the matching text according to your [Match options as](#match-options-as) rule.
+   - It clicks the matched option to complete the selection.
+
+### Example Configuration
+
+- **Field Type**: `Material Single Select`
+- **Field Selector Query**: `input.MuiAutocomplete-input`
+- **Field Value**: `California`
+- **If this field is to select text after the search**: `ON`
+- **Dropdown Options List Query**: `ul.MuiAutocomplete-listbox > li`
+
+---
+
+## External Library Name {#external-library-name}
+
+The extension includes built-in driver presets for popular JavaScript UI frameworks:
+
+- **Material-UI (MUI)**
+- **React-Select**
+- **Chosen**
+- **Vuetify**
+- **PrimeNG**
+- **Kendo UI**
+- **ng-multiselect-dropdown**
+
+### Other Material Library {#other-material-library}
+
+If your web page uses a custom dropdown component or an unlisted library, select **Other Material Library** and configure the selector queries:
+
+| Query Field | Required | Description | Example |
+|---|---|---|---|
+| **Dropdown Options List Query** | **Yes** | CSS selector targeting the option elements in the opened menu. | `ul.dropdown-menu > li[role="option"]` |
+| **Dropdown Open Element Query** | No | CSS selector for the button or trigger icon that opens the menu. | `.dropdown-arrow-icon`, `.select-trigger` |
+| **Dropdown Close Element Query** | No | Selector for closing the dropdown menu if needed. | `.modal-backdrop`, `.close-btn` |
+| **Selected Value Element Query** | No | Selector that displays the currently selected label. | `.selected-value-text` |
+
+---
+
+## Library Setup Snippets {#library-setup-snippets}
+
+::: details MUI Autocomplete {open}
+- **Dropdown Options List Query**: `ul > li.MuiAutocomplete-option`
+- Library reference: [MUI Autocomplete Documentation](https://mui.com/material-ui/react-autocomplete/)
 :::
 
-::: details MUI Select
-
-- How to open [MUI Select](https://mui.com/material-ui/react-select/) dropdown options.
+::: details MUI Select {open}
+- **How to open MUI Select via JavaScript event:**
   ```js
   let event = new MouseEvent("mousedown", {
     view: window,
@@ -64,36 +109,22 @@ Dropdown options list selector query is `ul > li.MuiAutocomplete-option` for [MU
   });
   document.querySelector("input").parentNode.querySelector("div").dispatchEvent(event);
   ```
-- Dropdown options list selector query is `ul.MuiMenu-list > li[role="option"]`
-  ```js
-  // For choice dropdown option
-  document.querySelector("div.MuiSelect-select").dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
-  ```
-- Close already opened options selector query `div.MuiModal-root[role='presentation'] > div`
-  :::
-
-::: details React Select
-Dropdown options list selector query is `div[class*='-menu'] div[class*='-option']` for [React Select](https://react-select.com/home).
-
-- Use field [javascript event](/documentation/form-fields/field-settings#trigger-javascript-event) `['mousedown', 'click', 'mouseup']` for open dropdown options and this is selector query `div[class*='-indicatorContainer']`
-  :::
-
-::: details Chosen Dropdown
-Use field [javascript mouse event](/documentation/form-fields/field-settings#trigger-javascript-mouse-event) `['mouseup']` for [Chosen Dropdown](https://harvesthq.github.io/chosen/).
+- **Dropdown Options List Query**: `ul.MuiMenu-list > li[role="option"]`
+- **Close already opened options query**: `div.MuiModal-root[role='presentation'] > div`
 :::
 
-:::warning NOTE
-If you are using a `kendo-ui` dropdown, do not use the field's [javascript event](/documentation/form-fields/field-settings#trigger-javascript-event) option.
+::: details React Select {open}
+- **Dropdown Options List Query**: `div[class*='-menu'] div[class*='-option']`
+- **Open Dropdown**: Use field [JavaScript Event](/documentation/form-fields/field-settings#trigger-javascript-event) `['mousedown', 'click', 'mouseup']` on selector `div[class*='-indicatorContainer']`.
+- Library reference: [React Select Documentation](https://react-select.com/home)
 :::
 
-## Supported Libraries
+::: details Chosen Dropdown {open}
+- Use field [JavaScript Mouse Event](/documentation/form-fields/field-settings#trigger-javascript-mouse-event) `['mouseup']`.
+- Library reference: [Chosen Documentation](https://harvesthq.github.io/chosen/)
+:::
 
-- https://mui.com/
-- https://mui.com/material-ui/react-select/
-- https://react-select.com/home
-- https://harvesthq.github.io/chosen/
-- https://primeng.org
-- https://harvesthq.github.io/chosen/
-- https://react-select.com/home
-- kendo-ui
-- ng-multiselect-dropdown
+::: warning Note on Kendo UI {open}
+When automating **Kendo UI** dropdowns, do not enable the field's [JavaScript Event](/documentation/form-fields/field-settings#trigger-javascript-event) option, as Kendo UI handles its own synthetic event listeners.
+:::
+

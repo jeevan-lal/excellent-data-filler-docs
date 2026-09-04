@@ -1,67 +1,70 @@
 # Local Server {#local-server}
 
-The Local Server feature allows the extension to communicate with a locally hosted server to perform advanced automation tasks, such as email operations and local data processing. 
+The **Local Server** feature allows the Excellent Data Filler extension to communicate with a companion server application hosted locally on your machine. This unlocks advanced automation capabilities that require system-level or network-level operations, such as automated email dispatching, IMAP inbox verification, and secure local file processing.
 
-To configure the server connection to extension, see the [Extension Server Settings](/documentation/settings#extension-server) page.
+To configure the server connection inside the extension, see the [Extension Server Settings](/documentation/settings#extension-server) reference.
 
-![Server Image](image/image.png)
+<img src="/image/local-server-dashboard.png" alt="Local Server Dashboard" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
-## 📥 Installation {#installation}
+---
 
-Follow these steps to set up and run the Local Server on your machine.
+## Installation {#installation}
+
+Follow these steps to set up and launch the Local Server:
 
 ### Download
 
-| Platform | Download Link | Version |
-|----------|---------------|---------|
-| **Windows** | [Download EDF Server](/edf-server-v1.0.0.zip) | v1.0.0 |
+| Platform | Package | Version |
+|---|---|---|
+| **Windows** | [Download EDF Server (.zip)](/edf-server-v1.0.0.zip) | v1.0.0 |
 
 ### How to Run
 
-1.  **Download**: Click the link above to download the `edf-server-v1.0.0.zip` file.
-2.  **Extract**: Right-click the downloaded zip file and select **Extract All...** to unzip the contents.
-3.  **Run**: Open the extracted folder and double-click the `edf-server.exe` program.
-4.  **Command Window**: A CMD (Command Prompt) window will open, indicating the server is running.
-5.  **Browser Access**: The server interface will automatically open in your default browser at [http://127.0.0.10:8080/](http://127.0.0.10:8080/).
+1. **Download**: Click the download link above to obtain `edf-server-v1.0.0.zip`.
+2. **Extract**: Right-click the downloaded zip archive and select **Extract All...** to unpack the files.
+3. **Run Executable**: Open the extracted folder and double-click `edf-server.exe`.
+4. **Command Window**: A console window will open, indicating that the server process is active.
+5. **Browser Interface**: The server web dashboard will launch automatically at [http://127.0.0.10:8080/](http://127.0.0.10:8080/).
 
-### API Configuration
+### API Authorization Configuration
 
-To enable communication between the extension and the local server, you must configure the API settings:
+To establish an authenticated bridge between the browser extension and your local server:
 
-1.  **Open API Settings**: Navigate to the server's API settings page: [http://127.0.0.10:8080/settings/api](http://127.0.0.10:8080/settings/api).
-2.  **Enable Public API**: Ensure the **Public API** toggle is turned **ON** to allow the extension to access the server.
-3.  **API Authorization**: In the **API Authorization** section, you will see the key `X-API-Token`.
-4.  **Copy Value**: Click the copy icon next to the **Value** field to copy your authorization token.
-5.  **Configure Extension**: Open the extension's **[Settings](/documentation/settings#extension-server)** page, navigate to the **Extension Server** section, and paste the token into the **X-API-Token** field.
+1. **Open API Settings**: Navigate to the server's API settings page: [http://127.0.0.10:8080/settings/api](http://127.0.0.10:8080/settings/api).
+2. **Enable Public API**: Toggle the **Public API** switch to **ON**.
+3. **Copy Token**: In the **API Authorization** section, locate the `X-API-Token` value and click the copy icon.
+4. **Configure Extension**: Open the extension's [Settings](/documentation/settings#extension-server), locate the **Extension Server** section, and paste the token into the **X-API-Token** field.
 
-:::info
-Keep the CMD window open while using the extension's local server features. Closing the window will stop the server.
+:::tip Keep Server Running
+Keep the command prompt window open while using local server automation features. Closing the console terminates the server process.
 :::
 
-## 🖥️ Server Interface {#server-interface}
+---
 
-The Local Server dashboard provides several tools to manage your automation environment.
+## Server Interface {#server-interface}
 
-- **Dashboard**: View overall server status, uptime, and active connections.
-- **[Mail Accounts](./mail-accounts)**: Add and configure the email accounts that the extension will interact with.
-- **API Settings**: Manage API Authorization tokens and toggle public API access.
-- **Audit Logs**: Review a detailed history of all requests and actions performed by the server for debugging and security monitoring.
+The Local Server web portal provides several management utilities:
 
-## 🚀 Where to Use {#where-to-use}
+- **Dashboard**: Monitor real-time server status, uptime, and active extension connections.
+- **[Mail Accounts](/documentation/local-server/mail-accounts)**: Register and configure IMAP/SMTP email accounts for automation workflows.
+- **API Settings**: Manage API authorization keys and toggle extension access.
+- **Audit Logs**: Inspect a detailed chronological log of all incoming requests and operations.
 
-The Local Server is utilized by specific field types that require system-level or network-level access for automation tasks.
+---
 
-Currently, the following field types depend on the Local Server:
-- **[Get Mail from Local Server](/documentation/field-types/local-server/get-mail-from-local-server)**
-- **[Send Mail from Local Server](/documentation/field-types/local-server/send-mail-from-local-server)**
+## Where to Use {#where-to-use}
 
-For a complete overview of all available field types, visit the **[Local Server Field Types](/documentation/form-fields/field-types#local-server)** section.
+The Local Server is utilized by automation fields that require background network or OS access:
 
+- **[Get Mail from Local Server](/documentation/field-types/local-server/get-mail-from-local-server)**: Automatically retrieve emails or verification codes via IMAP.
+- **[Send Mail from Local Server](/documentation/field-types/local-server/send-mail-from-local-server)**: Dispatch emails automatically via SMTP.
 
-## 🔒 Security Considerations {#security-considerations}
+For a summary of all server-assisted fields, visit the [Local Server Field Types](/documentation/form-fields/field-types#local-server) catalog.
 
-Your privacy and data security are our top priorities. 
+---
 
-- **Local Processing**: All data processed by the Local Server stays on your machine.
-- **No Data Collection**: We do not collect, store, or transmit any of your data to external servers. 
-- **Privacy First**: The server operates entirely within your local environment, ensuring that sensitive information like email content or automation data never leaves your computer.
+## Security Considerations {#security-considerations}
+
+- **Local Execution**: All communications between the extension and the server occur strictly over `localhost` (`127.0.0.10`).
+- **No Cloud Transmission**: Account credentials and automated payloads are never sent to external servers or third-party clouds.
+- **Token Protection**: Extension requests are authenticated using your unique local `X-API-Token`.

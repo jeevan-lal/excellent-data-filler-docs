@@ -1,217 +1,103 @@
-# Scraping Page URL
+---
+prev:
+  text: "Scraping Data"
+  link: "/documentation/field-types/scraper-data/scraping-data"
+next:
+  text: "Scraper Data Dashboard"
+  link: "/documentation/site/site-scraper-data"
+---
 
-Extract the current page URL and store it in your Excel file.
+# Scraping Page URL {#scraping-page-url}
 
-## Overview
+Capture the active web page URL dynamically during automation and log it to your Excel (`.xlsx`) report or state variables.
 
-The Scraping Page URL field type allows you to capture the current web page's URL. This is useful for tracking which pages were visited, logging navigation paths, or using the URL in subsequent automation steps.
+---
 
-## Configuration Options
+## Overview {#overview}
+
+The **Scraping Page URL** field type records the full web address (`window.location.href`) of the active browser tab. This is useful for auditing form transitions, recording redirection confirmation addresses with transaction tokens, tracking multi-page workflows, and capturing final landing URLs.
+
+---
+
+## Configuration Options {#configuration-options}
 
 | Option | Description | Required |
-|--------|-------------|----------|
-| **Field Default Value** | Optional default URL value | No |
-| **Are you using custom javascript function for return field responses?** | Enable custom JavaScript to modify the scraped URL | No |
+|---|---|---|
+| **Field Default Value** | Optional fallback URL. If left blank, captures the active page URL automatically. | No |
+| **Are you using custom javascript function for return field responses?** | Intercepts and transforms the captured URL before committing. | No |
 
 ---
 
-## How It Works
+## How It Works {#how-it-works}
 
-The Scraping Page URL field type has smart logic for determining what URL to capture:
-
-1. **If field value is undefined or empty**: Scrapes the current page URL
-2. **If field value is defined**: Uses the defined default value instead
-
-This allows you to either dynamically capture the current URL or use a predefined URL value.
+The field evaluates URL values using the following logic:
+1. **Empty / Undefined Default Value**: Automatically reads the live browser address (`https://domain.com/path?param=val#hash`).
+2. **Specified Default Value**: Overrides dynamic detection with a fixed string or pre-computed template variable.
 
 ---
 
-## URL Components
+## Custom JavaScript URL Transformation {#custom-javascript}
 
-When scraping the page URL, you get the complete URL including:
+Modify or filter URL parameters using a custom JavaScript interceptor:
 
-- **Protocol**: `https://` or `http://`
-- **Domain**: `example.com`
-- **Path**: `/products/item-123`
-- **Query Parameters**: `?id=456&category=electronics`
-- **Hash/Fragment**: `#section-2`
+1. Add a **JavaScript Code** field positioned directly **above** this field.
+2. Enable **Are you using custom javascript function for return field responses?**.
+3. Register the event listener:
 
-**Example Full URL:**
-```
-https://example.com/products/item-123?id=456&category=electronics#section-2
-```
-
----
-
-## Usage Examples
-
-### Example 1: Capture Current Page URL
-
-```
-Field Type: Scraping Page URL
-Field Name: pageURL
-Default Value: (empty)
-```
-
-**Current Page:** `https://formfiller.ctechhindi.in/example/form.php`
-
-**Result:** Stores `https://formfiller.ctechhindi.in/example/form.php` in Excel column `pageURL`
-
----
-
-### Example 2: Use Predefined URL
-
-```
-Field Type: Scraping Page URL
-Field Name: targetURL
-Default Value: https://example.com/default-page
-```
-
-**Result:** Stores `https://example.com/default-page` in Excel column `targetURL` (ignores current page URL)
-
----
-
-### Example 3: Track Navigation Path
-
-**Workflow:**
-1. **Field 1** - Scraping Page URL (Start Page)
-2. **Field 2** - Click Button to Navigate
-3. **Field 3** - Scraping Page URL (End Page)
-
-**Result:** Track the before and after URLs to verify navigation worked correctly.
-
----
-
-### Example 4: Dynamic URL with Variables
-
-```
-Field Type: Scraping Page URL
-Field Name: currentURL
-Default Value: {$baseURL$}/page
-```
-
-**Excel Column `baseURL`:** `https://example.com`
-
-**Result:** Stores `https://example.com/page` in Excel column `currentURL`
-
----
-
-### Example 5: Custom JavaScript Function to Modify URL
-
-You can use a custom JavaScript function to modify the fetched URL before it's stored.
-
-**Setup:**
-1. Add a **JavaScript Code** field type **above** the Scraping Page URL field
-2. Enable the option: **"Are you using custom javascript function for return field responses?"** in the Scraping Page URL field
-3. Use the field listener to modify the URL
-
-**JavaScript Code:**
-```js
+```javascript
 $fns.field.listener('EDF-FIELD-SCRAPING-PAGE-URL', (output, callback) => {
-  console.log("REQUEST:", output);
+  console.log('Raw URL:', output.response);
 
-  // Use custom actions - Example: Convert URL to uppercase
-  let newText = output.response.toUpperCase();
+  // Example: Extract clean path without query parameters
+  const urlObj = new URL(output.response);
+  const cleanPath = urlObj.origin + urlObj.pathname;
 
-  // Return modified data
-  callback({ status: true, message: "DONE", data: newText });
-  // Or return error: callback({ status: false, message: "ERROR" });
+  // Return cleaned URL
+  callback({ status: true, message: 'DONE', data: cleanPath });
 });
 
-$fns.return("1");
+$fns.return('1');
 ```
 
-**Current Page:** `https://example.com/page`
-
-**Result:** Stores `HTTPS://EXAMPLE.COM/PAGE` in Excel column
-
-**Use Cases:**
-- Normalize URLs (convert to lowercase/uppercase)
-- Extract specific URL components
-- Add tracking parameters
-- Transform URL format
-- Validate URL patterns
-
 ---
 
-## Use Cases
+## Practical Examples {#examples}
 
-### Navigation Tracking
-Record which pages were visited during form filling for audit trails or debugging.
+### Example 1: Capture Active Page Address
 
-### URL Verification
-Verify that navigation to the correct page occurred before proceeding with form filling.
-
-### Dynamic URL Capture
-Capture URLs with dynamic parameters (like session IDs or tracking codes) for later reference.
-
-### Multi-Page Forms
-Track progress through multi-page forms by recording the URL at each step.
-
-### Error Logging
-Store the URL where an error occurred to help with troubleshooting and debugging.
-
-### Success Confirmation
-Capture the final URL after form submission to confirm successful completion.
-
----
-
-## Storing URL Data
-
-The scraped URL is automatically stored in your Excel file in the column that matches the field name.
-
-**Example:**
-- **Field Name:** `submissionURL`
-- **Excel Column:** `submissionURL`
-- **Stored Value:** `https://example.com/success?id=12345`
-
----
-
-## Using Scraped URLs
-
-You can reference the scraped URL in subsequent fields using variables:
-
+```text
+Field Type: Scraping Page URL
+Field Name: FinalPageURL
+Default Value: (empty)
 ```
-{$pageURL$}
+*Stores the current URL (e.g., `https://portal.service.com/dashboard/confirmed`) directly into the `FinalPageURL` column.*
+
+### Example 2: Dynamic Template URL with Base Variable
+
+```text
+Field Type: Scraping Page URL
+Field Name: TargetAuditURL
+Default Value: {$BaseDomain$}/orders/archive
 ```
 
-**Example Use Cases:**
-- Compare URLs to verify navigation
-- Extract URL parameters using string manipulation
-- Log URLs for reporting purposes
-- Use URLs in API requests or custom JavaScript
+---
+
+## Related System Variables {#related-variables}
+
+You can also reference individual URL components directly in other fields using built-in system variables:
+
+| Variable | Output Description | Example Value |
+|---|---|---|
+| `{$location.href$}` | Full URL address | `https://example.com/checkout?step=2` |
+| `{$location.hostname$}` | Domain hostname | `example.com` |
+| `{$location.pathname$}` | URL path segment | `/checkout` |
+| `{$location.search$}` | Query parameters | `?step=2` |
 
 ---
 
-## Tips
+## Related Documentation {#related}
 
-:::tip Automatic vs Manual URL
-Leave the default value empty to automatically capture the current page URL. Only set a default value if you want to override the automatic behavior.
-:::
-
-:::info URL Components
-If you need specific parts of the URL (like just the hostname or pathname), consider using [variables](/documentation/variable) like `{$location.hostname$}` or `{$location.pathname$}` instead.
-:::
-
-:::warning Dynamic URLs
-Be aware that some websites use dynamic URLs with session tokens or timestamps. These URLs may change on each visit.
-:::
-
----
-
-## Related Field Types
-
-- [Scraping Data](/documentation/field-types/scraper-data/scraping-data) - Extract data from page elements
-- [URL Matching](/documentation/field-types/url-matching) - Match and validate URL patterns
-- [URL Open](/documentation/field-types/url-open) - Navigate to specific URLs
-
----
-
-## Related Variables
-
-- `{$location.href$}` - Current page URL
-- `{$location.hostname$}` - Domain name only
-- `{$location.pathname$}` - Path portion only
-- `{$location.search$}` - Query parameters only
-
-See [Variables Documentation](/documentation/variable) for more details.
+- <img src="/svg/excel.svg" class="doc-icon" /> [Scraper Data Management Dashboard](/documentation/site/site-scraper-data)
+- <img src="/svg/database.svg" class="doc-icon" /> [Scraping Data Field](/documentation/field-types/scraper-data/scraping-data)
+- <img src="/svg/code.svg" class="doc-icon" /> [Variables Reference](/documentation/variable)
+- <img src="/svg/browser.svg" class="doc-icon" /> [URL Matching Field](/documentation/field-types/url-matching)

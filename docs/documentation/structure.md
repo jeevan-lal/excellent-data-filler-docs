@@ -7,138 +7,144 @@ next:
   link: "/documentation/site/site"
 ---
 
+<script setup>
+import StructureAnimation from '../components/StructureAnimation.vue'
+</script>
+
 # Structure
 
-Understanding the structure of Excellent Data Filler is essential for effective automation. The extension follows a hierarchical organization that allows you to manage complex data entry workflows efficiently.
+Understanding the architecture of Excellent Data Filler is essential for building robust automation workflows. The extension follows a modular, hierarchical structure that allows you to manage everything from simple single-page forms to complex multi-step enterprise workflows.
 
-## Overview
+---
 
-Excellent Data Filler organizes your automation projects in a structured hierarchy:
+## Overview {#overview}
 
-```
-📁 Site
-├── 📄 Site Form (URL)
-│   ├── 🔧 Form Fields
-│   ├── ⚙️ Form Settings
-│   └── 📊 Response Actions
-├── 📋 Excel Templates
-└── 🔄 Automation Workflows
-```
+Excellent Data Filler organizes your automation workspace into a clear hierarchical tree:
 
-## Core Components
+<StructureAnimation />
 
-### 🏢 Site
+---
 
-A **Site** is the top-level container that represents a website or web application where you want to automate data entry tasks.
+## Core Components {#core-components}
+
+### Site {#site}
+
+A **Site** is the top-level container that represents a target website or web application where you want to automate tasks.
 
 **Key Characteristics:**
 
-- **Container for Forms** - Groups multiple related forms together
-- **Site-wide Settings** - Configure global settings that apply to all forms
-- **Permission Management** - Control access and permissions for the entire site
-- **Organization** - Helps organize automation projects by website or application
+- **Container for Forms & Segments**: Groups multiple related forms and on-demand workflows under a common domain.
+- **Site-Wide Settings**: Configure 10 granular execution toggles, delays, and behavior rules that apply to all forms within the site.
+- **Environment Variables**: Define site-scoped variables (`{$variable_name$}`) that dynamically inject values into field selectors or URLs.
+- **Data Source Management**: Manages uploaded `.xlsx` spreadsheet rows and Google Sheets synchronization.
 
-**Example Use Cases:**
+<img src="/image/site-01.png" alt="Site Management Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
-- E-commerce websites (Amazon, eBay, Shopify stores)
-- Survey platforms (Google Forms, SurveyMonkey)
-- Registration systems (Eventbrite, Meetup)
-- CRM platforms (Salesforce, HubSpot)
+For complete site setup instructions, see the [Site Overview](/documentation/site/site) and [Site Settings](/documentation/site/site-settings) guides.
 
-<img src="/image/site-01.png" alt="Site Management Interface">
+---
 
-### 📄 Site Form
+### Site Form (Pages) {#site-form}
 
-A **Site Form** represents a specific web page or form within a site that you want to automate. Each form is identified by its URL and contains the actual automation logic.
+A **Site Form** represents a specific web page or form within a site. Each form defines URL matching rules and initiates automated data filling upon page load.
 
 **Key Characteristics:**
 
-- **URL-based Identification** - Each form is tied to a specific web page URL
-- **Form Detection** - Automatically detects form fields on the target page
-- **Execution Context** - Defines where and how the automation runs
-- **Response Handling** - Manages form submission and response processing
+- **URL-Based Activation**: Target pages using **Full URL**, **URL pathname**, **URL hostname**, or **RegEx** matching.
+- **Automatic Trigger**: Executes automatically on page load or refresh when the page URL matches and the extension is ON.
+- **Execution Timing**: Configurable delay pauses before starting form execution and after completing form fields.
+- **Multi-Form Workflows**: Chain multiple forms under one site using the site ID to automate multi-page wizards.
 
-**Form Types Supported:**
+<img src="/image/form-01.png" alt="Form Configuration Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
-- Contact forms
-- Registration forms
-- Survey forms
-- Order forms
-- Login forms
-- Multi-step wizards
+For configuration details, see the [Site Form Guide](/documentation/form/form).
 
-<img src="/image/form-01.png" width="700" alt="Form Configuration Interface">
+---
 
-### 🔧 Site Form Fields
+### Segments {#segments}
 
-**Form Fields** are the individual input elements within a form that the extension can interact with. Each field represents a specific data input point that can be automated.
+A **Segment** is an independent, reusable collection of fields. Unlike Site Forms, segments **do not trigger automatically on page load**.
 
-[**Type of Fields**](/documentation/form-fields/field-types)
+**Key Characteristics:**
 
-<img src="/image/field-01.png" width="700" alt="Field Configuration Interface">
+- **On-Demand Execution**: Triggered explicitly by unique name through [Field Response Actions](/documentation/form-fields/field-response-action), [Loop](/documentation/field-types/loop) iterations, or the floating [Status Bar](/documentation/settings#status-bar) (`{MARK AS SAVED}`).
+- **Cross-Page Reusability**: Call the same segment from multiple forms or execute segments across modal popups.
+- **Tab Targeting ("View Field Element in Tab")**: Configure target page URLs to inspect and test field selectors directly in open tabs.
 
-### 📊 Excel Template Management
+<img src="/image/segment-list.png" alt="Segment Management Interface" style="max-width: 350px; border-radius: 8px; margin: 16px 0;" />
 
-Excel templates provide a powerful way to manage and organize your data for automated form filling.
+For step-by-step instructions, see the [Segment Documentation](/documentation/segment).
 
-#### 📥 Download Excel Template
+---
 
-If you want to download the excel template of any site, then you have to insert the Site's Form and Form Field. Excel sheet can be downloaded only if the field is present in the form. You can download the excel sheet from the image given below. 📥
+### Site Form Fields {#site-form-fields}
 
-<img src="/image/download-excel-template-01.png" width="700" alt="Download Excel Template Interface">
+**Form Fields** are the individual input and action elements targeted within a Form Page or Segment.
 
-#### 📤 Upload Excel Template
+**Key Characteristics:**
 
-Import existing Excel files or upload prepared data templates:
+- **Flexible Locators**: Locate elements using CSS Selectors, element IDs, XPath queries, or native JS Paths (`$.document...`).
+- **50+ Specialized Field Handlers**: Support for Text, Select, Checkboxes, File Uploads, Date Pickers, Loops, JavaScript code, and Scraper extraction.
+- **Data Source Priority**: Seamlessly populates from Excel (`.xlsx`) columns, with automatic fallback to configured default values.
+- **Response Logic**: Attach success, error, or skip response actions to handle dynamic page feedback.
 
-**Supported Formats:**
+<img src="/image/field-01.png" alt="Field Configuration Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
-- **Excel Files** - .xlsx formats
+For complete field settings, see [Form Field Setup](/documentation/form-fields/field) and the [Field Types Catalog](/documentation/form-fields/field-types).
 
-**Saving Excel Data:**
+---
 
-- **Save Excel Template** - Click this button to save and update your Excel data after uploading or modifying it.
+### Excel Template & Data Management {#excel-template-management}
 
-:::tip Saving Excel Data vs Site Settings
-Use the **Save Excel Template** button specifically for saving Excel data, and the **Save Changes** button for saving site configuration and settings.
+Spreadsheets provide structured batch data feeds for multi-entry automation.
+
+:::tip Spreadsheet Compatibility
+Exclusively **`.xlsx`** files are supported for spreadsheet uploads. You can also connect directly to **Google Sheets** via OAuth2 or Service Account credentials.
 :::
 
-<img src="/image/upload-excel-template.png" width="700" alt="Upload Excel Template Interface">
+#### Download Excel Template {#download-excel-template}
 
-## Workflow Structure
+Once you have configured fields in your form, the extension can generate a tailored `.xlsx` template containing column headers corresponding exactly to your field names:
 
-### 🔄 Automation Workflow
+<img src="/image/download-excel-template-01.png" alt="Download Excel Template Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
-The typical automation workflow follows this structure:
+#### Upload Excel Template {#upload-excel-template}
 
-1. **Site Creation** - Set up the target website
-2. **Form Detection** - Identify and configure forms
-3. **Field Mapping** - Map data sources to form fields
-4. **Template Preparation** - Create or upload data templates
-5. **Execution** - Run the automation process
-6. **Response Handling** - Process and store results
+Upload your populated `.xlsx` file into the site configuration. The extension processes rows sequentially, advancing row by row upon each successful form submission:
+
+<img src="/image/upload-excel-template.png" alt="Upload Excel Template Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
+
+For detailed spreadsheet guidelines, see [Excel Template Management](/documentation/site/site-excel-template).
+
+---
+
+## Automation Workflow Lifecycle {#automation-workflow}
+
+A complete automation project typically progresses through this lifecycle:
+
+1. **Site Registration**: Create a top-level site record for the target web application.
+2. **Form / Segment Setup**: Define target page URLs, matching patterns, and timing delays.
+3. **Field Mapping**: Inspect DOM elements (<kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>) and configure selectors.
+4. **Template Preparation**: Download the matching `.xlsx` template and populate batch data rows.
+5. **Automation Execution**: Navigate to the form and run automation (<kbd>Alt</kbd> + <kbd>Q</kbd>).
+6. **Response & Status Tracking**: Monitor execution row progress via the Status Bar and review diagnostics in the [Logs](/documentation/logs).
+
+---
 
 ## Next Steps
 
-Ready to start building your automation? Follow these guides:
+<img src="/svg/globe.svg" class="doc-icon" /> [How to insert a site](/documentation/site/site#insert-site) — Register your first site configuration  
+<img src="/svg/form.svg" class="doc-icon" /> [How to insert a site form](/documentation/form/form#insert-site-form) — Add form pages and URL matching rules  
+<img src="/svg/system.svg" class="doc-icon" /> [How to use segments](/documentation/segment) — Build on-demand, reusable field routines  
+<img src="/svg/code.svg" class="doc-icon" /> [How to configure form fields](/documentation/form-fields/field#insert-field) — Map selectors, types, and values  
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel Template Integration](/documentation/site/site-excel-template) — Master batch data handling  
 
-- [How to insert a site](/documentation/site/site#insert-site) - Create your first site
-- [How to insert a site form](/documentation/form/form#insert-site-form) - Add forms to your site
-- [How to insert site form fields](/documentation/form-fields/field#insert-field) - Configure individual fields
-- [Field Types Guide](/documentation/form-fields/field-types) - Learn about different field types
-- [Excel Integration](/documentation/functions) - Master data management with Excel
+---
 
-## Troubleshooting
+## Troubleshooting & Verification
 
-### Common Issues
+- **Form Not Triggering**: Verify the URL Match Type and ensure the extension toggle is **ON** (<kbd>Alt</kbd> + <kbd>Q</kbd>).
+- **Element Not Found**: Use the [Inspect Elements](/documentation/extension/context-menu#inspect-elements-tool) tool (<kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>) or refer to [Locate Element](/documentation/locate-element).
+- **Template Errors**: Ensure you are uploading a valid `.xlsx` file matching your field names.
+- **Execution Diagnostics**: Open the built-in [Logs Viewer](/documentation/logs) to inspect real-time action steps and errors.
 
-- **Form Detection Problems** - Check URL patterns and form selectors
-- **Field Mapping Issues** - Verify field selectors and data types
-- **Template Errors** - Ensure Excel format matches field requirements
-- **Execution Failures** - Review logs and error messages
-
-### Getting Help
-
-- Check the [Log](/documentation/log) for detailed error information
-- Review [Field Types](/documentation/form-fields/field-types) for configuration help
-- Visit our [Support Channels](/documentation/#need-help) for community assistance

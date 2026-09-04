@@ -8,14 +8,14 @@ Form Response functionality allows you to handle and process server-side respons
 
 After filling and submitting a form entry, the server typically responds with either a success or error message. The Form Response feature allows you to:
 
-- **📊 Track Entry Status** - Monitor whether entries are successfully saved or failed
-- **🔄 Control Workflow** - Determine next actions based on server responses
-- **🎯 Handle Errors** - Manage error scenarios and retry logic
-- **✅ Mark Entries** - Automatically mark successful entries as saved
+- **Track Entry Status** - Monitor whether entries are successfully saved or failed
+- **Control Workflow** - Determine next actions based on server responses
+- **Handle Errors** - Manage error scenarios and retry logic
+- **Mark Entries** - Automatically mark successful entries as saved
 
 ## Response Types
 
-### [✅ Success Response](/documentation/form-response/form-success-response) {#success-response}
+### [Success Response](/documentation/form-response/form-success-response) {#success-response}
 
 When a form entry is successfully submitted and saved by the server.
 
@@ -30,7 +30,7 @@ When a form entry is successfully submitted and saved by the server.
 - "Your data has been saved successfully"
 - "Form submitted successfully"
 
-### [❌ Error Response](/documentation/form-response/form-error-response) {#error-response}
+### [Error Response](/documentation/form-response/form-error-response) {#error-response}
 
 When form submission fails due to server-side issues or validation errors.
 
@@ -49,7 +49,7 @@ When form submission fails due to server-side issues or validation errors.
 
 ## Integration with Automation {#integration-with-automation}
 
-### 🔄 Workflow Integration {#workflow-integration}
+### Workflow Integration {#workflow-integration}
 
 Form Response seamlessly integrates with the overall automation workflow:
 
@@ -61,14 +61,15 @@ Form Response seamlessly integrates with the overall automation workflow:
 
 ## Next Steps {#next-steps}
 
-- [Success Response](/documentation/form-response/form-success-response) - Configure success response handling
-- [Error Response](/documentation/form-response/form-error-response) - Set up error response management
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure field-level response actions
-- [Log Management](/documentation/log) - Monitor and analyze response logs
+- <img src="/svg/form.svg" class="doc-icon" /> [Success Response](/documentation/form-response/form-success-response)
+- <img src="/svg/form.svg" class="doc-icon" /> [Error Response](/documentation/form-response/form-error-response)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action)
+- <img src="/svg/browser.svg" class="doc-icon" /> [Logs Management](/documentation/logs)
 
 ## Tips and Tricks {#tips-and-tricks}
 
-### 💡 Pro Tips {#pro-tips}
+### Pro Tips {#pro-tips}
 
 1. **Start Simple** - Begin with basic text-based detection before advanced methods
 2. **Monitor Performance** - Keep track of response detection accuracy
+

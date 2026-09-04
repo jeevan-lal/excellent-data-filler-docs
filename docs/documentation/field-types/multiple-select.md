@@ -1,6 +1,6 @@
 # Multiple Select Field
 
-Multiple Select fields are used for dropdown menus where users can choose one or more options from a list of available choices. They provide extensive configuration options for optimal multi-selection behavior, especially when dealing with data from external sources like Excel.
+Multiple Select fields are used for dropdown menus where users can choose one or more options from a list of available choices. They provide extensive configuration options for optimal multi-selection behavior, especially when dealing with data from external sources like Excel (.xlsx).
 
 ## Basic Configuration
 
@@ -12,13 +12,13 @@ Multiple Select fields are used for dropdown menus where users can choose one or
 | **Field Type**           | Set to **Multiple Select** for multi-choice dropdowns | `Multiple Select`                     |
 | **Field Selector Type**  | Method to locate the field element                    | `Selector`, `Id`, `XPath`             |
 | **Field Selector Query** | Unique address to locate the field                    | `select[name="hobbies"]`, `#skills`   |
-| **Field Value**          | Data source for field content (e.g., Excel column)    | Excel column or default value         |
+| **Field Value**          | Data source for field content (e.g., Excel column)    | Excel (.xlsx) column or default value |
 
 ## Multiple Select Field Settings
 
-### ⚙️ Option Matching Configuration {#option-matching-configuration}
+### Option Matching Configuration {#option-matching-configuration}
 
-These settings control how the values provided (e.g., from your Excel sheet) are matched against the available options in the multiple-select dropdown.
+These settings control how the values provided (e.g., from your Excel (.xlsx) sheet) are matched against the available options in the multiple-select dropdown.
 
 #### Match options as
 
@@ -43,7 +43,7 @@ This dropdown defines the strategy for matching the input value to the options w
 When providing multiple values for a multi-select field (e.g., from a single Excel cell), this character is used to split the string into individual values.
 
 - **Default Value**: `"` (double quote)
-- **Usage**: If your Excel cell contains `"Option1" "Option2"`, the extension will split this into "Option1" and "Option2" using the double quote as a separator, and then attempt to select both.
+- **Usage**: If your Excel (.xlsx) cell contains `"Option1" "Option2"`, the extension will split this into "Option1" and "Option2" using the double quote as a separator, and then attempt to select both.
 
 #### Wait until max options in the dropdown element
 
@@ -54,13 +54,13 @@ This toggle controls whether the extension should wait for a minimum number of o
 
 - **Input Field (Default: 2)**: Specifies the minimum number of options to wait for. For example, if set to `2`, the extension will wait until at least two options are available in the dropdown.
 
-### 📝 Text Normalization for Matching {#text-normalization-for-matching}
+### Text Normalization for Matching {#text-normalization-for-matching}
 
 These settings help standardize the text used for matching, improving the reliability of selections.
 
 #### Convert the text into lowercase letters and then match the text
 
-This toggle ensures that both the input value (from Excel) and the dropdown option text are converted to lowercase before comparison.
+This toggle ensures that both the input value (from Excel (.xlsx)) and the dropdown option text are converted to lowercase before comparison.
 
 - **Enabled**: Enables case-insensitive matching. For example, "Apple" will match "apple". (Recommended for robust matching)
 - **Disabled**: Matching will be case-sensitive.
@@ -81,7 +81,7 @@ This toggle removes all spaces (including internal spaces) from both the input v
 
 ## Example Usage
 
-Imagine you have a multiple-select dropdown for "Skills" and your Excel column `Skills` contains `"JavaScript" "Python" "CSS"`.
+Imagine you have a multiple-select dropdown for "Skills" and your Excel (.xlsx) column `Skills` contains `"JavaScript" "Python" "CSS"`.
 
 1.  **Field Type**: `Multiple Select`
 2.  **Field Selector Query**: `select[name="skills"]`
@@ -92,7 +92,7 @@ Imagine you have a multiple-select dropdown for "Skills" and your Excel column `
 
 The extension will:
 
-- Read `"JavaScript,CSS"` from Excel.
+- Read `"JavaScript,CSS"` from Excel (.xlsx).
 - Split it into `JavaScript`, `CSS`.
 - Convert these to lowercase (`javascript`, `css`).
 - Trim any extra spaces.
@@ -111,7 +111,8 @@ The extension will:
 
 ## Next Steps {#next-steps}
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

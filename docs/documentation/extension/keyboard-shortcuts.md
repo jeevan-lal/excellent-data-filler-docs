@@ -12,13 +12,17 @@ Excellent Data Filler provides comprehensive keyboard shortcuts for all major ac
 
 ### Access Shortcuts Settings
 
-1. Open Chrome and navigate to: `chrome://extensions/shortcuts`
+1. Open Chrome and navigate to: `chrome://extensions/shortcuts` (or `edge://extensions/shortcuts` in Microsoft Edge, `brave://extensions/shortcuts` in Brave)
 2. Find **"Excellent Data Filler"** in the list
 3. Click on the pencil icon next to any shortcut to customize it
 4. Press your desired key combination
 5. Click outside the input to save
 
-:::tip Customization
+::: warning Shortcut Not Working?
+If a shortcut is not working on a web page, check `chrome://extensions/shortcuts` in your browser. Another installed extension may be conflicting with the same hotkey, or the shortcut may need to be re-assigned.
+:::
+
+::: tip Customization
 All shortcuts can be customized to your preference. The shortcuts listed below are the default configurations.
 :::
 

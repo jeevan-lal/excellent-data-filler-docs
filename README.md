@@ -106,7 +106,7 @@ excellent-data-filler-docs/
 
 ### 🧪 Testing & Development
 - [Testing Site](/documentation/testing-site)
-- [Debugging Tools](/documentation/log)
+- [Debugging Tools](/documentation/logs)
 - [Error Handling](/documentation/form/form-response/)
 
 ## 🌐 Browser Support

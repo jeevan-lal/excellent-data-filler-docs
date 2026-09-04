@@ -2,7 +2,7 @@
 
 Save web pages as PDF files using the browser's print functionality. Configure PDF generation settings, file naming, and save options for automated document creation.
 
-## 📋 Field Options {#save-as-pdf-field-options}
+## Field Options {#save-as-pdf-field-options}
 
 | Field Options                                                   | Required | Description                                               | Example Values                        |
 | --------------------------------------------------------------- | -------- | --------------------------------------------------------- | ------------------------------------- |
@@ -19,11 +19,11 @@ Save web pages as PDF files using the browser's print functionality. Configure P
 | **Direct Save Page to PDF (Firefox only)**                      | No       | Direct PDF save without print dialog                      | Toggle ON/OFF                         |
 | **Field Value**                                                 | No       | Custom filename for PDF                                   | `document.pdf`, `report_{$name$}.pdf` |
 
-## ⚙️ Configuration {#save-as-pdf-configuration}
+## Configuration {#save-as-pdf-configuration}
 
-### 🖨️ Print Options {#print-options}
+### Print Options {#print-options}
 
-#### 📌 Press Ctrl + P {#press-ctrl-p}
+#### Press Ctrl + P {#press-ctrl-p}
 
 **Purpose:** Automatically trigger the print dialog without manual keyboard input.
 
@@ -38,7 +38,7 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 
 ---
 
-#### 📌 Set the image path to identify the print preview window. {#set-the-image-path-to-identify-the-print-preview-window}
+#### Set the image path to identify the print preview window {#set-the-image-path-to-identify-the-print-preview-window}
 
 **Purpose:** Use custom image to detect when print preview window is ready.
 
@@ -59,15 +59,14 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 <img src="/image/print-window-01.png" alt="Print Window Detection">
 
 :::warning Important
-
-- If you are using the same image to other pc so maybe the image is not working properly.
-- So you can take the image from the same pc where you are using the extension.
-- If you resize the browser window so maybe the image is not working properly.
-  :::
+- If you are using the same image to other PC, the image might not match due to different resolutions or OS scaling.
+- Take the image from the same PC where you run the automation.
+- If you resize the browser window, the detection image may fail to match.
+:::
 
 ---
 
-#### 📌 Set the image path to identify the print button. {#set-the-image-path-to-identify-the-print-button}
+#### Set the image path to identify the print button {#set-the-image-path-to-identify-the-print-button}
 
 **Purpose:** Use custom image to locate and click the print button in the print window.
 
@@ -79,7 +78,7 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 
 ---
 
-#### 📌 Set delay time after opening print window {#set-delay-time-after-opening-print-window}
+#### Set delay time after opening print window {#set-delay-time-after-opening-print-window}
 
 **Purpose:** Add wait time between opening print window and saving the PDF.
 
@@ -91,7 +90,7 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 
 ---
 
-#### 📌 Set delay time after pdf saved. {#set-delay-time-after-pdf-saved}
+#### Set delay time after pdf saved {#set-delay-time-after-pdf-saved}
 
 **Purpose:** Add wait time after the PDF file has been saved before proceeding further.
 
@@ -101,7 +100,7 @@ If your file/PDF is downloaded after clicking any button, provide the selector q
 
 ---
 
-#### 📌 Wait until the print page title matches? {#wait-until-the-print-page-title-matches}
+#### Wait until the print page title matches? {#wait-until-the-print-page-title-matches}
 
 **Purpose:** Wait until the browser page or print title matches a specified regex pattern before saving.
 
@@ -115,7 +114,7 @@ Here are some useful regex examples for matching browser page titles.
 | `(?i)^My Page$`                  | `my page`, `MY PAGE`        | Exact title, ignore case.                          |
 | `Invoice`                        | `Invoice 123`               | Title contains `Invoice`.                          |
 | `(?i)Invoice`                    | `invoice`, `INVOICE`        | Contains `Invoice`, ignore case.                   |
-| `^Invoice`                       | `Invoice #123`            | Title starts with `Invoice`.                       |
+| `^Invoice`                       | `Invoice #123`              | Title starts with `Invoice`.                       |
 | `Invoice$`                       | `Final Invoice`             | Title ends with `Invoice`.                         |
 | `(?i)\.pdf$`                     | `form.pdf`                  | Ends with `.pdf` (ignore case).                    |
 | `(?i)^.*\.pdf$`                  | `Application.pdf`           | Any PDF filename.                                  |
@@ -155,9 +154,9 @@ Here are some useful regex examples for matching browser page titles.
 
 ---
 
-### 🌐 Browser-Specific Options {#browser-specific-options}
+### Browser-Specific Options {#browser-specific-options}
 
-#### 📌 Direct Save Page to PDF (Firefox Only) {#direct-save-page-to-pdf-firefox-only}
+#### Direct Save Page to PDF (Firefox Only) {#direct-save-page-to-pdf-firefox-only}
 
 **Purpose:** Save PDF directly without print dialog (Firefox browser only).
 
@@ -169,9 +168,9 @@ Here are some useful regex examples for matching browser page titles.
 
 ---
 
-### 📁 File Management Options {#file-management-options}
+### File Management Options {#file-management-options}
 
-#### 📌 If file already exists then replace it {#if-file-already-exists-then-replace-it}
+#### If file already exists then replace it {#if-file-already-exists-then-replace-it}
 
 **Purpose:** Control behavior when a file with the same name already exists.
 
@@ -182,7 +181,7 @@ Here are some useful regex examples for matching browser page titles.
 
 ---
 
-#### 📌 Press Ctrl + S {#press-ctrl-s}
+#### Press Ctrl + S {#press-ctrl-s}
 
 **Purpose:** Use Ctrl+S keyboard shortcut for saving files.
 
@@ -194,11 +193,11 @@ Here are some useful regex examples for matching browser page titles.
 
 ---
 
-### 📝 File Naming {#file-naming}
+### File Naming {#file-naming}
 
-#### 📌 Field Value {#field-value}
+#### Field Value {#field-value}
 
-**Purpose:** Set custom filename for the generated PDF.
+**Purpose:** Set custom filename for the generated PDF from static values or Excel (.xlsx) columns.
 
 **Basic Usage:**
 
@@ -215,11 +214,11 @@ Here are some useful regex examples for matching browser page titles.
 
 ---
 
-## 🎯 PDF Page Settings (Firefox) {#pdf-page-settings-firefox}
+## PDF Page Settings (Firefox) {#pdf-page-settings-firefox}
 
 Customize PDF page settings for optimal document formatting.
 
-### 📌 Customize PDF Page Settings {#customize-pdf-page-settings}
+### Customize PDF Page Settings {#customize-pdf-page-settings}
 
 **Purpose:** Configure page size, orientation, margins, and other PDF properties.
 
@@ -242,9 +241,9 @@ paperHeight=297,paperWidth=210,orientation=1,scaling=0.65,paperSizeUnit=1,shrink
 | **paperSizeUnit** | 1     | 0 = inches, 1 = millimeters         |
 | **shrinkToFit**   | true  | Shrink content to fit page width    |
 
-## 🌐 Browser Window Title {#browser-window-title}
+## Browser Window Title {#browser-window-title}
 
-### 📌 Set the save as browser window title name {#set-browser-window-title}
+### Set the save as browser window title name {#set-browser-window-title}
 
 **Purpose:** Customize browser window title during PDF save process.
 
@@ -262,9 +261,9 @@ paperHeight=297,paperWidth=210,orientation=1,scaling=0.65,paperSizeUnit=1,shrink
 
 ---
 
-### 📌 Set the confirm replace save as browser window title name {#set-confirm-replace-save-as-browser-window-title}
+### Set the confirm replace save as browser window title name {#set-confirm-replace-save-as-browser-window-title}
 
-**Purpose:** Customize browser window title during PDF save process.
+**Purpose:** Customize browser window title during PDF save process confirmation.
 
 **Use Cases:**
 
@@ -274,7 +273,7 @@ paperHeight=297,paperWidth=210,orientation=1,scaling=0.65,paperSizeUnit=1,shrink
 
 ---
 
-## ⚠️ Important Notes {#important-notes}
+## Important Notes {#important-notes}
 
 ### Prerequisites {#prerequisites}
 
@@ -285,7 +284,7 @@ paperHeight=297,paperWidth=210,orientation=1,scaling=0.65,paperSizeUnit=1,shrink
 - **Install** the helper program on your system
 - **Verify** installation before configuring PDF fields
 
-## 🔍 Troubleshooting {#troubleshooting}
+## Troubleshooting {#troubleshooting}
 
 | Issue                         | Solution                               |
 | ----------------------------- | -------------------------------------- |
@@ -301,3 +300,11 @@ Use the `{$date.today[x]$}` variable in filenames to ensure unique file names ev
 :::warning Important
 Install the helper program before using this field type. The extension will not work without it.
 :::
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Target Element For Print](/documentation/field-types/target-element-for-print) — Selectively print elements
+- <img src="/svg/browser.svg" class="doc-icon" /> [Program Helper](/documentation/field-types/program-helper) — System-level helper automation
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

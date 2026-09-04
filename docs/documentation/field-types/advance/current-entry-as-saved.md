@@ -1,144 +1,151 @@
+---
+prev:
+  text: "Field Types"
+  link: "/documentation/form-fields/field-types"
+next:
+  text: "Form Error Message"
+  link: "/documentation/field-types/advance/form-error-message"
+---
+
 # Current Entry as Saved {#current-entry-as-saved}
 
-This field type allows you to mark the current Excel entry as **saved/completed** based on matching a success message or element in the page. It works similarly to [Form Success Response](/documentation/form-response/form-success-response), but **does not check URLs**.
+The **Current Entry as Saved** field type marks the active spreadsheet row as completed based on detecting on-screen success messages, DOM elements, or JavaScript alerts without requiring a page redirect or URL validation.
 
-:::tip Key Difference
-Unlike Form Success Response, this field type:
-- **Does NOT use** "Success Page URL" option
-- **Does NOT use** "Match URL Types" option
-- Works on the current page without URL validation
-:::
+> [!TIP]
+> **Key Difference from Form Success Response**: Unlike [Form Success Response](/documentation/form-response/form-success-response), this field type operates in-place on the active page without requiring a "Success Page URL" or URL matching rule.
 
-## 🎯 When to Use {#when-to-use}
+---
 
-Use this field type when you want to:
-- Mark an entry as saved based on a success message appearing on the page
-- Complete the entry without checking if the URL has changed
-- Handle success responses that appear on the same page (no redirect)
-- Use it as a field within your form configuration
+## When to Use {#when-to-use}
 
-## ⚙️ Field Options {#field-options}
+Use this field type when:
+- The target application displays a confirmation banner, modal, or status element on the same page (Single Page Applications / AJAX form submissions).
+- You want to mark the current `.xlsx` row as processed and update execution tracking immediately.
+- You need to trigger follow-up actions (e.g., clicking a button, running a segment, or reloading the form) upon successful submission.
 
-| Option | Description |
-| ------ | ----------- |
-| [Success Response Type](#success-response-type) | The type of success message that appears on the page |
-| [Enter Success Message](#enter-success-message) | The success message to match after the entry is processed |
-| [Delay Time Before Run Action](#delay-time-before-run-action) | Time delay before the [action](#action) is executed |
-| [Action](#action) | Action to execute when the success response matches |
+---
 
-## 📋 Additional Options {#additional-options}
+## Field Options {#field-options}
 
 | Option | Description |
-| ------ | ----------- |
-| If excel data is not found then don't execute the action | Prevents action execution when Excel data is empty |
-| If last excel entry completed then don't execute the action | Prevents action execution after the last entry is completed |
-| If there is no Excel data, update only scraper data in Excel | Saves only scraped data when no Excel template is used |
-| Can success message be anything in this element | Matches any message in the given element (useful for dynamic messages) |
-| Remove excel column value from current entry? | Removes column value from current entry after processing |
-| Set custom message after success message matched? | Sets a custom short message instead of the full success message |
+|---|---|
+| **Success Response Type** | Detection mechanism used to locate the success indicator. |
+| **Enter Success Message** | Text strings or patterns to match after the form is processed. |
+| **Delay Time Before Run Action** | Waiting period (in milliseconds) before the follow-up action executes. |
+| **Action** | Operation to trigger when the success message matches. |
 
-## 🔍 Success Response Type {#success-response-type}
+---
 
-Choose how the extension should detect the success response:
+## Additional Configuration Options {#additional-options}
+
+| Option | Description |
+|---|---|
+| **If excel data is not found then don't execute the action** | Skips action execution when spreadsheet records are unavailable. |
+| **If last excel entry completed then don't execute the action** | Halts follow-up execution once the final row of the dataset is processed. |
+| **If there is no Excel data, update only scraper data in Excel** | Updates only scraped fields in the workbook when standalone templates are used. |
+| **Can success message be anything in this element** | Wildcard mode matching any text rendered inside the target element. |
+| **Remove excel column value from current entry?** | Clears the processed value from extension memory after submission. |
+| **Set custom message after success message matched?** | Logs a custom note in extension logs instead of the raw web message. |
+
+---
+
+## Success Response Types {#success-response-type}
+
+Choose how the extension identifies completion:
 
 ### 1. Matching Message In Page {#matching-message-in-page}
 
-Searches for the success message anywhere in the page content.
+Searches visible page content or a specific DOM container for the success message.
 
-**Options:**
-- **Message Selector Query** (optional): Limit the search to a specific element
+- **Message Selector Query** *(Optional)*: Limits the search scope to a specific banner, toast, or status container.
 
-<img src="/image/entry-response-05.png" alt="Success Message in Page">
+<img src="/image/entry-response-05.png" alt="Success Message Detection on Page" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
+
+---
 
 ### 2. Matching Message In Browser Alert {#matching-message-in-alert}
 
-Detects success messages that appear in JavaScript alert dialogs.
+Detects success confirmations that appear inside native browser JavaScript `alert()` dialogs.
 
-:::tip
-Enable [Hide JavaScript Dialog](/documentation/settings#hide-javascript-dialog) in settings to automatically handle alerts.
-:::
+<img src="/image/js-alert-dialog.png" alt="JavaScript Alert Dialog Handling" style="max-width: 450px; border-radius: 8px; margin: 16px 0;" />
 
-<img src="/image/js-alert-dialog.png" alt="Alert Dialog">
+> [!TIP]
+> Enable **Hide JavaScript Dialog** in [Extension Settings](/documentation/settings#hide-javascript-dialog) to dismiss confirmation alerts automatically.
+
+---
 
 ### 3. Matching Message In Page Element Value {#matching-message-in-element-value}
 
-Checks for the success message in a form field's value (e.g., input box).
+Inspects the `value` attribute of input, hidden, or readonly fields (e.g., an order ID or confirmation input).
 
-**Required:**
-- **Message Selector Query**: The selector of the input element
+- **Required Parameter**: `Message Selector Query` pointing to the target element.
+
+---
 
 ### 4. Checking Element Exists In Page {#checking-element-exists}
 
-Marks entry as saved when a specific element appears on the page.
+Marks the entry as saved whenever a specific element appears in the DOM.
 
-**Required:**
-- **Message Selector Query**: The selector of the element to check
+- **Required Parameter**: `Message Selector Query` targeting the success element (e.g., `.order-confirmed-checkmark`).
+- **Condition**: The target element must only be mounted or rendered upon successful submission.
 
-:::warning Important
-The element should NOT be present before the action and should only appear after success.
+---
+
+## Enter Success Message {#enter-success-message}
+
+Enter the target text strings to match. You can configure multiple candidate phrases; if any phrase matches, the record is marked saved.
+
+- **Dynamic Column Variables**: Inject spreadsheet values using `{$ColumnName$}` tags (e.g., `Thank you {$Name$}, your response was recorded`).
+- **Partial Matching**: Providing `"Thank you"` matches any string containing `"Thank you"`.
+
+<img src="/image/entry-response-07.png" alt="Success Message Configuration" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
+
+---
+
+## Delay Time Before Run Action {#delay-time-before-run-action}
+
+Specifies a timeout in milliseconds before executing the configured follow-up action.
+
+:::tip Conversion
+`1000 milliseconds = 1 second`
 :::
 
-## 📝 Enter Success Message {#enter-success-message}
+---
 
-Enter the success message(s) to match. You can add multiple messages - if any matches, the entry will be marked as saved.
+## Follow-up Action Execution {#action}
 
-**Features:**
-- Support for multiple messages
-- Dynamic message support using variables
-- Partial message matching
+Select what occurs once the success state is verified:
 
-**Example:**
+| Action | Execution Behavior |
+|---|---|
+| **Redirect to Page** | Navigates the active tab to a designated URL. |
+| **Re-Execute Form** | Restarts the form workflow with the next spreadsheet entry. |
+| **Click on Button** | Dispatches a click on a specified button (e.g., "Submit Another Response"). |
+| **Page Reload** | Refreshes the active browser tab. |
+| **Execute Segment** | Triggers execution of a modular [Segment](/documentation/segment) routine. |
 
-<img src="/image/entry-response-07.png" alt="Success Messages">
+---
 
-::: details Dynamic Success Messages
-Use Excel column variables in your success messages:
+## Important Execution Rule {#important-notes}
 
-```
-Thank you {$Name$}, your form has been submitted!
-```
+> [!CAUTION]
+> **Placement Constraint**: When this field executes, **all subsequent fields below it in the form list are bypassed**. Always place **Current Entry as Saved** at the very bottom of your form field sequence.
 
-Or use partial matching:
-```
-Thank you
-```
-This will match "Thank you, your form has been submitted!" or any message containing "Thank you".
-:::
-
-## ⏱️ Delay Time Before Run Action {#delay-time-before-run-action}
-
-Set a delay (in milliseconds) before executing the action.
-
-<Badge type="tip" text="1 second = 1000 milliseconds" />
-
-## 🚀 Action {#action}
-
-Choose what happens after the success message is matched:
-
-- **Redirect to Page** - Navigate to a different page
-- **Re-Execute Form** - Fill the form again with the next entry
-- **Click on Button** - Click a specific button element
-- **Page Reload** - Reload the current page
-- **Execute Segment** - Run a specific segment of fields
-
-## ⚠️ Important Notes {#important-notes}
-
-:::danger Critical
-When you use this field type, **all fields below it will NOT execute**. Always place this field type **at the end** of your field list.
-:::
-
-**Execution Flow:**
-```
-Field 1 ✅ Executes
-Field 2 ✅ Executes
-Field 3 ✅ Executes
-Current Entry as Saved ✅ Executes & Marks Entry as Saved
-Field 4 ❌ Does NOT Execute
-Field 5 ❌ Does NOT Execute
+```text
+[Field 1: Name Input]           ──> Executes
+[Field 2: Email Input]          ──> Executes
+[Field 3: Submit Button]        ──> Executes
+[Current Entry as Saved]        ──> Marks Row Saved & Triggers Action
+--------------------------------------------------------------------
+[Field 4: Any Lower Field]      ──> DOES NOT EXECUTE (Bypassed)
 ```
 
-## 🔗 Related Documentation {#related}
+---
 
-- [Form Success Response](/documentation/form-response/form-success-response) - Similar functionality with URL checking
-- [Form Error Message](/documentation/field-types/advance/form-error-message) - Handle error responses
-- [Form Error Response](/documentation/form-response/form-error-response) - Error handling with URL checking
+## Related Documentation {#related}
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Form Success Response](/documentation/form-response/form-success-response)
+- <img src="/svg/bug.svg" class="doc-icon" /> [Form Error Message](/documentation/field-types/advance/form-error-message)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action)
+- <img src="/svg/template.svg" class="doc-icon" /> [Segments Routine Automation](/documentation/segment)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template (.xlsx)](/documentation/site/site-excel-template)

@@ -4,15 +4,15 @@ If you want to modify the value of any text or any field in the page, then you c
 
 <img src="/image/string-manipulation-01.png" width="400" height="400" alt="String Manipulation">
 
-## ⚙️ Field Options {#field-options}
+## Field Options {#field-options}
 
-### 🔍 Element Selector Query {#element-selector-query}
+### Element Selector Query {#element-selector-query}
 
 You can set target element selector query in the field. 
 
 You can find the element selector query by right-clicking on the element and selecting "Copy Element Selector Address" or "Copy Element XPath Selector Address".
 
-### 🎯 Which element option needs to be changed? {#which-element-option-needs-to-be-changed}
+### Which element option needs to be changed? {#which-element-option-needs-to-be-changed}
 
 Choose what type of content you want to replace or modify:
 
@@ -32,7 +32,7 @@ Choose what type of content you want to replace or modify:
 
 - **Field Value**: Enter the name of the field you want to target for replacement
 
-### 🧹 Text Cleaning Options {#text-cleaning-options}
+### Text Cleaning Options {#text-cleaning-options}
 
 | Option                 | Description                                                      |
 | ---------------------- | ---------------------------------------------------------------- |
@@ -41,7 +41,7 @@ Choose what type of content you want to replace or modify:
 | **Remove All String**  | Remove all text content (leaves empty string)                    |
 | **Trim**               | Remove leading and trailing whitespace                           |
 
-### 🔤 Case Conversion Options {#case-conversion-options}
+### Case Conversion Options {#case-conversion-options}
 
 | Option                    | Description                                                        |
 | ------------------------- | ------------------------------------------------------------------ |
@@ -49,7 +49,7 @@ Choose what type of content you want to replace or modify:
 | **Convert to Uppercase**  | Convert all text to uppercase letters                              |
 | **Convert to Title Case** | Convert text to title case (first letter of each word capitalized) |
 
-### 🔄 Replace String with RegEx {#replace-string-with-regex}
+### Replace String with RegEx {#replace-string-with-regex}
 
 Advanced text replacement using regular expressions.
 
@@ -68,61 +68,61 @@ If you want to change this "**Ben002**" string into this "**002_g.pdf**" then yo
 **Replace String**: `$1_g.pdf`  
 **Result**: `Ben002` → `002_g.pdf`
 
-### 💾 Save New Value Option {#save-new-value-option}
+### Save New Value Option {#save-new-value-option}
 
 - **Do you want to save the new value in the field?**: An on/off option. When enabled, the newly manipulated value is saved directly to the field, allowing other actions or variables to refer to this updated value.
 
-## 💡 Usage Examples {#usage-examples}
+## Usage Examples {#usage-examples}
 
-### 📝 Basic Text Replacement
+### Basic Text Replacement
 
 1. **Which element option needs to be changed?**: Element Text
 2. **Target**: Select the element containing the text to replace
 3. **New Content**: Enter the replacement text
 4. **Result**: The visible text will be updated
 
-### 🔧 Attribute Value Replacement
+### Attribute Value Replacement
 
 1. **Which element option needs to be changed?**: Element Attribute
 2. **Element Attribute Name**: `href`
 3. **New Value**: Enter the new URL
 4. **Result**: The link's href attribute will be updated
 
-### 🧹 Text Cleaning
+### Text Cleaning
 
 1. **Remove Extra Space**: ✅ Enabled
 2. **Trim**: ✅ Enabled
 3. **Convert to Title Case**: ✅ Enabled
 4. **Result**: Clean, properly formatted text
 
-### 🔄 Advanced Regex Replacement
+### Advanced Regex Replacement
 
 1. **Replace String with RegEx**: ✅ Enabled
 2. **Regular Expression**: `(\d{4})-(\d{2})-(\d{2})`
 3. **Replace String**: `$3/$2/$1`
 4. **Result**: `2024-12-25` → `25/12/2024`
 
-## 🎯 Common Use Cases {#common-use-cases}
+## Common Use Cases {#common-use-cases}
 
-### 📊 Data Formatting
+### Data Formatting
 
 - **Date Format Conversion**: Change date formats using regex
 - **Number Formatting**: Add commas, currency symbols, or decimal places
 - **Phone Number Formatting**: Standardize phone number formats
 
-### 🧹 Content Cleaning
+### Content Cleaning
 
 - **Remove Extra Whitespace**: Clean up messy text content
 - **Standardize Case**: Ensure consistent text casing
 - **Remove Unwanted Characters**: Strip out special characters or symbols
 
-### 🔄 Dynamic Content Updates
+### Dynamic Content Updates
 
 - **Update Links**: Change href attributes dynamically
 - **Modify Form Values**: Update input field values
 - **Replace Text Content**: Change displayed text based on conditions
 
-## 🔧 Advanced Features {#advanced-features}
+## Advanced Features {#advanced-features}
 
 ### Regex Patterns
 
@@ -131,7 +131,7 @@ If you want to change this "**Ben002**" string into this "**002_g.pdf**" then yo
 - **Global Replacement**: Replace all occurrences of a pattern
 - **Case-Insensitive Matching**: Use regex flags for flexible matching
 
-## ⚠️ Important Notes {#important-notes}
+## Important Notes {#important-notes}
 
 ### Element Selection
 
@@ -143,3 +143,10 @@ If you want to change this "**Ben002**" string into this "**002_g.pdf**" then yo
 - Always test regex patterns with sample data first
 - Be careful with greedy patterns that might match too much text
 - Use escape characters for special regex characters
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [String Matching](/documentation/field-types/string-matching) — Match and evaluate strings conditionally
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Advanced field options
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Regex Testing Tool](/documentation/regex) — Test regular expressions in real-time

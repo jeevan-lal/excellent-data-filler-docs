@@ -3,8 +3,8 @@ prev:
   text: "Icon"
   link: "/documentation/icon"
 next:
-  text: "Log"
-  link: "/documentation/log"
+  text: "Logs"
+  link: "/documentation/logs"
 ---
 
 # Settings {#settings}
@@ -13,364 +13,344 @@ The Settings page provides comprehensive control over the Excellent Data Filler 
 
 <img src="/image/extension-settings-01.png" width="700" height="500" alt="Extension Settings Interface">
 
-## 🔧 Extension Settings {#extension-settings}
+## <img src="/svg/settings.svg" class="doc-icon" width="22" height="22" alt="Extension Settings" /> Extension Settings {#extension-settings}
 
-Core extension controls that determine the overall behavior and functionality of the extension.
+Control global extension behavior and automation power state.
 
-### 🔄 Extension Status {#extension-status}
+### Extension Control {#extension-control}
 
-Control the main power state of the extension with this essential setting.
+The master switch governing all extension activity across your browser.
 
-**Functionality:**
+| Setting | Type | Description |
+| --- | --- | --- |
+| **Extension Active Status** | Toggle | Turn automatic filling and extension detection on or off globally. |
 
-- **Turn ON/OFF**: Enable or disable the entire extension
-- **Keyboard Shortcut**: Use `ALT + Q` to quickly toggle extension status
-- **Visual Feedback**: Icon changes color based on status (colored = ON, grayed = OFF)
+**Key Details:**
 
-**How to Use:**
+- **Turn ON / OFF**: When toggled OFF, all automated form detection, page-load triggers, and data entry routines are paused globally.
+- **Keyboard Shortcut**: Press <kbd>Alt</kbd> + <kbd>Q</kbd> anywhere in your browser to instantly toggle the extension status on or off.
+- **Visual Feedback**: The browser toolbar icon dynamically reflects status (vibrant colored icon = **ON**, grayscale icon = **OFF**).
 
-1. Click the extension icon in your browser toolbar
-2. Toggle the "Extension is ON" switch
-3. Extension status changes immediately
-4. All automation features respect this setting
-
-:::info
-Change Shortcuts Key in Chrome - `chrome://extensions/shortcuts`
+::: info Customize Shortcuts
+You can customize shortcut key combinations in Chrome anytime by visiting `chrome://extensions/shortcuts`.
 :::
 
 ---
 
-## 💬 Dialog Boxes {#dialog-boxes}
+## <img src="/svg/chat.svg" class="doc-icon" width="22" height="22" alt="Dialog Boxes" /> Dialog Boxes {#dialog-boxes}
 
-Configure how the extension handles browser dialogs and alerts to ensure smooth automation without interruptions.
+Manage auto-dismissal rules and automated responses for JavaScript dialog popups (`alert` and `confirm`) to ensure smooth, unattended automation.
 
-**Supported Dialog Types:**
+### Dialog Management {#dialog-management}
 
-- **Alert Dialog**: Simple alert messages
-- **Confirm Dialog**: Yes/No confirmation prompts
+Configure automated rules for alert popups and confirmation prompts.
 
-### 🚨 Alert Dialog Handling {#alert-dialog-handling}
+#### Alert Dialogs
 
-Automatically handle alert messages during form filling.
+Automatically dismiss JavaScript `alert()` popups without requiring manual user intervention.
 
-**Look like this:**
+| Setting | Type | Description |
+| --- | --- | --- |
+| **Hide Alert Dialogs** | Toggle | Automatically dismiss JavaScript `alert()` popups without user action. |
+| **Target URLs for Alert Dismissal** | URL List | Enter website URLs and press <kbd>Enter</kbd> to add them to the dismissal list. |
 
-<img src="/image/js-alert-dialog.png" alt="Alert Dialog Handling">
+**How It Works:**
 
-**Settings:**
+1. Toggle **Hide Alert Dialogs** to **ON**.
+2. Enter your target website URL(s) into **Target URLs for Alert Dismissal** and press <kbd>Enter</kbd>.
+3. When an `alert()` appears on the specified site, the extension automatically intercepts and dismisses it immediately in the background so form automation continues without interruption.
 
-- **Toggle Switch**: Turn Alert Dialog Handling ON/OFF
-- **Site URL Input**: Enter website URL to hide alert dialogs
+#### Confirm Dialogs
 
-**How to Use:**
+Automatically answer JavaScript `confirm()` dialogs with predefined affirmative or negative decisions.
 
-1. Toggle the switch to **ON**
-2. Enter the website URL in the input field and press `enter`
-3. Extension will automatically dismiss alert dialogs on the specified site
+| Setting | Type | Description |
+| --- | --- | --- |
+| **Hide Confirm Dialogs** | Toggle | Automatically answer `confirm()` dialogs with predefined decisions. |
+| **Target URLs for Confirm Dismissal** | URL List | Enter website URLs where confirmation dialogs should be automatically answered. |
+| **Match Message Text Patterns** | Text Patterns | (Optional) Specify keyword patterns inside confirm dialogs to target specific prompts. |
+| **Choose Default Action** | Action Option | Predefine whether to automatically accept (`OK`) or dismiss (`Cancel`) the prompt. |
 
-:::info Note
-If when you fill entry, your entry complete has been detected by the alert message, then you can turn on this option as well as give the URL of the site.
-:::
-
-:::info Note
-Press `enter` to save the website URL
-:::
-
-### ✅ Confirm Dialog Handling {#confirm-dialog-handling}
-
-Automatically respond to confirmation dialogs.
-
-**Look like this:**
-
-<img src="/image/js-confirm-dialog.png" height="400" width="400" alt="Confirm Dialog Handling">
-
-**Settings:**
-
-- **Toggle Switch**: Turn Confirm Dialog Handling ON/OFF
-- **Site URL Input**: Enter website URL for confirm dialog handling
-- **Message Text Input**: (Optional) Enter specific confirm dialog message text
-
-**How to Use:**
-
-1. Toggle the switch to **ON**
-2. Enter the website URL in the input field and press `enter`
-3. (Optional) Enter specific confirm dialog message text
-4. Extension will automatically handle confirm dialogs on the specified site
-
-:::info Important Note
-If you do not give the message of Confirm Dialog then the extension will ok all the confirm dialogs of the site.
-:::
-
-:::info Note
-If when you fill entry, your entry complete has been detected by the confirm message, then you can turn on this option as well as give the URL of the site.
+::: tip Unattended Automation
+If automated form submission triggers an alert or confirmation prompt verifying that an entry has been completed, registering the site URL under **Dialog Management** prevents your automation workflow from pausing.
 :::
 
 ---
 
-## ➕ Insert Site/Form {#insert-site-form}
+## <img src="/svg/form.svg" class="doc-icon" width="22" height="22" alt="Insert Site / Form Rules" /> Insert Site / Form Rules {#insert-site-form}
 
-Configure how the extension detects, processes, and handles form elements on websites for optimal automation performance.
+Configure DOM detection depth, selector generation strategies, advanced parsing filters, and automatic field label cleaning.
 
-### 🔍 Form Detection {#form-detection}
+### Form Detection & Field Rules {#form-detection}
 
-Configure form element detection and processing.
+Fine-tune how the extension scans, detects, and generates selectors for form elements on a web page.
 
-| Field Options                      | Description                                   | Example Values                                                                   |
-| ---------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Form Element Label Position**    | Position value for form element labels        | `1`, `2`, `3`, ..                                                                |
-| **Ignore HTML Element Tag**        | HTML elements to ignore during form detection | `div`, `span`, `script`                                                          |
-| **Ignore Input Tag Type**          | Input types to ignore during automation       | `hidden`, `reset`, `button`                                                      |
-| **Generate Selector Query Method** | Method for generating element selectors       | **Unique Path** <br> **Full Path (CSS)** <br> **Full Path (DIV)** <br> **XPath** |
+| Setting | Type | Description | Default / Options |
+| --- | --- | --- | --- |
+| **Form Label Position** | Number | Sets the relative DOM traversal depth and position used to locate field label text. | `3` |
+| **Ignored HTML Tags** | Tag List | Specify HTML tags to ignore during form scanning (e.g., `textarea`, `select`). | None |
+| **Ignored Input Types** | Tag List | Specify input types to ignore during detection. | `hidden`, `reset` |
+| **Preferred Selector Strategy** | Dropdown | Choose the primary algorithm for generating element selector queries. | `Unique CSS Hierarchy` |
 
-### ⚙️ Advanced Options {#advanced-options}
+#### Preferred Selector Strategy Options
 
-Fine-tune form detection behavior with advanced configuration options.
+| Strategy | Description |
+| --- | --- |
+| **Unique CSS Hierarchy** | Generates the most concise, unique CSS selector hierarchy that targets the specific element without unnecessary parent selectors. |
+| **Full CSS Path** | Generates the complete CSS selector path from the document root down to the element. |
+| **Full Div Hierarchy** | Generates a structured CSS path specifically tracing through parent container `<div>` layers. |
+| **XPath Expression** | Generates robust, standard XPath expressions for precise element location. |
 
-| Option                                    | Description                                      |
-| ----------------------------------------- | ------------------------------------------------ |
-| **Fetch all the form fields of the site** | Detect fields both inside and outside forms      |
-| **Check External Library in the Page**    | Check for external libraries on the page         |
-| **Fetch only visible forms**              | Detect only visible forms for better performance |
-| **Fetch only visible form fields**        | Detect only visible form fields                  |
-| **Allow Right Click on Site**             | Enable right-click functionality on the site     |
-| **FORCE: Allow Right Click on Site**      | Force enable right-click functionality           |
+### Advanced Parsing Filters {#advanced-options}
 
-:::info Note
-If some fields in your site are inside the form and some fields are outside the form, then use the **"Fetch all the form fields of the site"** option.
+Enhance DOM scanning resilience for single-page applications (SPAs), modern dynamic frameworks, and secured pages.
+
+| Filter Option | Type | Description |
+| --- | --- | --- |
+| **Detect Inputs Outside `<form>`** | Toggle | Scans independent container `<div>` blocks or modern SPA inputs that are not wrapped within standard HTML `<form>` tags. |
+| **Check External Libraries** | Toggle | Detects and utilizes third-party DOM helper scripts if needed during page inspection. |
+| **Only Target Visible Forms** | Toggle | Ignores hidden or `display: none` form containers during automatic detection. |
+| **Only Target Visible Input Fields** | Toggle | Skips invisible, collapsed, or zero-height form elements. |
+| **Allow Right-Click** | Toggle | Re-enables the browser context menu on websites that disable right-click interactions. |
+| **Force Allow Right-Click** | Toggle | Strictly overrides hostile JavaScript event handlers blocking right-click access. |
+
+::: tip Quick Right-Click Bypass via Toolbar Menu
+You can also toggle right-click re-enabling on the active page on the fly: right-click the extension icon in your browser toolbar and click [Allow Right Click?](/documentation/extension/context-menu#allow-right-click).
 :::
 
-### 🧹 Field Name Cleaning {#field-name-cleaning}
+### Clean Field Names {#field-name-cleaning}
 
-Clean and format field names automatically for better organization and readability.
+Automatically sanitize and format detected field labels by stripping framework noise, ASP.NET IDs, and unwanted prefixes.
 
-| Field Options                       | Description                                      | Example Values                                       |
-| ----------------------------------- | ------------------------------------------------ | ---------------------------------------------------- |
-| **Is Clean Field Name**             | Toggle to remove repeated words from field names | `ON`                                                 |
-| **Remove String From Field Name**   | Strings to remove from field names               | `ctl00$ContentPlaceHolder1$`, `ctl00$OnlineContent$` |
-| **Remove String From Field Prefix** | Prefix strings to remove from field names        | `aspnetForm$`, `form1$`                              |
+| Setting | Type | Description |
+| --- | --- | --- |
+| **Clean Field Names** | Toggle | **Master Switch**. When enabled, strips unwanted prefixes or special character noise from detected field labels. |
+| **Remove Substrings from Labels** | Tag List | List of specific noise substrings to remove from detected labels. |
+| **Remove Prefixes from Labels** | Text Input | Enter specific prefixes to strip from the beginning of labels. |
 
 **Example:**
 
-- **Original**: `ctl00$ContentPlaceHolder1$txtName`
-- **After Cleaning**: `txtName`
+- **Raw Web Label / ID:** `ctl00$ContentPlaceHolder1$txtName`
+- **Substrings Removed:** `ctl00$ContentPlaceHolder1$`
+- **Clean Detected Field Name:** `txtName`
 
 ---
 
-## 📃 Form Filler {#form-filler}
+## <img src="/svg/browser.svg" class="doc-icon" width="22" height="22" alt="Form Filler Settings" /> Form Filler Settings {#form-filler}
 
-Configure visual feedback, performance settings, and form filling behavior for optimal user experience.
+Configure automation speed, status overlay displays, runtime logging viewers, environment variables, CAPTCHA bypass, and web request monitoring.
 
-### 👁️ Visual Feedback {#visual-feedback}
+### Visual Feedback {#visual-feedback}
 
-Configure visual indicators during form filling.
+Configure visual cues, status overlays, and runtime logging during automated filling cycles.
 
-| Option                                | Description                                          |
-| ------------------------------------- | ---------------------------------------------------- |
-| **Show Response Color in Field**      | Display response color in fields while filling forms |
-| **Show Entry's Status Bar**           | Display status bar showing entry progress            |
-| **Show Extension Logs in Status Bar** | Display latest extension logs in the status bar      |
+| Option | Type | Description |
+| --- | --- | --- |
+| **Input Color Feedback** | Toggle | Highlight input field backgrounds dynamically during fill cycles to visually track active elements. |
+| **Show Automation Status Bar** | Toggle | Display a floating overlay status bar during autofill runs. |
+| **Show Log Messages in Status Bar** | Toggle | Output live execution step messages directly on the status bar. When turned **ON**, log messages are visible in the status bar and attached popover; otherwise, they are not visible. |
+| **Show Extension Logs Viewer** | Toggle | Show a floating sidebar button on the web page to inspect live runtime log traces and debugging events. |
 
-**Look like this: Status Bar**
+#### Automation Status Bar
 
-<img src="/image/status-bar-01.png" alt="Image">
+When **Show Automation Status Bar** is enabled, an interactive toolbar renders on target web pages providing real-time progress, navigation, and live execution feedback.
 
-:::info
-If click `Mark as Saved` button on the status bar then execute `{MARK AS SAVED}` segment. If segment exists then execute.
+<img src="/image/status-bar-01.png" alt="Automation Status Bar">
+
+::: info Mark as Saved
+Clicking the **Mark as Saved** button on the status bar triggers the [{MARK AS SAVED}](/documentation/segment#predefine-segment) segment for the current entry row if configured in the form.
 :::
 
-#### 📊 Show Entry's Status Bar {#show-entrys-status-bar}
+**Key Status Bar Capabilities:**
 
-**Description:** Display a status bar at the top or bottom of the page showing entry progress and navigation controls.
+- **Slim & Modern Design**: Status bar that is sleek, unobtrusive, and fully mobile-responsive.
+- **Position & Theme Toggle**: Easily toggle the bar's position between **Top** and **Bottom**, and switch between **Dark** and **Light** themes for optimal contrast on any website.
+- **Minimize / Float Dock Mode**: Collapse the full toolbar into a compact floating pill docked at the corner of the screen when unobstructed page visibility is needed.
+- **Attached Logs Popover**: Clicking on the logs section opens an attached flyout card directly above or below the bar to inspect live runtime execution traces (visible only when **Show Log Messages in Status Bar** is turned ON; otherwise not visible).
 
-**Purpose:** The status bar provides real-time information about the current automation entry and allows quick navigation between entries.
+**Status Bar Controls & Features:**
 
-**Features:**
+| Control | Description |
+| --- | --- |
+| **Current Entry Index** | Displays the current active row number and total rows count (e.g. `Entry: 5 / 100`). |
+| **Previous Row** | Navigate to and fill the previous data row. |
+| **Next Row** | Navigate to and fill the next data row. |
+| **Mark as Saved** | Executes the [{MARK AS SAVED}](/documentation/segment#predefine-segment) segment. |
+| **Attached Logs Popover** | Click to open a live flyout card displaying recent execution steps and error logs (visible only when **Show Log Messages in Status Bar** is turned ON; otherwise not visible). |
+| **Dock / Minimize** | Collapses the status bar into a compact floating pill at the corner. |
+| **Position / Theme Toggle** | Switch docking edge (Top/Bottom) or color theme (Dark/Light). |
 
-| Feature | Description |
-|---------|-------------|
-| **Current Entry Row Index** | Shows the current entry row number being processed |
-| **Total Entries** | Displays the total number of entries in the Excel sheet |
-| **Fill Next Entry** | Button to navigate to and fill the next entry |
-| **Fill Previous Entry** | Button to navigate to and fill the previous entry |
-| **Mark as Saved** | Button to mark the current entry as saved (executes `{MARK AS SAVED}` segment if exists) |
-| **Extension Logs** | Displays latest extension logs (when enabled) |
-
-**Display Format:**
-
-```
-Entry: [Current Row] / [Total Entries]  [◀ Previous] [Next ▶] [Mark as Saved]
-```
-
-**Example:**
-
-```
-Entry: 5 / 100  [◀ Previous] [Next ▶] [Mark as Saved]
-```
-
-**How to Use:**
-
-1. Enable **"Show Entry's Status Bar"** option in settings
-2. Status bar appears at configured position (Top or Bottom)
-3. View current entry progress during automation
-4. Click navigation buttons to move between entries
-5. Click "Mark as Saved" to execute save segment
-
-**Navigation Controls:**
-
-- **◀ Previous:** Navigate to and fill the previous entry row
-- **Next ▶:** Navigate to and fill the next entry row
-- **Mark as Saved:** Execute the `{MARK AS SAVED}` segment (if defined in form)
-
-**Benefits:**
-
-- **Track Progress:** See which entry is currently being processed
-- **Quick Navigation:** Move between entries without opening Excel
-- **Manual Control:** Override automatic entry progression
-- **Save Tracking:** Mark entries as completed/saved
-- **Visual Feedback:** Monitor automation status in real-time
-
-**Related Settings:**
-
-- **Status Bar Position:** Configure whether status bar appears at Top or Bottom
-- **Show Extension Logs in Status Bar:** Display logs alongside entry information
-
-:::tip Entry Navigation
-Use the Previous/Next buttons to manually navigate between entries during automation. This is useful for testing specific entries or handling errors.
+::: tip Close Status Bar Programmatically
+To dismiss or close the status bar from the web page during automation (for example, prior to capturing full-page screenshots or upon finishing form tasks), you can use the [`closeStatusBar`](/documentation/functions#closestatusbar) predefined function.
 :::
 
-#### 📊 Show Extension Logs in Status Bar {#show-extension-logs-in-status-bar}
+### Show Extension Logs Viewer {#show-extension-logs-viewer}
 
-**Description:** When enabled, the latest extension logs will be displayed in the status bar at the bottom of the page.
+When enabled under **Visual Feedback**, a floating sidebar button appears on active web pages, allowing you to open the dedicated **Extension Logs** runtime viewer directly over the page without opening browser developer tools.
 
-**Requirements:**
-- **Show Entry's Status Bar** must be enabled
-- Status bar must be visible on the page
+<img src="/image/logs-viewer.png" alt="Extension Logs Viewer" style="max-width: 420px; border-radius: 8px;">
 
-**How to Use:**
+#### Top Toolbar Controls
 
-1. Enable **"Show Entry's Status Bar"** option
-2. Enable **"Show Extension Logs in Status Bar"** option
-3. Status bar will display latest extension logs during automation
-4. Logs update in real-time as operations occur
+The header bar provides quick actions to control the live log stream and manage records:
 
-**Related:** [Logs Monitor](/documentation/log#logs-monitor)
+| Action | Description |
+| --- | --- |
+| **Dock / Sidebar Mode** | Toggle the panel between floating drawer and docked sidebar layouts. |
+| **Search** | Real-time text search to quickly filter logs by keyword, field name, or URL. |
+| **Pause / Resume** | Freeze log streaming to closely inspect a specific event while automation is actively running. |
+| **Download / Export** | Download the current session log records as a file for troubleshooting. |
+| **Clear Logs** | Clears the active log feed from the viewer. |
+| **Close** | Dismisses the slide-over viewer. |
 
-:::tip
-Use this feature during development and testing to monitor automation without switching between tabs or opening the browser console.
-:::
+#### Panel Customization
 
-### ⚡ Performance Settings {#performance-settings}
+Customize the viewer to fit your monitor resolution and reading preferences:
 
-Configure filling speed and monitoring behavior.
+- **Panel Width Presets**: Select between **420px**, **520px**, **680px**, and **880px** for optimal reading space.
+- **Zoom Scale**: Adjust text sizing using the zoom controls (`-`, `+`, `Reset`) with percentage scale feedback.
+- **Theme Mode**: Seamlessly switch between **Dark** and **Light** themes.
 
-| Field Options                   | Description                            | Example Values                                                                                                                                                                                     |
-| ------------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Status Bar Position**         | Position of the status bar on the page | **Bottom** <br> **Top**                                                                                                                                                                            |
-| **Types of URL Monitoring**     | Method for monitoring URL changes      | **- When the page is not reloaded when the URL changes.** <br> **- When the page is not reloaded when the URL changes. (ASYNC METHOD)** <br> **- When the page is reloaded when the URL changes.** |
-| **Types of Form Filling Speed** | Speed of form filling operations       | **Fast (no delay)** <br> **Medium (0.3s delay)** <br> **Slow (2s delay)** <br> **Random (min, max)**                                                                                               |
+#### Log Filter Categories
 
-#### 🎲 Random Speed Settings {#random-speed-settings}
+Pill tabs at the top of the feed allow instant filtering by event type with live count badges:
 
-Configure random delay parameters when "Random (min, max)" is selected.
+- **All**: Displays all recorded logs sequentially.
+- **Group**: Shows execution segment boundaries, form URL matching blocks, and loop cycles.
+- **Success**: Highlights successful field matches, inputs, and completed automated actions.
+- **Warn**: Identifies non-critical warnings or skipped field conditions.
+- **Error**: Immediately flags missing DOM elements, timeout errors, and submission failures.
 
-| Field Options            | Description                        | Example Values         |
-| ------------------------ | ---------------------------------- | ---------------------- |
-| **Minimum Milliseconds** | Minimum delay time in milliseconds | `100`, `500`, `1000`   |
-| **Maximum Milliseconds** | Maximum delay time in milliseconds | `2000`, `3000`, `5000` |
+#### Detailed Log Cards
 
-:::info Note  
-These settings only appear when "Random (min, max)" is selected for Form Filling Speed.
-:::
+Each log entry is rendered as an interactive card containing:
 
-### 🌐 Web Request Monitoring {#web-request-monitoring}
+- **Status & Segment Badges**: Clear badges denoting level (`SUCCESS`, `WARN`, `ERROR`, `GROUP`) and active segments (e.g. `{ENTRY-ALL-DONE}`).
+- **Precise Timing**: Exact timestamp down to the second, plus relative execution duration badges (e.g. `+1.00s`).
+- **One-Click Copy**: Copy card contents and diagnostic payload directly to your clipboard.
+- **Source URL**: Clickable link to the exact web page where the event occurred.
 
-Monitor specific URL patterns for web requests.
+---
 
-| Field Options    | Description                     | Example Values                                                      |
-| ---------------- | ------------------------------- | ------------------------------------------------------------------- |
-| **URL Patterns** | List of URL patterns to monitor | `https://*/*` <br> `*://mail.google.com/*` <br> `*://example.com/*` |
+### Speed & Performance {#performance-settings}
 
-**How to Use:**
+Configure automation execution speed, DOM navigation monitoring, and layout positions.
 
-1. Enter URL patterns in the input field
-2. Press `Enter` to add each pattern
-3. Patterns will be displayed as tags
-4. Use wildcards (`*`) for flexible matching
+| Setting | Type | Description | Default / Options |
+| --- | --- | --- | --- |
+| **Status Bar Position** | Dropdown | Sets the placement of the floating status bar on the page. | `Bottom`, `Top` |
+| **URL Change Monitoring Mode** | Dropdown | Choose how the extension detects and handles page navigation or dynamic URL transitions. | `SPA / Dynamic History changes (Sync)` |
+| **Form Filling Speed** | Dropdown | Controls execution delay between sequential field actions. | `Fast (Instant execution)` |
 
-:::info Note
-if use [`Web Request Completed`](/documentation/field-types/web-request-completed) field type, then you have to use the URL patterns in the **Request URL** field.
-:::
+#### URL Change Monitoring Modes
 
-### ⚙️ Environment Settings {#environment-settings}
+| Mode | Best Used For |
+| --- | --- |
+| **SPA / Dynamic History changes (Sync)** | Single Page Applications (React, Vue, Angular) where the URL updates dynamically via the History API without a full page reload. |
+| **SPA / Dynamic History changes (Async)** | Complex SPAs that render DOM elements asynchronously after a URL route or hash transition. |
+| **Standard Page reloads (Sync)** | Traditional multi-page web applications that perform full page reloads on navigation. |
 
-Configure environment settings for the extension.
+#### Form Filling Speed Options
 
-| Field Options             | Description                                 | Example Values                                |
-| ------------------------- | ------------------------------------------- | --------------------------------------------- |
-| **Environment Variables** | JSON configuration for environment settings | <pre>{"title": "EDF", "version": "4.0"}</pre> |
+| Speed Option | Behavior |
+| --- | --- |
+| **Fast (Instant execution)** | Fills fields sequentially with zero artificial delay for maximum automation throughput. |
+| **Medium (0.3s delay)** | Adds a 300ms delay between field operations to ensure reactive input handlers register values. |
+| **Slow (2s delay)** | Adds a 2-second delay between field operations for slow web forms or visual demonstrations. |
+| **Randomized delay range** | Introduces human-like randomized delays between fields within a configurable range. |
 
-:::info How to Use
-Use in the field options value or field value with `{$variable_name$}`. Like this:
+#### Randomized Delay Range Settings {#random-speed-settings}
+
+When **Randomized delay range** is selected, the following duration parameters appear:
+
+| Field | Type | Description | Example Value |
+| --- | --- | --- | --- |
+| **Min Delay (ms)** | Number | Minimum delay time in milliseconds. | `200` |
+| **Max Delay (ms)** | Number | Maximum delay time in milliseconds. | `1000` |
+
+---
+
+### Environment Variables {#environment-settings}
+
+Configure global variables accessible in expressions, templates, and field values using `{$key_name$}` syntax.
+
+<img src="/image/global-env-var.png" alt="Environment Variables" style="max-width: 100%; width: 680px; height: auto; border-radius: 8px; margin: 12px 0;">
+
+**Key Features:**
+- **Table & JSON Views**: Switch seamlessly between a structured table view and a direct JSON editor.
+- **Search by Key**: Quickly locate variables using the search filter.
+- **Data Types**: Supports typed values such as `String`, `Number`, `Boolean`, and `Object`.
+- **Row Actions**: Copy value, duplicate variable row, or delete variable.
+
+| Column | Description |
+| --- | --- |
+| **Variable Key** | The unique identifier used to reference the variable (e.g. `title`). |
+| **Type** | The variable data type (`String`, `Number`, etc.). |
+| **Value** | The value assigned to the variable. |
+| **Actions** | Quick action buttons to copy, duplicate, or delete the variable. |
+
+**Usage Example:**
+
+Reference environment variables in field values or settings using curly brackets:
 
 ```json
 {$title$}
 ```
 
+::: tip Site-Specific Environment Variables
+Variables defined here apply **globally** across all websites. If you need variables isolated to a specific website, configure [Site Environment Variables](/documentation/site/site-settings#site-environment-variables) inside that site's settings. Site-level variables automatically take precedence if the same key name is used.
 :::
 
 ---
 
-### 🔐 Captcha Solution {#captcha-solution}
+### Auto-Solve CAPTCHAs {#captcha-solution}
 
-Configure Captcha Solution API Keys for the extension to automatically solve captchas during automation.
+Configure automated CAPTCHA solving services to bypass verification challenges during form filling cycles.
 
-#### 🔑 API Configuration {#api-configuration}
+| Setting | Type | Description |
+| --- | --- | --- |
+| **Auto-Solve CAPTCHAs** | Toggle | **Master Switch**. Bypass verification challenges automatically during form filling cycles. |
+| **Service** | Provider | Supported CAPTCHA solving provider (e.g. `2Captcha`). |
+| **API Key** | Secret Key | Your provider account API key (with visibility toggle to reveal/hide). |
+| **Solve Cloudflare Turnstile challenges** | Toggle | Automatically detect and solve Cloudflare Turnstile verification challenges. |
 
-Set up your captcha solving service API credentials.
-
-| Field Options                        | Description                                    | Example Values                            |
-| ------------------------------------ | ---------------------------------------------- | ----------------------------------------- |
-| **Use Captcha Solution Service API** | Enable/disable captcha solving service         | Toggle ON/OFF                             |
-| **Service Name**                     | Captcha solving service provider               | `2Captcha`                                |
-| **API Key**                          | Your captcha service API key                   | `a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6`        |
-
-#### ⚙️ Service Options {#service-options}
-
-Configure additional captcha solving options.
-
-| Option                                              | Description                                      |
-| --------------------------------------------------- | ------------------------------------------------ |
-| **Solve Cloudflare Challenge Page with 2Captcha**  | Automatically solve Cloudflare Turnstile captcha |
-
-**How to Use:**
-
-1. Toggle **"Use Captcha Solution Service API"** to **ON**
-2. Select **Service Name**: `2Captcha`
-3. Enter your **API Key** from your 2Captcha account
-4. (Optional) Enable **"Solve Cloudflare Challenge Page with 2Captcha"** for Cloudflare Turnstile support
-5. API key will be used globally across all sites
-
-:::tip Get API Key
-Sign up at [2Captcha](https://2captcha.com/) to get your API key. You can find it in your account dashboard after signing up.
+::: tip Get API Key
+Obtain your API key from your [2Captcha](https://2captcha.com/) account dashboard.
 :::
 
-:::info Priority
-API keys can be configured at three levels:
-- **Global Settings** (this page) - Applies to all sites
-- **Site Settings** - Applies to specific site
-- **Field Settings** - Applies to specific field
-
-**Priority Order**: Field Settings > Site Settings > Global Settings
+::: info Priority Hierarchy
+CAPTCHA settings can be configured at three levels:
+1. **Field Settings** (Highest Priority)
+2. **Site Settings**
+3. **Global Settings** (Configured here)
 :::
 
-#### 📚 Related Documentation {#captcha-related-docs}
+#### Related Documentation {#captcha-related-docs}
 
 - [Captcha Solution Field Type](/documentation/field-types/captcha-solution)
 - [2Captcha Documentation](/documentation/field-types/captcha-solution/2captcha)
 
 ---
 
-## 📄 Microsoft Form {#microsoft-form}
+### Monitored Request URLs (Match Patterns) {#web-request-monitoring}
+
+Specify URL match patterns to track network requests across targeted domains.
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **Monitored Request URLs** | Tag Input | Enter URL match patterns (e.g. `https://*/*`) and press <kbd>Enter</kbd>. |
+
+**Match Pattern Examples:**
+- `https://*/*` — Targets all HTTPS domains.
+- `*://mail.google.com/*` — Targets Gmail specifically.
+
+::: info Note
+Used by the [`Web Request Completed`](/documentation/field-types/web-request-completed) and [`Request Monitor`](/documentation/field-types/request-monitor) field types to monitor and capture background HTTP requests.
+:::
+
+---
+
+## <img src="/svg/template.svg" class="doc-icon" width="22" height="22" alt="Microsoft Form Rules" /> Microsoft Form Rules {#microsoft-form}
 
 Configure Microsoft Forms integration and field selector customization for optimal compatibility.
 
@@ -388,7 +368,7 @@ Configure Microsoft Forms integration and field selector customization for optim
 
 ---
 
-## 🏢 Extension Server {#extension-server}
+## <img src="/svg/system.svg" class="doc-icon" width="22" height="22" alt="Local Extension Server" /> Local Extension Server {#extension-server}
 
 Configure the connection to your local server to enable advanced automation features, such as email operations and local data processing. See [Local Server](/documentation/local-server/local-server) for more details.
 
@@ -412,37 +392,47 @@ When you check the server status, a detailed JSON response from the server is di
 
 ---
 
-## 📤 Export/Import {#export-import}
+## <img src="/svg/database.svg" class="doc-icon" width="22" height="22" alt="Export / Import Data" /> Export / Import Data (Data Management & Backups) {#export-import}
 
-Manage data backup, restoration, and site management operations.
+The **Data Management & Backups** dashboard provides centralized controls to export, import, and manage your extension configurations across different browsers or backup storage.
 
-### 📥 Import Operations {#import-operations}
+### Import Site Configurations {#import-site-configurations}
 
-| Operation       | Description                                             | File Format |
-| --------------- | ------------------------------------------------------- | ----------- |
-| **Import Data** | Import previously exported site data and configurations | JSON        |
+Restore previously saved site configurations, form definitions, and field rules from a JSON backup file.
 
-### 📤 Export Operations {#export-operations}
+| Action | Control | Description |
+| --- | --- | --- |
+| **Choose JSON File to Import** | File Upload Button | Select an exported `.json` configuration file from your computer to restore your site definitions and field mappings. |
 
-| Operation                 | Description                                      | Includes                          |
-| ------------------------- | ------------------------------------------------ | --------------------------------- |
-| **Backup All Sites**      | Export all active sites and their configurations | Forms, fields, settings           |
-| **Backup Archived Sites** | Export only archived/inactive sites              | Archived forms and configurations |
-
-:::info Note
-Export option don't include excel data.
+::: tip Safe Import
+Importing a JSON configuration updates and merges existing site configurations without wiping unrelated extension settings.
 :::
 
-### 🗑️ Delete Operations {#delete-operations}
+### Export Site Backup {#export-site-backup}
 
-| Operation                 | Description                                 | Impact                                           |
-| ------------------------- | ------------------------------------------- | ------------------------------------------------ |
-| **Delete All Sites**      | Permanently remove all sites and their data | **⚠️ Irreversible - All data will be lost**      |
-| **Delete Archived Sites** | Permanently remove only archived sites      | **⚠️ Irreversible - Archived data will be lost** |
+Export your configurations into standardized `.json` backup files for safe keeping, version control, or migrating to another browser profile.
 
-:::warning Important
+| Action | Format | Description |
+| --- | --- | --- |
+| **Backup All Sites** | `.json` File | Save all active sites, registered forms, and field configurations into a single JSON backup. |
+| **Backup Archived Sites** | `.json` File | Save all archived sites and inactive forms into a separate dedicated JSON backup file. |
 
-- **Backup before deleting**: Always create a backup before performing delete operations
-- **Irreversible action**: Deleted data cannot be recovered
-- **Archive instead of delete**: Consider archiving sites instead of deleting them
-  :::
+::: info Note
+Backup files contain site definitions, form structures, field rules, and selector configurations. Backups do not include uploaded `.xlsx` spreadsheet rows, which are managed independently per session.
+:::
+
+### Danger Zone {#danger-zone}
+
+Permanent deletion actions to wipe site storage. Exercise extreme caution when using these options.
+
+| Action | Severity | Description |
+| --- | --- | --- |
+| **Delete All Sites** | Critical | Permanently wipes all active site configurations, forms, and fields from extension storage. |
+| **Delete Archived Sites** | Critical | Permanently wipes all archived sites and stored historical configurations from extension storage. |
+
+::: danger Irreversible Actions
+- **Always Backup First**: Generate a **Backup All Sites** JSON export before deleting any configurations.
+- **Permanent Loss**: Deleted configurations cannot be recovered once removed from storage.
+- **Prefer Archiving**: If a site is no longer actively needed, move it to the Archive rather than permanently wiping it.
+:::
+

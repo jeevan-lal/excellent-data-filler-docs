@@ -2,7 +2,7 @@
 
 The Date and Time field type is used to handle date and time operations, formatting, and calculations. This field type provides several options for working with dates and times, including getting the current date and time, converting dates between different formats, adding time to a date, and subtracting time from a date.
 
-[Date Format](https://day.js.org/docs/en/display/format)
+Refer to the [Day.js Date Format Documentation](https://day.js.org/docs/en/display/format) for standard date tokens.
 
 ## Field Types
 
@@ -51,8 +51,8 @@ Specify the desired output format for the converted date.
 :::info Usage Notes
 
 - If you have given element query in this field then scrape date from element text.
-- If you haven't provided an element query then you must specify date in the field value.
-  :::
+- If you haven't provided an element query then you must specify date in the field value or map it from your Excel (.xlsx) file.
+:::
 
 ## Increase Date
 
@@ -92,8 +92,8 @@ Specify the format for the output date after adding time.
 :::info Usage Notes
 
 - If you have given element query in this field then scrape date from element text.
-- If you haven't provided an element query then you must specify date in the field value.
-  :::
+- If you haven't provided an element query then you must specify date in the field value or map it from your Excel (.xlsx) file.
+:::
 
 ## Decrease Date
 
@@ -133,5 +133,13 @@ Specify the format for the output date after subtracting time.
 :::info Usage Notes
 
 - If you have given element query in this field then scrape date from element text.
-- If you haven't provided an element query then you must specify date in the field value.
-  :::
+- If you haven't provided an element query then you must specify date in the field value or map it from your Excel (.xlsx) file.
+:::
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

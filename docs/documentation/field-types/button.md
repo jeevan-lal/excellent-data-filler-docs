@@ -12,24 +12,24 @@ Button fields are used to interact with clickable elements on web pages, such as
 | **Field Type**           | Set to **Button** for clickable elements | `Button`                             |
 | **Field Selector Type**  | Method to locate the field element       | `Selector`, `Id`, `XPath`            |
 | **Field Selector Query** | Unique address to locate the field       | `#submit`, `button[type="submit"]`   |
-| **Field Value**          | Data source for button interaction       | Excel column or default value        |
+| **Field Value**          | Data source for button interaction       | Excel (.xlsx) column or default value |
 
 ## Button Field Settings
 
-### 🖱️ Button Click Behavior {#button-click-behavior}
+### Button Click Behavior {#button-click-behavior}
 
-Configure how the button interacts based on Excel data values.
+Configure how the button interacts based on Excel (.xlsx) data values.
 
 **Core Behavior:**
 
-- **Excel Value Priority** - Button behavior depends on Excel column value
+- **Excel Value Priority** - Button behavior depends on Excel (.xlsx) column value
 - **Conditional Clicking** - Button only clicks when Excel value is not "not-click"
 - **Skip Behavior** - Button is skipped when Excel value is "not-click"
 
 **Configuration:**
 
 - **Toggle Switch**: Enable/disable conditional button clicking
-- **Excel Value Check**: System checks Excel column for "not-click" value
+- **Excel Value Check**: System checks Excel (.xlsx) column for "not-click" value
 - **Click Action**: Button clicks only when Excel value is not "not-click"
 
 **Example Scenarios:**
@@ -43,7 +43,7 @@ Excel Column Value: "submit" → Button gets clicked
 
 ---
 
-### ⏳ Element Detection Settings {#element-detection-settings}
+### Element Detection Settings {#element-detection-settings}
 
 Configure how the extension waits for and interacts with button elements.
 
@@ -59,7 +59,7 @@ Configure how the extension waits for and interacts with button elements.
 - **Use Case**: Hidden buttons, CSS visibility controls
 - **Configuration**: Toggle ON/OFF
 
-### ⚡ Trigger Javascript Event {#javascript-event-triggering}
+### Trigger Javascript Event {#javascript-event-triggering}
 
 Configure JavaScript events to be triggered on the button element.
 
@@ -93,7 +93,7 @@ This will trigger the form's submit event programmatically without requiring a c
 - **Event**: `submit`
 :::
 
-### 🔗 Open Links in New Tab? {#open-links-in-new-tab}
+### Open Links in New Tab? {#open-links-in-new-tab}
 
 Configure whether links clicked by the button open in a new tab.
 
@@ -113,7 +113,7 @@ Configure whether links clicked by the button open in a new tab.
 
 ### Skip Button
 
-- **Behavior**: Button is ignored when Excel value is "not-click"
+- **Behavior**: Button is ignored when Excel (.xlsx) value is "not-click"
 - **Use Case**: Optional form steps, conditional workflows
 - **Configuration**: Excel value "not-click" skips button
 
@@ -135,11 +135,12 @@ If the user closes the tab or browser, this confirm dialog will appear again on 
 - Check selector accuracy
 - Verify element visibility
 - Test with different selectors
-- Check Excel value format
+- Check Excel (.xlsx) value format
 
 ## Next Steps
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

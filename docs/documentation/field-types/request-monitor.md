@@ -97,9 +97,9 @@ When the **"Do you want to click on an element?"** option is enabled, this field
 
 The extension will locate this element and click it before starting to monitor the network requests.
 
-## Save to Excel
+## Save to Excel (.xlsx)
 
-This option allows you to **automatically save the request response data to an Excel sheet**. When enabled, the response from the monitored request will be captured and saved to your Excel file.
+This option allows you to **automatically save the request response data to an Excel (.xlsx) sheet**. When enabled, the response from the monitored request will be captured and saved to your Excel file.
 
 ### Column Naming Convention
 
@@ -124,5 +124,8 @@ This makes it easy to identify which field captured the request data and allows 
 
 ## Related Documentation
 
-For advanced request monitoring using JavaScript code, see:
-- [JavaScript Code - Request Monitoring](/documentation/field-types/javascript-code.html#request-monitoring)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Advanced field configuration
+- <img src="/svg/form.svg" class="doc-icon" /> [JavaScript Code - Request Monitoring](/documentation/field-types/javascript-code.html#request-monitoring) — Request monitoring via script
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Excel (.xlsx) template structure
+- <img src="/svg/browser.svg" class="doc-icon" /> [Web Request Completed](/documentation/field-types/web-request-completed) — Wait for web request completion
+

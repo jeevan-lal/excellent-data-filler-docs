@@ -2,7 +2,7 @@
 
 The Program Helper is a required companion application that enables advanced automation features in the Excellent Data Filler extension. It provides system-level access for file operations, PDF generation, and other automation tasks that require elevated permissions.
 
-## 📋 Overview {#overview}
+## Overview {#overview}
 
 The Program Helper is essential for:
 
@@ -12,7 +12,7 @@ The Program Helper is essential for:
 - **Security** - Handle sensitive operations safely
 - **Other** - Other advanced automation tasks
 
-## 🚀 Installation {#installation}
+## Installation {#installation}
 
 ### Prerequisites {#prerequisites}
 
@@ -51,7 +51,7 @@ The Program Helper is essential for:
 1. **Open the extension** in your browser
 3. **Test Field Types** functionality
 
-## 🔧 Troubleshooting {#troubleshooting}
+## Troubleshooting {#troubleshooting}
 
 ### Common Issues {#common-issues}
 
@@ -70,7 +70,7 @@ The Program Helper is essential for:
 - **Cause:** Helper program not installed or not running
 - **Solution:** Install helper program and restart browser
 
-## 🔒 Security Considerations {#security-considerations}
+## Security Considerations {#security-considerations}
 
 ### Data Protection {#data-protection}
 
@@ -103,3 +103,11 @@ Keep the helper program updated to the latest version for the best performance a
 :::warning Important
 The helper program is required for advanced features. Some extension field type will not function properly without it.
 :::
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Upload File Field Type](/documentation/field-types/upload-file)
+- <img src="/svg/form.svg" class="doc-icon" /> [Save as PDF Field Type](/documentation/field-types/save-as-pdf)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+- <img src="/svg/browser.svg" class="doc-icon" /> [Extension Settings](/documentation/settings)
+

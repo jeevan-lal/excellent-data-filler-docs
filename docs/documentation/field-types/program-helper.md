@@ -6,11 +6,11 @@ Program Helper field types allow you to interact with external applications, sys
 To use these fields, you will first have to install the helper program in the OS, only after that you can do this field work.
 :::
 
-## 📥 Install Helper Program {#install-helper-program}
+## Install Helper Program {#install-helper-program}
 
-The [**Helper Program**](/documentation/program#download-and-install) is required to enable system-level automation and external application interactions. Download and install the appropriate version for your operating system:
+The [**Helper Program**](/documentation/program#download-and-install) is required to enable system-level automation and external application interactions. Download and install the appropriate version for your operating system.
 
-## 🖥️ X-Focus Application Window {#x-focus-application-window}
+## X-Focus Application Window {#x-focus-application-window}
 
 Focus on a specific application window to bring it to the foreground.
 
@@ -24,7 +24,7 @@ Focus on a specific application window to bring it to the foreground.
 - `ahk_exe notepad.exe` - Focus Notepad
 - `Untitled - Notepad` - Focus window by title
 
-## ⌨️ X-Click (Space Key) {#x-click-space-key}
+## X-Click (Space Key) {#x-click-space-key}
 
 Simulate a space key press on the currently focused element.
 
@@ -34,7 +34,7 @@ Simulate a space key press on the currently focused element.
 - Automatically sends a space key press to the focused element
 - Useful for activating buttons or toggling checkboxes
 
-## 📝 X-Paste Text {#x-paste-text}
+## X-Paste Text {#x-paste-text}
 
 Paste text content into the currently focused element.
 
@@ -46,9 +46,9 @@ Paste text content into the currently focused element.
 **Usage Examples:**
 
 - **Field Value**: `Hello World` - Pastes "Hello World"
-- **Field Value**: `{$variable$}` - Pastes dynamic variable content
+- **Field Value**: `{$variable$}` - Pastes dynamic variable content from Excel (.xlsx)
 
-## 📌 X-WinAlwaysOnTop (Activate) {#x-winalwaysontop-activate}
+## X-WinAlwaysOnTop (Activate) {#x-winalwaysontop-activate}
 
 Set the current window to always stay on top of other windows.
 
@@ -58,7 +58,7 @@ Set the current window to always stay on top of other windows.
 - Makes the current window stay above all other windows
 - Useful for keeping important dialogs visible
 
-## 📌 X-WinAlwaysOnTop (Deactivate) {#x-winalwaysontop-deactivate}
+## X-WinAlwaysOnTop (Deactivate) {#x-winalwaysontop-deactivate}
 
 Remove the always-on-top property from the current window.
 
@@ -68,7 +68,7 @@ Remove the always-on-top property from the current window.
 - Returns the window to normal layering behavior
 - Use after completing tasks that required always-on-top
 
-## ⏳ X-KeyWait {#x-keywait}
+## X-KeyWait {#x-keywait}
 
 Wait for a specific key to be released before proceeding.
 
@@ -86,7 +86,7 @@ Wait for a specific key to be released before proceeding.
 If you need to send multiple keystrokes, like `"alt+a"`, you will need to insert two `X-KeyWait` field types in the extension form: one for `"alt"` and one for `"a"`.
 :::
 
-## ⌨️ X-Send {#x-send}
+## X-Send {#x-send}
 
 Send keystrokes, special keys, or text to the currently focused element.
 
@@ -111,7 +111,7 @@ Send keystrokes, special keys, or text to the currently focused element.
 - **Field Value**: `^s` - Sends Ctrl+S (save)
 - **Field Value**: `Hello World` - Types "Hello World"
 
-## 🖱️ X-MouseClick {#x-mouseclick}
+## X-MouseClick {#x-mouseclick}
 
 Simulate mouse clicks at specific coordinates or on the current cursor position.
 
@@ -132,7 +132,7 @@ Simulate mouse clicks at specific coordinates or on the current cursor position.
 - `right,100,200,1` - Right click at coordinates (100, 200)
 - `left,,,2` - Double left click at current position
 
-## 🎯 X-ControlClick {#x-controlclick}
+## X-ControlClick {#x-controlclick}
 
 Click on specific control elements within applications.
 
@@ -151,7 +151,7 @@ Click on specific control elements within applications.
 - `x100 y200,Untitled - Notepad` - Click at (100, 200) in Notepad window
 - `x50 y50,Calculator` - Click at (50, 50) in Calculator window
 
-## 🔍 X-ImageSearch {#x-imagesearch}
+## X-ImageSearch {#x-imagesearch}
 
 Search for images on the screen and perform actions based on their location.
 
@@ -168,7 +168,7 @@ Search for images on the screen and perform actions based on their location.
 
 ---
 
-## 📂 FileExist {#fileexist}
+## FileExist {#fileexist}
 
 Check for the existence of a file or folder on your PC using file patterns and wildcards.
 
@@ -176,7 +176,7 @@ Check for the existence of a file or folder on your PC using file patterns and w
 | --------------- | ------------------------------------------ | -------------------- |
 | **Field Value** | File pattern to search for (path + pattern) | `C:\Temp\*.tmp`      |
 
-**Set in:** Field Default Value or Excel Field Column
+**Set in:** Field Default Value or Excel (.xlsx) Field Column
 
 **File Pattern Examples:**
 
@@ -253,7 +253,7 @@ File patterns on Windows are case-insensitive. `*.TXT` and `*.txt` will match th
 
 ---
 
-## 📁 X-FileGetSize {#x-filegetsize}
+## X-FileGetSize {#x-filegetsize}
 
 Get the file size in bytes for local files or remote URLs.
 
@@ -276,7 +276,7 @@ C:\Users\P1\Pictures\photo.jpg
 https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg
 ```
 
-## 📄 X-FileExtension {#x-fileextension}
+## X-FileExtension {#x-fileextension}
 
 Get the file extension from a file path or URL.
 
@@ -296,3 +296,10 @@ Get the file extension from a file path or URL.
 - **Input**: `photo.jpg` → **Output**: `jpg`
 - **Input**: `script.js` → **Output**: `js`
 - **Input**: `document.pdf` → **Output**: `pdf`
+
+## Next Steps
+
+- <img src="/svg/browser.svg" class="doc-icon" /> [Helper Program Guide](/documentation/program#download-and-install) — Native helper installation
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about all field types
+- <img src="/svg/excel.svg" class="doc-icon" /> [Upload File Field](/documentation/field-types/upload-file) — Automate file uploads with helper
+- <img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings

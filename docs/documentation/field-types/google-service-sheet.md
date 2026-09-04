@@ -38,6 +38,11 @@ Retrieve data from Google Sheets to use in your automation workflows.
 
 ## Related Documentation
 
-- [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/form.svg" class="doc-icon" /> [Fetch Google Sheet Data](/documentation/field-types/google-service-sheet/fetch-google-sheet-data)
+<img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+
 - [Variables](/documentation/variable)
 - [Google Sheets API Documentation](https://developers.google.com/sheets/api)
+

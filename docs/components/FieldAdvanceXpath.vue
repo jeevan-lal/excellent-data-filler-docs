@@ -214,6 +214,55 @@
           </table>
         </td>
       </tr>
+      <tr>
+        <td>
+          <code><strong>not(@attribute)</strong></code>
+        </td>
+        <td>
+          <table style="width: max-content;">
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>HTML</th>
+                <th>XPath</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="text" placeholder="Active input" />
+                  <input type="text" disabled placeholder="Disabled input" />
+                </td>
+                <td>
+                  <code>&lt;input type="text" placeholder="Active input"&gt;</code> <br />
+                  <code>&lt;input type="text" disabled placeholder="Disabled input"&gt;</code>
+                </td>
+                <td>
+                  <strong>//input[not(@disabled)]</strong> <br />
+                  <strong>//input[not(@readonly)]</strong> <br />
+                  <strong>//tag_name[not(@attribute_name)]</strong> <br />
+                  <strong>//button[not(@disabled) and contains(text(),"Submit")]</strong>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="card active" style="padding: 4px; border: 1px solid #ccc; margin-bottom: 4px;">Active Box</div>
+                  <div class="card hidden" style="padding: 4px; border: 1px dashed #ccc; color: #888;">Hidden Box</div>
+                </td>
+                <td>
+                  <code>&lt;div class="card active"&gt;Active Box&lt;/div&gt;</code> <br />
+                  <code>&lt;div class="card hidden"&gt;Hidden Box&lt;/div&gt;</code>
+                </td>
+                <td>
+                  <strong>//div[not(contains(@class,"hidden"))]</strong> <br />
+                  <strong>//div[not(@id)]</strong> <br />
+                  <strong>//div[@class="card"][not(contains(@class,"hidden"))]</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>

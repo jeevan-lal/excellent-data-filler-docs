@@ -7,380 +7,282 @@ next:
   link: "/documentation/site/site-scraper-data"
 ---
 
-# Excel Template
+# Excel Template {#excel-template}
 
-Manage your Excel data source for automated form filling with support for both uploaded Excel files and Google Sheets integration.
+Manage your spreadsheet data source for automated form filling with native support for local Excel (`.xlsx`) files and Google Sheets integration.
 
-<img src="/image/download-excel-template-01.png" width="350" height="350" alt="Download Excel Template Interface">
-
-## Overview
-
-Excel templates serve as the data source for your automation workflows. The extension supports two types of Excel sheet integration:
-
-- **📤 Upload Excel Sheet** - Upload local Excel (.xlsx) files
-- **📊 Google Sheet (Beta)** - Connect to Google Sheets for real-time data access
-
-## Excel Sheet Type Selection
-
-Choose between two methods for managing your Excel data:
-
-### 📤 Upload Excel Sheet
-
-Upload local Excel files directly to the extension.
-
-**Features:**
-- Upload .xlsx files from your computer
-- Download template based on your form fields
-- Delete uploaded Excel file
-- Offline data access
-
-### 📊 Google Sheet (Beta)
-
-Connect to Google Sheets for cloud-based data management.
-
-**Features:**
-- Real-time data synchronization
-- Two connection types: OAuth2 and Service Account
-- Multi-browser support with Browser ID
-- Automatic sheet updates
-- Cloud-based data storage
+<img src="/image/upload-excel-template.png" alt="Upload Excel Template Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
 
 ---
 
-## Method 1: Upload Excel Sheet
+## Overview {#overview}
 
-### Step 1: Select Excel Sheet Type
+Excel templates serve as the primary data source for your automated workflows. Excellent Data Filler reads row records sequentially or randomly and fills target web form inputs accordingly.
 
-1. Navigate to **Upload Excel** tab
-2. Select **Upload Excel Sheet** radio button
+The extension supports two Excel data source types:
 
-### Step 2: Upload Excel File
+- **Upload Excel File**: Upload local Excel (`.xlsx`) files directly into extension storage for fast, offline execution.
+- **Google Sheet (Beta)**: Connect to Google Sheets for real-time cloud collaboration, automatic syncing, and multi-browser automation.
 
-**Select excel (.xlsx) file for Upload:**
-
-1. Click **"Choose File"** button
-2. Select your Excel file (.xlsx format)
-3. File will be uploaded automatically
-
-**Available Actions:**
-
-| Button | Description |
-|--------|-------------|
-| **💾 Save Excel Template** | Save and update the uploaded Excel data template |
-| **📥 Download Excel Template** | Download template with your form field structure |
-| **🗑️ Delete Excel** | Remove the currently uploaded Excel file |
-
-### Step 3: Excel Data Status
-
-**When No Excel File is Uploaded:**
-
-The interface will display:
-```
-Not Found
-Excel Data Not Available, Please Upload Excel File.
-```
-
-**When Excel File is Uploaded:**
-
-- Excel data becomes available for form filling
-- Data can be viewed in the **Excel Data** tab
-- Form filling can begin using the uploaded data
+> [!IMPORTANT]
+> **Strict `.xlsx` Format Requirement**: The extension exclusively supports `.xlsx` spreadsheet files. Other spreadsheet formats are not supported for uploads.
 
 ---
 
-## Method 2: Google Sheet (Beta)
+## Excel Source Type Selection {#excel-source-type-selection}
 
-### Connection Types
+Within your Site workspace, open the **Upload Excel** tab. Use the **Excel Source Type** radio toggle to select your data source:
 
-Google Sheet integration offers two connection methods:
-
-#### 🔐 OAuth2 (Login Required)
-
-Connect using your Google account with OAuth2 authentication.
-
-**Requirements:**
-- Google account login
-- Permission to access Google Sheets
-- Internet connection
-
-**Setup:**
-1. Select **Google Sheet (Beta)** radio button
-2. Choose **OAuth2 (Login Required)** connection type
-3. Click **"Check Account Connection"** to authenticate
-4. Sign in with your Google account
-5. Grant necessary permissions
-
-#### 🔑 Client (Service Account, No Login Required)
-
-Connect using a Google Cloud service account without login.
-
-**Requirements:**
-- Google Cloud Console service account
-- JSON key file (private_key, client_email)
-- Sheet shared with service account email
-
-**Setup:**
-1. Select **Google Sheet (Beta)** radio button
-2. Choose **Client (Service Account, No Login Required)** connection type
-3. Click **"Click to Upload JSON File"** button
-4. Upload your service account JSON key file
-
-:::tip Create Service Account
-Create a service account in **Google Cloud Console**, download JSON key file (private_key, client_email), share the sheet with the service account email.
-:::
+| Source Type | Description | Best For |
+|---|---|---|
+| **Upload Excel File** | Direct upload of a local `.xlsx` workbook into extension storage. | Fast execution, offline workflows, standalone automation tasks. |
+| **Google Sheet (Beta)** | Live cloud connection via Google Sheets API (OAuth2 or Service Account). | Team collaboration, real-time data entry, multi-browser distributed processing. |
 
 ---
 
-## Google Sheet Configuration
+## Method 1: Upload Excel File {#upload-excel-file}
 
-### Required Fields
+Follow these steps to upload and manage local Excel files:
+
+### Step 1: Select Upload Excel File
+
+1. Navigate to the **Upload Excel** tab in your site workspace.
+2. Select the **Upload Excel File** option under **Excel Source Type**.
+
+### Step 2: Upload Your `.xlsx` File
+
+1. Under **Select Excel File (.xlsx) for Upload**, click inside the upload box or drag and drop your file.
+2. Select your `.xlsx` workbook from your computer.
+3. Click **Save Excel Template** to store the workbook in the extension.
+
+<img src="/image/download-excel-template-01.png" alt="Download and Save Excel Template Interface" style="max-width: 100%; border-radius: 8px; margin: 16px 0;" />
+
+### Available Toolbar Actions
+
+| Action Button | Purpose | Details |
+|---|---|---|
+| **Save Excel Template** | Commit and save dataset | Saves the uploaded `.xlsx` data into local extension storage for the active site. |
+| **Download Excel Template** | Generate `.xlsx` template | Creates a ready-to-fill `.xlsx` spreadsheet pre-populated with column headers matching your configured form fields. |
+| **Delete Excel** (Trash Icon) | Clear uploaded data | Removes the current Excel dataset from extension storage. |
+
+### Excel Data Status States
+
+- **When No Excel File is Uploaded**:
+  ```text
+  Not Found
+  Excel Data Not Available, Please Upload Excel File.
+  ```
+- **When Excel File is Successfully Uploaded**:
+  - The records become immediately accessible for automation.
+  - You can inspect loaded rows and column mappings under the **Excel Data** tab.
+  - The extension tracks row indexes during automation runs.
+
+---
+
+## Method 2: Google Sheet (Beta) {#google-sheet-beta}
+
+Connect directly to cloud spreadsheets in Google Drive for live data streaming and bidirectional sync.
+
+### Connection Types {#connection-types}
+
+Google Sheet integration supports two distinct authentication methods:
+
+#### 1. OAuth2 (Login Required) {#oauth2-login}
+
+Connect using your Google account via standard OAuth2 authentication.
+
+- **Requirements**: Active Google account with access permissions to the target spreadsheet and an internet connection.
+- **Setup**:
+  1. Select the **Google Sheet (Beta)** radio button.
+  2. Choose **OAuth2 (Login Required)**.
+  3. Click **Check Account Connection**.
+  4. Follow the Google OAuth popup prompt to sign in and grant spreadsheet read/write permissions.
+
+#### 2. Client Service Account (No Login Required) {#service-account}
+
+Connect securely via a Google Cloud Console service account without requiring browser user logins.
+
+- **Requirements**:
+  - A Google Cloud Platform (GCP) project with the Google Sheets API enabled.
+  - A Service Account with an exported JSON key file containing `client_email` and `private_key`.
+  - The Google Sheet must be shared with the Service Account email address (`Editor` permissions).
+- **Setup**:
+  1. Select the **Google Sheet (Beta)** radio button.
+  2. Choose **Client (Service Account, No Login Required)**.
+  3. Click **Click to Upload JSON File** and select your downloaded service account `.json` key file.
+  4. Ensure your Google Sheet is shared with the service account email.
+
+> [!TIP]
+> **Service Account Sharing**: Always open your Google Sheet, click **Share**, and paste the Service Account email (`...iam.gserviceaccount.com`) as an **Editor** to allow reading and updating rows.
+
+---
+
+## Google Sheet Configuration {#google-sheet-configuration}
+
+### Required Connection Fields
 
 | Field | Description | Example |
-|-------|-------------|---------|
-| **Spreadsheet URL** | Full URL of your Google Sheet | `https://docs.google.com/spreadsheets/d/1A2B3C4D5E6F7G8H9I0...` |
-| **Spreadsheet Sheet Name (Sheet1)** | Name of the specific sheet tab | `Sheet1`, `Data`, `FormData` |
-| **How many rows of the sheet to fetch?** | Number of rows to retrieve | `30`, `50`, `100` |
+|---|---|---|
+| **Spreadsheet URL** | Full web URL of the Google Spreadsheet. | `https://docs.google.com/spreadsheets/d/1A2B3C4D5E6F7G8H9.../edit` |
+| **Spreadsheet Sheet Name** | Exact name of the sheet/tab containing your data (case-sensitive). | `Sheet1`, `Orders`, `FormData` |
+| **How many rows of the sheet to fetch?** | Maximum number of rows to retrieve per batch. | `30`, `50`, `100` |
 
-### Optional Features
+### Optional Advanced Features
 
-#### 🆔 Fetch Sheet Row Data Using Browser Id
+#### Fetch Sheet Row Data Using Browser ID {#browser-id}
 
-Enable this option to use different data for different browsers.
+Enables running multiple browser instances or profiles concurrently against the same sheet without row collision.
 
-**How it works:**
-1. Toggle **"Fetch Sheet Row Data Using Browser Id"** checkbox
-2. Enter browser ID names in the input field
-3. Create a column named `{BROWSER-ID}` in your sheet
-4. Fill browser ID names in this column
+- **How it works**:
+  1. Toggle **Fetch Sheet Row Data Using Browser Id**.
+  2. Enter identifier names in the Browser ID field (e.g., `browser-1`, `browser-2`).
+  3. In your Google Sheet, create a column named `<code v-pre>{BROWSER-ID}</code>`.
+  4. Assign the appropriate browser ID value to each row.
+  5. The extension instance will only fetch and fill rows designated for its configured Browser ID.
 
-**Example:**
+> [!NOTE]
+> The column header in your Google Sheet must be spelled exactly `<code v-pre>{BROWSER-ID}</code>` (including curly braces).
+
+#### Ignore Column Values When Updating {#ignore-columns}
+
+Protects specific columns from being overwritten when pushing site data updates back to the sheet.
+
+- **How to use**:
+  1. Toggle **Ignore column values when updating the sheet?**.
+  2. Enter the column names you wish to preserve (e.g., `Status`, `Notes`, `DateAdded`), pressing Enter after each entry.
+  3. These columns will be retained untouched during sync operations.
+
+---
+
+## Google Sheet Management Actions {#google-sheet-actions}
+
+### Check Account Connection
+
+Tests and confirms your Google account authentication or Service Account JSON validity.
+
+- **OAuth2**: Triggers authentication verification with Google servers.
+- **Service Account**: Validates the uploaded JSON key format and cryptographic credentials.
+
+### Check Sheet Connection
+
+Verifies network access, spreadsheet URL validity, and sheet tab existence. Confirms that headers and rows can be fetched properly.
+
+### Update Sheet With Site Data
+
+Synchronizes your configured form fields with the Google Sheet structure.
+
+- Inspects all form fields registered in the active site.
+- Generates or updates column headers in the target sheet to match field names.
+- Configures schema alignment for seamless two-way data filling and status reporting.
+
+### Clear Sheet Cache
+
+Flushes locally cached Google Sheet data, forcing the extension to pull fresh records on the next automation cycle.
+
+> [!IMPORTANT]
+> Always click **Clear Sheet Cache** whenever you edit cell values, insert rows, or add new columns directly inside Google Sheets.
+
+---
+
+## Excel Template Download {#download-excel-template}
+
+Generating an Excel template ensures your local `.xlsx` file matches your form field names with 100% precision:
+
+1. Configure all form fields in your site.
+2. Under the **Upload Excel** tab, click **Download Excel Template**.
+3. The extension compiles an `.xlsx` workbook containing:
+   - Header row matching every active field name.
+   - Proper column sequencing.
+   - Clean column layout ready for batch data entry.
+4. Open the downloaded file in Microsoft Excel or compatible software, populate your rows, and upload it back into the extension.
+
+- **Output File Naming Format**: `[SiteName]_Template_[Date].xlsx`
+
+---
+
+## Prerequisites {#prerequisites}
+
+Before uploading data or downloading templates, ensure:
+
+1. **Site Created**: A parent site container exists in the extension.
+2. **Forms Registered**: At least one form page is added under the site.
+3. **Fields Configured**: Form fields have assigned element selectors and field types.
+4. **Valid Names**: Field names are clear and descriptive to generate readable `.xlsx` column headers.
+
+---
+
+## Automation Workflows {#workflows}
+
+### Local Excel (`.xlsx`) Workflow
+
+```text
+[Configure Fields] ──> [Download .xlsx Template] ──> [Populate Rows] ──> [Upload .xlsx] ──> [Run Automation]
 ```
-Browser IDs: browser-1, browser-2, browser-3
+
+1. **Download Template**: Click **Download Excel Template** to obtain the current field schema.
+2. **Populate Rows**: Fill records into the `.xlsx` sheet.
+3. **Upload Workbook**: Upload via **Select Excel File (.xlsx) for Upload** and click **Save Excel Template**.
+4. **Execute**: Trigger form filling with <kbd>Alt</kbd> + <kbd>Q</kbd> or on page load.
+
+### Google Sheets Workflow
+
+```text
+[Connect OAuth2 / Service Account] ──> [Set URL & Sheet Name] ──> [Update Sheet With Site Data] ──> [Fill Rows] ──> [Run Automation]
 ```
 
-:::info Use Browser ID
-Use Browser ID if you use same sheet in multiple browser, create a new column with this name **{BROWSER-ID}** and fill the browser id name in this column.
-:::
-
-#### 🚫 Ignore Column Values When Updating
-
-Prevent specific columns from being updated when syncing data.
-
-**How to use:**
-1. Toggle **"Ignore column values when updating the sheet?"** checkbox
-2. Enter column names to ignore (press Enter after each)
-3. These columns will be excluded from updates
-
-**Example:**
-```
-title, description, notes
-```
+1. **Authenticate**: Connect using OAuth2 or upload Service Account JSON.
+2. **Configure**: Provide the Spreadsheet URL and Sheet Tab Name.
+3. **Structure Sync**: Click **Update Sheet With Site Data** to create headers automatically.
+4. **Input Data**: Enter data into the Google Sheet.
+5. **Execute**: Run automation. If edits are made in the sheet, click **Clear Sheet Cache**.
 
 ---
 
-## Google Sheet Actions
+## Troubleshooting {#troubleshooting}
 
-### 🔍 Check Account Connection
+### Local Excel Issues
 
-Verify your Google account authentication status.
-
-**For OAuth2:**
-- Click **"Check Account Connection"** button
-- Sign in if not already authenticated
-- Verify connection status
-
-**For Service Account:**
-- Upload JSON key file first
-- Click **"Check Account Connection"** button
-- Verify service account credentials
-
-### 📊 Check Sheet Connection
-
-Verify connection to your Google Spreadsheet.
-
-**Steps:**
-1. Enter Spreadsheet URL
-2. Enter Sheet Name
-3. Click **"Check Sheet Connection"** button
-4. Verify sheet access and data availability
-
-### 📤 Update Sheet With Site Data
-
-Sync your form field structure with Google Sheet.
-
-**Purpose:**
-For updating google sheet with your extension site data. this will insert columns and create database sheet.
-
-**How it works:**
-1. Click **"Update Sheet With Site Data"** button
-2. Extension reads your form field configuration
-3. Creates/updates columns in Google Sheet
-4. Generates database structure based on field types
-
-**What gets updated:**
-- Column headers matching field names
-- Data validation rules
-- Field type formatting
-- Required field indicators
-
-### 🗑️ Clear Sheet Cache
-
-Clear cached Google Sheet data to fetch fresh data.
-
-**When to use:**
-If you have changed any data in the sheet or added new columns, it is essential to clear the cache before using the sheet.
-
-**Steps:**
-1. Click **"Clear Sheet Cache"** button
-2. Cache will be cleared immediately
-3. Next data fetch will retrieve fresh data from Google Sheet
-
----
-
-## Excel Template Download
-
-### 📥 Download Excel Template
-
-Generate and download an Excel template based on your form fields.
-
-**How it works:**
-1. Click **"Download Excel Template"** button
-2. Extension generates template with:
-   - Column headers matching field names
-   - Sample data for guidance
-   - Proper formatting for each field type
-3. File downloads to your default download folder
-
-**File naming:** `[SiteName]_Template_[Date].xlsx`
-
----
-
-## Prerequisites
-
-Before using Excel templates, ensure you have:
-
-1. **✅ Site Created** - A site must be set up in the extension
-2. **✅ Form Added** - At least one form must be added to the site
-3. **✅ Fields Configured** - Form fields must be properly configured
-4. **✅ Field Types Set** - Each field must have a defined field type
-
----
-
-## Workflow Integration
-
-### Upload Excel Sheet Workflow
-
-1. **Download Template** - Get the latest template structure
-2. **Fill Data** - Enter your data in Excel
-3. **Upload File** - Upload the filled Excel file
-4. **Run Automation** - Execute automated form filling
-
-### Google Sheet Workflow
-
-1. **Connect Account** - Authenticate with Google
-2. **Configure Sheet** - Set spreadsheet URL and sheet name
-3. **Update Structure** - Sync form fields with sheet columns
-4. **Fill Data** - Enter data in Google Sheet
-5. **Run Automation** - Execute automated form filling
-6. **Clear Cache** - Clear cache when data changes
-
----
-
-## Troubleshooting
-
-### Upload Excel Sheet Issues
-
-**Issue:** Template not downloading
-
-**Solutions:**
-- Ensure all form fields are properly configured
-- Check if the site has at least one form
-- Verify browser download permissions
-- Try refreshing the extension options page
-
-**Issue:** Excel file not uploading
-
-**Solutions:**
-- Verify file format is .xlsx
-- Check file size is reasonable
-- Ensure file is not corrupted
-- Try a different Excel file
-
----
+| Problem | Cause | Solution |
+|---|---|---|
+| **Template not downloading** | Missing form fields or browser permission issue | Ensure at least one form with fields is configured. Check browser download settings. |
+| **Excel file will not upload** | Unsupported file format or corrupted file | Ensure the file is strictly `.xlsx`. Re-save the file in Excel if needed. |
+| **Data not filling into form** | Header mismatch with field names | Download a fresh template to verify column headers match field names exactly. |
 
 ### Google Sheet Issues
 
-**Issue:** Cannot connect to Google account
-
-**Solutions:**
-- Check internet connection
-- Verify Google account credentials
-- Clear browser cache and cookies
-- Try re-authenticating
-
-**Issue:** Sheet connection failed
-
-**Solutions:**
-- Verify spreadsheet URL is correct
-- Check sheet name matches exactly (case-sensitive)
-- Ensure sheet is shared with service account (for Client connection)
-- Verify permissions are granted
-
-**Issue:** Data not updating
-
-**Solutions:**
-- Click "Clear Sheet Cache" button
-- Verify sheet has data in correct format
-- Check column names match field names
-- Ensure row count is set correctly
-
-**Issue:** Browser ID not working
-
-**Solutions:**
-- Verify `{BROWSER-ID}` column exists in sheet
-- Check browser ID names are entered correctly
-- Ensure browser ID values match in sheet
-- Clear cache and try again
+| Problem | Cause | Solution |
+|---|---|---|
+| **Cannot connect Google account** | Expired OAuth session or network block | Re-click **Check Account Connection** and complete the Google login prompt. |
+| **Sheet connection failed** | Incorrect URL, sheet name mismatch, or missing permissions | Verify the URL and tab name (case-sensitive). For Service Accounts, verify the sheet is shared with the service account email as Editor. |
+| **Data changes not appearing** | Local cache active | Click **Clear Sheet Cache** to fetch the latest cloud rows. |
+| **Browser ID filtering not working** | Header misspelling or missing column | Confirm the column header is named `<code v-pre>{BROWSER-ID}</code>` and row values match the configured ID. |
 
 ---
 
-## Best Practices
+## Best Practices {#best-practices}
 
-### ✅ Do's
+### Do's
 
-- **Use descriptive sheet names** - Make sheet names clear and meaningful
-- **Keep data organized** - Maintain consistent data formatting
-- **Regular backups** - Backup your Excel files and Google Sheets
-- **Clear cache after changes** - Always clear cache when updating Google Sheets
-- **Test with small datasets** - Verify automation works before bulk processing
-- **Use Browser ID for multi-browser** - Implement Browser ID when using same sheet across browsers
+- **Download Fresh Templates**: Download a new `.xlsx` template whenever you add, rename, or remove form fields.
+- **Match Header Names**: Ensure column names match field names accurately.
+- **Clear Cache on Sheet Edits**: Always click **Clear Sheet Cache** after updating Google Sheet data.
+- **Test with Sample Rows**: Test automation on 2-3 rows before processing large datasets.
+- **Use Browser IDs for Scale**: Use `<code v-pre>{BROWSER-ID}</code>` when distributing work across multiple profiles or devices.
 
-### ❌ Don'ts
+### Don'ts
 
-- **Don't modify column headers** - Keep column names matching field names
-- **Don't use special characters** - Avoid special characters in sheet names
-- **Don't forget to clear cache** - Always clear cache after Google Sheet updates
-- **Don't share sensitive data** - Be cautious with service account credentials
-- **Don't exceed row limits** - Keep row count reasonable for performance
+- **Do Not Use Non-XLSX Formats**: Upload local data exclusively in `.xlsx` format.
+- **Do Not Rename Headers Manually**: Avoid altering generated template column headers.
+- **Do Not Leave Formulas Uncalculated**: If your spreadsheet uses complex formulas, ensure values are resolved before running automation.
+- **Do Not Expose Service Account Keys**: Keep your Google Cloud JSON credentials safe and confidential.
 
 ---
 
-## Related Documentation
+## Related Documentation {#related-documentation}
 
-- [Site Management](/documentation/site/site)
-- [Excel Data](/documentation/site/site-excel-template)
-- [Form Fields](/documentation/form-fields/field)
-- [Field Types](/documentation/form-fields/field-types)
-- [Google Service](/documentation/services/google-service)
-- [Automation Workflow](/documentation/structure)
-
----
-
-## Support and Help
-
-If you need assistance with Excel templates:
-
-- Check the [Log](/documentation/log) for detailed error information
-- Review [Field Types](/documentation/form-fields/field-types) for configuration help
-- Visit our [Support Channels](/documentation/#need-help) for community assistance
-- Report issues on our [GitHub Repository](https://github.com/jeevan-lal/excellent-data-filler-docs/issues)
+- <img src="/svg/form.svg" class="doc-icon" /> [Site Management](/documentation/site/site)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Scraper Data](/documentation/site/site-scraper-data)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+- <img src="/svg/card.svg" class="doc-icon" /> [Form Fields](/documentation/form-fields/field)
+- <img src="/svg/database.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+- <img src="/svg/beaker.svg" class="doc-icon" /> [Logs & Execution Tracking](/documentation/logs)

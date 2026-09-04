@@ -14,15 +14,15 @@ The Date Picker field type provides comprehensive automation for various calenda
 
 **Key Features:**
 
-- 📅 **Calendar Navigation** - Navigate through months and years
-- 🎯 **Date Selection** - Automatically select specific dates
-- 🔄 **Multiple Library Support** - Works with various date picker libraries
-- ⚙️ **Custom Configuration** - Flexible setup for different calendar types
-- 🎨 **Visual Calendar Support** - Handles both input-based and visual calendar interfaces
+- **Calendar Navigation** - Navigate through months and years
+- **Date Selection** - Automatically select specific dates from Excel (.xlsx) data
+- **Multiple Library Support** - Works with various date picker libraries
+- **Custom Configuration** - Flexible setup for different calendar types
+- **Visual Calendar Support** - Handles both input-based and visual calendar interfaces
 
 ## Field Configuration Options
 
-### 📅 Calendar Date Format
+### Calendar Date Format
 
 Specifies how dates are displayed in the calendar interface.
 
@@ -46,7 +46,7 @@ For complete format options, refer to the [Day.js format documentation](https://
 
 ---
 
-### ⬅️ Calendar Previous Button Selector Address
+### Calendar Previous Button Selector Address
 
 Defines the CSS selector for the button that navigates to the previous month.
 
@@ -66,7 +66,7 @@ Defines the CSS selector for the button that navigates to the previous month.
 
 ---
 
-### ➡️ Calendar Next Button Selector Address
+### Calendar Next Button Selector Address
 
 Defines the CSS selector for the button that navigates to the next month.
 
@@ -86,7 +86,7 @@ Defines the CSS selector for the button that navigates to the next month.
 
 ---
 
-### 📆 Calendar Days Selector Address
+### Calendar Days Selector Address
 
 Specifies the container element that holds all selectable days in the calendar.
 
@@ -106,7 +106,7 @@ Specifies the container element that holds all selectable days in the calendar.
 
 ---
 
-### 📝 Calendar Already Selected Date
+### Calendar Already Selected Date
 
 Handles scenarios where the date picker doesn't automatically populate the input field after date selection.
 
@@ -126,7 +126,7 @@ If the calendar shows `2023-04-22` as selected, configure this option to populat
 
 ---
 
-### 🔄 Generate Calendar Already Selected Date
+### Generate Calendar Already Selected Date
 
 Creates a calendar interface with a pre-selected date when the selected date changes dynamically. This feature allows you to configure how the extension identifies and handles already selected dates in the calendar.
 
@@ -138,7 +138,7 @@ Creates a calendar interface with a pre-selected date when the selected date cha
 - **Pre-populated Forms** - Forms with existing date values
 - **State Management** - Maintaining calendar state across interactions
 
-#### 📅 Month Configuration
+#### Month Configuration
 
 Configure how the extension identifies the month in the calendar interface.
 
@@ -156,7 +156,7 @@ Configure how the extension identifies the month in the calendar interface.
 - **Month Selector Query** - CSS selector or XPath to locate the month element
 - **Format Matching** - Select the format that matches your calendar's month display
 
-#### 📆 Year Configuration
+#### Year Configuration
 
 Configure how the extension identifies the year in the calendar interface.
 
@@ -174,7 +174,7 @@ Configure how the extension identifies the year in the calendar interface.
 
 ---
 
-### 🔘 Open Calendar Button Selector Address
+### Open Calendar Button Selector Address
 
 Handles date pickers that require clicking a separate button to open the calendar interface.
 
@@ -197,7 +197,7 @@ When clicking the input field doesn't open the calendar because it's controlled 
 
 ---
 
-### ⏱️ Set the wait time between Previous/Next month Action
+### Set the wait time between Previous/Next month Action
 
 Configures the delay between month navigation actions to ensure proper calendar loading.
 
@@ -215,7 +215,7 @@ Configures the delay between month navigation actions to ensure proper calendar 
 
 ---
 
-### ✅ After picking the date, press the button to set the date in form
+### After picking the date, press the button to set the date in form
 
 Specifies a button that must be clicked after date selection to confirm and set the date in the form.
 
@@ -231,7 +231,7 @@ Specifies a button that must be clicked after date selection to confirm and set 
 
 ## Supported Date Picker Libraries
 
-### 📚 flatpickr
+### flatpickr
 
 A lightweight, powerful date picker library with extensive customization options.
 
@@ -247,7 +247,7 @@ If using `flatpickr` date picker, set only one JavaScript event `change` in the 
 
 **Library Link:** [flatpickr on GitHub](https://github.com/flatpickr/flatpickr)
 
-### 📅 date-picker
+### date-picker
 
 A modern, accessible date picker component with clean design.
 
@@ -259,7 +259,7 @@ A modern, accessible date picker component with clean design.
 
 **Library Link:** [date-picker on GitHub](https://github.com/duetds/date-picker)
 
-### 📊 react-multi-date-picker
+### react-multi-date-picker
 
 A React-based date picker with multi-date selection capabilities.
 
@@ -271,7 +271,7 @@ A React-based date picker with multi-date selection capabilities.
 
 **Library Link:** [react-multi-date-picker on GitHub](https://github.com/shahabyazdi/react-multi-date-picker)
 
-### 📈 daterangepicker
+### daterangepicker
 
 A jQuery plugin for selecting date ranges with advanced features.
 
@@ -304,21 +304,21 @@ if (dateInput) dateInput.data("daterangepicker").setStartDate("12-30-2024");
 
 ## Configuration Best Practices
 
-### 🎯 Selector Configuration
+### Selector Configuration
 
 1. **Test Selectors** - Always test CSS selectors in browser developer tools
 2. **Specific Selectors** - Use specific selectors to avoid conflicts
 3. **Dynamic Content** - Account for dynamically loaded calendar elements
 4. **Fallback Options** - Provide alternative selectors for different calendar states
 
-### ⏱️ Timing Considerations
+### Timing Considerations
 
 1. **Calendar Loading** - Allow sufficient time for calendar to load
 2. **Animation Delays** - Account for transition animations
 3. **Element Stability** - Wait for elements to be fully rendered
 4. **User Experience** - Balance speed with reliability
 
-### 🔧 Error Handling
+### Error Handling
 
 1. **Element Detection** - Verify all required elements are present
 2. **Date Validation** - Ensure selected dates are valid
@@ -327,7 +327,7 @@ if (dateInput) dateInput.data("daterangepicker").setStartDate("12-30-2024");
 
 ## Troubleshooting
 
-### ❌ Common Issues
+### Common Issues
 
 **Issue:** Calendar doesn't open
 **Solutions:**
@@ -350,7 +350,7 @@ if (dateInput) dateInput.data("daterangepicker").setStartDate("12-30-2024");
 - Check if a confirmation button needs to be clicked
 - Verify the input field selector is correct
 
-### 🔧 Advanced Troubleshooting
+### Advanced Troubleshooting
 
 **Issue:** Month navigation not working
 **Solutions:**
@@ -368,14 +368,14 @@ if (dateInput) dateInput.data("daterangepicker").setStartDate("12-30-2024");
 
 ## Next Steps
 
-- [Field Settings](/documentation/form-fields/field-settings) - Configure advanced field options
-- [Field Types](/documentation/form-fields/field-types) - Explore other field types
-- [Variables](/documentation/variable) - Use variables for dynamic dates
-- [Form Configuration](/documentation/form/form) - Set up complete form automation
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Configure advanced field options
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Explore other field types
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Form Configuration](/documentation/form/form) — Set up complete form automation
 
 ## Tips and Tricks
 
-### 💡 Pro Tips
+### Pro Tips
 
 1. **Test with Sample Dates** - Always test with various date formats and ranges
 2. **Use Browser Tools** - Leverage developer tools to identify correct selectors
@@ -383,9 +383,10 @@ if (dateInput) dateInput.data("daterangepicker").setStartDate("12-30-2024");
 4. **Monitor Performance** - Adjust timing settings for optimal performance
 5. **Document Configurations** - Keep track of working configurations for different calendar types
 
-### 🚀 Advanced Features
+### Advanced Features
 
 - **Dynamic Date Generation** - Use variables to generate dynamic dates
 - **Conditional Date Selection** - Select dates based on specific conditions
 - **Range Selection** - Handle date range pickers with multiple dates
 - **Custom Calendar Integration** - Adapt to proprietary calendar implementations
+

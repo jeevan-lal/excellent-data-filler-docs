@@ -1,398 +1,140 @@
-# Fetch Mail (Gmail)
+---
+prev:
+  text: "2Captcha"
+  link: "/documentation/field-types/captcha-solution/2captcha"
+next:
+  text: "Fetch Single Mail (Gmail)"
+  link: "/documentation/field-types/google-service-gmail/fetch-single-mail-gmail"
+---
 
-Retrieve multiple emails from Gmail based on search criteria and filters.
+# Fetch Mail (Gmail) {#fetch-mail-gmail}
 
-## Overview
+Retrieve and filter multiple emails from your Gmail account using search queries, labels, regex extractors, and automated retry mechanisms.
 
-The Fetch Mail (Gmail) field type allows you to search and retrieve emails from your Gmail account using powerful search queries and filters. You can fetch specific parts of emails, filter by labels, apply regular expressions, and automatically mark emails as read.
+---
 
-## Configuration Options
+## Overview {#overview}
+
+The **Fetch Mail (Gmail)** field type connects to the Google Gmail API using your authorized Google account to harvest email data into automation workflows. It allows extracting email bodies, subject lines, senders, recipients, and tokens (like OTPs or verification URLs) with full regex support.
+
+---
+
+## Configuration Options {#configuration-options}
 
 | Option | Type | Description | Required |
-|--------|------|-------------|----------|
-| [Google Service Account](#google-service-account) | Dropdown | Select logged-in Google account | **Yes** |
-| [Mail Parts](#mail-parts) | Input Tags | Select which mail parts to fetch | **Yes** |
-| [Enable Max Results](#enable-max-results) | Switch | Limit number of results | No |
-| [Max Results Count](#max-results-count) | Input | Number of results to return | No |
-| [Use Gmail Labels](#use-gmail-labels) | Switch | Search in specific Gmail labels | No |
-| [Gmail Label IDs](#gmail-label-ids) | Dropdown Multiple | Select Gmail labels to search | No |
-| [Include Spam/Trash](#include-spam-trash) | Switch | Include spam and trash in results | No |
-| [Enable Retry on Failure](#enable-retry-on-failure) | Switch | Retry if request fails | No |
-| [Max Retries (Failure)](#max-retries-failure) | Input | Maximum retry attempts on failure | No |
-| [Retry Until Mail Received](#retry-until-mail-received) | Switch | Keep retrying until mail is found | No |
-| [Max Retries (Until Received)](#max-retries-until-received) | Input | Maximum retry attempts until mail received | No |
-| [Timeout](#timeout) | Input | Timeout duration in seconds | No |
-| [Enable Regex Filter](#enable-regex-filter) | Switch | Filter data with regular expression | No |
-| [Regular Expression](#regular-expression) | Input | Regex pattern to match | No |
-| [Regex Replace](#regex-replace) | Input | Replacement string for regex matches | No |
-| [Remove UNREAD Label](#remove-unread-label) | Switch | Mark email as read after fetching | No |
-| [Search Query](#search-query) | Default Value | Gmail search query | No |
+|---|---|---|---|
+| **Google Service Account** | Dropdown | Logged-in Google account with Gmail permissions. | Yes |
+| **Mail Parts** | Input Tags | Specific email parts to extract (`body`, `subject`, `from`, `snippet`, `to`). | Yes |
+| **Enable Max Results** | Toggle Switch | Limit the number of matching emails returned. | No |
+| **Max Results Count** | Number Input | Maximum count of messages to fetch (e.g., `5`, `10`, `50`). | When limit enabled |
+| **Use Gmail Labels** | Toggle Switch | Filter search specifically within chosen Gmail labels. | No |
+| **Gmail Label IDs** | Multi-Select | Select labels to scope the search (e.g., `INBOX`, `SPAM`, `UNREAD`). | When labels enabled |
+| **Include Spam/Trash** | Toggle Switch | Includes messages located in Spam or Trash folders. | No |
+| **Enable Retry on Failure** | Toggle Switch | Re-attempts the API query if network errors occur. | No |
+| **Max Retries (Failure)** | Number Input | Maximum retry attempts for failed requests. | When retry enabled |
+| **Retry Until Mail Received** | Toggle Switch | Polls repeatedly until an email matching search criteria arrives. | No |
+| **Max Retries (Until Received)** | Number Input | Number of polling cycles to wait for new emails. | When polling enabled |
+| **Timeout** | Number Input | Wait timeout in seconds between polling cycles. | No |
+| **Enable Regex Filter** | Toggle Switch | Applies regular expressions to extract specific patterns from email content. | No |
+| **Regular Expression** | Text Input | Regex pattern to capture tokens (e.g. `\b\d{6}\b` for 6-digit OTPs). | When regex enabled |
+| **Regex Replace** | Text Input | Optional replacement string for matched regex patterns. | No |
+| **Remove UNREAD Label** | Toggle Switch | Automatically marks retrieved emails as read to prevent reprocessing. | No |
+| **Search Query** | Default Value | Standard Gmail search operators to filter messages. | No |
 
 ---
 
-## Option Details
+## Detailed Settings Breakdown {#option-details}
 
-### Google Service Account {#google-service-account}
+### Google Service Account
 
-Select the Google account you want to use for accessing Gmail.
+Select the authorized Google identity registered under [Google Service](/documentation/services/google-service). Ensure the account holds valid OAuth2 permissions to read Gmail messages.
 
-**Type:** Dropdown
+### Mail Parts
 
-**Description:** Choose from your logged-in Google accounts. Make sure the selected account has Gmail access enabled.
+Specify which components of the message to parse:
+- `body`: Plain text or HTML email body.
+- `subject`: Email subject header.
+- `from`: Sender name and address (`sender@domain.com`).
+- `to`: Recipient address(es).
+- `snippet`: Short preview text snippet generated by Gmail.
 
-**Example:**
-- `user@gmail.com`
-- `work@company.com`
+### Polling for Incoming Emails
 
----
+When an automated form triggers an email verification code:
+1. Enable **Retry Until Mail Received**.
+2. Set **Max Retries** (e.g., `10`).
+3. Set **Timeout** (e.g., `10` seconds).
+4. The extension will poll Gmail every 10 seconds (up to 10 times) until the message arrives.
 
-### Mail Parts {#mail-parts}
+### Regex Extraction
 
-Select which parts of the email you want to retrieve.
+Extract specific text fragments from the email body:
+- **6-Digit Verification Code**: `\b\d{6}\b`
+- **Confirmation Link**: `https://example\.com/verify\?token=[a-zA-Z0-9_-]+`
+- **Invoice Number**: `INV-\d{5,8}`
 
-**Type:** Input Tags
+### Mark as Read (`Remove UNREAD Label`)
 
-**Available Parts:**
-- `body` - Email body content
-- `subject` - Email subject line
-- `from` - Sender email address
-- `snippet` - Short preview of email content
-- `to` - Recipient email address(es)
-
-**Example:**
-```
-body, subject, from
-subject, snippet
-body, from, to
-```
+Enable **Remove UNREAD Label** to strip the `UNREAD` badge upon successful retrieval. This ensures subsequent loop iterations or forms do not read the same verification message twice.
 
 ---
 
-### Enable Max Results {#enable-max-results}
+## Practical Examples {#examples}
 
-Enable limiting the number of results returned.
+### Example 1: Fetching Unread Verification Code
 
-**Type:** Switch
+```text
+Google Service Account: user@example.com
+Mail Parts: body
+Retry Until Mail Received: ON
+Max Retries (Until Received): 8
+Timeout: 5 seconds
+Enable Regex Filter: ON
+Regular Expression: \b\d{6}\b
+Remove UNREAD Label: ON
+Search Query: from:auth@service.com is:unread
+```
 
-**Options:**
-- **ON** - Limit number of results
-- **OFF** - Return all matching results
+### Example 2: Extracting Latest Billing Report
+
+```text
+Google Service Account: billing@company.com
+Mail Parts: subject, snippet
+Enable Max Results: ON
+Max Results Count: 1
+Search Query: subject:"Monthly Invoice" after:2025/01/01
+```
 
 ---
 
-### Max Results Count {#max-results-count}
+## Best Practices {#best-practices}
 
-Specify the maximum number of emails to return.
+### Do's
 
-**Type:** Input
+- **Use Precise Search Queries**: Scope searches with `from:`, `subject:`, and `newer_than:1d` to minimize API latency.
+- **Mark Processed Emails as Read**: Prevent duplicate data processing by enabling **Remove UNREAD Label**.
+- **Set Realistic Polling Timeouts**: Give external email delivery servers at least 30–60 seconds to deliver OTP messages.
 
-**Description:** Set how many emails should be fetched (Return Max Results).
+### Don'ts
 
-**Example:**
-```
-1    (Return only 1 email)
-5    (Return up to 5 emails)
-10   (Return up to 10 emails)
-50   (Return up to 50 emails)
-```
-
-**Note:** This option only works when [Enable Max Results](#enable-max-results) is turned ON.
+- **Do Not Fetch Unbounded Queries**: Avoid broad queries without `is:unread` or date boundaries.
+- **Do Not Set Infinite Retries**: Limit polling to a reasonable count (e.g., 6–10 attempts).
 
 ---
 
-### Use Gmail Labels {#use-gmail-labels}
+## Troubleshooting {#troubleshooting}
 
-Search emails in specific Gmail labels.
-
-**Type:** Switch
-
-**Description:** Enable this to filter emails by Gmail labels.
-
-**Options:**
-- **ON** - Search in selected labels only
-- **OFF** - Search in all emails
+| Issue | Likely Cause | Solution |
+|---|---|---|
+| **No emails found** | Search query too restrictive or email delayed | Verify search parameters manually in Gmail web interface. Increase retry timeout. |
+| **Permission denied (403)** | Missing Gmail API scope | Re-authenticate Google account under [Google Service](/documentation/services/google-service). |
+| **Regex returns empty** | Pattern does not match email body formatting | Test regex against the actual raw email body text. |
 
 ---
 
-### Gmail Label IDs {#gmail-label-ids}
-
-Select which Gmail labels to search in.
-
-**Type:** Dropdown Multiple
-
-**Available Labels:**
-- `INBOX` - Inbox emails
-- `SPAM` - Spam folder
-- `TRASH` - Trash/Deleted emails
-- `UNREAD` - Unread emails
-- `STARRED` - Starred/Important emails
-- `SENT` - Sent emails
-- `IMPORTANT` - Important emails
-- `DRAFT` - Draft emails
-
-**Example:**
-```
-INBOX, UNREAD
-STARRED, IMPORTANT
-SENT
-```
-
-**Note:** This option only works when [Use Gmail Labels](#use-gmail-labels) is turned ON.
-
----
-
-### Include Spam/Trash {#include-spam-trash}
-
-Include emails from Spam and Trash folders in the results.
-
-**Type:** Switch
-
-**Options:**
-- **ON** - Include spam and trash
-- **OFF** - Exclude spam and trash (default)
-
----
-
-### Enable Retry on Failure {#enable-retry-on-failure}
-
-Automatically retry the request if it fails.
-
-**Type:** Switch
-
-**Description:** When enabled, the system will retry fetching emails if an error occurs.
-
-**Options:**
-- **ON** - Enable retry on failure
-- **OFF** - Don't retry on failure
-
-**Use Cases:**
-- Network connectivity issues
-- Temporary API errors
-- Rate limiting scenarios
-
----
-
-### Max Retries (Failure) {#max-retries-failure}
-
-Maximum number of retry attempts if the request fails.
-
-**Type:** Input
-
-**Description:** Specify how many times the system should retry before giving up.
-
-**Example:**
-```
-3    (Retry up to 3 times)
-5    (Retry up to 5 times)
-10   (Retry up to 10 times)
-```
-
-**Note:** This option only works when [Enable Retry on Failure](#enable-retry-on-failure) is turned ON.
-
----
-
-### Retry Until Mail Received {#retry-until-mail-received}
-
-Keep retrying until the expected email is received.
-
-**Type:** Switch
-
-**Description:** Useful for waiting for verification emails, OTPs, or confirmation messages.
-
-**Options:**
-- **ON** - Retry until mail is found
-- **OFF** - Don't retry if mail not found
-
-**Use Cases:**
-- Waiting for verification codes
-- Expecting confirmation emails
-- Polling for specific messages
-
----
-
-### Max Retries (Until Received) {#max-retries-until-received}
-
-Maximum number of retry attempts when waiting for mail.
-
-**Type:** Input
-
-**Description:** Specify how many times to retry before giving up.
-
-**Example:**
-```
-10   (Retry up to 10 times)
-20   (Retry up to 20 times)
-50   (Retry up to 50 times)
-```
-
-**Note:** This option only works when [Retry Until Mail Received](#retry-until-mail-received) is turned ON.
-
----
-
-### Timeout {#timeout}
-
-Timeout duration in seconds between retry attempts.
-
-**Type:** Input
-
-**Description:** Specify how long to wait between each retry attempt.
-
-**Example:**
-```
-5     (Wait 5 seconds between retries)
-10    (Wait 10 seconds between retries)
-30    (Wait 30 seconds between retries)
-```
-
-**Note:** This option only works when [Retry Until Mail Received](#retry-until-mail-received) is turned ON.
-
----
-
-### Enable Regex Filter {#enable-regex-filter}
-
-Filter email data using regular expressions.
-
-**Type:** Switch
-
-**Description:** Apply regex patterns to extract or transform email content.
-
-**Options:**
-- **ON** - Enable regex filtering
-- **OFF** - Return raw email data
-
----
-
-### Regular Expression {#regular-expression}
-
-Regular expression pattern to match in email content.
-
-**Type:** Input
-
-**Description:** Define a regex pattern to extract specific data from emails.
-
-**Example:**
-```
-\d{6}                    (Match 6-digit codes)
-[A-Z0-9]{8}              (Match 8-character alphanumeric codes)
-verification code: (\d+) (Extract verification code)
-```
-
-**Note:** This option only works when [Enable Regex Filter](#enable-regex-filter) is turned ON.
-
----
-
-### Regex Replace {#regex-replace}
-
-Replacement string for regex matches.
-
-**Type:** Input
-
-**Description:** Define what to replace matched patterns with. Use `$1`, `$2` for capture groups.
-
-**Example:**
-```
-$1                (Use first capture group)
-Code: $1          (Prefix with "Code: ")
-$1-$2             (Combine capture groups)
-```
-
-**Note:** This option only works when [Enable Regex Filter](#enable-regex-filter) is turned ON.
-
----
-
-### Remove UNREAD Label {#remove-unread-label}
-
-Automatically mark email as read after fetching.
-
-**Type:** Switch
-
-**Description:** Remove the UNREAD label from emails after they are retrieved.
-
-**Options:**
-- **ON** - Mark as read after fetching
-- **OFF** - Keep email as unread
-
-**Use Cases:**
-- Prevent duplicate processing
-- Clean up inbox automatically
-- Track processed emails
-
----
-
-### Search Query {#search-query}
-
-Gmail search query to filter emails.
-
-**Type:** Default Value Field
-
-**Description:** Use Gmail's powerful search syntax to find specific emails.
-
-:::tip Set Query in Default Value
-You can set the search query in the **"If excel column value is empty then fill this default value"** field option.
-
-**Example:**
-```
-from:noreply@example.com subject:verification
-is:unread after:2024/01/01
-has:attachment larger:5M
-```
-:::
-
-**Learn More:** See [Gmail API Search Queries](/documentation/field-types/google-service-gmail/gmail-api-search-queries) for detailed search syntax and examples.
-
----
-
-## Use Cases
-
-- **Fetch verification codes from emails** - Extract OTP codes for automation
-- **Monitor inbox for specific messages** - Wait for confirmation emails
-- **Extract data from email content** - Parse structured data from emails
-- **Process email attachments** - Retrieve emails with specific attachments
-- **Automate email-based workflows** - Trigger actions based on received emails
-
-## Best Practices
-
-### ✅ Do's
-
-- **Use specific search queries** - Narrow down results with precise filters
-- **Enable retry for verification emails** - Use retry mechanism for expected emails
-- **Use regex for data extraction** - Extract specific patterns like codes or URLs
-- **Mark emails as read** - Prevent duplicate processing
-- **Limit max results** - Improve performance by fetching only needed emails
-
-### ❌ Don'ts
-
-- **Don't fetch all emails** - Use search queries to filter results
-- **Don't set excessive retries** - Balance between reliability and performance
-- **Don't ignore timeout settings** - Set appropriate timeout for retry scenarios
-- **Don't process spam unnecessarily** - Exclude spam unless specifically needed
-
-## Troubleshooting
-
-### No Emails Found
-
-**Solution:** Verify your search query is correct and emails matching the criteria exist.
-
-### Permission Denied
-
-**Solution:** Ensure the selected Google account has Gmail API access enabled.
-
-### Timeout Errors
-
-**Solution:** Increase timeout duration or reduce max retry attempts.
-
-### Regex Not Working
-
-**Solution:** Test your regex pattern and ensure it matches the email content format.
-
-### Too Many Results
-
-**Solution:** Enable max results limit and refine your search query.
-
-## Related Documentation
-
-- [Gmail API Search Queries](/documentation/field-types/google-service-gmail/gmail-api-search-queries)
-- [Google Service - Gmail](/documentation/field-types/google-service-gmail)
-- [Field Types](/documentation/form-fields/field-types)
-- [Variables](/documentation/variable)
-- [Gmail API Documentation](https://developers.google.com/gmail/api)
+## Related Documentation {#related-documentation}
+
+- <img src="/svg/globe.svg" class="doc-icon" /> [Gmail API Search Queries Guide](/documentation/field-types/google-service-gmail/gmail-api-search-queries)
+- <img src="/svg/chat.svg" class="doc-icon" /> [Fetch Single Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-single-mail-gmail)
+- <img src="/svg/click.svg" class="doc-icon" /> [Send Mail (Gmail)](/documentation/field-types/google-service-gmail/send-mail-gmail)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Google Service Account Setup](/documentation/services/google-service)

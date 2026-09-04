@@ -11,30 +11,31 @@ Browser Bus is a powerful JavaScript API that enables seamless **real-time commu
 
 ## Key Features
 
-### 📡 Cross-Tab Communication
+### Cross-Tab Communication
 Send and receive data between any open browser tabs, enabling seamless information sharing without requiring a backend server.
 
-### 🔄 Real-Time Synchronization
+### Real-Time Synchronization
 Data changes are instantly reflected across all connected tabs, ensuring all tabs stay in sync with the latest information.
 
-### 🎯 Flexible Data Types
+### Flexible Data Types
 Send any type of data including strings, numbers, objects, arrays, and complex nested structures.
 
-### 🔒 Origin Control
+### Origin Control
 Configure which URLs can send and receive data, providing security and control over cross-tab communication.
 
-### 🎛️ Listener Management
+### Listener Management
 Full control over connection listeners with start, stop, remove, and reset capabilities for efficient resource management.
 
-### 🧹 Data Cleanup
+### Data Cleanup
 Remove previously sent data to manage memory and keep your communication channel clean.
 
-### 🖼️ iFrame Support
+### iFrame Support
 Optional support for communication within iframes, with granular control over which iframes can participate.
 
 :::tip Note
 All JavaScript code examples below should be used in the [JavaScript Code](/documentation/field-types/javascript-code) field type.
 :::
+
 
 ## How it works
 
@@ -145,3 +146,11 @@ $fns.connection.settings({
 - **allow_iframe**: This setting is set to `false`, which means that the connection will not be allowed within an iframe.
 - **senderURLs**: In this case, the only allowed sender URL is `https://temp-mail.org/en/`. This means that only requests originating from this URL will be able to send connection data.
 - **receiverTab**: The specified URL is `https://formfiller.ctechhindi.in/*`, which indicates that any page under this domain can receive the connection.
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [JavaScript Code Field Type](/documentation/field-types/javascript-code)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+

@@ -5,6 +5,7 @@ hero:
   name: Excellent Data Filler
   image:
     src: /logo-white.svg
+    alt: Excellent Data Filler
   text: "Powerful Form Automation & Data Scraping"
   tagline: Automate form filling, data extraction, and web interactions with Excel integration. Save hours of manual work with intelligent automation.
   actions:
@@ -18,45 +19,63 @@ hero:
       text: View Examples
       link: /documentation/testing-site
 features:
-  - icon: 📊
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h2"/><path d="M8 17h2"/><path d="M14 13h2"/><path d="M14 17h2"/></svg>'
     title: Excel Integration
     details: Seamlessly integrate with Excel spreadsheets for automated data entry. Generate templates and fill forms row by row with your data.
-  - icon: 🔄
+    link: /documentation/site/site-excel-template
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>'
     title: Multi-Form Support
     details: Use data from a single Excel sheet across multiple forms. Perfect for bulk data entry and form automation workflows.
-  - icon: 💻
+    link: /documentation/form/form
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'
     title: JavaScript Execution
     details: Execute custom JavaScript code and leverage predefined functions for advanced automation and data manipulation.
-  - icon: 📁
+    link: /documentation/field-types/javascript-code
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>'
     title: Smart File Upload
     details: Automatic file uploading with support for Google Forms, Microsoft Forms, and custom file handling with intelligent naming.
-  - icon: 🕷️
+    link: /documentation/field-types/upload-file
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>'
     title: Data Scraping
     details: Extract text, tables, and structured data from websites with powerful scraping capabilities and data processing tools.
-  - icon: 🎯
+    link: /documentation/site/site-scraper-data
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>'
     title: Browser Automation
     details: Control browser tabs, windows, and interactions. Handle dialogs, manage downloads, and automate complex web workflows.
-  - icon: 📅
+    link: /documentation/field-types/browser-actions
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><polyline points="12 14 12 17 14 17"/></svg>'
     title: Date & Time Processing
     details: Advanced date manipulation, format conversion, and time-based automation for scheduling and data processing.
-  - icon: 🔧
+    link: /documentation/field-types/date-picker
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>'
     title: System Integration
     details: Interact with external applications, perform system-level operations, and integrate with desktop software.
-  - icon: 📄
+    link: /documentation/local-server/local-server
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>'
     title: PDF Generation
     details: Automatically generate and save PDFs from web content with customizable formatting and layout options.
-  - icon: 🧮
+    link: /documentation/field-types/save-as-pdf
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="14"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>'
     title: Math Operations
     details: Perform calculations, data analysis, and mathematical operations on extracted data with built-in math functions.
-  - icon: 🔤
+    link: /documentation/field-types/math-actions
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>'
     title: String Manipulation
     details: Advanced text processing, regex operations, case conversion, and string manipulation for data cleaning and formatting.
-  - icon: 🎨
+    link: /documentation/field-types/string-manipulation
+
+  - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>'
     title: Material Design Support
     details: Full support for Material Design frameworks including Vuetify, MUI, React Material, and Angular Material.
+    link: /documentation/field-types/material-single-select
 ---
-
-<style>
-.VPHero {
-}
-</style>

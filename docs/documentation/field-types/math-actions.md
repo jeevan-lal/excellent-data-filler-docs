@@ -1,8 +1,8 @@
-# 🧮 Math Actions {#math-actions}
+# Math Actions {#math-actions}
 
 Math Actions field types allow you to perform mathematical calculations and operations on numeric data extracted from web pages or provided values. These field types are essential for data processing, calculations, and numerical analysis in your automation workflows.
 
-## ➕ Sum (+) {#sum}
+## Sum (+) {#sum}
 
 Add a number from a single element to another number to get their sum.
 
@@ -21,7 +21,7 @@ Add a number from a single element to another number to get their sum.
 - **Field Value**: `15`
 - **Result**: `40` (25 + 15)
 
-## ➖ Subtract (-) {#subtract}
+## Subtract (-) {#subtract}
 
 Subtract a number from a single element value.
 
@@ -40,7 +40,7 @@ Subtract a number from a single element value.
 - **Field Value**: `15`
 - **Result**: `35` (50 - 15)
 
-## ✖️ Multiply (\*) {#multiply}
+## Multiply (*) {#multiply}
 
 Multiply a number from a single element with another number to get their product.
 
@@ -59,7 +59,7 @@ Multiply a number from a single element with another number to get their product
 - **Field Value**: `5`
 - **Result**: `40` (8 × 5)
 
-## ➗ Divide (÷) {#divide}
+## Divide (÷) {#divide}
 
 Divide a number from a single element by another number to get their quotient.
 
@@ -82,7 +82,7 @@ Divide a number from a single element by another number to get their quotient.
 Be careful when dividing by zero as it will result in an error. Always ensure your divisor values are not zero.
 :::
 
-## 🔢 Count {#count}
+## Count {#count}
 
 Count occurrences of specific values or elements.
 
@@ -108,7 +108,7 @@ Count occurrences of specific values or elements.
 If there are values in new line then use `\r\n` for split values.
 :::
 
-## 🧮 Calculate Math Query {#calculate-math-query}
+## Calculate Math Query {#calculate-math-query}
 
 Perform complex mathematical calculations using expressions and variables.
 
@@ -136,7 +136,7 @@ sin(90) + cos(0)    // Trigonometric functions
 
 ### Advanced Features
 
-- **Variable substitution**: Use `{$variable_name$}` to insert dynamic values
+- **Variable substitution**: Use `{$variable_name$}` to insert dynamic values from Excel (.xlsx)
 - **Nested expressions**: Complex calculations with multiple operations
 - **Function support**: Mathematical functions like trigonometry, logarithms
 - **Error handling**: Graceful handling of invalid expressions
@@ -145,7 +145,7 @@ sin(90) + cos(0)    // Trigonometric functions
 This field type uses the [math-expression-evaluator](https://github.com/bugwheels94/math-expression-evaluator) library for mathematical operations.
 :::
 
-## 💡 Usage Tips {#usage-tips}
+## Usage Tips {#usage-tips}
 
 ### Data Preparation
 
@@ -164,3 +164,11 @@ This field type uses the [math-expression-evaluator](https://github.com/bugwheel
 1. **Efficient Selectors**: Use specific selectors to target only relevant elements
 2. **Batch Operations**: Process multiple calculations in sequence rather than individual operations
 3. **Variable Reuse**: Store calculated results in variables for reuse in other fields
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/form.svg" class="doc-icon" /> [String Manipulation](/documentation/field-types/string-manipulation) — Clean and modify text
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Advanced field configuration
+

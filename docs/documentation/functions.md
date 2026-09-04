@@ -84,50 +84,73 @@ To match the **length** of an element according to the condition, then you can u
 - [==][20][true]
 - [>][3][false]
 
-## checkElementExists
+## checkElementExists {#checkelementexists}
 
-If you want to check an element whether the element is in the page or not, then you can use it.
+Checks whether a target element exists in the DOM of the active web page.
 
-| Options                  | Required |
-| ------------------------ | -------- |
-| Selector Type            | true     |
-| Selector Query           | true     |
-| Wait until element is found in the page. | false    |
-
-## checkElementDestroy
-
-If you want to check whether an element has been **removed/destroyed** from the page, then you can use this function. This is useful for waiting until an element disappears from the DOM.
-
-| Options                  | Required | Description                                                                                           |
-| ------------------------ | -------- | ----------------------------------------------------------------------------------------------------- |
-| Selector Type            | true     | Element Selector Type                                                                                 |
-| Selector Query           | true     | Element Selector Query                                                                                |
-| Wait until element is destroy in the page | false    | If enabled, waits for the element to be destroyed before executing below fields. |
+| Options | Required | Description | Values / Types |
+| --- | --- | --- | --- |
+| **Selector Type** | `true` | Element locator type. Supports both CSS selectors and XPath addresses. | `Selector`, `XPath` |
+| **Selector Query** | `true` | The CSS selector query or XPath address targeting the element. | e.g., `#username`, `//input[@id='username']` |
+| **Wait until element is found in the page (`isForceCheck`)** | `false` | When enabled, waits continuously until the element is found in the DOM without timing out. | Toggle ON / OFF (`true` / `false`) |
 
 ### Behavior
 
-- **When "Wait until element is destroy in the page" is enabled (true)**: The function waits until the specified element is destroyed/removed from the page. Once the element is destroyed, it executes the fields below.
-- **When "Wait until element is destroy in the page" is disabled (false)**: The function immediately checks if the element exists. Returns true if element is not found (destroyed), false if element still exists.
+- **When `isForceCheck` is `true` (Wait until element is found)**: The function continuously monitors the DOM and waits until the target element appears and matches. **It does not time out**, ensuring subsequent actions pause safely until dynamic asynchronous elements are rendered.
+- **When `isForceCheck` is `false`**: Performs an immediate check. If the element is present in the DOM, it returns `true`; if not found, it returns `false` immediately without waiting.
 
-## checkElementVisible
+---
 
-If you want to check an element whether the element is there in the page or not and the element is visible to us then you can use this.
+## checkElementDestroy {#checkelementdestroy}
 
-| Options                  | Required |
-| ------------------------ | -------- |
-| Selector Type            | true     |
-| Selector Query           | true     |
-| Wait until element is found in the page. | false    |
+Checks whether a specified element has been **removed / destroyed** from the DOM. This is especially useful for waiting until a loading spinner, overlay, or progress modal disappears before proceeding.
 
-## checkElementInvisible
+| Options | Required | Description | Values / Types |
+| --- | --- | --- | --- |
+| **Selector Type** | `true` | Element locator type. Supports both CSS selectors and XPath addresses. | `Selector`, `XPath` |
+| **Selector Query** | `true` | The CSS selector query or XPath address targeting the element. | e.g., `.spinner-border`, `//div[@id='loading-mask']` |
+| **Wait until element is destroy in the page (`isForceCheck`)** | `false` | When enabled, waits continuously until the element disappears from the DOM without timing out. | Toggle ON / OFF (`true` / `false`) |
 
-If you want to check an element whether the element is in the page or not and the element is invisible then you can use this.
+### Behavior
 
-| Options                  | Required |
-| ------------------------ | -------- |
-| Selector Type            | true     |
-| Selector Query           | true     |
-| Wait until element is found in the page. | false    |
+- **When `isForceCheck` is `true` (Wait until element is destroy)**: The function waits continuously until the element is completely removed/destroyed from the page DOM. **It does not time out**, executing subsequent fields only after the element has vanished.
+- **When `isForceCheck` is `false`**: Immediately checks if the element is absent. Returns `true` if the element is not found (destroyed), or `false` if it still exists in the DOM.
+
+---
+
+## checkElementVisible {#checkelementvisible}
+
+Checks whether a target element exists in the DOM **and is visible** to the user (i.e. not hidden with `display: none`, `visibility: hidden`, or zero dimensions).
+
+| Options | Required | Description | Values / Types |
+| --- | --- | --- | --- |
+| **Selector Type** | `true` | Element locator type. Supports both CSS selectors and XPath addresses. | `Selector`, `XPath` |
+| **Selector Query** | `true` | The CSS selector query or XPath address targeting the element. | e.g., `.modal.show`, `//div[contains(@class,'alert-success')]` |
+| **Wait until element is found in the page (`isForceCheck`)** | `false` | When enabled, waits continuously until the element becomes visible without timing out. | Toggle ON / OFF (`true` / `false`) |
+
+### Behavior
+
+- **When `isForceCheck` is `true` (Wait until element is visible)**: The function continuously monitors the element and waits until it is fully visible on the screen. **It does not time out**, making it ideal for waiting on dialog popups, confirmation prompts, or interactive cards that animate into view.
+- **When `isForceCheck` is `false`**: Immediately checks visibility. If the element is absent or currently invisible, it returns `false` without waiting.
+
+---
+
+## checkElementInvisible {#checkelementinvisible}
+
+Checks whether a target element is invisible or hidden from view on the page (e.g. styled with `display: none`, `visibility: hidden`, or removed from visible flow).
+
+| Options | Required | Description | Values / Types |
+| --- | --- | --- | --- |
+| **Selector Type** | `true` | Element locator type. Supports both CSS selectors and XPath addresses. | `Selector`, `XPath` |
+| **Selector Query** | `true` | The CSS selector query or XPath address targeting the element. | e.g., `#progress-bar`, `//div[contains(@class,'loading-overlay')]` |
+| **Wait until element is found in the page (`isForceCheck`)** | `false` | When enabled, waits continuously until the element becomes invisible without timing out. | Toggle ON / OFF (`true` / `false`) |
+
+### Behavior
+
+- **When `isForceCheck` is `true` (Wait until element is invisible)**: The function continuously waits until the target element becomes invisible or hidden. **It does not time out**, ensuring subsequent fields only execute after background processing or loading indicators have completed and hidden.
+- **When `isForceCheck` is `false`**: Immediately verifies whether the element is hidden or invisible at that exact moment without waiting.
+
+---
 
 ## elementVisible
 
@@ -714,4 +737,18 @@ Use this function to wait until a web page or iframe finishes loading completely
 
 - Set **timeout** in milliseconds in **Field Value**
 - Set **iframe selector** in **Field Selector Query** (optional, when waiting for a specific iframe)
+
+## closeStatusBar
+
+Close the injected **status bar** from the current web page.
+
+| Options                  | Required | Description                           | Value |
+| ------------------------ | -------- | ------------------------------------- | ----- |
+| Selector Type            | false    | Not required                          |       |
+| Selector Query           | false    | Not required                          |       |
+| Field Value              | false    | Optional flag (`false` to skip action)|       |
+
+### Usage
+
+Use this function in your automation sequence whenever you need to dismiss or hide the extension's status bar from the current page (for example, prior to taking full-page screenshots, printing, or upon finishing form actions).
 

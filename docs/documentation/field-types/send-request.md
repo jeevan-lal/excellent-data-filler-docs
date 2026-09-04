@@ -886,11 +886,10 @@ The custom JavaScript function extracts and formats the user data, saving:
 
 ## Related Documentation
 
-- [Field Settings](/documentation/form-fields/field-settings)
-- [Default Value](/documentation/form-fields/field-settings#default-value)
-- [Scraper Data](/documentation/form-fields/field-types#scraper-data)
-- [HTTP Methods - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
-- [JSONPath-Plus](https://github.com/JSONPath-Plus/JSONPath)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Advanced field configuration
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Scraper Data](/documentation/form-fields/field-types#scraper-data) — Scraped data management
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Excel (.xlsx) template structure
 
 ## Notes
 
@@ -899,4 +898,4 @@ The custom JavaScript function extracts and formats the user data, saving:
 - Response size limits may apply
 - JSONPath only works with JSON output type
 - Empty JSONPath returns entire response
-- Text output type returns raw response as string
+- Text output type returns raw response as string

@@ -611,6 +611,6 @@ All scheduled tasks appear in the main Task Scheduler interface with:
 
 If you need assistance with Task Scheduler:
 
-- Check the [Log](/documentation/log) for detailed error information
+- Check the [Logs](/documentation/logs) for detailed error information
 - Visit our [Support Channels](/documentation/#need-help) for community assistance
 - Report issues on our [GitHub Repository](https://github.com/jeevan-lal/excellent-data-filler-docs/issues)

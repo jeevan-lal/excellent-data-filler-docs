@@ -324,10 +324,10 @@ Opens: https://example.com/redirect?from=/products/item&host=source.com
 
 ## Related Documentation
 
-- [Page Location Variables](/documentation/variable#page-location-variable)
-- [Field Settings](/documentation/form-fields/field-settings)
-- [Default Value](/documentation/form-fields/field-settings#default-value)
-- [URL Matching](/documentation/field-types/url-matching)
+- <img src="/svg/form.svg" class="doc-icon" /> [Page Location Variables](/documentation/variable#page-location-variable) — Predefined location variable tokens
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Advanced field configuration
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Excel (.xlsx) template structure
+- <img src="/svg/browser.svg" class="doc-icon" /> [URL Matching](/documentation/field-types/url-matching) — Validate current page URL against patterns
 
 ---
 
@@ -338,3 +338,4 @@ Opens: https://example.com/redirect?from=/products/item&host=source.com
 - Subsequent fields in the workflow will execute on the new page
 - Use this field type for page navigation within automation workflows
 - For opening URLs in new tabs, use browser action field types
+

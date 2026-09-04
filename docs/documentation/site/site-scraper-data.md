@@ -1,148 +1,113 @@
 ---
 prev:
-  text: "Download Excel Template"
+  text: "Excel Template"
   link: "/documentation/site/site-excel-template"
 next:
   text: "Site Settings"
   link: "/documentation/site/site-settings"
 ---
 
-# Scraper Data
+# Scraper Data {#scraper-data}
 
-Scraper Data is a specialized section that stores and manages data collected from scraper field types. When you use scraper field types in your forms, the extracted data is automatically stored here and can be downloaded for further use or analysis.
+The **Scraper Data** workspace stores and manages datasets extracted from web pages using scraper field types during automated form workflows.
 
-## Overview
+---
 
-The Scraper Data section provides:
+## Overview {#overview}
 
-- **📊 Data Storage** - Stores scraped data from scraper field types
-- **📥 Download Options** - Multiple download formats for scraped data
-- **🔄 Data Management** - View, refresh, and delete scraped data
-- **📋 Data Organization** - Organize scraped data for easy access
+When automating complex web portals, workflows often require extracting live data from web pages (such as order numbers, confirmation IDs, table entries, or verification codes) alongside filling inputs.
 
-## When Scraper Data Appears
+Whenever forms or segments execute with scraper field types enabled, the extracted records are automatically captured and organized within the **Scraper Data** tab of the active site:
 
-### 🎯 Prerequisites
+- **Structured Storage**: Catalogs extracted text, HTML elements, and table cells under structured field names.
+- **Excel Export**: Download datasets directly as `.xlsx` spreadsheets for analysis, archiving, or feeding into subsequent automation steps.
+- **Session Control**: View live records, refresh in-memory datasets, and purge old data to start fresh.
 
-Scraper Data section becomes available when:
+---
 
-- **✅ Scraper Field Types Used** - You have configured scraper field types in your forms
-- **✅ Data Successfully Scraped** - The scraper field types have successfully extracted data
-- **✅ Data Storage Enabled** - The extension has stored the scraped data
-- **✅ Site Configuration Complete** - Your site and forms are properly configured
+## When Scraper Data Appears {#when-scraper-data-appears}
 
-:::info INFO
-if using [Supported Field Types](/documentation/form-fields/field-types#scraper-data) then Scraper Data section will be available.
-:::
+The Scraper Data interface and records become active when the following prerequisites are met:
 
-## Scraper Data Interface
+1. **Scraper Fields Configured**: The active site has one or more fields assigned to a scraper field type (e.g., text scraper, attribute extractor, or table scraper).
+2. **Form Automation Executed**: The target web page has been processed with automation enabled (<kbd>Alt</kbd> + <kbd>Q</kbd> or page-load trigger).
+3. **Data Captured**: Elements matching your selectors were located in the DOM and values were retrieved.
 
-### 🖥️ Interface Overview
+> [!NOTE]
+> If no scraper field types are configured for the site, or if the form has not been executed yet, the tab will display:
+> ```text
+> Scraper Data Not Available
+> ```
+> Learn more about configuring scraper field types in [Supported Field Types](/documentation/form-fields/field-types).
 
-The Scraper Data section provides a clean interface for managing your scraped data:
+---
 
-- **📊 Data Display** - View all scraped data in an organized format
-- **📥 Download Buttons** - Multiple download options for different needs
-- **🔄 Management Tools** - Refresh and delete data as needed
-- **📋 Status Information** - Clear indication of data availability
+## Available Actions {#available-actions}
 
-## Download Options
+The Scraper Data toolbar provides export and management actions:
 
-### 📥 Download Scraper Data
+| Action Button | Output / Behavior | Best For |
+|---|---|---|
+| **Download Scraper Data** | Multi-sheet `.xlsx` workbook | Comprehensive data export containing dedicated sheets for distinct scraped forms and entity groups. |
+| **Download Scraper Data Single Sheet** | Consolidated single-sheet `.xlsx` | Quick reviews, flat data tables, or spreadsheets requiring straightforward row-by-row filtering. |
+| **Refresh Data** | Re-queries stored memory | Updates the on-screen display if new records were scraped while the tab remained open. |
+| **Delete Data** | Clears scraped records | Permanently removes current scraped records from the extension storage for this site. |
 
-**Purpose:** Download all scraped data in a comprehensive format
-**Format:** Complete dataset with all scraped information
-**Use Case:** Full data analysis and comprehensive reporting
+---
 
-### 📥 Download Scraper Data Single Sheet
+## How to Generate and Export Scraper Data {#how-to-generate-scraper-data}
 
-**Purpose:** Download scraped data in a simplified single-sheet format
-**Format:** Condensed data in a single Excel sheet
-**Use Case:** Quick data review and simple analysis
+Follow this complete step-by-step workflow:
 
-### 🔄 Refresh Data
+### Step 1: Configure Scraper Fields
 
-**Purpose:** Update scraped data with the latest information
-**Action:** Re-runs scraper field types to get fresh data
-**Use Case:** When source data has changed or been updated
+1. Open your **Site** and select the target **Form** or **Segment**.
+2. Add a new field and select the appropriate scraper field type.
+3. Configure the DOM selector (CSS Selector or XPath) matching the target text or table element on the web page.
+4. Set any required [Timing Delays](/documentation/form-fields/field-settings#timing-settings) if the target content loads asynchronously via JavaScript.
 
-### 🗑️ Delete Data
+### Step 2: Run Form Automation
 
-**Purpose:** Remove all scraped data from storage
-**Action:** Permanently deletes stored scraper data
-**Use Case:** Clearing old data or starting fresh
+1. Navigate to the target web page.
+2. Ensure the extension is enabled and trigger automation using <kbd>Alt</kbd> + <kbd>Q</kbd>.
+3. The extension processes form steps, locates the scraper target elements, and extracts their values into memory.
 
-## How to Generate Scraper Data
+### Step 3: Inspect and Export Scraped Data
 
-### 🔧 Prerequisites
+1. Open the extension popup or options dashboard.
+2. Navigate to your **Site** workspace and select the **Scraper Data** tab.
+3. Review the extracted records displayed in the table.
+4. Click **Download Scraper Data** or **Download Scraper Data Single Sheet** to export the data into a clean `.xlsx` file.
 
-Before you can access scraper data, you need to:
+---
 
-1. **Configure Scraper Field Types** - Set up scraper field types in your forms
-2. **Run Form Automation** - Execute the form filling process to scrape data
-3. **Verify Data Extraction** - Ensure scraper field types successfully extracted data
-4. **Check Data Storage** - Confirm data is stored in the scraper data section
+## Troubleshooting {#troubleshooting}
 
-## Troubleshooting
+### Common Extraction Issues
 
-### ❌ Common Issues
+| Problem | Likely Cause | Solution |
+|---|---|---|
+| **"Scraper Data Not Available" message** | No scraper fields configured, or automation hasn't run | Ensure at least one scraper field exists in the active form/segment and execute the workflow. |
+| **Empty or null values captured** | Target element rendered after extraction attempt | Add a delay in **Delay Time Before Running This Field** (e.g., `1000ms` or `2000ms`) to allow dynamic content to load. |
+| **Incorrect element scraped** | Non-unique CSS selector or dynamic DOM IDs | Inspect the element using <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> and use a stable class or XPath expression. |
+| **Download does not start** | Browser download permission prompt blocked | Check browser permissions for extension downloads or check browser download shelf. |
 
-**Issue:** "Scraper Data Not Available" message appears
-**Solutions:**
+---
 
-- Ensure you have configured scraper field types in your forms
-- Run the form automation process to generate scraped data
-- Check if scraper field types are properly configured
-- Verify that data extraction was successful
+## Best Practices {#best-practices}
 
-**Issue:** No data appears after running automation
-**Solutions:**
+- **Use Stable Selectors**: Avoid auto-generated selectors with dynamic numerical IDs; use semantic class names, data attributes, or precise XPath queries.
+- **Account for Dynamic Rendering**: Use appropriate before/after delays for AJAX or Single Page Application (SPA) elements.
+- **Clear Old Data Between Runs**: Click **Delete Data** before initiating a new batch if you do not want previous session records mixed with fresh results.
+- **Validate Selectors with Inspect Element**: Use <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> on the target page to confirm your selector matches the exact node containing text.
 
-- Check scraper field type configuration
-- Verify CSS selectors or XPath expressions are correct
-- Test scraper field types individually
-- Check the extension log for error messages
+---
 
-**Issue:** Download buttons are not working
-**Solutions:**
+## Related Documentation {#related-documentation}
 
-- Ensure data is available in the scraper data section
-- Check browser download permissions
-- Try refreshing the page and data
-- Verify data storage is working properly
-
-### 🔧 Data Issues
-
-**Issue:** Incomplete or missing data
-**Solutions:**
-
-- Review scraper field type selectors
-- Check if source page structure has changed
-- Verify data extraction patterns
-- Test with different data sources
-
-**Issue:** Data formatting problems
-**Solutions:**
-
-- Check data processing rules in scraper field types
-- Verify data type configurations
-- Review data cleaning settings
-- Test with sample data first
-
-## Support and Help
-
-If you need assistance with scraper data:
-
-- Check the [Log](/documentation/log) for detailed error information
-- Review [Field Types](/documentation/form-fields/field-types) for scraper field configuration
-- Visit our [Support Channels](/documentation/#need-help) for community assistance
-- Report issues on our [GitHub Repository](https://github.com/jeevan-lal/excellent-data-filler-docs/issues)
-
-## Next Steps
-
-After setting up scraper data:
-
-- [Field Types Guide](/documentation/form-fields/field-types) - Learn about different field types
-- [Form Configuration](/documentation/form/form) - Configure forms to use scraper data
-- [Data Management](/documentation/functions) - Advanced data processing functions
-- [Automation Workflow](/documentation/structure) - Set up complete automation workflows
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template)
+- <img src="/svg/form.svg" class="doc-icon" /> [Site Management](/documentation/site/site)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+- <img src="/svg/database.svg" class="doc-icon" /> [Field Types Guide](/documentation/form-fields/field-types)
+- <img src="/svg/beaker.svg" class="doc-icon" /> [Execution Logs](/documentation/logs)
+- <img src="/svg/template.svg" class="doc-icon" /> [Segments Routine Automation](/documentation/segment)

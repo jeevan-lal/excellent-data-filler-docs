@@ -1,17 +1,17 @@
-# 🗃️ Execute Segment {#execute-segment}
+# Execute Segment {#execute-segment}
 
 Execute predefined segments with custom environment variables. Run specific automation workflows with dynamic configuration parameters.
 
-## 📋 Field Options {#execute-segment-field-options}
+## Field Options {#execute-segment-field-options}
 
 | Field Options    | Required | Description                              | Example Values                                |
 | ---------------- | -------- | ---------------------------------------- | --------------------------------------------- |
 | **Segment Name** | Yes      | Name of the segment to execute           | `login_flow`, `data_entry`, `form_submission` |
 | **Environment**  | No       | JSON configuration for segment execution | `{"title": "EDF", "timeout": 5000}`           |
 
-## ⚙️ Configuration {#execute-segment-configuration}
+## Configuration {#execute-segment-configuration}
 
-### 📝 Segment Name {#segment-name}
+### Segment Name {#segment-name}
 
 **Purpose:** Specifies which predefined segment to execute during form filling.
 
@@ -29,7 +29,7 @@ Execute predefined segments with custom environment variables. Run specific auto
 - Avoid special characters and spaces
 - Use snake_case or camelCase naming
 
-### 🌐 Environment Variables {#environment-variables}
+### Environment Variables {#environment-variables}
 
 **Purpose:** Pass dynamic configuration data to the segment during execution.
 
@@ -49,7 +49,7 @@ Execute predefined segments with custom environment variables. Run specific auto
 {$title$}
 ```
 
-## ⚠️ Important Notes {#important-notes}
+## Important Notes {#important-notes}
 
 - **Segment must exist** before execution
 - **Environment variables** are passed as JSON
@@ -63,3 +63,10 @@ Use environment variables to make segments reusable across different forms and s
 :::warning Important
 Ensure the segment name matches exactly with the predefined segment in your extension configuration.
 :::
+
+## Next Steps
+
+<img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)

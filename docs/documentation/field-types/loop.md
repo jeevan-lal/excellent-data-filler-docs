@@ -1,199 +1,120 @@
-# Loop
+# Loop {#loop}
 
-Loops can execute a [segment](/documentation/segment) a number of times. Loops are handy, if you want to run the same segment over and over again, each time. You can use [Loop Variables](/documentation/variable#loop-variable) to access information about the current loop iteration.
+Loops execute a [segment](/documentation/segment) multiple times. Loops are ideal when you need to repeat a sequence of automated actions iteratively across table rows, list items, or counter values. You can also use [Loop Variables](/documentation/variable#loop-variable) to access information about the current iteration.
 
-<img src="/image/loop-01.png" alt="Loop">
+<img src="/image/loop-01.png" alt="Loop Field Configuration" style="max-width: 620px; width: 100%; border-radius: 8px; margin: 16px 0;" />
 
-## Options
+---
 
-| Options                                                                                                                                         | Required |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| [**Which segment do you want to execute**](#which-segment-do-you-want-to-execute)                                                               | **Yes**  |
-| [**How many times the segment has to be run**](#how-many-times-the-segment-has-to-be-run)                                                       | **Yes**  |
-| [**If field value is multiline**](#if-field-value-is-multiline)                                                                                 | No       |
-| [**Character that splits field value into multiline**](#character-that-splits-field-value-into-multiline)                                       | No       |
-| [**Store Loop Index**](#store-loop-index)                                                                                                       | No       |
-| [**Delete store loop index data before execution of last index of loop**](#delete-store-loop-index-data-before-execution-of-last-index-of-loop) | No       |
+## Options Overview {#options}
 
-## Which segment do you want to execute
+| Option | Required | Description |
+| --- | --- | --- |
+| **Which segment do you want to execute** | **Yes** | The name of the segment to run in each iteration. |
+| **How many times the segment has to be run** | **Yes** | Set loop duration via fixed **Value** or dynamic **Element Length** count. |
+| **If field value is multiline** | No | Process multiline data by running one iteration per line. |
+| **Character that splits field value into multiline** | No | Delimiter character to split multiline values (e.g., `\r\n`, `,`). |
+| **Store Loop Index** | No | Persists loop progress across page reloads/refreshes. |
+| **Delete store loop index data before execution of last index of loop** | No | Automatically clears stored index data right before the final iteration. |
 
-The name of the [segment](/documentation/segment) which is to be executed in the loop comes in this option.
+---
+
+## Which segment do you want to execute {#which-segment-to-execute}
+
+Enter the name of the [segment](/documentation/segment) to execute in each loop cycle.
 
 :::v-pre
-**Using Variables in Segment Name:**
-You can use [Loop Variables](/documentation/variable#loop-variable) within the segment name to dynamically execute different segments in each iteration.
-- Example: `segment-{{loop.index[loop]}}`
-- Segment execution: `segment-1`, `segment-2`, `segment-3`, etc.
+**Dynamic Segment Names:**
+You can use loop variables within the segment name to dynamically execute different segments in each iteration:
+- Example: `segment-{{loop.index[FieldName]}}`
+- Resolves to: `segment-1`, `segment-2`, `segment-3`, etc.
 :::
 
-## How many times the segment has to be run
+---
 
-The number of times the loop has to be executed is given in it. In this, value can be given in the following way.
+## Using Loop Index in Query Selectors {#loop-index-in-selectors}
 
-- **Value** - Specify a fixed number or use variables
-- **Element Length** - Loop based on the number of matching elements on the page
+:::v-pre
+When automating repetitive tables, lists, or grids, you can use `{{loop.index[FieldName]}}` directly inside the CSS selector or XPath query of fields within the loop segment to target elements dynamically.
 
-### Element Length Option
+### CSS Selector Comparison
 
-The **Element Length** option allows you to run a loop based on the number of elements found on the page that match a specific selector.
+- **Normal Static Selector** (targets only row 1):
+  ```css
+  table tbody tr:nth-child(1)
+  ```
 
-:::warning IMPORTANT: Use Selector Only, Not Numbers
-In the **Element Length** option, you should **ONLY use an Element Selector Query** (CSS Selector or XPath). **DO NOT use numbers** in this field. The number of loop iterations will be automatically determined by counting how many elements match your selector.
+- **Dynamic Selector with Loop Index** (targets each row sequentially):
+  ```css
+  table tbody tr:nth-child({{loop.index[FieldName]}})
+  ```
+
+### XPath Comparison
+
+- **Normal Static XPath**:
+  ```xpath
+  //table/tbody/tr[1]/td[2]/input
+  ```
+
+- **Dynamic XPath with Loop Index**:
+  ```xpath
+  //table/tbody/tr[{{loop.index[FieldName]}}]/td[2]/input
+  ```
 :::
 
-**How it works:**
-1. Provide a CSS Selector or XPath query
-2. The extension counts how many elements match that selector
-3. The loop runs that many times (once for each matching element)
+::: tip 1-Based vs 0-Based Indexing
+CSS `:nth-child()` and XPath index positions are **1-based** (the first element is index `1`). When targeting `:nth-child(index)` using <code>&#123;&#123;loop.index[FieldName]&#125;&#125;</code>, configure your loop starting index to `1` or use 1-based loop variables (<code>&#123;&#123;loop.iteration[FieldName]&#125;&#125;</code>).
+:::
+
+---
+
+## How many times the segment has to be run {#loop-duration}
+
+You can control loop iterations using either **Value** or **Element Length**:
+
+### 1. Value Mode
+
+Specify fixed numerical bounds for the loop:
+
+- **Start Index**: Starting number of the loop (`0` by default).
+- **End Index**: Ending value for the loop.
+- **Infinite Loop**: Enter `-1` as the End Index to run continuously until stopped.
+
+::: info Loop Starting Counter
+The loop counter starts at `0` by default (`0, 1, 2, 3, 4, ...`). If Start Index is set to `4`, the loop begins at `4`.
+:::
+
+::: tip Stopping or Skipping Infinite Loops
+When running an infinite loop (`-1`), stop or skip cycles using:
+- [Field Success Response Action](/documentation/form-fields/field-settings#field-success-response-action) set to **Stop Loop** or **Skip Segment**.
+- [Field Error Response Action](/documentation/form-fields/field-settings#field-error-response-action).
+- [String Matching](/documentation/field-types/string-matching) field comparing `Loop Index` to target values.
+:::
+
+---
+
+### 2. Element Length Mode
+
+Runs the loop based on the number of matching elements found on the page.
+
+::: warning Use Selectors Only
+In **Element Length** mode, only enter a CSS Selector or XPath query (e.g. `table tbody tr`). Do not enter numbers. The extension automatically counts matching elements and runs the loop that many times.
+:::
 
 **Example:**
+- **Selector Query**: `table tbody tr`
+- If 10 rows exist on the page, the loop automatically runs 10 times.
 
-```
-Selector Type: CSS Selector
-Element Selector Query: table tbody tr
-```
+---
 
-If there are 10 table rows (`<tr>`) on the page, the loop will run 10 times.
+## Multiline Field Values {#multiline-values}
 
-**Use Cases:**
-- Process all items in a list
-- Fill multiple form sections
-- Handle dynamic content where the count varies
-- Interact with table rows
-- Process search results
+- **If field value is multiline**: When enabled, the loop splits the field's data string into multiple lines and processes one line per iteration.
+- **Character that splits field value into multiline**: Delimiter character used to split entries (use `\r\n` for newline-separated data, or `,` / `;` for delimited strings).
 
-### Stopping a Loop Using Loop Index
+---
 
-If you want to stop a loop at a specific iteration number (e.g., stop at index 5), use the **String Matching** field type with the **Loop Index** option.
+## Store Loop Index Across Page Refreshes {#store-loop-index}
 
-**Steps to Stop Loop at Specific Index:**
-
-1. Add a **[String Matching](/documentation/field-types/string-matching)** field inside your loop segment
-2. In String Matching field settings:
-   - **String 1**: Select "Loop Index" from the dropdown
-   - **String 2**: Enter the index number where you want to stop (e.g., `5`)
-   - **Matching Type**: Select "Equal to" or appropriate comparison
-3. In **Field Success Response Action**: Select **"Stop Loop"**
-
-**Example Configuration:**
-
-```
-Field Type: String Matching
-String 1: Loop Index
-Matching Type: Equal to
-String 2: 5
-Field Success Response Action: Stop Loop
-```
-
-**Result:** The loop will stop when it reaches index 5 (the 6th iteration, since loops start at 0).
-
-**Advanced Example - Stop at Different Conditions:**
-
-```
-// Stop when loop index is greater than or equal to 10
-String 1: Loop Index
-Matching Type: Greater than or equal to
-String 2: 10
-Field Success Response Action: Stop Loop
-```
-
-### Practical Example: Dynamic Table Row Deletion
-
-**Scenario:** You need to delete table rows based on input values, but the DOM updates after each deletion, causing the element count to change.
-
-**Problem:** When you delete a row, the remaining rows shift, and element indices change, making it difficult to target the correct rows.
-
-**Solution:** Use Element Length with proper selector strategy.
-
-**Live Example:** [Dynamic Table Row Deletion Demo](https://formfiller.ctechhindi.in/example/example36.html)
-
-**How to Handle Dynamic DOM Updates:**
-
-1. **Use Element Length** to count current rows
-2. **Always target the first matching element** in your loop (since indices shift after deletion)
-3. **Use conditional logic** to decide which rows to delete
-4. **Let the loop re-count** elements on each iteration
-
-**Example Configuration:**
-
-```
-Loop Field:
-  - How many times: Element Length
-  - Selector Type: CSS Selector
-  - Element Selector Query: table tbody tr
-
-Inside Loop Segment:
-  1. Scraping Data Field (Get row data)
-     - Selector: table tbody tr:first-child .name
-     - Which Element Option: Element Text
-  
-  2. String Matching Field (Check if should delete)
-     - String 1: {$scrapedName$}
-     - Matching Type: Equal to
-     - String 2: John Doe
-     - Field Success Response Action: Continue
-     - Field Error Response Action: Skip Segment
-  
-  3. Button Click Field (Delete the row)
-     - Selector: table tbody tr:first-child .delete-btn
-```
-
-**Key Points:**
-- Always use `:first-child` or similar selectors to target the first element
-- The DOM updates after deletion, so the next iteration will see the new first element
-- Use String Matching to conditionally process rows
-- Element Length automatically adjusts as rows are deleted
-
-### Loop Starting and Ending Point
-
-- From which number the loop has to be started? `(Default Index: 0)`
-- What number should the loop end at?
-
-:::warning NOTE
-Starting number of the loop is `0`. If you give 4 numbers in the starting number then the loop will start from number 5 because the loop will start from 0. Like - `0,1,2,3,4,5,...`
-:::
-
-::: details How to run infinite loop?
-To execute Infinite Loop, give `-1` in Loop Ending Value.
-:::
-
-::: details How to stop a loop when using an infinite loop?
-
-To stop the loop, you can do it through the field settings given below.
-
-- [Field Success Response Action](/documentation/form-fields/field-settings#field-success-response-action)
-- [Field Error Response Action](/documentation/form-fields/field-settings#field-error-response-action)
-
-:::
-
-::: details How to skip any loop index?
-To skip any loop index (1,2,3,..), use the `Field Success Response` or `Field Error Response` options in the field settings. Choice `Skip Segment` action.
-:::
-
-## If field value is multiline
-
-This option allows you to handle multiline field values. When enabled, the loop will process each line of a multiline field value separately.
-
-### Character that splits field value into multiline
-
-This option specifies the character that will be used to split field values into multiple lines. By default, this is set to an string `,,`, which typically means newline characters are used for splitting.
-
-:::info Note
-If there are values in new line then use `\r\n` for split values.
-:::
-
-## Store Loop Index
-
-If the page on which you are using the loop is **refreshed** after the loop's action and the Loop starts from again the first number then you can use this option.
-
-:::info Remove Store Loop Index Data
-You can remove stored loop index data using the "Remove Store Loop Index Data" button. This clears any previously stored index information.
-:::
-
-## Delete store loop index data before execution of last index of loop
-
-This option allows you to automatically delete the stored loop index data before executing the last index of the loop. When enabled, the stored index data will be cleared just before the final iteration runs.
-
-## Form Field has multiple elements
-
-If the field is being used in `Loop` Field Type, then after turning on this [`field setting`](/documentation/form-fields/field-settings#if-this-field-is-being-used-in-a-loop-and-the-field-has-multiple-elements), if the element given in the field is multiple in the page, then we will get one element through the `index` of the loop.
+- **Store Loop Index**: Enable this if form actions cause a full page refresh during a loop cycle. The extension stores the current iteration index in browser storage so execution resumes from the saved index rather than starting over from 0.
+- **Delete store loop index data before execution of last index of loop**: Automatically clears the stored progress before running the final iteration to keep storage clean for subsequent runs.

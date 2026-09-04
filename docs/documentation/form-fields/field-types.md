@@ -2,7 +2,7 @@
 
 This page provides a comprehensive overview of all available field types in Excellent Data Filler. Field types are categorized based on their functionality and complexity level.
 
-## 🔹 Basic {#basic}
+## Basic {#basic}
 
 Essential field types for standard form interactions and data input.
 
@@ -20,7 +20,7 @@ Essential field types for standard form interactions and data input.
 If using `jquery inputMask` text field then trigger only the `paste` event (if the value is not filled in the input).
 :::
 
-## 🌐 External {#external}
+## External {#external}
 
 Advanced field types that work with external libraries and frameworks for enhanced user experience.
 
@@ -41,34 +41,34 @@ Advanced field types that work with external libraries and frameworks for enhanc
 Material field type works on Material framework like **Vuetify, MUI, React Material, Angular Material**, etc.
 :::
 
-## ⚡ Advance {#advance}
+## Advance {#advance}
 
 Powerful field types for complex automation, scripting, and advanced form control.
 
-- [**👩‍💻 Javascript Code**](/documentation/field-types/javascript-code) - Execute custom JavaScript code
-- [**🚀 Function**](/documentation/functions#predefined-function) - Use predefined functions for data manipulation
-- [**🔑 Keys**](/documentation/keys#special-key) - Simulate keyboard input and special keys
-- [**🛑 Form Error Message**](/documentation/field-types/advance/form-error-message) - Display custom error messages
-- [**✅ Current Entry as Saved**](/documentation/field-types/advance/current-entry-as-saved) - Mark current Excel entry as completed
-- **📃 Field Action Status Checker** - Check the status of field actions
-- **⏭️ Next Excel Entry Exists** - Verify if next Excel entry is available
-- [**🗃️ Execute Segment**](/documentation/field-types/execute-segment) - Execute a segment of the form
-- [**➕ Set Environment**](/documentation/field-types/set-environment) - Set the environment of the form
+- [**Javascript Code**](/documentation/field-types/javascript-code) - Execute custom JavaScript code
+- [**Function**](/documentation/functions#predefined-function) - Use predefined functions for data manipulation
+- [**Keys**](/documentation/keys#special-key) - Simulate keyboard input and special keys
+- [**Form Error Message**](/documentation/field-types/advance/form-error-message) - Display custom error messages
+- [**Current Entry as Saved**](/documentation/field-types/advance/current-entry-as-saved) - Mark current Excel entry as completed
+- **Field Action Status Checker** - Check the status of field actions
+- **Next Excel Entry Exists** - Verify if next Excel entry is available
+- [**Execute Segment**](/documentation/field-types/execute-segment) - Execute a segment of the form
+- [**Set Environment**](/documentation/field-types/set-environment) - Set the environment of the form
 
-## 🤖 AI {#ai}
+## AI {#ai}
 
 Field types powered by artificial intelligence for advanced automation and intelligent data processing.
 
-- [**🤖 AI**](/documentation/field-types/ai) - AI-powered field automation and intelligent form filling
+- [**AI**](/documentation/field-types/ai) - AI-powered field automation and intelligent form filling
 
-## 🏢 Local Server {#local-server}
+## Local Server {#local-server}
 
 Field types for interacting with a locally hosted server for various automation tasks and data operations.
 
 - [**Get Mail from Local Server**](/documentation/field-types/local-server/get-mail-from-local-server) - Retrieve emails from local server
 - [**Send Mail from Local Server**](/documentation/field-types/local-server/send-mail-from-local-server) - Send emails through local server
 
-## 🔍 Google Field {#google-field}
+## Google Field {#google-field}
 
 Field types specifically designed for Google Forms integration and compatibility.
 
@@ -84,7 +84,7 @@ Field types specifically designed for Google Forms integration and compatibility
 - **Time/Duration** - Time duration input fields
 - **File Upload** - File attachment functionality
 
-## 🏢 Microsoft Field {#microsoft-field}
+## Microsoft Field {#microsoft-field}
 
 Field types optimized for Microsoft Forms and Office 365 integration.
 
@@ -99,7 +99,7 @@ Field types optimized for Microsoft Forms and Office 365 integration.
 - **Matrix Radio Group** - Matrix layout with radio button groups
 - **Net Promoter Score (Linear Scale Radio)** - NPS survey scale (0-10)
 
-## 🍰 SurveyCake Field {#surveycake-field}
+## SurveyCake Field {#surveycake-field}
 
 Field types specifically designed for SurveyCake form integration and compatibility.
 
@@ -116,7 +116,7 @@ Field types specifically designed for SurveyCake form integration and compatibil
 - **Matrix Checkbox Group** - Matrix layout with checkbox groups
 - **Slider** - Range slider input component
 
-## 🕷️ Scraper Data {#scraper-data}
+## Scraper Data {#scraper-data}
 
 Field types for extracting and processing data from web pages and documents.
 
@@ -129,7 +129,7 @@ Field types for extracting and processing data from web pages and documents.
 - [**Fetch Header-Value Data**](/documentation/field-types/scraper-data/fetch-header-value-data) - Extract key-value pairs from elements
 - [**Fetch Multiple Data (Vertical)**](/documentation/field-types/scraper-data/fetch-multiple-data-vertical) - Extract multiple data points in vertical format
 
-## 🔧 Program Helper {#program-helper}
+## Program Helper {#program-helper}
 
 Basic automation field types for interacting with external applications and system functions.
 
@@ -140,7 +140,7 @@ Basic automation field types for interacting with external applications and syst
 - [**X-WinAlwaysOnTop (Deactivate)**](/documentation/field-types/program-helper#x-winalwaysontop-deactivate) - Remove always-on-top window property
 - [**X-KeyWait**](/documentation/field-types/program-helper#x-keywait) - Wait for specific key press
 
-## ⚡ Program Helper - Advance {#program-helper-advance}
+## Program Helper - Advance {#program-helper-advance}
 
 Advanced automation field types for complex system interactions and file operations.
 
@@ -151,7 +151,7 @@ Advanced automation field types for complex system interactions and file operati
 - [**X-FileGetSize**](/documentation/field-types/program-helper#x-filegetsize) - Get file size information
 - [**X-FileExtension**](/documentation/field-types/program-helper#x-fileextension) - Get file extension information
 
-## 🖼️ Image Actions {#image-actions}
+## Image Actions {#image-actions}
 
 Field types for processing, analyzing, and manipulating images and files.
 
@@ -160,14 +160,14 @@ Field types for processing, analyzing, and manipulating images and files.
 - [**Get Image Height**](/documentation/field-types/image-actions#get-image-height) - Extract image height in pixels
 - [**Download Image/File**](/documentation/field-types/image-actions#download-image-file) - Download files from URLs
 
-## 🌐 Browser Actions {#browser-actions}
+## Browser Actions {#browser-actions}
 
 Field types for controlling browser behavior, tabs, and web page interactions.
 
 - [**Open a new Tab**](/documentation/field-types/browser-actions#open-a-new-tab) - Create and open new browser tabs
 - [**Get Tab ID**](/documentation/field-types/browser-actions#get-tab-id) - Retrieve current tab identifier
 - [**Get Tab Details**](/documentation/field-types/browser-actions#get-tab-details) - Retrieve specific details about a browser tab
-- [**Capture Tab**](/documentation/field-types/browser-actions#capture-tab) - Take screenshots of browser tabs
+- [**Capture Tab**](/documentation/field-types/browser-actions#capture-tab) - Take full-page screenshots of browser tabs
 - [**Update Tab**](/documentation/field-types/browser-actions#update-tab) - Modify tab properties and content
 - [**Go Back to Previous Page**](/documentation/field-types/browser-actions#go-back-to-previous-page) - Navigate to previous page in history
 - [**Go Forward to Next Page**](/documentation/field-types/browser-actions#go-forward-to-next-page) - Navigate to next page in history
@@ -184,7 +184,7 @@ Field types for controlling browser behavior, tabs, and web page interactions.
 - [**Get Local Data**](/documentation/field-types/browser-actions#get-local-data) - Retrieve data from browser local storage
 - [**Remove Local Data**](/documentation/field-types/browser-actions#remove-local-data) - Clear data from browser local storage
 
-## 💬 Javascript Dialog {#javascript-dialog}
+## Javascript Dialog {#javascript-dialog}
 
 Field types for handling and interacting with JavaScript dialog boxes and popups.
 
@@ -195,7 +195,7 @@ Field types for handling and interacting with JavaScript dialog boxes and popups
 - [**Get Alert Dialog Message**](/documentation/field-types/javascript-dialog#get-alert-dialog-message) - Extract text from alert dialogs
 - [**Hide Confirm Dialog**](/documentation/field-types/javascript-dialog#hide-confirm-dialog) - Close or hide confirmation dialogs
 
-## ⌨️ Javascript Events {#javascript-events}
+## Javascript Events {#javascript-events}
 
 Field types for handling and simulating JavaScript events and user interactions.
 
@@ -203,7 +203,7 @@ Field types for handling and simulating JavaScript events and user interactions.
 - [**Pointer Event**](/documentation/field-types/javascript-events#pointer-event) - Simulate mouse and pointer events
 - [**Focus Event**](/documentation/field-types/javascript-events#focus-event) - Simulate focus and blur events
 
-## 📅 Date and Time {#date-and-time}
+## Date and Time {#date-and-time}
 
 Field types for handling date and time operations, formatting, and calculations.
 
@@ -212,7 +212,7 @@ Field types for handling date and time operations, formatting, and calculations.
 - [**Increase Date**](/documentation/field-types/date-time#increase-date) - Add days, months, or years to dates
 - [**Decrease Date**](/documentation/field-types/date-time#decrease-date) - Subtract days, months, or years from dates
 
-## 📊 Extension Actions {#extension-actions}
+## Extension Actions {#extension-actions}
 
 Field types for direct interaction with Excel data, enabling powerful spreadsheet automation.
 
@@ -225,24 +225,24 @@ Field types for direct interaction with Excel data, enabling powerful spreadshee
 - [**Modify Excel Column**](/documentation/field-types/extension-actions#modify-excel-column) - Modify existing Excel cell values
 - [**Refresh Excel Data**](/documentation/field-types/extension-actions#refresh-excel-data) - Reload Excel data in the extension
 
-## 🧮 Math Actions {#math-actions}
+## Math Actions {#math-actions}
 
 Field types for performing mathematical calculations and operations on numeric data.
 
 - [**Sum (+)**](/documentation/field-types/math-actions#sum) - Add multiple numeric values together
 - [**Subtract (-)**](/documentation/field-types/math-actions#subtract) - Subtract one value from another
-- [**Multiply (\*)**](/documentation/field-types/math-actions#multiply) - Multiply numeric values
+- [**Multiply (*)**](/documentation/field-types/math-actions#multiply) - Multiply numeric values
 - [**Divide (÷)**](/documentation/field-types/math-actions#divide-÷) - Divide one value by another
 - [**Count**](/documentation/field-types/math-actions#count) - Count the number of items or elements
 - [**Calculate Math Query**](/documentation/field-types/math-actions#calculate-math-query) - Execute complex mathematical expressions
 
-## 📊 Google Service - Sheet {#google-service-sheet}
+## Google Service - Sheet {#google-service-sheet}
 
 Field types for integrating with Google Sheets API to read and write spreadsheet data.
 
 - [**Fetch Google Sheet Data**](/documentation/field-types/google-service-sheet#fetch-google-sheet-data) - Retrieve data from Google Sheets
 
-## 📧 Google Service - Gmail {#google-service-gmail}
+## Google Service - Gmail {#google-service-gmail}
 
 Field types for integrating with Gmail API to manage emails and messages.
 
@@ -250,13 +250,13 @@ Field types for integrating with Gmail API to manage emails and messages.
 - [**Fetch Single Mail (Gmail)**](/documentation/field-types/google-service-gmail#fetch-single-mail-gmail) - Retrieve a specific email from Gmail
 - [**Send Mail (Gmail)**](/documentation/field-types/google-service-gmail#send-mail-gmail) - Send emails through Gmail
 
-## 🔐 Captcha Solution {#captcha-solution}
+## Captcha Solution {#captcha-solution}
 
 Field types for solving captcha challenges using third-party services.
 
 - [**2Captcha**](/documentation/field-types/captcha-solution#2captcha) - Solve captchas using 2Captcha service
 
-## 🔧 Others {#others}
+## Others {#others}
 
 Miscellaneous field types for various utility functions, web interactions, and content manipulation.
 

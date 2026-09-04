@@ -102,7 +102,7 @@ You can set the API key at three levels:
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Maintain sufficient balance** - Keep your 2Captcha account funded
 - **Set appropriate timeouts** - Allow 3-5 minutes for captcha solving
@@ -111,7 +111,7 @@ You can set the API key at three levels:
 - **Monitor success rates** - Track and optimize solving accuracy
 - **Secure API keys** - Store keys in global settings
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't use short timeouts** - Human solvers need adequate time
 - **Don't share API keys** - Keep credentials secure
@@ -143,8 +143,12 @@ You can set the API key at three levels:
 
 ## Related Documentation
 
-- [2Captcha](/documentation/field-types/captcha-solution/2captcha)
-- [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/form.svg" class="doc-icon" /> [2Captcha Integration](/documentation/field-types/captcha-solution/2captcha)
+<img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+
 - [2Captcha API Documentation](https://2captcha.com/api-docs)
 - [2Captcha Pricing](https://2captcha.com/pricing)
 - [2Captcha Dashboard](https://2captcha.com/enterpage)
+

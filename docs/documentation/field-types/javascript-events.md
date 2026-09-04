@@ -6,7 +6,7 @@ Programmatically trigger JavaScript events on page elements to simulate user int
 
 JavaScript Events field types allow you to trigger various browser events on specific elements without actual user interaction. This is useful for automating workflows, testing event handlers, and simulating user behavior in forms and web applications.
 
-## ⌨️ Keyboard Event {#keyboard-event}
+## Keyboard Event {#keyboard-event}
 
 To trigger any **key** on the **keyboard** in the element of the page.
 
@@ -19,7 +19,7 @@ Shift, Ctrl, Alt, Enter, Space, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Meta 
 | **Selector Query** | Selector Query of Element                      | [Get element query](/documentation/locate-element)      | **Yes**  |
 | **Field Value**    | In this, we give the name of any keyboard key. | **Enter<br> Space<br> Ctrl+2<br> Alt+4<br>Shift+Alt+U** | **Yes**  |
 
-## 🖱️ Pointer Event {#pointer-event}
+## Pointer Event {#pointer-event}
 
 Trigger pointer and mouse events on elements in the page.
 
@@ -62,9 +62,9 @@ mousedown
 pointerup
 ```
 
-#### Method 2: Excel Column
+#### Method 2: Excel (.xlsx) Column
 
-Store event names in an Excel column and reference it in the field value.
+Store event names in an Excel (.xlsx) column and reference it in the field value.
 
 **Example Excel Column:**
 ```
@@ -84,7 +84,7 @@ wheel
 - **Selector Query**: `.menu-item`
 - **Event Name**: `mouseover`
 
-## 🎯 Focus Event {#focus-event}
+## Focus Event {#focus-event}
 
 Trigger focus-related events on elements in the page.
 
@@ -116,9 +116,9 @@ focus
 blur
 ```
 
-#### Method 2: Excel Column
+#### Method 2: Excel (.xlsx) Column
 
-Store event names in an Excel column and reference it in the field value.
+Store event names in an Excel (.xlsx) column and reference it in the field value.
 
 **Example Excel Column:**
 ```
@@ -152,3 +152,11 @@ focus
 - Navigate through form fields
 - Test focus-based interactions
 - Activate autocomplete suggestions
+
+## Next Steps
+
+- <img src="/svg/form.svg" class="doc-icon" /> [Javascript Dialog](/documentation/field-types/javascript-dialog) — Handle alert, confirm, and prompt dialogs
+- <img src="/svg/form.svg" class="doc-icon" /> [Button Field](/documentation/field-types/button) — Automate button clicks and custom submit triggers
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

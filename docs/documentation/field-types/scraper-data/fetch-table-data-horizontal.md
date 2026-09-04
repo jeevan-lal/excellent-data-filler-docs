@@ -1,348 +1,124 @@
-# Fetch Table Data in the Response Excel (Horizontal)
+---
+prev:
+  text: "Fetch Multiple Data (Vertical)"
+  link: "/documentation/field-types/scraper-data/fetch-multiple-data-vertical"
+next:
+  text: "Fetch Table Data (Vertical)"
+  link: "/documentation/field-types/scraper-data/fetch-table-data-vertical"
+---
 
-Extract data from HTML tables and store it horizontally in your Excel file, with each row of the table becoming a new column in a single Excel entry.
+# Fetch Table Data (Horizontal) {#fetch-table-data-horizontal}
 
-## Overview
+Extract HTML table records and pivot them horizontally into columns within a single Excel (`.xlsx`) row.
 
-The Fetch Table Data in the Response Excel (Horizontal) field type allows you to extract data from HTML tables on web pages. The data is stored **horizontally** in Excel, meaning each table row becomes a new **column** in your Excel file, all within a single row.
+---
 
-## Configuration Options
+## Overview {#overview}
+
+The **Fetch Table Data (Horizontal)** field type extracts data from HTML tables where each table row represents an attribute of a single entity (such as a receipt summary, product specification sheet, or user profile table). The extension converts table rows into horizontal spreadsheet columns for the active record under [Scraper Data](/documentation/site/site-scraper-data).
+
+---
+
+## Configuration Options {#configuration-options}
 
 | Option | Description | Required |
-|--------|-------------|----------|
-| **Selector Type** | Type of selector (CSS or XPath) | Yes |
-| **Selector Query** | The selector to locate the table element or rows | Yes |
-| **Select Table Design Type** | Choose between Horizontal Table or Vertical Table | Yes |
-| **Add Prefix in the Table Header Name** | Add a prefix to all column names | No |
-| **Prefix of Prefix** | The prefix text to add before column names | No |
-| **Select Prefix Numbering** | Numbering format for prefix (Ordinal Numbers, etc.) | No |
-| **Suffix of Prefix** | Text to add after the prefix number | No |
-| **Add Suffix in the Table Header Name** | Add a suffix to all column names | No |
-| **Prefix of Suffix** | Text to add before the suffix number | No |
-| **Select Suffix Numbering** | Numbering format for suffix (Numerical, Ordinal, Words Ordinal, Words) | No |
-| **Suffix of Suffix** | Text to add after the suffix number | No |
-| **Do we have to wait for the data to appear in the table?** | Wait for table data to load before scraping | No |
-| **Waiting for total maximum table rows** | Specify the number of rows to wait for (if wait is enabled) | No |
-| **If you want to take data only from the rows of the table** | Enable to provide a specific row selector instead of table selector | No |
-| **Are you using custom javascript function for return field responses?** | Enable to modify fetched table data using custom JavaScript function | No |
+|---|---|---|
+| **Selector Type** | CSS Selector or XPath. | Yes |
+| **Selector Query** | Selector targeting the table element or its row collection. | Yes |
+| **Select Table Design Type** | Table layout mode (`Horizontal Table` or `Vertical Table`). | Yes |
+| **Add Prefix in the Table Header Name** | Prepends a prefix string or counter to generated column names. | Conditional |
+| **Select Prefix Numbering** | Format style for prefix numbers (Ordinal, Numerical, etc.). | No |
+| **Add Suffix in the Table Header Name** | Appends a suffix string or counter to generated column names. | Conditional |
+| **Select Suffix Numbering** | Format style for suffix numbers (Numerical, Ordinal, Words). | No |
+| **Do we have to wait for the data to appear in the table?** | Pauses until rows finish rendering. | No |
+| **Waiting for total maximum table rows** | Expected count of rows to wait for before extraction. | When wait enabled |
+| **If you want to take data only from the rows of the table** | Switches selector scope to individual `tr` elements rather than `table`. | No |
+| **Are you using custom javascript function for return field responses?** | Enables custom post-processing of extracted rows via JavaScript. | No |
 
-:::warning Important
-One of the **Prefix** or **Suffix** options must be enabled, otherwise only the data from the first row of the table will be fetched.
-:::
+> [!IMPORTANT]
+> **Prefix or Suffix Requirement**: You must enable either **Add Prefix** or **Add Suffix** in the Table Header configuration when parsing multi-row tables horizontally to avoid column name collisions.
 
-:::info Row-Specific Scraping
-When "If you want to take data only from the rows of the table" is enabled, you must provide the **selector query of the rows** of the table, not the selector query of the table itself.
+---
 
-**Example:**
-- ❌ Table selector: `#product-details`
-- ✅ Row selector: `#product-details tr` or `.detail-row`
-:::
+## Custom JavaScript Response Interceptor {#custom-javascript}
 
-## 🛠️ Custom JavaScript Field Response Modification
+When **Are you using custom javascript function for return field responses?** is enabled, you can transform or clean table data before it commits to the spreadsheet:
 
-If you enable **"Are you using custom javascript function for return field responses?"**, you can intercept and modify the fetched table data in your own way.
+1. Add a **JavaScript Code** field positioned directly **above** this field.
+2. Register an event listener:
 
-### Setup Instructions:
-
-1. Add a **Javascript** field type **above** the `Fetch Table Data in the Response Excel (Horizontal)` field.
-2. Use the following JavaScript code in that Javascript field:
-
-```js
+```javascript
 $fns.field.listener('EDF-FIELD-FETCH-TABLE-DATA-HORIZONTAL', (output, callback) => {
-  console.log("TABLE DATA:", output.response);
+  console.log('Raw Table Data:', output.response);
 
-  // use custom actions
-
-  // return new data
-  callback({ status: true, message: "DONE", data: output.response });
-  // callback({ status: false, message: "ERROR" });
+  // Perform custom data transformations or cleaning here
+  
+  // Return updated payload
+  callback({ status: true, message: 'DONE', data: output.response });
 });
-
-$fns.return("1");
 ```
 
-:::tip Column Naming with Prefix/Suffix
-When prefix or suffix is enabled, column names are generated as:
-- **With Prefix**: `Prefix1TableHeaderName`, `Prefix2TableHeaderName`, etc.
-- **With Suffix**: `TableHeaderNameSuffix1`, `TableHeaderNameSuffix2`, etc.
+---
 
-**Numbering Options:**
-- **Numerical Numbers**: 1, 2, 3, 4...
-- **Ordinal Numbers**: 1st, 2nd, 3rd, 4th...
-- **Words Ordinal Numbers**: First, Second, Third, Fourth...
-- **Words Numbers**: One, Two, Three, Four...
-:::
+## Table Structure Compatibility {#table-structure}
 
-## How Horizontal Format Works
-
-In **horizontal format**, each row from the HTML table becomes a **new column** in your Excel file, all stored in a single Excel row.
-
-### HTML Table Example:
+This field type is optimized for two-column key-value tables:
 
 ```html
-<table id="product-details">
-  <tr>
-    <td>Product Name</td>
-    <td>Wireless Mouse</td>
-  </tr>
-  <tr>
-    <td>Price</td>
-    <td>$29.99</td>
-  </tr>
-  <tr>
-    <td>Stock</td>
-    <td>In Stock</td>
-  </tr>
-  <tr>
-    <td>Rating</td>
-    <td>4.5 Stars</td>
-  </tr>
+<table class="specs-table">
+  <tr><td>Model Name</td><td>HyperDrive-X</td></tr>
+  <tr><td>Storage Capacity</td><td>1 TB</td></tr>
+  <tr><td>Interface</td><td>USB-C 3.2</td></tr>
 </table>
 ```
 
-### Excel Output (Horizontal):
+### Resulting Horizontal Excel (.xlsx) Row
 
-| Product Name | Price | Stock | Rating |
-|--------------|-------|-------|--------|
-| Wireless Mouse | $29.99 | In Stock | 4.5 Stars |
-
-Each table row becomes a column in a single Excel row.
+| Model Name | Storage Capacity | Interface |
+|---|---|---|
+| HyperDrive-X | 1 TB | USB-C 3.2 |
 
 ---
 
-## Column Naming
+## Practical Examples {#examples}
 
-The extension creates Excel column names based on the prefix/suffix configuration:
+### Example 1: Order Checkout Summary
 
-### With Prefix Enabled
-
-Column names follow the pattern: `[Prefix of Prefix][Number][Suffix of Prefix][Table Header Name]`
-
-**Examples:**
-- Prefix: `Spec`, Numbering: `Ordinal Numbers` → `Spec1stBrand`, `Spec2ndPrice`, `Spec3rdStock`
-- Prefix: `Detail`, Numbering: `Numerical Numbers` → `Detail1Name`, `Detail2Email`, `Detail3Phone`
-- Prefix: `Item`, Numbering: `Words Numbers` → `ItemOneName`, `ItemTwoPrice`, `ItemThreeQty`
-
-### With Suffix Enabled
-
-Column names follow the pattern: `[Table Header Name][Prefix of Suffix][Number][Suffix of Suffix]`
-
-**Examples:**
-- Suffix: `Info`, Numbering: `Numerical Numbers` → `BrandInfo1`, `PriceInfo2`, `StockInfo3`
-- Suffix: `Data`, Numbering: `Ordinal Numbers` → `NameData1st`, `EmailData2nd`, `PhoneData3rd`
-- Suffix: `Field`, Numbering: `Words Ordinal Numbers` → `BrandFieldFirst`, `PriceFieldSecond`
-
-### Without Prefix or Suffix
-
-If neither prefix nor suffix is enabled, **only the first row** of the table will be fetched.
-
-**Excel Columns:** Based on first cell content of each row (e.g., `Name`, `Email`, `Phone`)
-
----
-
-## Usage Examples
-
-### Example 1: Product Details with Prefix
-
-```
-Field Type: Fetch Table Data in the Response Excel (Horizontal)
-Selector Type: CSS Selector
-Selector Query: .product-specs
+```text
+Selector Type: CSS
+Selector Query: table.order-summary-table
 Select Table Design Type: Horizontal Table
-Add Prefix in the Table Header Name: ✅ Enabled
-Prefix of Prefix: Spec
-Select Prefix Numbering: Ordinal Numbers
-Suffix of Prefix: (leave empty)
+Add Prefix in Table Header Name: Enabled
+Prefix of Prefix: Order_
+Do we have to wait for the data to appear?: Enabled
+Waiting for total maximum table rows: 4
 ```
 
-**HTML:**
-```html
-<table class="product-specs">
-  <tr><td>Brand</td><td>TechCo</td></tr>
-  <tr><td>Model</td><td>XM-2000</td></tr>
-  <tr><td>Warranty</td><td>2 Years</td></tr>
-</table>
+### Example 2: Row-Specific Target
+
+```text
+Selector Type: CSS
+Selector Query: .profile-attributes tbody tr
+If you want to take data only from the rows: Enabled
+Add Suffix in Table Header Name: Enabled
+Select Suffix Numbering: Numerical
 ```
-
-**Excel Output:**
-
-| Spec1stBrand | Spec2ndModel | Spec3rdWarranty |
-|--------------|--------------|-----------------|
-| TechCo | XM-2000 | 2 Years |
 
 ---
 
-### Example 2: User Profile with Suffix
+## Troubleshooting {#troubleshooting}
 
-```
-Field Type: Fetch Table Data in the Response Excel (Horizontal)
-Selector Type: XPath
-Selector Query: //table[@class='user-info']
-Select Table Design Type: Horizontal Table
-Add Suffix in the Table Header Name: ✅ Enabled
-Prefix of Suffix: Info
-Select Suffix Numbering: Numerical Numbers
-Suffix of Suffix: (leave empty)
-Do we have to wait for the data to appear in the table?: ✅ Enabled
-Waiting for total maximum table rows: 2
-```
-
-**HTML:**
-```html
-<table class="user-info">
-  <tr><td>Username</td><td>johndoe123</td></tr>
-  <tr><td>Member Since</td><td>2020-01-15</td></tr>
-  <tr><td>Status</td><td>Active</td></tr>
-</table>
-```
-
-**Excel Output:**
-
-| UsernameInfo1 | Member SinceInfo2 | StatusInfo3 |
-|---------------|-------------------|-------------|
-| johndoe123 | 2020-01-15 | Active |
+| Issue | Likely Cause | Solution |
+|---|---|---|
+| **Only first row extracted** | Neither Prefix nor Suffix option was enabled | Enable **Add Prefix** or **Add Suffix** to allow multi-column mapping. |
+| **Table element missing** | Dynamic AJAX rendering or iframe nesting | Enable the wait option and verify iframe context. |
+| **Columns contain raw HTML tags** | Table cells contain nested markup | Enable the custom JavaScript listener to extract `innerText` cleanly. |
 
 ---
 
-### Example 3: Order Summary with Row-Specific Scraping
+## Related Documentation {#related}
 
-```
-Field Type: Fetch Table Data in the Response Excel (Horizontal)
-Selector Type: CSS Selector
-Selector Query: #order-summary tr.summary-row
-Select Table Design Type: Horizontal Table
-Add Prefix in the Table Header Name: ✅ Enabled
-Prefix of Prefix: Order
-Select Prefix Numbering: Words Numbers
-If you want to take data only from the rows of the table: ✅ Enabled
-```
-
-**HTML:**
-```html
-<table id="order-summary">
-  <tr class="summary-row"><td>Subtotal</td><td>$99.99</td></tr>
-  <tr class="summary-row"><td>Tax</td><td>$8.00</td></tr>
-  <tr class="summary-row"><td>Total</td><td>$107.99</td></tr>
-</table>
-```
-
-**Excel Output:**
-
-| OrderOneSubtotal | OrderTwoTax | OrderThreeTotal |
-|------------------|-------------|-----------------|
-| $99.99 | $8.00 | $107.99 |
-
----
-
-## Vertical vs Horizontal Format
-
-### Horizontal Format (This Field Type)
-- Each **table row** → New **Excel column**
-- All data in **one Excel row**
-- Best for: Single record details, specifications, profiles
-- Example: Product details, user profile, order summary
-
-### Vertical Format
-- Each **table row** → New **Excel row**
-- Multiple Excel rows created
-- Best for: Multiple records, lists, directories
-- Example: User list, product catalog, transaction history
-
----
-
-## Use Cases
-
-### Product Specifications
-Extract detailed product specifications from e-commerce sites where each spec is a table row.
-
-### User Profile Data
-Scrape user profile information displayed in key-value table format.
-
-### Order Summaries
-Extract order details like subtotal, tax, shipping, and total from checkout pages.
-
-### Configuration Settings
-Scrape system or account configuration settings displayed in table format.
-
-### Comparison Data
-Extract comparison data for a single item from comparison tables.
-
----
-
-## Tips
-
-:::tip Table Design Type
-Always select **Horizontal Table** for this field type to ensure each table row becomes a new Excel column.
-:::
-
-:::tip Prefix or Suffix Required
-Remember to enable either **Prefix** or **Suffix** options. Without them, only the first row of data will be extracted!
-:::
-
-:::warning Column Limits
-Excel has a maximum of 16,384 columns. Ensure your table doesn't exceed this limit.
-:::
-
-:::info Dynamic Content
-For dynamically loaded tables, enable "Do we have to wait for the data to appear in the table?" and set the expected number of rows to wait for.
-:::
-
-:::tip Column Naming Strategy
-Choose meaningful prefix/suffix text and appropriate numbering formats to make your Excel columns easy to identify and work with.
-:::
-
----
-
-## Table Structure Requirements
-
-The horizontal format works best with tables structured as **key-value pairs**:
-
-### ✅ Good Structure:
-```html
-<table>
-  <tr><td>Label 1</td><td>Value 1</td></tr>
-  <tr><td>Label 2</td><td>Value 2</td></tr>
-</table>
-```
-
-### ❌ Not Ideal:
-```html
-<table>
-  <tr><td>Value 1</td><td>Value 2</td><td>Value 3</td></tr>
-  <tr><td>Value 4</td><td>Value 5</td><td>Value 6</td></tr>
-</table>
-```
-*For multi-row, multi-column tables, use [Vertical Format](/documentation/field-types/scraper-data/fetch-table-data-vertical) instead.*
-
----
-
-## Troubleshooting
-
-### Only First Row Extracted
-- **Solution**: Enable either "Add Prefix in the Table Header Name" or "Add Suffix in the Table Header Name"
-- This is the most common issue with horizontal table scraping
-
-### Table Not Found
-- Verify the selector is correct
-- Enable wait option for dynamic content
-- Check if the table is inside an iframe
-
-### Incorrect Column Names
-- Verify you selected "Horizontal Table" as the design type
-- Check the prefix/suffix configuration
-- Ensure the first cell of each row contains meaningful text
-- Verify numbering format matches your needs
-
-### Missing Data
-- Increase the "Waiting for total maximum table rows" value
-- Ensure all table rows are visible (not hidden with CSS)
-- Verify the row selector targets all desired rows (if row-specific scraping is enabled)
-- Check if the table uses non-standard HTML structure
-
----
-
-## Related Field Types
-
-- [Fetch Table Data (Vertical)](/documentation/field-types/scraper-data/fetch-table-data-vertical) - Extract table data in vertical format
-- [Fetch Header-Value Data](/documentation/field-types/scraper-data/fetch-header-value-data) - Extract key-value pairs from non-table elements
-- [Scraping Data](/documentation/field-types/scraper-data/scraping-data) - Extract data from individual elements
+- <img src="/svg/excel.svg" class="doc-icon" /> [Scraper Data Management Dashboard](/documentation/site/site-scraper-data)
+- <img src="/svg/database.svg" class="doc-icon" /> [Fetch Table Data (Vertical)](/documentation/field-types/scraper-data/fetch-table-data-vertical)
+- <img src="/svg/form.svg" class="doc-icon" /> [Fetch Header-Value Data](/documentation/field-types/scraper-data/fetch-header-value-data)
+- <img src="/svg/code.svg" class="doc-icon" /> [JavaScript Code Field](/documentation/field-types/javascript-code)

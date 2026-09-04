@@ -1,4 +1,4 @@
-# 🤖 AI
+# AI
 
 Generate AI-powered responses using prompts and automatically fill the output into form elements.
 

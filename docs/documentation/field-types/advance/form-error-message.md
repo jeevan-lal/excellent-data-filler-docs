@@ -1,199 +1,173 @@
+---
+prev:
+  text: "Current Entry as Saved"
+  link: "/documentation/field-types/advance/current-entry-as-saved"
+next:
+  text: "Check Downloads"
+  link: "/documentation/field-types/browser-actions/check-downloads"
+---
+
 # Form Error Message {#form-error-message}
 
-This field type allows you to detect and handle error messages that appear on the page after form submission. It works similarly to [Form Error Response](/documentation/form-response/form-error-response), but **does not check URLs**.
+The **Form Error Message** field type detects on-screen validation or server errors after form interaction without requiring URL redirection or page change matching.
 
-:::tip Key Difference
-Unlike Form Error Response, this field type:
-- **Does NOT use** "Error Page URL" option
-- **Does NOT use** "Match URL Types" option
-- Works on the current page without URL validation
-:::
+> [!TIP]
+> **Key Difference from Form Error Response**: Unlike [Form Error Response](/documentation/form-response/form-error-response), this field type detects in-page error alerts, banners, or DOM messages on the current URL without requiring "Error Page URL" rules.
 
-## 🎯 When to Use {#when-to-use}
+---
 
-Use this field type when you want to:
-- Detect error messages that appear on the same page (no redirect)
-- Handle multiple error messages in different locations on the page
-- Stop or save the entry based on error detection
-- Use it as a field within your form configuration
+## When to Use {#when-to-use}
 
-:::info Multiple Error Messages
-If multiple error messages can appear in different locations on the page, this field type can match **any of them** regardless of their position.
-:::
+Use this field type when:
+- Forms display error messages dynamically via JavaScript on the same page (e.g., "Email already registered", "Invalid OTP", or "Server Timeout").
+- Errors can appear in varying locations across the page (top notifications, inline alerts, or modal popups).
+- You want to record the exact error message into your `.xlsx` row record or halt automation safely.
 
-## ⚙️ Field Options {#field-options}
+---
+
+## Field Options {#field-options}
 
 | Option | Description |
-| ------ | ----------- |
-| [Error Response Type](#error-response-type) | The type of error message that appears on the page |
-| [Enter Error Message](#enter-error-message) | The error message to match after form submission |
-| [Entry Action Type](#entry-action-type) | What to do when error is detected (stop or save) |
-| [Delay Time Before Run Action](#delay-time-before-run-action) | Time delay before the [action](#action) is executed |
-| [Action](#action) | Action to execute when the error response matches |
+|---|---|
+| **Error Response Type** | Detection mode used to locate the error (Page text, Alert dialog, Input value, or Element existence). |
+| **Enter Error Message** | Target text strings or patterns to identify error states. |
+| **Entry Action Type** | Whether to halt automation immediately (`Stop Entry`) or record the message into the spreadsheet (`Save Error in the Entry Data`). |
+| **Delay Time Before Run Action** | Timeout in milliseconds before executing the follow-up recovery action. |
+| **Action** | Operation to trigger upon error detection (Redirect, Reload, Re-Execute, Click, or Segment). |
 
-## 📋 Additional Options {#additional-options}
+---
+
+## Additional Configuration Options {#additional-options}
 
 | Option | Description |
-| ------ | ----------- |
-| If excel data is not found then don't execute the action | Prevents action execution when Excel data is empty |
-| If last excel entry completed then don't execute the action | Prevents action execution after the last entry is completed |
-| If there is no Excel data, update only scraper data in Excel | Saves only scraped data when no Excel template is used |
-| Can error message be anything in this element | Matches any message in the given element (useful for dynamic messages) |
-| Remove excel column value from current entry? | Removes column value from current entry after processing |
-| Set custom message after error message matched? | Sets a custom short message instead of the full error message |
+|---|---|
+| **If excel data is not found then don't execute the action** | Disables follow-up action if spreadsheet data is not present. |
+| **If last excel entry completed then don't execute the action** | Prevents execution if the error occurs on the final dataset row. |
+| **If there is no Excel data, update only scraper data in Excel** | Restricts workbook updates to scraper outputs. |
+| **Can error message be anything in this element** | Wildcard mode matching any error text found inside the specified element. |
+| **Remove excel column value from current entry?** | Clears the value from memory once processed. |
+| **Set custom message after error message matched?** | Logs a custom status phrase instead of the raw DOM error text. |
 
-## 🔍 Error Response Type {#error-response-type}
+---
 
-Choose how the extension should detect the error response:
+## Error Response Types {#error-response-type}
 
 ### 1. Matching Message In Page {#matching-message-in-page}
 
-Searches for the error message anywhere in the page content.
+Scans the page body or a designated container element for matching error text.
 
-**Options:**
-- **Message Selector Query** (optional): Limit the search to a specific element
+- **Message Selector Query** *(Optional)*: Limits the search to a specific alert box or validation container.
 
-<img src="/image/entry-response-08.png" alt="Error Message in Page">
+<img src="/image/entry-response-08.png" alt="Error Message on Page" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
 
-:::tip Multiple Locations
-This is especially useful when error messages can appear in different locations on the page. The extension will search the entire page by default.
-:::
+---
 
 ### 2. Matching Message In Browser Alert {#matching-message-in-alert}
 
-Detects error messages that appear in JavaScript alert dialogs.
+Detects error alerts triggered via JavaScript `alert()` popups.
 
-:::tip
-Enable [Hide JavaScript Dialog](/documentation/settings#hide-javascript-dialog) in settings to automatically handle alerts.
-:::
+<img src="/image/entry-response-09.png" alt="Alert Dialog Error Detection" style="max-width: 450px; border-radius: 8px; margin: 16px 0;" />
 
-<img src="/image/entry-response-09.png" alt="Alert Dialog">
+> [!TIP]
+> Enable **Hide JavaScript Dialog** in [Extension Settings](/documentation/settings#hide-javascript-dialog) to suppress alert popups automatically.
+
+---
 
 ### 3. Matching Message In Page Element Value {#matching-message-in-element-value}
 
-Checks for the error message in a form field's value (e.g., input box).
+Checks the `value` attribute of input or status fields for error text.
 
-**Required:**
-- **Message Selector Query**: The selector of the input element
+<img src="/image/entry-response-06.png" alt="Element Value Error Check" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
 
-<img src="/image/entry-response-06.png" width="500" height="500" alt="Element Value">
+---
 
 ### 4. Checking Element Exists In Page {#checking-element-exists}
 
-Marks entry as having an error when a specific element appears on the page.
+Flags an error as soon as a designated error element mounts into the DOM.
 
-**Required:**
-- **Message Selector Query**: The selector of the element to check
+- **Required Parameter**: `Message Selector Query` targeting the error banner or badge (e.g., `.form-error-toast`).
 
-:::warning Important
-The element should NOT be present before submission and should only appear after an error occurs.
-:::
+---
 
-## 📝 Enter Error Message {#enter-error-message}
+## Enter Error Message {#enter-error-message}
 
-Enter the error message(s) to match. You can add multiple messages - if any matches, the extension will handle the error according to your [Entry Action Type](#entry-action-type).
+Specify the error message strings to match. You can configure multiple phrases; if any phrase matches, the error flow is activated.
 
-**Features:**
-- Support for multiple messages
-- Dynamic message support using variables
-- Partial message matching
+- **Spreadsheet Variables**: Use dynamic variables like `Error: {$Email$} is already registered`.
+- **Partial Matching**: Providing `"already registered"` matches any longer sentence containing that substring.
 
-**Example:**
+<img src="/image/entry-response-10.png" alt="Error Messages Configuration" style="max-width: 480px; border-radius: 8px; margin: 16px 0;" />
 
-<img src="/image/entry-response-10.png" alt="Error Messages">
+---
 
-::: details Dynamic Error Messages
-Use Excel column variables in your error messages:
+## Entry Action Type {#entry-action-type}
 
-```
-Error: {$Email$} is already registered
-```
-
-Or use partial matching:
-```
-already registered
-```
-This will match any error message containing "already registered".
-:::
-
-::: details Pre-existing Error Messages
-If an error message is already present on the page **before** form submission, the extension will detect it and **will not fill the entry** to prevent duplicate submissions.
-:::
-
-## 🎬 Entry Action Type {#entry-action-type}
-
-Choose what happens when an error message is detected:
+Configure how the active spreadsheet entry is treated upon error:
 
 ### 1. Stop Entry
-- Stops processing the current entry
-- Entry is NOT marked as saved
-- Useful when you want to manually fix the issue
+- Halts processing for the current row.
+- The record is **not** marked as saved.
+- Ideal when manual user intervention or debugging is required.
 
 ### 2. Save Error in the Entry Data
-- Marks the entry as saved
-- Stores the error message in the Excel entry
-- Continues to the next entry
-- Useful for logging errors and reviewing later
+- Marks the entry as processed.
+- Writes the captured error string into the corresponding spreadsheet record for later review.
+- Automatically advances automation to the next data row.
 
-## ⏱️ Delay Time Before Run Action {#delay-time-before-run-action}
+---
 
-Set a delay (in milliseconds) before executing the action.
+## Delay Time Before Run Action {#delay-time-before-run-action}
 
-<Badge type="tip" text="1 second = 1000 milliseconds" />
+Specifies a timeout in milliseconds before executing the follow-up recovery action.
 
-## 🚀 Action {#action}
-
-Choose what happens after the error message is matched:
-
-- **Redirect to Page** - Navigate to a different page
-- **Re-Execute Form** - Fill the form again (useful for retrying)
-- **Click on Button** - Click a specific button element
-- **Page Reload** - Reload the current page
-- **Execute Segment** - Run a specific segment of fields
-
-## ⚠️ Important Notes {#important-notes}
-
-:::danger Critical
-When you use this field type, **all fields below it will NOT execute**. Always place this field type **at the end** of your field list.
+:::tip Conversion
+`1000 milliseconds = 1 second`
 :::
 
-**Execution Flow:**
+---
+
+## Follow-up Action Execution {#action}
+
+Select what occurs once the error state is confirmed:
+
+| Action | Execution Behavior |
+|---|---|
+| **Redirect to Page** | Navigates the active tab to a recovery URL. |
+| **Re-Execute Form** | Restarts the form workflow from the beginning (useful for transient retries). |
+| **Click on Button** | Dispatches a click on a recovery element (e.g., "Dismiss", "Close Modal"). |
+| **Page Reload** | Refreshes the active browser tab. |
+| **Execute Segment** | Triggers an error-handling [Segment](/documentation/segment) routine. |
+
+---
+
+## Important Execution Rule {#important-notes}
+
+> [!CAUTION]
+> **Placement Constraint**: When this field executes, **all subsequent fields below it in the form list are bypassed**. Place **Form Error Message** at the very end of your form sequence (or right alongside `Current Entry as Saved`).
+
+```text
+[Field 1: Username]             ──> Executes
+[Field 2: Password]             ──> Executes
+[Field 3: Submit Button]        ──> Executes
+[Form Error Message]            ──> Detects Error & Handles Recovery
+--------------------------------------------------------------------
+[Field 4: Any Lower Field]      ──> DOES NOT EXECUTE (Bypassed)
 ```
-Field 1 ✅ Executes
-Field 2 ✅ Executes
-Field 3 ✅ Executes
-Form Error Message ✅ Executes & Detects Error
-Field 4 ❌ Does NOT Execute
-Field 5 ❌ Does NOT Execute
-```
 
-## 💡 Use Cases {#use-cases}
+---
 
-### Handling Variable Error Locations
+## Common Use Cases {#use-cases}
 
-If your form shows errors in different places depending on the error type:
+- **Logging Duplicates**: Automatically mark duplicate records in your `.xlsx` file and continue batch processing without stopping.
+- **Handling Transient Timeouts**: Configure **Re-Execute Form** or **Page Reload** to retry forms affected by brief gateway drops.
+- **Modal Dismissal**: Click modal close buttons automatically when non-blocking warnings appear.
 
-```
-Login Error: Top of page
-Validation Error: Next to field
-Server Error: Modal popup
-```
+---
 
-This field type can detect all of them without specifying exact locations.
+## Related Documentation {#related}
 
-### Logging Errors for Review
-
-Set **Entry Action Type** to "Save Error in the Entry Data" to:
-1. Continue processing all entries
-2. Mark entries with errors
-3. Review and fix them later in Excel
-
-### Retry on Temporary Errors
-
-Set **Action** to "Re-Execute Form" to automatically retry when temporary errors occur (e.g., network issues).
-
-## 🔗 Related Documentation {#related}
-
-- [Form Error Response](/documentation/form-response/form-error-response) - Similar functionality with URL checking
-- [Current Entry as Saved](/documentation/field-types/advance/current-entry-as-saved) - Handle success responses
-- [Form Success Response](/documentation/form-response/form-success-response) - Success handling with URL checking
+- <img src="/svg/check.svg" class="doc-icon" /> [Current Entry as Saved](/documentation/field-types/advance/current-entry-as-saved)
+- <img src="/svg/bug.svg" class="doc-icon" /> [Form Error Response](/documentation/form-response/form-error-response)
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action)
+- <img src="/svg/template.svg" class="doc-icon" /> [Segments Routine Automation](/documentation/segment)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template (.xlsx)](/documentation/site/site-excel-template)

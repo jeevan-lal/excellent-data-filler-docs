@@ -75,11 +75,20 @@ The field's value will contain the requested tab detail based on your selection.
 
 ## Capture Tab
 
-If you want to take a screenshot of the page then you can use this.
+The **Capture Tab** field type captures a full-page screenshot of the active browser tab during automation.
 
-:::info
-Will capture the `entire page` if you are using `Firefox` browser.
+### Full-Page Capture Support
+
+- **Firefox**: Performs a native full-page capture of the entire scrollable webpage.
+- **Other Browsers (Chrome, Edge, Brave, etc.)**: Uses an automated scroll-and-stitch mechanism to capture and stitch viewports together into a complete full-page screenshot.
+
+::: tip Use Cases
+- Capturing complete receipts, transaction summaries, or confirmation pages.
+- Archiving full-length reports, multi-row data tables, or submitted forms.
+- Visual auditing and automated verification during workflow runs.
 :::
+
+---
 
 ## Update Tab
 

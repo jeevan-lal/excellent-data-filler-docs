@@ -6,13 +6,13 @@ The Get TOTP Code field type allows you to automatically generate and fill Time-
 
 TOTP (Time-based One-Time Password) is a security mechanism that generates time-sensitive codes for two-factor authentication. The Get TOTP Code field type enables you to:
 
-- **🔐 Generate TOTP Codes** - Automatically generate valid TOTP codes from authenticator URIs
-- **📱 Google Authenticator Support** - Works with Google Authenticator and other TOTP apps
-- **🔢 Code Splitting** - Split codes across multiple input fields
+- **Generate TOTP Codes** - Automatically generate valid TOTP codes from authenticator URIs
+- **Google Authenticator Support** - Works with Google Authenticator and other TOTP apps
+- **Code Splitting** - Split codes across multiple input fields
 
 ## Configuration Options
 
-### 🔗 URI of the TOTP Code
+### URI of the TOTP Code
 
 The primary configuration option where you enter the TOTP URI (Uniform Resource Identifier) that contains the secret key and other parameters needed to generate the TOTP code.
 
@@ -25,14 +25,12 @@ otpauth://totp/AccountName?secret=SECRET_KEY&issuer=ISSUER_NAME&algorithm=SHA1&d
 **How to Get TOTP URI:**
 
 1. **From Google Authenticator:**
-
    - Open Google Authenticator app
    - Tap on the account you want to use
    - Look for "Export" or "Show QR Code" option
    - The URI is usually displayed in the QR code or export options
 
 2. **From Other Apps:**
-
    - Most TOTP apps provide export functionality
    - Look for "Export", "Backup", or "Show Secret" options
    - Copy the URI or secret key
@@ -42,7 +40,7 @@ otpauth://totp/AccountName?secret=SECRET_KEY&issuer=ISSUER_NAME&algorithm=SHA1&d
    - Check account security settings for 2FA setup
    - Look for "Manual Entry" or "Advanced" options
 
-### 🔀 Should we split the code?{#should-we-split-the-code}
+### Should we split the code? {#should-we-split-the-code}
 
 This toggle option determines how the TOTP code is filled into form fields.
 
@@ -79,7 +77,7 @@ When the toggle is **ON**, the TOTP code is split across multiple input fields, 
 
 ## Field Selector Configuration
 
-### 🎯 Single Input Field{#single-input-field}
+### Single Input Field {#single-input-field}
 
 For single input mode, provide a CSS selector that targets one input field.
 
@@ -96,7 +94,7 @@ For single input mode, provide a CSS selector that targets one input field.
 #totp-input-field
 ```
 
-### 🔢 Multiple Input Fields{#multiple-input-fields}
+### Multiple Input Fields {#multiple-input-fields}
 
 For split code mode, provide a CSS selector that matches multiple input fields.
 
@@ -110,7 +108,7 @@ For split code mode, provide a CSS selector that matches multiple input fields.
 **Example:**
 
 ```css
-.otp-inputs input[type="text"];
+.otp-inputs input[type="text"]
 ```
 
 **Field Order:**
@@ -118,7 +116,7 @@ The extension will fill the fields in the order they appear in the DOM. Ensure y
 
 ## Advanced Configuration
 
-### 🔐 Security Considerations
+### Security Considerations
 
 **Best Practices:**
 
@@ -126,9 +124,10 @@ The extension will fill the fields in the order they appear in the DOM. Ensure y
 - **Local Processing** - Code generation happens locally, not on external servers
 - **No Network** - TOTP generation doesn't require internet connection
 - **Encryption** - Stored secrets are encrypted
+
 ## Troubleshooting
 
-### ❌ Common Issues
+### Common Issues
 
 **Issue:** TOTP code not generating
 **Solutions:**
@@ -154,7 +153,7 @@ The extension will fill the fields in the order they appear in the DOM. Ensure y
 - Ensure all fields are accessible
 - Test with a simple selector first
 
-### 🔧 Debugging Tips
+### Debugging Tips
 
 1. **Test URI** - Verify the URI works in a TOTP app first
 2. **Check Selectors** - Use browser tools to test selectors
@@ -164,7 +163,7 @@ The extension will fill the fields in the order they appear in the DOM. Ensure y
 
 ## Next Steps
 
-- [Field Settings](/documentation/form-fields/field-settings) - Configure advanced field options
-- [Field Types](/documentation/form-fields/field-types) - Explore other field types
-- [Variables](/documentation/variable) - Use variables for dynamic TOTP handling
-- [Form Configuration](/documentation/form/form) - Set up complete form automation
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Configure advanced field options
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Explore other field types
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Form Configuration](/documentation/form/form) — Set up complete form automation

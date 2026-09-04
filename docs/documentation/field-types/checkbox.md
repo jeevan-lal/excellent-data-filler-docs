@@ -15,24 +15,24 @@ Checkbox fields are used for multiple-selection options in web forms, where user
 | **Field Type**           | Set to **Checkbox** for checkbox elements | `Checkbox`                           |
 | **Field Selector Type**  | Method to locate the field element        | `Selector`, `Id`, `XPath`            |
 | **Field Selector Query** | Unique address to locate the field        | `input[name="newsletter"]`, `#terms` |
-| **Field Value**          | Data source for checkbox state            | Excel column or default value        |
+| **Field Value**          | Data source for checkbox state            | Excel (.xlsx) column or default value |
 
 ## Checkbox Field Settings
 
-### ☑️ Checkbox State Behavior
+### Checkbox State Behavior {#checkbox-state-behavior}
 
-Configure how checkboxes are checked/unchecked based on Excel data values.
+Configure how checkboxes are checked/unchecked based on Excel (.xlsx) data values.
 
 **Core Behavior:**
 
-- **Excel Value Priority** - Checkbox state depends on Excel column value
+- **Excel Value Priority** - Checkbox state depends on Excel (.xlsx) column value
 - **Checked State** - Checkbox is checked when Excel value is not empty
 - **Unchecked State** - Checkbox is unchecked when Excel value is "unchecked"
 
 **Configuration:**
 
 - **Toggle Switch**: Enable/disable checkbox state control
-- **Excel Value Check**: System checks Excel column for state values
+- **Excel Value Check**: System checks Excel (.xlsx) column for state values
 - **State Action**: Checkbox state changes based on Excel value
 
 **Example Scenarios:**
@@ -47,7 +47,7 @@ Excel Column Value: "no" → Checkbox gets unchecked
 
 ---
 
-### ⏳ Element Detection Settings {#element-detection-settings}
+### Element Detection Settings {#element-detection-settings}
 
 Configure how the extension waits for and interacts with checkbox elements.
 
@@ -63,7 +63,7 @@ Configure how the extension waits for and interacts with checkbox elements.
 - **Use Case**: Hidden checkboxes, CSS visibility controls
 - **Configuration**: Toggle ON/OFF
 
-### ⚡ Trigger Javascript Event {#javascript-event-triggering}
+### Trigger Javascript Event {#javascript-event-triggering}
 
 Configure JavaScript events to be triggered on the checkbox element.
 
@@ -91,7 +91,7 @@ Configure JavaScript events to be triggered on the checkbox element.
 - **"unchecked"** - Checkbox gets unchecked
 - **"" (empty)** - Checkbox remains unchecked
 
-## Excel Value Configuration
+## Excel (.xlsx) Value Configuration
 
 ### Text Values
 
@@ -110,11 +110,12 @@ Excel Column Value: "" → Checkbox unchecked
 - Check selector accuracy
 - Verify element visibility
 - Test with different selectors
-- Check Excel value format
+- Check Excel (.xlsx) value format
 
 ## Next Steps
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

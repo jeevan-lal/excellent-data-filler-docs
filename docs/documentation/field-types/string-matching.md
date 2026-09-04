@@ -41,7 +41,7 @@ Error: Invalid input
 Active
 ```
 
-### Using Excel Field Column
+### Using Excel (.xlsx) Field Column
 
 Reference data from your Excel sheet by using the field column name:
 
@@ -57,7 +57,7 @@ String Matching Value: {$expectedStatus$}
 // Will match against: "Active"
 ```
 
-**Use Case:** When the matching string varies per row in your Excel data.
+**Use Case:** When the matching string varies per row in your Excel (.xlsx) data.
 
 ### Using Variables
 
@@ -93,8 +93,9 @@ String Matching Value: "John Doe"
 ```
 
 :::tip Dynamic Matching
-Use Excel field columns or variables when you need different matching strings for each row or when the matching string depends on other data.
+Use Excel (.xlsx) field columns or variables when you need different matching strings for each row or when the matching string depends on other data.
 :::
+
 
 ---
 
@@ -616,10 +617,12 @@ Result: Waits until "Loaded" appears, then matches
 
 ## Related Documentation
 
-- [Field Settings](/documentation/form-fields/field-settings)
-- [Search Strings and Execute Field Action](/documentation/field-options/search-and-action)
-- [Locate Element](/documentation/locate-element)
-- [Testing Site](/documentation/testing-site)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Advanced field configuration
+- <img src="/svg/form.svg" class="doc-icon" /> [Search Strings and Execute Field Action](/documentation/field-options/search-and-action) — Conditional actions on match
+- <img src="/svg/browser.svg" class="doc-icon" /> [Locate Element](/documentation/locate-element) — Element selector guide
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/settings.svg" class="doc-icon" /> [Testing Site](/documentation/testing-site) — Test automation workflows
+
 
 ---
 

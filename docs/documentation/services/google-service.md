@@ -191,7 +191,7 @@ To revoke extension access from Google:
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Use separate accounts** - Use different Google accounts for different purposes
 - **Grant minimal permissions** - Only enable permissions you need
@@ -199,7 +199,7 @@ To revoke extension access from Google:
 - **Test connections** - Verify account access before automation
 - **Keep accounts organized** - Use descriptive account names
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't share accounts** - Each user should use their own Google account
 - **Don't grant unnecessary permissions** - Only enable required permissions
@@ -240,10 +240,11 @@ To revoke extension access from Google:
 
 ## Related Documentation
 
-- [Google Service - Sheet](/documentation/field-types/google-service-sheet)
-- [Google Service - Gmail](/documentation/field-types/google-service-gmail)
-- [Fetch Google Sheet Data](/documentation/field-types/google-service-sheet/fetch-google-sheet-data)
-- [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
-- [Fetch Single Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-single-mail-gmail)
-- [Send Mail (Gmail)](/documentation/field-types/google-service-gmail/send-mail-gmail)
-- [Field Types](/documentation/form-fields/field-types)
+- <img src="/svg/form.svg" class="doc-icon" /> [Google Service - Sheet](/documentation/field-types/google-service-sheet)
+- <img src="/svg/form.svg" class="doc-icon" /> [Google Service - Gmail](/documentation/field-types/google-service-gmail)
+- <img src="/svg/form.svg" class="doc-icon" /> [Fetch Google Sheet Data](/documentation/field-types/google-service-sheet/fetch-google-sheet-data)
+- <img src="/svg/form.svg" class="doc-icon" /> [Fetch Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-mail-gmail)
+- <img src="/svg/form.svg" class="doc-icon" /> [Fetch Single Mail (Gmail)](/documentation/field-types/google-service-gmail/fetch-single-mail-gmail)
+- <img src="/svg/form.svg" class="doc-icon" /> [Send Mail (Gmail)](/documentation/field-types/google-service-gmail/send-mail-gmail)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+

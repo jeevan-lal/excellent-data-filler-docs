@@ -9,202 +9,261 @@ next:
 
 # Introduction
 
-**Excellent Data Filler** is a powerful browser extension that automates data entry tasks across web forms. Whether you need to fill forms repeatedly, generate Excel reports, or automate complex workflows, this extension provides the tools you need to save time and reduce manual errors.
+**Excellent Data Filler** is a modern, privacy-focused browser extension designed to automate repetitive data entry, bulk form submissions, and web data extraction with spreadsheet integration.
 
-## Key Features
+Whether you need to fill hundreds of survey responses, populate CRM fields from an Excel sheet, or automate multi-step web workflows, Excellent Data Filler provides an intelligent, flexible, and robust automation engine directly within your browser.
+
+---
+
+## Key Features {#key-features}
 
 <style>
 .key-features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2.5rem 0;
 }
 
-.key-features-grid h3 {
+.feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 14px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--vp-c-brand-1);
+  box-shadow: var(--vp-shadow-2);
+  background-color: var(--vp-c-bg-elv);
+}
+
+.feature-icon-wrapper {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-  color: #2c3e50;
-  border-bottom: 2px solid #e8f4f8;
-  padding-bottom: 0.5rem;
-}
-
-.key-features-grid h3:before {
-  content: '';
-  width: 24px;
-  height: 24px;
-  background-size: contain;
-  background-repeat: no-repeat;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
   flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
-.key-features-grid p {
+.feature-card:hover .feature-icon-wrapper {
+  transform: scale(1.08);
+}
+
+.feature-content {
+  flex: 1;
+}
+
+.feature-title {
+  font-family: var(--vp-font-family-heading);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin: 0 0 0.35rem 0;
+  line-height: 1.35;
+}
+
+.feature-desc {
+  font-size: 0.88rem;
+  color: var(--vp-c-text-2);
   margin: 0;
-  color: #5a6c7d;
   line-height: 1.5;
-  font-size: 0.95rem;
 }
-
-.key-features-grid > div {
-  border: 1px solid #e2e8f0;
-  border-color: #3b82f6;
-  border-radius: 8px;
-  padding: 1.25rem;
-  transition: all 0.2s ease;
-}
-
-.key-features-grid > div:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color:rgb(11, 76, 181);
-}
-
 </style>
 
 <div class="key-features-grid">
 
-<div>
-🔄 Auto Fill Form Fields
-Automatically populate form fields with predefined or dynamic data
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/form.svg" width="22" height="22" alt="Form" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Intelligent Form Auto-Fill</div>
+    <div class="feature-desc">Automatically detect and populate input fields with predefined values, dynamic variables, or spreadsheet rows.</div>
+  </div>
 </div>
 
-<div>
-📊 Auto Generate Excel
-Create and export data to Excel files with custom formatting
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/excel.svg" width="22" height="22" alt="Excel" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Excel Integration</div>
+    <div class="feature-desc">Upload and import data directly from <code>.xlsx</code> files and automatically iterate through records row-by-row.</div>
+  </div>
 </div>
 
-<div>
-🖱️ Auto Click Buttons
-Automate button clicks and form submissions
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/click.svg" width="22" height="22" alt="Click" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Smart Action Triggers</div>
+    <div class="feature-desc">Automate button clicks, modal interactions, tab navigation, and form submissions effortlessly.</div>
+  </div>
 </div>
 
-<div>
-⚡ Run Custom JavaScript
-Execute custom scripts for advanced automation
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/code.svg" width="22" height="22" alt="Code" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Custom JavaScript Execution</div>
+    <div class="feature-desc">Execute custom JavaScript formulas and conditions to transform data and handle complex workflows dynamically.</div>
+  </div>
 </div>
 
-<div>
-💾 Store Entry Response
-Save and manage form submission responses
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/database.svg" width="22" height="22" alt="Database" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Response Capture & Logging</div>
+    <div class="feature-desc">Record submission results, track errors, and export detailed logs for auditing and reporting.</div>
+  </div>
 </div>
 
-<div>
-🌐 Universal Compatibility
-Works with Google Forms, Microsoft Forms, and virtually any web form
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/globe.svg" width="22" height="22" alt="Globe" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Universal Compatibility</div>
+    <div class="feature-desc">Works across Google Forms, Microsoft Forms, internal enterprise portals, and standard HTML web forms.</div>
+  </div>
 </div>
 
-<div>
-📋 Data Templates
-Create reusable data templates for consistent form filling
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/template.svg" width="22" height="22" alt="Template" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Reusable Site Configurations</div>
+    <div class="feature-desc">Save form field mappings into persistent templates to reuse across multiple sessions or team members.</div>
+  </div>
 </div>
 
-<div>
-🔧 Advanced Field Types
-Support for text, dropdowns, checkboxes, file uploads, and more
+<div class="feature-card">
+  <div class="feature-icon-wrapper">
+    <img src="/svg/settings.svg" width="22" height="22" alt="Settings" />
+  </div>
+  <div class="feature-content">
+    <div class="feature-title">Comprehensive Field Support</div>
+    <div class="feature-desc">Native support for text, email, numbers, dropdown selects, radio buttons, checkboxes, dates, and file uploads.</div>
+  </div>
 </div>
 
 </div>
 
-### Availability
+---
 
-Excellent Data Filler extension is available for all major browsers.
+## Browser Availability & Download {#download-extension}
 
-| ![Chrome](/logo/icons8-chrome-64.svg) | ![Firefox](/logo/icons8-firefox-48.png) | ![Opera](/logo/icons8-opera-48.svg) | ![Edge](/logo/icons8-edge-48.svg) | ![Safari](/logo/icons8-safari-48.svg) |
-| ------------------------------------- | --------------------------------------- | ----------------------------------- | --------------------------------- | ------------------------------------- |
-| Latest ✔                              | Latest ✔                                | Latest ✔                            | Latest ✔                          | 👩‍🏫                                    |
+Excellent Data Filler is built using Manifest V3 and is officially supported across all major Chromium and Gecko browsers:
 
-### Download Extension
+| ![Chrome](/logo/icons8-chrome-64.svg) | ![Firefox](/logo/icons8-firefox-48.png) | ![Edge](/logo/icons8-edge-48.svg) | ![Opera](/logo/icons8-opera-48.svg) | ![Safari](/logo/icons8-safari-48.svg) |
+| :---: | :---: | :---: | :---: | :---: |
+| **Google Chrome** | **Mozilla Firefox** | **Microsoft Edge** | **Opera Browser** | **Apple Safari** |
+| Latest <img src="/svg/check.svg" class="doc-icon" width="14" height="14" alt="Supported" /> | Latest <img src="/svg/check.svg" class="doc-icon" width="14" height="14" alt="Supported" /> | Latest <img src="/svg/check.svg" class="doc-icon" width="14" height="14" alt="Supported" /> | Latest <img src="/svg/check.svg" class="doc-icon" width="14" height="14" alt="Supported" /> | Coming Soon |
 
-- [For - Chrome Browser](https://chrome.google.com/webstore/detail/excellent-data-filler-cth/abafaagbfhobgjkcepckbnadafflkdea)
-- [For - Chrome Browser - DEV](https://chromewebstore.google.com/detail/excellent-data-filler-dev/pkcdniljhopkooejgnidnfahljpnopgn)
-- [For - Firefox Browser](https://addons.mozilla.org/en-US/firefox/addon/excellent-data-filler/)
+### Direct Store Links
 
-## Quick Start
+- <img src="/svg/globe.svg" class="doc-icon" width="16" height="16" alt="Chrome" /> [Chrome Web Store (Official Release)](https://chrome.google.com/webstore/detail/excellent-data-filler-cth/abafaagbfhobgjkcepckbnadafflkdea)
+- <img src="/svg/code.svg" class="doc-icon" width="16" height="16" alt="Dev" /> [Chrome Web Store (Developer / Beta Version)](https://chromewebstore.google.com/detail/excellent-data-filler-dev/pkcdniljhopkooejgnidnfahljpnopgn)
+- <img src="/svg/globe.svg" class="doc-icon" width="16" height="16" alt="Firefox" /> [Firefox Add-ons (Official Release)](https://addons.mozilla.org/en-US/firefox/addon/excellent-data-filler/)
 
-Follow these simple steps to get started with Excellent Data Filler:
+---
 
-### Step 1: Install the Extension
+## Quick Start Guide {#quick-start}
 
-1. [Download the extension](#download-extension) for your preferred browser
-2. Follow the browser-specific installation instructions
-3. The extension icon will appear in your browser toolbar
+Follow these 4 simple steps to automate your first web form in under 2 minutes:
 
-### Step 2: Set Up Your First Site
+### Step 1: Install & Pin the Extension
 
-1. Navigate to the web page with the form you want to automate
-2. Right-click on the extension icon in your toolbar
-3. Select **"Insert Site"** from the context menu
-4. Alternatively, right-click directly on the form and choose the extension option
+1. Install the extension from your browser's web store using the links above.
+2. Pin the **Excellent Data Filler** icon to your browser toolbar for quick 1-click access.
 
-![Chrome](/image/insert-site-01.png)
+### Step 2: Register a New Site Configuration
 
-### Step 3: Configure Form Fields
+1. Open the target web page containing the form you want to automate.
+2. Click the extension toolbar icon or right-click anywhere on the form.
+3. Select **"Insert Site"** from the context menu. The extension will automatically detect the page URL and prepare the field mapping schema.
 
-1. The extension will automatically detect form fields on the page
-2. Configure each field with your desired data source (static text, Excel data, variables, etc.)
-3. Set up any special actions like file uploads or custom JavaScript
+![Insert Site](/image/insert-site-01.png)
 
-### Step 4: Run Your Automation
+### Step 3: Configure Form Fields & Data Sources
 
-Refresh the page and the extension will automatically fill the form fields. If any action not running in the form then you can check extension [Log](/documentation/log) for more details.
+1. Open the **Site Configuration** dashboard from the extension popup.
+2. Match each detected field to your desired data source:
+   - **Static Values**: Fixed text, default choices, or boilerplate content.
+   - **Excel Rows (.xlsx)**: Map columns (e.g. `Column A`, `Column B`) from your uploaded `.xlsx` file directly to form inputs.
+   - **Dynamic Variables**: Timestamps, random numbers, UUIDs, or counter loops.
+   - **Custom Scripting**: Apply JavaScript conditions or calculations before insertion.
 
-> **💡 Pro Tip:** Start with simple forms to get familiar with the extension, then gradually work up to more complex automation scenarios.
+### Step 4: Run Automation & Review Results
 
-## Common Use Cases
+1. Refresh or navigate to the form page — the extension will automatically detect the site configuration and fill the form fields.
+2. You can quickly start or pause automation anytime using the keyboard shortcut <kbd>Alt</kbd> + <kbd>Q</kbd>, or by toggling the extension icon.
+3. If any field or action needs troubleshooting, open the built-in [Extension Logs](/documentation/logs) to review detailed execution steps and error diagnostics.
 
-### 📝 Data Entry Automation {#data-entry-automation}
+> **<img src="/svg/bulb.svg" class="doc-icon" width="18" height="18" alt="Tip" /> Pro Tip:** When working with large multi-page forms, configure small sections first to verify selector accuracy before running bulk batch imports.
 
-- **Survey Responses** - Automatically fill out surveys with predefined answers
-- **Registration Forms** - Streamline user registration processes
-- **Contact Forms** - Populate contact forms with customer data
-- **Application Forms** - Fill job applications or service requests
+---
 
-### 📊 Data Management {#data-management}
+## Common Use Cases {#common-use-cases}
 
-- **Excel Integration** - Import/export data between Excel and web forms
-- **Database Population** - Transfer data from spreadsheets to web databases
-- **Report Generation** - Create automated reports from form submissions
-- **Data Migration** - Move data between different systems
+### <img src="/svg/form.svg" class="doc-icon" width="20" height="20" alt="Data Entry" /> Bulk Data Entry Automation {#data-entry-automation}
 
-### 🔄 Workflow Automation {#workflow-automation}
+- **Customer Registration & Onboarding** — Rapidly fill out account creation forms and onboarding portals.
+- **Survey Submissions** — Streamline responses across Google Forms, Microsoft Forms, and SurveyMonkey.
+- **Support Ticket Creation** — Auto-populate repetitive fields in helpdesk systems like Zendesk or Jira.
+- **Job & College Applications** — Save hours by filling identical background questions automatically.
 
-- **Testing Scenarios** - Automate form testing with various data sets
-- **Bulk Operations** - Process large volumes of data efficiently
-- **Scheduled Tasks** - Set up recurring data entry tasks
-- **Integration** - Connect with other tools and services
+### <img src="/svg/excel.svg" class="doc-icon" width="20" height="20" alt="Data Management" /> Spreadsheet & Database Workflows {#data-management}
 
-## Video Tutorial
+- **Row-by-Row Batch Processing** — Automatically advance through spreadsheet rows after each successful form submission.
+- **Data Migration** — Migrate legacy spreadsheet records into web-based ERP and CRM applications without manual copy-pasting.
+- **Automated Report Generation** — Extract and assemble periodic form responses into structured Excel reports.
 
-<iframe width="560" height="315" title="youtube" src="https://www.youtube.com/embed/PZn1Rm83TS0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-<iframe width="560" height="315" title="youtube" src="https://www.youtube.com/embed/8aR9i6DpN78" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-<iframe width="560" height="315" title="youtube" src="https://www.youtube.com/embed/NFieoLVWE0A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+### <img src="/svg/browser.svg" class="doc-icon" width="20" height="20" alt="Workflow Automation" /> Quality Assurance & Testing {#workflow-automation}
 
-## Need Help?
+- **Form Validation & Stress Testing** — Test edge-case inputs, special characters, and boundary conditions automatically.
+- **Regression Testing** — Validate form submission flows during web application release cycles.
+- **Web Scraping & Extraction** — Extract structured tabular data from web pages into exportable formats.
 
-### 📚 Documentation {#documentation}
+---
 
-- Browse our comprehensive [documentation](/documentation/) for detailed guides
-- Check out [field types](/documentation/form-fields/field-types) for advanced configurations
-- Learn about [functions and variables](/documentation/functions) for dynamic data
+## Need Help & Support? {#need-help}
 
-### 🆘 Support Channels {#support-channels}
+### <img src="/svg/book.svg" class="doc-icon" width="20" height="20" alt="Documentation" /> Documentation Guides {#documentation}
 
-- [📺 YouTube Channel](https://www.youtube.com/@ctechhindi) - Video tutorials and updates
-- [❔ Google Group](https://groups.google.com/g/excellent-data-filler) - Community discussions
-- [👨‍👧‍👧 WhatsApp Group](https://chat.whatsapp.com/F2AdHoZRvr8HiAbvWqKlVS) - Real-time support
-- [📦 Report Issues](https://github.com/jeevan-lal/excellent-data-filler-docs/issues) - Report issues
+- Explore the complete [Documentation Overview](/documentation/) for in-depth setup instructions.
+- Learn about supported [Field Types & Selectors](/documentation/form-fields/field-types).
+- Master dynamic automation with [Functions and Variables](/documentation/functions).
 
-### 🧪 Testing & Development {#testing-development}
+### <img src="/svg/support.svg" class="doc-icon" width="20" height="20" alt="Support" /> Support Channels {#support-channels}
 
-- [💻 Testing Site](/documentation/testing-site) - Try the extension with sample forms
-- [🔧 Development Version](https://chromewebstore.google.com/detail/excellent-data-filler-dev/pkcdniljhopkooejgnidnfahljpnopgn) - Latest features and updates
+- <img src="/svg/youtube.svg" class="doc-icon" width="16" height="16" alt="YouTube" /> [YouTube Channel](https://www.youtube.com/@ctechhindi) - Video tutorials and feature demos
+- <img src="/svg/chat.svg" class="doc-icon" width="16" height="16" alt="Google Group" /> [Google Group Forum](https://groups.google.com/g/excellent-data-filler) - Community discussions and tips
+- <img src="/svg/whatsapp.svg" class="doc-icon" width="16" height="16" alt="WhatsApp" /> [WhatsApp Group](https://chat.whatsapp.com/F2AdHoZRvr8HiAbvWqKlVS) - Real-time user support
+- <img src="/svg/bug.svg" class="doc-icon" width="16" height="16" alt="Report Issues" /> [GitHub Issues](https://github.com/jeevan-lal/excellent-data-filler-docs/issues) - Report bugs and request new features
 
-### 💳 Support the Project {#support-the-project}
+### <img src="/svg/beaker.svg" class="doc-icon" width="20" height="20" alt="Testing" /> Interactive Sandbox {#testing-development}
 
-- [💳 PayPal Donation](https://www.paypal.com/paypalme/ctechhindi) - Help us maintain and improve the extension
-- ⭐ Star our [GitHub repository](https://github.com/jeevan-lal/excellent-data-filler-docs) if you find it useful
+- <img src="/svg/code.svg" class="doc-icon" width="16" height="16" alt="Testing Site" /> [Interactive Testing Site](/documentation/testing-site) - Test your extension rules with live sample forms.
+- <img src="/svg/settings.svg" class="doc-icon" width="16" height="16" alt="Development Version" /> [Developer Build Channel](https://chromewebstore.google.com/detail/excellent-data-filler-dev/pkcdniljhopkooejgnidnfahljpnopgn) - Try the latest features and pre-release updates.
+
+### <img src="/svg/card.svg" class="doc-icon" width="20" height="20" alt="Support Project" /> Support the Project {#support-the-project}
+
+- <img src="/svg/card.svg" class="doc-icon" width="16" height="16" alt="PayPal" /> [PayPal Donation](https://www.paypal.com/paypalme/ctechhindi) - Support ongoing development and maintenance.
+- <img src="/svg/star.svg" class="doc-icon" width="16" height="16" alt="Star" /> Star the [GitHub Repository](https://github.com/jeevan-lal/excellent-data-filler-docs) to show your support!

@@ -1,359 +1,120 @@
-# Scraping Data
+---
+prev:
+  text: "Fetch Table Data (Vertical)"
+  link: "/documentation/field-types/scraper-data/fetch-table-data-vertical"
+next:
+  text: "Scraping Page URL"
+  link: "/documentation/field-types/scraper-data/scraping-page-url"
+---
 
-Extract specific data from web page elements and store it in your Excel file for later use or analysis.
+# Scraping Data {#scraping-data}
 
-## Overview
+Extract specific data from web page elements into your `.xlsx` report or export directly as structured output files.
 
-The Scraping Data field type allows you to extract various types of information from HTML elements on a web page. This is useful for collecting data, monitoring changes, or gathering information that can be used in subsequent fields or saved to Excel.
+---
 
-## Configuration Options
+## Overview {#overview}
+
+The **Scraping Data** field type targets individual DOM nodes to extract text, HTML attributes, form values, or selected dropdown options. Extracted values are saved directly under the field's column header in [Scraper Data](/documentation/site/site-scraper-data) and can be referenced dynamically by subsequent fields using `{$fieldName$}` variable syntax.
+
+---
+
+## Configuration Options {#configuration-options}
 
 | Option | Description | Required |
-|--------|-------------|----------|
-| **Selector Type** | Type of selector (CSS or XPath) | Yes |
-| **Selector Query** | The selector to locate the element | Yes |
-| [**Which Element Option Scraping**](#which-element-option-scraping) | Type of data to extract from the element | Yes |
-| **Wait until element is found in the page** | Wait for the element to appear before scraping | No |
-| [**Are you using custom javascript function for return field responses?**](#example-5-custom-javascript-function-to-modify-scraped-data) | Enable custom JavaScript to modify the scraped data | No |
-| [**Download a file with scraped data?**](#download-a-file-with-scraped-data) | Enable downloading the scraped data as a file | No |
-| **File Type** | Choose between Text File, CSV File, or JSON File | No |
-| [**Wait, the unit file download is complete?**](#wait-the-unit-file-download-is-complete) | Wait for the file download to finish before proceeding | No |
-| [**Do you want to set the custom name of the file?**](#do-you-want-to-set-the-custom-name-of-the-file) | Enable setting a custom name for the file | No |
-| **Enter file name** | Specify the name for the downloaded file | No |
+|---|---|---|
+| **Selector Type** | Syntax type (`CSS Selector` or `XPath`). | Yes |
+| **Selector Query** | Target element selector query. | Yes |
+| **Which Element Option Scraping** | Target property to extract from the element. | Yes |
+| **Wait until element is found in the page** | Pauses execution until the element mounts in the DOM. | No |
+| **Are you using custom javascript function for return field responses?** | Enables custom post-processing via a JavaScript listener. | No |
+| **Download a file with scraped data?** | Saves extracted data directly as a downloadable file. | No |
+| **File Type** | Output format when downloading a file (`Text File`, `CSV File`, `JSON File`). | When download enabled |
+| **Wait, the unit file download is complete?** | Pauses automation until the browser download finishes. | No |
+| **Do you want to set the custom name of the file?** | Enables naming the exported download file. | No |
+| **Enter file name** | Custom filename string (without extension). | When custom name enabled |
 
 ---
 
-## Which Element Option Scraping
+## Element Scraping Targets {#which-element-option-scraping}
 
-Choose what type of data you want to extract from the target element:
-
-**Available Options:**
-- [Element Text](#element-text)
-- [Element Text Content](#element-text-content)
-- [Element Value](#element-value)
-- [Element HTML](#element-html)
-- [Element Attribute](#element-attribute)
-- [Element Selected Option Text](#element-selected-option-text)
-- [Element Selected Option Value](#element-selected-option-value)
-- [Set Field Default Value](#set-field-default-value)
+| Property | Extraction Target | HTML Example |
+|---|---|---|
+| **Element Text** | Visible text (`innerText`). | `<div class="tag">Active</div>` → `Active` |
+| **Element Text Content** | Raw text including hidden descendants (`textContent`). | `<div style="display:none">123</div>` → `123` |
+| **Element Value** | Input or textarea `value`. | `<input value="USR-99" />` → `USR-99` |
+| **Element HTML** | Inner markup (`innerHTML`). | `<p><strong>Bold</strong></p>` → `<strong>Bold</strong>` |
+| **Element Attribute** | Value of any specific attribute (e.g., `href`, `data-id`). | `<a href="/doc.pdf">` → `/doc.pdf` |
+| **Element Selected Option Text** | Visible label of active `<option>` in a `<select>`. | `<option selected>California</option>` → `California` |
+| **Element Selected Option Value** | Value attribute of active `<option>` in a `<select>`. | `<option value="CA" selected>` → `CA` |
 
 ---
 
-### Element Text
+## Custom JavaScript Processing {#custom-javascript}
 
-Extracts the **visible text content** of an element.
+Transform or sanitize scraped values before committing them:
 
-**Example:**
-```html
-<div class="username">John Doe</div>
-```
-- **Selector:** `.username`
-- **Scraped Value:** `John Doe`
+1. Add a **JavaScript Code** field positioned directly **above** this field.
+2. Enable **Are you using custom javascript function for return field responses?**.
+3. Register a listener:
 
----
-
-### Element Text Content
-
-Extracts the **text content** including hidden text and text from child elements.
-
-**Example:**
-```html
-<div class="message">
-  Hello <span style="display:none;">Hidden</span> World
-</div>
-```
-- **Selector:** `.message`
-- **Element Text:** `Hello World`
-- **Element Text Content:** `Hello Hidden World`
-
----
-
-### Element Value
-
-Extracts the **value attribute** of form input elements.
-
-**Example:**
-```html
-<input type="text" id="email" value="user@example.com">
-```
-- **Selector:** `#email`
-- **Scraped Value:** `user@example.com`
-
----
-
-### Element HTML
-
-Extracts the **inner HTML** of an element, including all child elements and tags.
-
-**Example:**
-```html
-<div class="content">
-  <h2>Title</h2>
-  <p>Description</p>
-</div>
-```
-- **Selector:** `.content`
-- **Scraped Value:** `<h2>Title</h2><p>Description</p>`
-
----
-
-### Element Attribute
-
-Extracts a **specific attribute value** from an element.
-
-**Configuration:**
-- You need to specify which attribute to extract (e.g., `href`, `src`, `data-id`, `class`)
-
-**Example:**
-```html
-<a href="https://example.com" class="link">Click here</a>
-```
-- **Selector:** `.link`
-- **Attribute:** `href`
-- **Scraped Value:** `https://example.com`
-
----
-
-### Element Selected Option Text
-
-Extracts the **visible text** of the currently selected option in a dropdown/select element.
-
-**Example:**
-```html
-<select id="country">
-  <option value="us">United States</option>
-  <option value="uk" selected>United Kingdom</option>
-  <option value="ca">Canada</option>
-</select>
-```
-- **Selector:** `#country`
-- **Scraped Value:** `United Kingdom`
-
----
-
-### Element Selected Option Value
-
-Extracts the **value attribute** of the currently selected option in a dropdown/select element.
-
-**Example:**
-```html
-<select id="country">
-  <option value="us">United States</option>
-  <option value="uk" selected>United Kingdom</option>
-  <option value="ca">Canada</option>
-</select>
-```
-- **Selector:** `#country`
-- **Scraped Value:** `uk`
-
----
-
-### Set Field Default Value
-
-Stores a **default value or Excel column value** directly to the specified column name without requiring any element selector query.
-
-**Key Features:**
-- ✅ **No element selector required** - This option doesn't need a selector query
-- ✅ **Variable support** - Use variables like `{$fieldName$}` in the value
-- ✅ **Excel column support** - Reference Excel column values
-- ✅ **Direct storage** - Value is stored directly to the column name
-
-**Configuration:**
-- **Column Name:** The Excel column where the value will be stored
-- **Default Value:** The value to store (supports variables and Excel column references)
-
-**Example 1: Static Default Value**
-```
-Field Type: Scraping Data
-Which Element Option: Set Field Default Value
-Column Name: status
-Default Value: pending
-```
-**Result:** Stores "pending" in the "status" column.
-
-**Example 2: Using Variables**
-```
-Field Type: Scraping Data
-Which Element Option: Set Field Default Value
-Column Name: fullName
-Default Value: {$firstName$} {$lastName$}
-```
-**Result:** Combines firstName and lastName variables and stores in "fullName" column.
-
-**Example 3: Excel Column Reference**
-```
-Field Type: Scraping Data
-Which Element Option: Set Field Default Value
-Column Name: processedEmail
-Default Value: {$email$}
-```
-**Result:** Stores the value from the "email" Excel column into "processedEmail" column.
-
-## File Download Options
-
-These options allow you to save the scraped data directly to your local machine as a file.
-
-### Download a file with scraped data?
-When enabled, the extension will download the scraped content. You can choose from several file formats to store your data.
-
-**File Types:**
-- **Text File**: Saves the data as a `.txt` file.
-- **CSV File**: Saves the data in Comma-Separated Values format (`.csv`).
-- **JSON File**: Saves the data as a structured JSON object (`.json`).
-
-### Wait, the unit file download is complete?
-If this option is enabled, the automation will pause and wait for the browser to confirm that the file download has successfully completed before proceeding to the next field or action.
-
-### Do you want to set the custom name of the file?
-By default, the extension generates a filename automatically. Enable this option if you want to provide a specific name for the downloaded file.
-
-**Enter file name:**
-Enter the desired filename (e.g., `extracted_data`). Note that the appropriate file extension will be added automatically based on the selected **File Type**.
-
-## Usage Examples
-
-### Example 1: Scrape User Profile Name
-
-```
-Field Type: Scraping Data
-Selector Type: CSS Selector
-Selector Query: .profile-name
-Which Element Option: Element Text
-```
-
-**Result:** Extracts the user's name from the profile page.
-
----
-
-### Example 2: Scrape Product Price
-
-```
-Field Type: Scraping Data
-Selector Type: CSS Selector
-Selector Query: .product-price
-Which Element Option: Element Text
-Wait until element is found in the page: ✅ Enabled
-```
-
-**Result:** Waits for the price element to load, then extracts the price value.
-
----
-
-### Example 3: Scrape Image URL
-
-```
-Field Type: Scraping Data
-Selector Type: CSS Selector
-Selector Query: .product-image
-Which Element Option: Element Attribute
-Attribute Name: src
-```
-
-**Result:** Extracts the image source URL from the `src` attribute.
-
----
-
-### Example 4: Scrape Form Input Value
-
-```
-Field Type: Scraping Data
-Selector Type: XPath
-Selector Query: //input[@name='email']
-Which Element Option: Element Value
-```
-
-**Result:** Extracts the current value from the email input field.
-
----
-
-### Example 5: Custom JavaScript Function to Modify Scraped Data
-
-You can use a custom JavaScript function to modify the scraped data before it's stored.
-
-**Setup:**
-1. Add a **JavaScript Code** field type **above** the Scraping Data field
-2. Enable the option: **"Are you using custom javascript function for return field responses?"** in the Scraping Data field
-3. Use the field listener to modify the scraped data
-
-**JavaScript Code:**
-```js
+```javascript
 $fns.field.listener('EDF-FIELD-SCRAPING-DATA', (output, callback) => {
-  console.log("REQUEST:", output);
+  console.log('Raw Scraped Data:', output.response);
 
-  // Use custom actions - Example: Convert to lowercase
-  let newText = output.response.toLocaleLowerCase();
+  // Normalize string to uppercase and trim whitespace
+  const sanitized = output.response.trim().toUpperCase();
 
-  // Return modified data
-  callback({ status: true, message: "DONE", data: newText });
-  // Or return error: callback({ status: false, message: "ERROR" });
+  // Return cleaned value
+  callback({ status: true, message: 'DONE', data: sanitized });
 });
 
-$fns.return("1");
+$fns.return('1');
 ```
 
-**Configuration:**
-```
-Field Type: Scraping Data
+---
+
+## Practical Examples {#examples}
+
+### Example 1: Scrape Order Confirmation Number
+
+```text
 Selector Type: CSS Selector
-Selector Query: .product-name
+Selector Query: span#order-confirmation-number
 Which Element Option: Element Text
-Are you using custom javascript function: ✅ Enabled
+Wait until element is found: Enabled
 ```
 
-**HTML:**
-```html
-<div class="product-name">LAPTOP PRO 2024</div>
+### Example 2: Extract Selected Dropdown Value
+
+```text
+Selector Type: CSS Selector
+Selector Query: select#billing-state
+Which Element Option: Element Selected Option Value
 ```
 
-**Result:** Stores `laptop pro 2024` (converted to lowercase) in Excel column
+### Example 3: Extract Image Link
 
-**Use Cases:**
-- Format scraped text (uppercase, lowercase, title case)
-- Clean and sanitize data (remove extra spaces, special characters)
-- Parse and extract specific patterns (emails, phone numbers)
-- Transform data format (date formatting, number formatting)
-- Validate and filter scraped content
-- Combine multiple scraped values
-
----
-
-## Use Cases
-
-### Data Collection
-Extract product information, prices, descriptions, or any other data from web pages for analysis or record-keeping.
-
-### Form Validation
-Scrape values from form fields to verify that data was entered correctly before submission.
-
-### Dynamic Content Monitoring
-Extract data from dynamically loaded content and store it in Excel for tracking changes over time.
-
-### Multi-Step Forms
-Scrape data from one step of a form to use in subsequent steps or for verification purposes.
-
-### API Response Data
-Extract data from elements that display API responses or dynamically generated content.
+```text
+Selector Type: CSS Selector
+Selector Query: .avatar-profile img
+Which Element Option: Element Attribute
+Element Attribute Name: src
+```
 
 ---
 
-## Tips
+## Best Practices {#best-practices}
 
-:::tip Storing Scraped Data
-Scraped data is automatically stored in the Excel column that corresponds to the field name. Make sure your Excel template has a column with the same name as your scraping field.
-:::
-
-:::warning Wait for Dynamic Content
-If scraping dynamically loaded content, enable "Wait until element is found in the page" to ensure the element is present before attempting to scrape.
-:::
-
-:::info Using Variables
-You can use the scraped data in subsequent fields by referencing it as a variable: `{$fieldName$}`
-:::
+- **Wait for Dynamic Elements**: Always enable **Wait until element is found in the page** when scraping elements hydrated asynchronously by client-side frameworks.
+- **Reference as Variables**: Use `{$fieldName$}` in subsequent form steps to input the scraped value into downstream forms.
+- **Use Stable Selectors**: Inspect elements with <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to ensure selectors avoid dynamic ephemeral class names.
 
 ---
 
-## Related Field Types
+## Related Documentation {#related}
 
-- [Scraping Page URL](/documentation/field-types/scraper-data/scraping-page-url) - Extract the current page URL
-- [Fetch Header-Value Data](/documentation/field-types/scraper-data/fetch-header-value-data) - Extract key-value pairs
-- [Fetch Table Data](/documentation/field-types/scraper-data/fetch-table-data-vertical) - Extract data from tables
+- <img src="/svg/excel.svg" class="doc-icon" /> [Scraper Data Management Dashboard](/documentation/site/site-scraper-data)
+- <img src="/svg/globe.svg" class="doc-icon" /> [Scraping Page URL](/documentation/field-types/scraper-data/scraping-page-url)
+- <img src="/svg/form.svg" class="doc-icon" /> [Fetch Header-Value Data](/documentation/field-types/scraper-data/fetch-header-value-data)
+- <img src="/svg/database.svg" class="doc-icon" /> [Fetch Table Data (Vertical)](/documentation/field-types/scraper-data/fetch-table-data-vertical)

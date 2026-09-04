@@ -14,11 +14,11 @@ Text fields are the most commonly used field type for single-line text input in 
 | **Field Type**           | Set to **Text** for text input fields | `Text`                              |
 | **Field Selector Type**  | Method to locate the field element    | `Selector`, `Id`, `XPath`           |
 | **Field Selector Query** | Unique address to locate the field    | `#firstName`, `input[name="email"]` |
-| **Field Value**          | Data source for field content         | Excel column or default value       |
+| **Field Value**          | Data source for field content         | Excel (.xlsx) column or default value |
 
 ## Text Field Settings
 
-### ⌨️ Simulate Human Typing Speed {#simulate-human-typing-speed}
+### Simulate Human Typing Speed {#simulate-human-typing-speed}
 
 Enable human-like typing behavior to simulate realistic user input patterns.
 
@@ -32,20 +32,20 @@ Enable human-like typing behavior to simulate realistic user input patterns.
 
 ---
 
-### 🧹 Before filling the value in the field, clear the value of the field {#before-filling-the-value-in-the-field-clear-the-value-of-the-field}
+### Before filling the value in the field, clear the value of the field {#before-filling-the-value-in-the-field-clear-the-value-of-the-field}
 
 Automatically clears existing field values before entering new data.
 
 **Configuration:**
 
 - **Toggle Switch**: Enable/disable field clearing
-- **Empty Value Field**: Specify what to fill when Excel data is not found
+- **Empty Value Field**: Specify what to fill when Excel (.xlsx) data is not found
 
 ---
 
-### 📋 If excel column value is empty then fill this default value {#if-excel-column-value-is-empty-then-fill-this-default-value}
+### If excel column value is empty then fill this default value {#if-excel-column-value-is-empty-then-fill-this-default-value}
 
-Set fallback values when Excel column data is not available.
+Set fallback values when Excel (.xlsx) column data is not available.
 
 **Configuration:**
 
@@ -63,7 +63,7 @@ Excel Column Value: null → Field gets default value
 
 ---
 
-### ⏳ Element Detection Settings {#element-detection-settings}
+### Element Detection Settings {#element-detection-settings}
 
 Configure how the extension waits for and interacts with form elements.
 
@@ -79,7 +79,7 @@ Configure how the extension waits for and interacts with form elements.
 - **Use Case**: Hidden elements, CSS visibility controls
 - **Configuration**: Toggle ON/OFF
 
-### ⚡ Trigger Javascript Event {#javascript-event-triggering}
+### Trigger Javascript Event {#javascript-event-triggering}
 
 Configure JavaScript events to be triggered on the field element.
 
@@ -92,7 +92,7 @@ Configure JavaScript events to be triggered on the field element.
 - **keydown** - Triggers on key press
 - **keyup** - Triggers on key release
 
-### ✍️ Text editor mode {#text-editor-mode}
+### Text editor mode {#text-editor-mode}
 
 Enable text editor mode for enhanced rich text or custom editor text input handling with natural human typing speed simulation.
 
@@ -100,7 +100,7 @@ Enable text editor mode for enhanced rich text or custom editor text input handl
 
 - **Text editor mode**: Toggle ON/OFF to enable text editor mode.
 
-#### ⚙️ Settings (when enabled):
+#### Settings (when enabled)
 
 - **Min Key Delay (ms)**: Minimum delay in milliseconds between key presses (e.g., `50` ms)
 - **Max Key Delay (ms)**: Maximum delay in milliseconds between key presses (e.g., `120` ms)
@@ -112,7 +112,7 @@ Enable text editor mode for enhanced rich text or custom editor text input handl
 
 ---
 
-### 🔧 If form is ASPX, remove the input behavior {#if-form-is-aspx-remove-the-input-behavior}
+### If form is ASPX, remove the input behavior {#if-form-is-aspx-remove-the-input-behavior}
 
 Special handling for ASPX (Active Server Pages Extended) forms.
 
@@ -129,10 +129,12 @@ Special handling for ASPX (Active Server Pages Extended) forms.
 - Check selector accuracy
 - Verify element visibility
 - Test with different selectors
+- Check Excel (.xlsx) column mapping
 
 ## Next Steps
 
-- [Field Types](/documentation/form-fields/field-types) - Learn about different field types
-- [Field Response Actions](/documentation/form-fields/field-response-action) - Configure response behaviors
-- [Variables](/documentation/variable) - Use variables in field settings
-- [Site Settings](/documentation/site/site-settings) - Configure site-wide settings
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Learn about different field types
+- <img src="/svg/settings.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action) — Configure response behaviors
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Prepare Excel (.xlsx) templates
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure site-wide automation settings
+

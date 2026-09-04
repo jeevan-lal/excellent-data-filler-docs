@@ -4,14 +4,14 @@ Execute specific actions after a specified time delay. Set the action type and t
 
 After the field runs, the specified action will execute when the timer expires. This field operates asynchronously - the next field does not wait for the timer action to complete before proceeding.
 
-## 📋 Field Options {#timer-action-field-options}
+## Field Options {#timer-action-field-options}
 
 | Field Options   | Required | Example Values                                                 | Description                                   |
 | --------------- | -------- | -------------------------------------------------------------- | --------------------------------------------- |
 | **Set Seconds** | Yes      | `5`, `10`, `30`, `60`                                          | [Set Seconds](#set-seconds)                   |
 | **Action Name** | Yes      | **Open URL** <br> **Click Field Element** <br> **Reload Page** | Type of action to perform after timer expires |
 
-## ⚙️ Action Configuration {#action-configuration}
+## Action Configuration {#action-configuration}
 
 ### Set Seconds {#set-seconds}
 
@@ -36,3 +36,11 @@ Select the type of action to execute after the timer expires.
 | **Open URL**            | Navigate to a specific URL       | **URL** - Target URL to open                 |
 | **Click Field Element** | Click on a specific page element | **Element Selector** - CSS selector or XPath |
 | **Reload Page**         | Refresh the current page         | No additional configuration required         |
+
+## Next Steps
+
+<img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+<img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
+<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+

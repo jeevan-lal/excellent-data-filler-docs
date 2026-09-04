@@ -15,16 +15,16 @@ When you trigger a print action (using `window.print()` or browser print), this 
 
 ## Key Features
 
-### 🎯 Selective Printing
+### Selective Printing
 Target specific elements on the page to print, hiding everything else automatically.
 
-### 📋 Multiple Elements
+### Multiple Elements
 Select multiple elements to print by separating selectors with commas.
 
-### 🔍 CSS Selector Support
+### CSS Selector Support
 Use standard CSS selectors (ID, class, attribute, etc.) to target elements precisely.
 
-### 🖨️ Clean Output
+### Clean Output
 Automatically hides all non-targeted elements during print, ensuring clean and professional printouts.
 
 ## How to Use
@@ -141,6 +141,7 @@ document.querySelectorAll('your-selector-here')
 
 ## Related Documentation
 
-- [CSS Selector Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)
-- [Locate Element](/documentation/locate-element)
-- [Field Types](/documentation/form-fields/field-types)
+- <img src="/svg/form.svg" class="doc-icon" /> [Save as PDF](/documentation/field-types/save-as-pdf) — Save generated print layouts to PDF
+- <img src="/svg/browser.svg" class="doc-icon" /> [Locate Element](/documentation/locate-element) — Element selector guide
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types) — Complete field types list
+
