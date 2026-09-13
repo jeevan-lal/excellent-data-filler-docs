@@ -123,9 +123,9 @@ Each site entry in the dashboard provides management actions:
 
 ## Next Steps
 
-<img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure execution toggles, site environment variables, and exports  
-<img src="/svg/form.svg" class="doc-icon" /> [Insert Site Form](/documentation/form/form#insert-site-form) — Add form pages and URL matching rules  
-<img src="/svg/system.svg" class="doc-icon" /> [Segments](/documentation/segment) — Build on-demand, reusable field routines  
-<img src="/svg/code.svg" class="doc-icon" /> [Form Fields Configuration](/documentation/form-fields/field#insert-field) — Set up individual form field selectors  
-<img src="/svg/excel.svg" class="doc-icon" /> [Excel Template Management](/documentation/site/site-excel-template) — Download and upload `.xlsx` spreadsheets  
+- <img src="/svg/settings.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings) — Configure execution toggles, site environment variables, and exports  
+- <img src="/svg/form.svg" class="doc-icon" /> [Insert Site Form](/documentation/form/form#insert-site-form) — Add form pages and URL matching rules  
+- <img src="/svg/system.svg" class="doc-icon" /> [Segments](/documentation/segment) — Build on-demand, reusable field routines  
+- <img src="/svg/code.svg" class="doc-icon" /> [Form Fields Configuration](/documentation/form-fields/field#insert-field) — Set up individual form field selectors  
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template Management](/documentation/site/site-excel-template) — Download and upload `.xlsx` spreadsheets  
 

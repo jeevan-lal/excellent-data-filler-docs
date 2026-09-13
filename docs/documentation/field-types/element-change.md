@@ -67,7 +67,7 @@ If the element changes before the extension's Element Change field type action t
 
 ## Next Steps
 
-<img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
-<img src="/svg/form.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action)
-<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
-<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Response Actions](/documentation/form-fields/field-response-action)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)

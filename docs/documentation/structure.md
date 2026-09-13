@@ -133,11 +133,11 @@ A complete automation project typically progresses through this lifecycle:
 
 ## Next Steps
 
-<img src="/svg/globe.svg" class="doc-icon" /> [How to insert a site](/documentation/site/site#insert-site) — Register your first site configuration  
-<img src="/svg/form.svg" class="doc-icon" /> [How to insert a site form](/documentation/form/form#insert-site-form) — Add form pages and URL matching rules  
-<img src="/svg/system.svg" class="doc-icon" /> [How to use segments](/documentation/segment) — Build on-demand, reusable field routines  
-<img src="/svg/code.svg" class="doc-icon" /> [How to configure form fields](/documentation/form-fields/field#insert-field) — Map selectors, types, and values  
-<img src="/svg/excel.svg" class="doc-icon" /> [Excel Template Integration](/documentation/site/site-excel-template) — Master batch data handling  
+- <img src="/svg/globe.svg" class="doc-icon" /> [How to insert a site](/documentation/site/site#insert-site) — Register your first site configuration  
+- <img src="/svg/form.svg" class="doc-icon" /> [How to insert a site form](/documentation/form/form#insert-site-form) — Add form pages and URL matching rules  
+- <img src="/svg/system.svg" class="doc-icon" /> [How to use segments](/documentation/segment) — Build on-demand, reusable field routines  
+- <img src="/svg/code.svg" class="doc-icon" /> [How to configure form fields](/documentation/form-fields/field#insert-field) — Map selectors, types, and values  
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template Integration](/documentation/site/site-excel-template) — Master batch data handling  
 
 ---
 

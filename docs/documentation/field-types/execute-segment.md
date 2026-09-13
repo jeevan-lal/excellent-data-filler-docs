@@ -66,7 +66,7 @@ Ensure the segment name matches exactly with the predefined segment in your exte
 
 ## Next Steps
 
-<img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
-<img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
-<img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
-<img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Types](/documentation/form-fields/field-types)
+- <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings)
+- <img src="/svg/excel.svg" class="doc-icon" /> [Excel (.xlsx) Template](/documentation/site/site-excel-template)
+- <img src="/svg/browser.svg" class="doc-icon" /> [Site Settings](/documentation/site/site-settings)
