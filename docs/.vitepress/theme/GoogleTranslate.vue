@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-translate-container" ref="containerRef">
+  <div class="custom-translate-container notranslate" ref="containerRef">
     <!-- Trigger Button -->
     <button class="translate-trigger-btn" :class="{ 'is-active': isOpen }" @click="toggleDropdown" type="button" aria-label="Select Language">
       <svg class="globe-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -134,8 +134,37 @@ function selectLanguage(lang) {
   }
 }
 
+let observer = null
+
+const resetLayout = () => {
+  if (typeof document !== 'undefined') {
+    if (document.body && document.body.style.top && document.body.style.top !== '0px') {
+      document.body.style.top = '0px'
+    }
+    if (document.body && document.body.style.position === 'relative') {
+      document.body.style.position = 'static'
+    }
+    const banners = document.querySelectorAll(
+      'iframe.skiptranslate, .goog-te-banner-frame, .VIpgJd-ZVi9kd-OAZLKg-Ne963b, .VIpgJd-ZVi9kd-OR9M1b-OWXEXe-OAZLKg, body > .skiptranslate'
+    )
+    banners.forEach(el => {
+      if (el && el.style.display !== 'none') {
+        el.style.display = 'none'
+      }
+    })
+  }
+}
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+
+  // Observe and neutralize any layout shifts or banners injected by Google Translate
+  observer = new MutationObserver(resetLayout)
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['style', 'class'],
+    childList: true
+  })
 
   // Detect existing selected language from cookie
   const match = document.cookie.match(/(^|;\s*)googtrans=\/en\/([^;]+)/)
@@ -170,6 +199,10 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
+  if (observer) {
+    observer.disconnect()
+    observer = null
+  }
 })
 </script>
 
@@ -395,22 +428,38 @@ onUnmounted(() => {
   pointer-events: none !important;
 }
 
+html,
 body {
   top: 0px !important;
   position: static !important;
 }
 
-.goog-te-banner-frame.skiptranslate,
+/* Comprehensive suppression of Google Translate top banner, iframes & tooltips */
+.goog-te-banner-frame,
 iframe.goog-te-banner-frame,
-.goog-te-balloon-frame {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-}
-
+iframe.skiptranslate,
+body > .skiptranslate,
+.VIpgJd-ZVi9kd-OAZLKg-Ne963b,
+.VIpgJd-ZVi9kd-OR9M1b-OWXEXe-OAZLKg,
+.VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q,
+.VIpgJd-ZVi9kd-G0jg0d,
+iframe[id*=":"][id*="container"],
+div[id*=":"][id*="container"],
+.goog-te-balloon-frame,
+#goog-gt-tt,
 .goog-tooltip,
 .goog-tooltip:hover {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: -99999px !important;
+  left: -99999px !important;
+  z-index: -99999 !important;
 }
 
 .goog-text-highlight {

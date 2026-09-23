@@ -311,7 +311,7 @@ The **Export Cookies** field type exports the cookies of the active page to a JS
 
 | Options           | Description                                                                                    | Required |
 | ----------------- | ---------------------------------------------------------------------------------------------- | -------- |
-| **Default Value** | Set the JSON file name for the exported cookies (e.g., `cookies.json` or `session.json`).      | Yes      |
+| **Default Value** | Set the JSON file name for the exported cookies (e.g., `cookies.json` or `session.json`).      | No      |
 
 ### Usage
 

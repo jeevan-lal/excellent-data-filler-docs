@@ -1000,3 +1000,45 @@ html {
   background-color: var(--vp-c-brand-soft) !important;
   color: var(--vp-c-brand-1) !important;
 }
+
+/* --------------------------------------------------------------------------
+   Google Translate Overrides (Prevent Top Banner & Navbar Displacement)
+   -------------------------------------------------------------------------- */
+html,
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+iframe.skiptranslate,
+body > .skiptranslate,
+.VIpgJd-ZVi9kd-OAZLKg-Ne963b,
+.VIpgJd-ZVi9kd-OR9M1b-OWXEXe-OAZLKg,
+.VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q,
+.VIpgJd-ZVi9kd-G0jg0d,
+iframe[id*=":"][id*="container"],
+div[id*=":"][id*="container"],
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: -99999px !important;
+  left: -99999px !important;
+  z-index: -99999 !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
