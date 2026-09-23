@@ -52,12 +52,12 @@ When automating repetitive tables, lists, or grids, you can use `{{loop.index[Fi
 ### XPath Comparison
 
 - **Normal Static XPath**:
-  ```xpath
+  ```text
   //table/tbody/tr[1]/td[2]/input
   ```
 
 - **Dynamic XPath with Loop Index**:
-  ```xpath
+  ```text
   //table/tbody/tr[{{loop.index[FieldName]}}]/td[2]/input
   ```
 :::

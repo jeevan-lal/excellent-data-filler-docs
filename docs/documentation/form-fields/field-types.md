@@ -183,6 +183,8 @@ Field types for controlling browser behavior, tabs, and web page interactions.
 - [**Set Local Data**](/documentation/field-types/browser-actions#set-local-data) - Store data in browser local storage
 - [**Get Local Data**](/documentation/field-types/browser-actions#get-local-data) - Retrieve data from browser local storage
 - [**Remove Local Data**](/documentation/field-types/browser-actions#remove-local-data) - Clear data from browser local storage
+- [**Export Cookies**](/documentation/field-types/browser-actions#export-cookies) - Export current page cookies to a JSON file
+- [**Import Cookies**](/documentation/field-types/browser-actions#import-cookies) - Import cookies from a JSON file
 
 ## Javascript Dialog {#javascript-dialog}
 

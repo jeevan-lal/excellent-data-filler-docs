@@ -302,3 +302,47 @@ Delete data from the browser's extension storage (stored via [Set Local Data](#s
 - **Storage API**: Uses `chrome.storage.local` API (not `localStorage`)
 - **Permanent Deletion**: Data is permanently removed and cannot be recovered
 - **Immediate Effect**: Deletion happens immediately
+
+---
+
+## Export Cookies
+
+The **Export Cookies** field type exports the cookies of the active page to a JSON file.
+
+| Options           | Description                                                                                    | Required |
+| ----------------- | ---------------------------------------------------------------------------------------------- | -------- |
+| **Default Value** | Set the JSON file name for the exported cookies (e.g., `cookies.json` or `session.json`).      | Yes      |
+
+### Usage
+
+1. Set the field type to **Export Cookies**.
+2. In the **Default Value** setting of the field, enter the desired JSON file name (e.g., `cookies.json`).
+3. When the field executes during automation, all cookies for the current page domain are gathered and downloaded as a JSON file in your browser's download folder.
+
+::: tip Use Cases
+- Backing up session cookies before running workflows.
+- Exporting active authentication state to reuse later without re-authenticating.
+:::
+
+---
+
+## Import Cookies
+
+The **Import Cookies** field type imports cookies from a JSON file into the browser session.
+
+| Options           | Description                                                                                  | Required |
+| ----------------- | -------------------------------------------------------------------------------------------- | -------- |
+| **Default Value** | Set the JSON file name to import cookies from (e.g., `cookies.json` or `session.json`).      | Yes      |
+
+### Usage
+
+1. Set the field type to **Import Cookies**.
+2. In the **Default Value** setting of the field, enter the name of the JSON file containing the cookies (e.g., `cookies.json`).
+3. Make sure the JSON file exists in your browser's download or working directory.
+4. When executed, the extension parses the JSON file and restores all cookies into the browser for the matching domain.
+
+::: tip Use Cases
+- Restoring saved login sessions or auth tokens automatically before filling forms.
+- Bypassing repetitive login screens or two-factor prompts during automated runs.
+:::
+
