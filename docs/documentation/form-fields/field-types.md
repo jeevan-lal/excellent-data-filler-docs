@@ -50,8 +50,8 @@ Powerful field types for complex automation, scripting, and advanced form contro
 - [**Keys**](/documentation/keys#special-key) - Simulate keyboard input and special keys
 - [**Form Error Message**](/documentation/field-types/advance/form-error-message) - Display custom error messages
 - [**Current Entry as Saved**](/documentation/field-types/advance/current-entry-as-saved) - Mark current Excel entry as completed
-- **Field Action Status Checker** - Check the status of field actions
-- **Next Excel Entry Exists** - Verify if next Excel entry is available
+- [**Field Action Status Checker**](/documentation/field-types/advance/field-action-status-checker) - Check the status of field actions
+- [**Next Excel Entry Exists**](/documentation/field-types/advance/next-excel-entry-exists) - Verify if next Excel entry is available
 - [**Execute Segment**](/documentation/field-types/execute-segment) - Execute a segment of the form
 - [**Set Environment**](/documentation/field-types/set-environment) - Set the environment of the form
 
@@ -120,8 +120,8 @@ Field types specifically designed for SurveyCake form integration and compatibil
 
 Field types for extracting and processing data from web pages and documents.
 
-- **Fetch Text** - Extract plain text content from elements
-- **Fetch HTML** - Extract HTML content from elements
+- [**Fetch Text**](/documentation/field-types/scraper-data/fetch-text) - Extract plain text content from elements
+- [**Fetch HTML**](/documentation/field-types/scraper-data/fetch-html) - Extract HTML content from elements
 - [**Scraping Data**](/documentation/field-types/scraper-data/scraping-data) - Advanced web scraping functionality
 - [**Scraping Page URL**](/documentation/field-types/scraper-data/scraping-page-url) - Extract current page URL
 - [**Fetch Table Data in Scraper Data (Vertical)**](/documentation/field-types/scraper-data/fetch-table-data-vertical) - Extract table data in vertical format

@@ -258,7 +258,7 @@ Payload: Hello World
 **Example:**
 
 ```
-Retry request on Error: ✅ Enabled
+Retry request on Error: Enabled
 Max Retry (Times): 5
 Interval (Seconds): 2
 ```
@@ -631,7 +631,7 @@ Saved as: Structured data accessible by other fields
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Use HTTPS** - Always use secure HTTPS endpoints
 - **Test JSONPath** - Verify JSONPath expressions before deployment
@@ -640,7 +640,7 @@ Saved as: Structured data accessible by other fields
 - **Validate responses** - Check response format and structure
 - **Use variables** - Make URLs dynamic with Excel data
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't expose sensitive data** - Keep API keys secure
 - **Don't use wrong methods** - Don't use POST for reading data
@@ -820,7 +820,7 @@ Request Method: POST
 Content Type: application/json
 
 // Headers
-Do you want to set Headers in the request?: ✅ Enabled
+Do you want to set Headers in the request?: Enabled
 Headers:
 {
   "Authorization": "Bearer {$apiToken$}",
@@ -829,7 +829,7 @@ Headers:
 }
 
 // Payload
-Do you want to set body payload in the request?: ✅ Enabled
+Do you want to set body payload in the request?: Enabled
 Payload:
 {
   "username": "{$username$}",
@@ -843,12 +843,12 @@ Payload:
 }
 
 // Retry Settings
-Retry request on Error?: ✅ Enabled
+Retry request on Error?: Enabled
 Max Retry (Times): 3
 Interval (Seconds): 5
 
 // Custom Function
-Are you using custom javascript function for return field responses?: ✅ Enabled
+Are you using custom javascript function for return field responses?: Enabled
 
 // Output Settings
 Request Output Type: json

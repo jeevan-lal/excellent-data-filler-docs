@@ -120,7 +120,7 @@ To specify where the AI output should be filled:
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Be specific in prompts** - Clear prompts generate better responses
 - **Test prompts first** - Verify AI output quality before automation
@@ -128,7 +128,7 @@ To specify where the AI output should be filled:
 - **Set retry on error** - Enable retry for better reliability
 - **Monitor API usage** - Keep track of your API quota and costs
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't use vague prompts** - Unclear prompts lead to inconsistent results
 - **Don't exceed token limits** - Keep prompts and expected outputs within model limits

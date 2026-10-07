@@ -267,8 +267,8 @@ Retrieve data from the browser's extension storage (stored via [Set Local Data](
 ### Example
 
 - **Store Key Name**: `CTH_EDF_DB_LOCAL_user_profile`
-- **Wait until the given key data is received**: ✅ Enabled
-- **Delete the data after getting the key data**: ❌ Disabled (keep data for reuse)
+- **Wait until the given key data is received**: Enabled
+- **Delete the data after getting the key data**: Disabled (keep data for reuse)
 
 ### Technical Notes
 
@@ -328,21 +328,37 @@ The **Export Cookies** field type exports the cookies of the active page to a JS
 
 ## Import Cookies
 
-The **Import Cookies** field type imports cookies from a JSON file into the browser session.
+The **Import Cookies** field type imports session and authentication cookies from a local JSON file directly into the browser session.
 
 | Options           | Description                                                                                  | Required |
 | ----------------- | -------------------------------------------------------------------------------------------- | -------- |
 | **Default Value** | Set the JSON file name to import cookies from (e.g., `cookies.json` or `session.json`).      | Yes      |
 
-### Usage
+::: info Configuration Note
+Import cookies from a JSON file. Set the JSON file name in the **Default Value** setting.
+:::
+
+::: warning Companion Program Prerequisite
+To use this field type, you must first [install a program](/documentation/program) on your PC.
+
+Because browser extensions operate in a secure sandbox without direct access to your local file system, reading the JSON cookie file requires the local desktop companion utility (**Program Helper**).
+
+- **Connection Test**: Use the **"Click and Check Program Connection to Extension"** button inside the field settings to confirm that the companion application is running and communicating with the extension.
+:::
+
+### Usage Instructions
 
 1. Set the field type to **Import Cookies**.
 2. In the **Default Value** setting of the field, enter the name of the JSON file containing the cookies (e.g., `cookies.json`).
-3. Make sure the JSON file exists in your browser's download or working directory.
-4. When executed, the extension parses the JSON file and restores all cookies into the browser for the matching domain.
+3. Ensure the companion program is installed and running on your computer.
+4. Click **Click and Check Program Connection to Extension** to verify connectivity.
+5. Place your exported JSON cookie file in the companion program's working directory or downloads folder.
+6. When the field executes during automation, the companion program reads the JSON file, transfers the data to the extension, and restores all cookies into the browser for the target domain.
 
 ::: tip Use Cases
 - Restoring saved login sessions or auth tokens automatically before filling forms.
 - Bypassing repetitive login screens or two-factor prompts during automated runs.
+- Sharing authenticated sessions across different test automation profiles.
 :::
+
 

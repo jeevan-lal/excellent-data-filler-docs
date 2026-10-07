@@ -72,11 +72,11 @@ Inspect DOM element metrics, hierarchical positions, and structural breadcrumb p
 - **Dimensions & Positioning**: Displays pixel dimensions (`Width: 707px`, `Height: 26px`) and CSS positioning (`Position: static`, `Top`, `Left`, `Z-Index`).
 - **Header Actions**: Quick controls to **Hide**, **Copy HTML**, Download element, Delete, or **Clear**.
 - **Docked Toolbar Controls**:
-  - **Pause / Freeze** (<kbd>⏸</kbd>): Freezes dynamic page states (tooltips, dropdowns) for inspection.
-  - **Element Picker** (<kbd>✦</kbd>): Click to highlight and inspect any other element on the page.
+  - **Pause / Freeze**: Freezes dynamic page states (tooltips, dropdowns) for inspection.
+  - **Element Picker**: Click to highlight and inspect any other element on the page.
   - **Grid Overlay**: Toggles alignment grid overlays.
   - **Edit**: Edit element attributes directly.
-  - **Close** (<kbd>✕</kbd>): Dismisses the inspector overlay.
+  - **Close**: Dismisses the inspector overlay.
 
 ---
 

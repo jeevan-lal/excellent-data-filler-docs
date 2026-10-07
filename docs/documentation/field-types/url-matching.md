@@ -48,12 +48,12 @@ https://example.com/products/item?id=123#section
 Current URL: https://example.com/products/item?id=123
 URL Type: Match with Full URL
 URL Value: https://example.com/products/item?id=123
-Result: ✅ Match
+Result: Match
 
 Current URL: https://example.com/products/item?id=123
 URL Type: Match with Full URL
 URL Value: https://example.com/products/item
-Result: ❌ No Match (query parameters don't match)
+Result: No Match (query parameters don't match)
 ```
 
 **Use Case:** When you need exact URL matching including all parameters.
@@ -79,12 +79,12 @@ https://example.com/products/item?id=123#section
 Current URL: https://example.com/products/item?id=123
 URL Type: Match with URL pathname
 URL Value: /products/item
-Result: ✅ Match
+Result: Match
 
 Current URL: https://example.com/products/item
 URL Type: Match with URL pathname
 URL Value: /products
-Result: ❌ No Match (pathname doesn't match exactly)
+Result: No Match (pathname doesn't match exactly)
 ```
 
 **Use Case:** When you want to match the page path regardless of domain or query parameters.
@@ -110,12 +110,12 @@ https://example.com/products/item?id=123#section
 Current URL: https://example.com/products/item?id=123
 URL Type: Match with URL hostname
 URL Value: example.com
-Result: ✅ Match
+Result: Match
 
 Current URL: https://www.example.com/page
 URL Type: Match with URL hostname
 URL Value: example.com
-Result: ❌ No Match (www. subdomain doesn't match)
+Result: No Match (www. subdomain doesn't match)
 ```
 
 **Use Case:** When you want to verify the domain regardless of the specific page.
@@ -250,7 +250,7 @@ URL Value: /products/{$categoryId$}
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Use appropriate URL type** - Choose the right matching type for your use case
 - **Use pathname for flexibility** - When domain or parameters don't matter
@@ -259,7 +259,7 @@ URL Value: /products/{$categoryId$}
 - **Use variables for dynamic URLs** - Make URL matching data-driven
 - **Test URL patterns** - Verify patterns match expected URLs
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't forget protocol** - Include `https://` when using full URL matching
 - **Don't forget leading slash** - Pathname should start with `/`
@@ -344,7 +344,7 @@ URL Value: https://example.com/products/item?id=123
 // Current URL
 https://example.com/products/item?id=123
 
-// Result: ✅ Match
+// Result: Match
 ```
 
 ### Example 2: Pathname Match with Variable
@@ -360,7 +360,7 @@ userId: "456"
 // Current URL
 https://example.com/users/456
 
-// Result: ✅ Match (pathname is /users/456)
+// Result: Match (pathname is /users/456)
 ```
 
 ### Example 3: Hostname Match
@@ -373,7 +373,7 @@ URL Value: www.example.com
 // Current URL
 https://www.example.com/any/page?param=value
 
-// Result: ✅ Match (hostname is www.example.com)
+// Result: Match (hostname is www.example.com)
 ```
 
 ### Example 4: Dynamic URL from Excel
@@ -389,7 +389,7 @@ URL Value (from Default Value): {$expectedURL$}
 // Current URL
 https://example.com/dashboard
 
-// Result: ✅ Match
+// Result: Match
 ```
 
 ---

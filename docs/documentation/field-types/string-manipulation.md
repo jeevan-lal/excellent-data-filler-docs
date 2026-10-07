@@ -90,14 +90,14 @@ If you want to change this "**Ben002**" string into this "**002_g.pdf**" then yo
 
 ### Text Cleaning
 
-1. **Remove Extra Space**: ✅ Enabled
-2. **Trim**: ✅ Enabled
-3. **Convert to Title Case**: ✅ Enabled
+1. **Remove Extra Space**: Enabled
+2. **Trim**: Enabled
+3. **Convert to Title Case**: Enabled
 4. **Result**: Clean, properly formatted text
 
 ### Advanced Regex Replacement
 
-1. **Replace String with RegEx**: ✅ Enabled
+1. **Replace String with RegEx**: Enabled
 2. **Regular Expression**: `(\d{4})-(\d{2})-(\d{2})`
 3. **Replace String**: `$3/$2/$1`
 4. **Result**: `2024-12-25` → `25/12/2024`

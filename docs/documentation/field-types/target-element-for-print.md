@@ -90,7 +90,7 @@ This will print all three elements: the receipt header, invoice details, and pay
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Use specific selectors** - Target exact elements to avoid printing unwanted content
 - **Test before production** - Always test print output to ensure correct elements are selected
@@ -98,7 +98,7 @@ This will print all three elements: the receipt header, invoice details, and pay
 - **Combine multiple selectors** - Print related sections together for complete information
 - **Use descriptive selectors** - Choose selectors that clearly identify the content
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't use overly broad selectors** - Avoid selectors like `div` or `*` that match too many elements
 - **Don't forget to test** - Always verify the print output matches your expectations
@@ -110,8 +110,8 @@ This will print all three elements: the receipt header, invoice details, and pay
 :::warning Don't Use XPath
 Do **not** use XPath selectors in the **Target Element For Print** field type. Only CSS selectors are supported.
 
-**Incorrect:** `//div[@id='invoice']` ❌  
-**Correct:** `#invoice` ✅
+**Incorrect:** `//div[@id='invoice']` (XPath is unsupported)  
+**Correct:** `#invoice` (CSS selector)
 :::
 
 :::tip CSS Selectors Only

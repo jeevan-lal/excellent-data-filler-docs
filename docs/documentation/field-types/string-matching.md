@@ -159,7 +159,7 @@ Some options require additional configuration fields:
 Which option: Element Attribute
 Element Attribute Name: data-status
 String Matching Value: active
-Result: ✅ Match (attribute value is "active")
+Result: Match (attribute value is "active")
 ```
 
 **Common Attributes:**
@@ -266,25 +266,25 @@ Select the comparison operator for string matching.
 Element Text: "Success"
 Operator: ==
 String Value: "Success"
-Result: ✅ Match
+Result: Match
 
 // Not equal to (!=)
 Element Text: "Error"
 Operator: !=
 String Value: "Success"
-Result: ✅ Match
+Result: Match
 
 // Greater than (>)
 Element Text: "100"
 Operator: >
 String Value: "50"
-Result: ✅ Match (100 > 50)
+Result: Match (100 > 50)
 
 // Less than (<)
 Element Text: "25"
 Operator: <
 String Value: "50"
-Result: ✅ Match (25 < 50)
+Result: Match (25 < 50)
 ```
 
 ---
@@ -317,12 +317,12 @@ The **Matching Type** option only appears when **Operator** is set to `==` or `!
 Element Text: "Welcome to Excellent Data Filler"
 Matching Type: Search String in Any Position
 String Value: "Excellent"
-Result: ✅ Match Found (substring exists)
+Result: Match Found (substring exists)
 
 Element Text: "Hello World"
 Matching Type: Search String in Any Position
 String Value: "World"
-Result: ✅ Match Found (substring exists)
+Result: Match Found (substring exists)
 ```
 
 ---
@@ -355,19 +355,19 @@ Element Text: "Option"
 Matching Type: Match String from Start-End Position
 String Value: "Option"
 Pattern: /^Option$/
-Result: ✅ Match Found (exact match from start to end)
+Result: Match Found (exact match from start to end)
 
 Element Text: "Option 1"
 Matching Type: Match String from Start-End Position
 String Value: "Option"
 Pattern: /^Option$/
-Result: ❌ No Match (doesn't match from start to end)
+Result: No Match (doesn't match from start to end)
 
 Element Text: "My Option"
 Matching Type: Match String from Start-End Position
 String Value: "Option"
 Pattern: /^Option$/
-Result: ❌ No Match (doesn't start with "Option")
+Result: No Match (doesn't start with "Option")
 ```
 
 **Use Case:** When you need to ensure the string matches from the very beginning to the very end of the element content, similar to an exact match but using regex anchors.
@@ -384,12 +384,12 @@ Result: ❌ No Match (doesn't start with "Option")
 Element Text: "Welcome to Excellent Data Filler"
 Matching Type: Equal to String
 String Value: "Welcome to Excellent Data Filler"
-Result: ✅ Match Found (exact match)
+Result: Match Found (exact match)
 
 Element Text: "Welcome to Excellent Data Filler"
 Matching Type: Equal to String
 String Value: "Excellent"
-Result: ❌ No Match (not exact match)
+Result: No Match (not exact match)
 ```
 
 ---
@@ -443,7 +443,7 @@ Result: Matches only if all elements contain "Complete"
 Element Text: "SUCCESS"
 String Value: "success"
 Convert to lowercase: ON
-Result: ✅ Match (both become "success")
+Result: Match (both become "success")
 ```
 
 ---
@@ -461,7 +461,7 @@ Result: ✅ Match (both become "success")
 Element Text: "Hello    World"
 String Value: "Hello World"
 Remove extra space: ON
-Result: ✅ Match (extra spaces removed)
+Result: Match (extra spaces removed)
 ```
 
 ---
@@ -479,7 +479,7 @@ Result: ✅ Match (extra spaces removed)
 Element Text: "Hello World"
 String Value: "HelloWorld"
 Remove all space: ON
-Result: ✅ Match (all spaces removed)
+Result: Match (all spaces removed)
 ```
 
 ---
@@ -563,7 +563,7 @@ Result: Waits until "Loaded" appears, then matches
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Use appropriate operators** - Choose the right operator for your comparison
 - **Enable case-insensitive matching** - When case doesn't matter
@@ -572,7 +572,7 @@ Result: Waits until "Loaded" appears, then matches
 - **Use "Search String"** - For flexible partial matching
 - **Wait for dynamic content** - Enable "Wait until matches" for AJAX content
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't use wrong operator** - `>` and `<` are for numeric/length comparisons
 - **Don't forget case sensitivity** - String matching is case-sensitive by default
@@ -640,7 +640,7 @@ String Value: "Success"
 // Element
 <div class="message">Success</div>
 
-// Result: ✅ Match
+// Result: Match
 ```
 
 ### Example 2: Partial Match
@@ -655,7 +655,7 @@ String Value: "Error"
 // Element
 <div class="alert">Error: Invalid input</div>
 
-// Result: ✅ Match (contains "Error")
+// Result: Match (contains "Error")
 ```
 
 ### Example 3: Numeric Comparison
@@ -669,7 +669,7 @@ String Value: "50"
 // Element
 <input type="number" value="75">
 
-// Result: ✅ Match (75 > 50)
+// Result: Match (75 > 50)
 ```
 
 ### Example 4: Case-Insensitive Match
@@ -685,5 +685,5 @@ Convert to lowercase: ON
 // Element
 <span class="status">COMPLETE</span>
 
-// Result: ✅ Match (both become "complete")
+// Result: Match (both become "complete")
 ```

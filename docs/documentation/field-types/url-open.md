@@ -162,7 +162,7 @@ https://{$domain$}/users/{$userId$}/profile?tab={$tabName$}
 
 ## Best Practices
 
-### ✅ Do's
+### Do's
 
 - **Use HTTPS protocol** - Always include `https://` in URLs
 - **Encode special characters** - URL-encode special characters in parameters
@@ -171,7 +171,7 @@ https://{$domain$}/users/{$userId$}/profile?tab={$tabName$}
 - **Use absolute URLs** - Include full URL with protocol and domain
 - **Validate Excel data** - Ensure Excel contains valid URL components
 
-### ❌ Don'ts
+### Don'ts
 
 - **Don't forget protocol** - Always include `https://` or `http://`
 - **Don't use relative URLs** - Use full URLs, not `/page` or `../page`

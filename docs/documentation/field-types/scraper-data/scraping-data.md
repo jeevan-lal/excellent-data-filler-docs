@@ -1,7 +1,7 @@
 ---
 prev:
-  text: "Fetch Table Data (Vertical)"
-  link: "/documentation/field-types/scraper-data/fetch-table-data-vertical"
+  text: "Fetch HTML"
+  link: "/documentation/field-types/scraper-data/fetch-html"
 next:
   text: "Scraping Page URL"
   link: "/documentation/field-types/scraper-data/scraping-page-url"

@@ -9,7 +9,7 @@
             <img src="/192x192.png" alt="Excellent Data Filler Logo" class="brand-logo" />
             <div>
               <h3 class="brand-title">Excellent Data Filler</h3>
-              <span class="version-badge">v4.13.2</span>
+              <span class="version-badge">v{{ version }}</span>
             </div>
           </div>
           <p class="brand-desc">
@@ -132,6 +132,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useData } from 'vitepress'
+import { version } from '../../../package.json'
 
 const { frontmatter, page } = useData()
 const isHome = computed(() => {

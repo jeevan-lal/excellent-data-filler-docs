@@ -47,19 +47,19 @@ Check Real Time RegEx String.
 
 | RegEx               | URL/String                                             | Result                   |
 | ------------------- | ------------------------------------------------------ | ------------------------ |
-| ^r                  | rabbit <br> parrot                                     | ✅ <br> ❌               |
-| t$                  | rabbit <br> trap                                       | ✅ <br> ❌               |
-| (\d+)               | 45 <br> 45A <br> 45/A                                  | ✅ <br> ✅<br> ✅        |
-| (\d+$)              | 45 <br> 45A <br> 45/A                                  | ✅ <br> ❌<br> ❌        |
-| (\d{2}/\d{2}/\d{4}) | 05/09/2024 <br> 5/09/2024 <br> 05/9/2024 <br> 05/9/224 | ✅ <br> ❌<br> ❌<br> ❌ |
+| ^r                  | rabbit <br> parrot                                     | Match <br> No Match      |
+| t$                  | rabbit <br> trap                                       | Match <br> No Match      |
+| (\d+)               | 45 <br> 45A <br> 45/A                                  | Match <br> Match <br> Match |
+| (\d+$)              | 45 <br> 45A <br> 45/A                                  | Match <br> No Match <br> No Match |
+| (\d{2}/\d{2}/\d{4}) | 05/09/2024 <br> 5/09/2024 <br> 05/9/2024 <br> 05/9/224 | Match <br> No Match <br> No Match <br> No Match |
 
 ### Advanced Patterns
 
 | RegEx                             | URL/String                                                                                          | Result            |
 | --------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
-| https://demo.in/form/page/(\d+$)  | https://demo.in/form/page/45 <br> https://demo.in/form/page/45A <br> https://demo.in/form/page/45/A | ✅ <br> ❌<br> ❌ |
-| https://demo.in/form/(\d+)/(\d+$) | https://demo.in/form/02/45 <br> https://demo.in/form/02Q/45A <br> https://demo.in/form/02/45/A      | ✅ <br> ❌<br> ❌ |
-| param=[^&]+&param2=([^&]+)$       | param=Data%20saved&param2=124045 <br>param=Data%20saved&param2=124045&param3=done                   | ✅ <br> ❌        |
+| https://demo.in/form/page/(\d+$)  | https://demo.in/form/page/45 <br> https://demo.in/form/page/45A <br> https://demo.in/form/page/45/A | Match <br> No Match <br> No Match |
+| https://demo.in/form/(\d+)/(\d+$) | https://demo.in/form/02/45 <br> https://demo.in/form/02Q/45A <br> https://demo.in/form/02/45/A      | Match <br> No Match <br> No Match |
+| param=[^&]+&param2=([^&]+)$       | param=Data%20saved&param2=124045 <br>param=Data%20saved&param2=124045&param3=done                   | Match <br> No Match |
 
 ## Next Steps
 
