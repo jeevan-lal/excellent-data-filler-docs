@@ -36,6 +36,7 @@ Advanced field types that work with external libraries and frameworks for enhanc
 - [**CKEditor**](/documentation/field-types/ckeditor) - Advanced WYSIWYG editor integration
 - [**Table Advance Options**](/documentation/field-types/table-advance-options) - Advanced table manipulation features
 - [**Get TOTP Code**](/documentation/field-types/get-totp-code) - Get TOTP code from Google Authenticator
+- [**Wait & Act**](/documentation/field-types/wait-act) - Wait for element condition (visible/invisible) and trigger actions
 
 :::warning INFO
 Material field type works on Material framework like **Vuetify, MUI, React Material, Angular Material**, etc.
@@ -165,6 +166,7 @@ Field types for processing, analyzing, and manipulating images and files.
 Field types for controlling browser behavior, tabs, and web page interactions.
 
 - [**Open a new Tab**](/documentation/field-types/browser-actions#open-a-new-tab) - Create and open new browser tabs
+- [**Open a new Window**](/documentation/field-types/browser-actions#open-a-new-window) - Create and open new browser windows with custom size, state, or incognito mode
 - [**Get Tab ID**](/documentation/field-types/browser-actions#get-tab-id) - Retrieve current tab identifier
 - [**Get Tab Details**](/documentation/field-types/browser-actions#get-tab-details) - Retrieve specific details about a browser tab
 - [**Capture Tab**](/documentation/field-types/browser-actions#capture-tab) - Take full-page screenshots of browser tabs
@@ -185,6 +187,7 @@ Field types for controlling browser behavior, tabs, and web page interactions.
 - [**Remove Local Data**](/documentation/field-types/browser-actions#remove-local-data) - Clear data from browser local storage
 - [**Export Cookies**](/documentation/field-types/browser-actions#export-cookies) - Export current page cookies to a JSON file
 - [**Import Cookies**](/documentation/field-types/browser-actions#import-cookies) - Import cookies from a JSON file
+- [**Capture Web Request**](/documentation/field-types/capture-web-request) - Monitor network requests, optionally click elements, and capture responses
 
 ## Javascript Dialog {#javascript-dialog}
 
@@ -266,7 +269,6 @@ Miscellaneous field types for various utility functions, web interactions, and c
 - [**URL Matching**](/documentation/field-types/url-matching) - Match and validate URL patterns
 - [**URL Open**](/documentation/field-types/url-open) - Open URLs in new tabs or windows
 - [**Send Request**](/documentation/field-types/send-request) - Send HTTP requests to external APIs
-- [**Web Request Completed**](/documentation/field-types/web-request-completed) - Monitor request completion status
 - [**Timer Action**](/documentation/field-types/timer-action) - Execute actions after specified time delays
 - [**String Matching**](/documentation/field-types/string-matching) - Match and validate text patterns
 - [**String Manipulation**](/documentation/field-types/string-manipulation) - Transform and process text strings

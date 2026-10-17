@@ -345,7 +345,7 @@ Specify URL match patterns to track network requests across targeted domains.
 - `*://mail.google.com/*` — Targets Gmail specifically.
 
 ::: info Note
-Used by the [`Web Request Completed`](/documentation/field-types/web-request-completed) and [`Request Monitor`](/documentation/field-types/request-monitor) field types to monitor and capture background HTTP requests.
+Used by the [`Capture Web Request`](/documentation/field-types/capture-web-request) field type to monitor and capture background HTTP requests.
 :::
 
 ---

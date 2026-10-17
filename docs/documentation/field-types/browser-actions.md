@@ -9,7 +9,54 @@ The **Browser Action** field types allow you to automate and control various bro
 
 ## Open a new Tab
 
-Open a new tab in browser then use this field type and you can set tab `url` in the `field value` or `default value`.
+The **Open a new Tab** field type creates and opens a new tab in the browser window with options for position, window placement, tab pinning, opener relationship, and split views. You can set the target URL in the **field value** or **default value**.
+
+| Option Key | Label / Switch Text | Type | Default | Description |
+|---|---|---|---|---|
+| `url` | **Field Value** / **Default Value** | String | `""` | Target URL to open in the newly created tab. |
+| `isActive` | **Make this tab active (focused) in the window?** | `switch` | `false` | When enabled, automatically shifts user focus to the new tab upon creation. |
+| `pinned` | **Pin this tab in the tab bar?** | `switch` | `false` | When enabled, pins the new tab to the left of the tab strip. |
+| `isSetIndex` | **Set tab position (index) in the window?** | `switch` | `false` | Enables manual position assignment. |
+| `index` | **Tab Index** | `text` / `number` | `""` | Zero-based index position in the tab bar (e.g. `0` for the first tab). |
+| `isSetWindowId` | **Open in a specific window (Window ID)?** | `switch` | `false` | Enables window target selection. |
+| `windowId` | **Target Window ID** | `text` / `variable` | `""` | Target browser Window ID to open the tab inside. |
+| `isSetOpenerTabId` | **Specify the opener tab (Opener Tab ID)?** | `switch` | `false` | Enables opener relationship specification. |
+| `openerTabId` | **Opener Tab ID** | `text` / `variable` | `""` | Tab ID of the opener tab (enables context inheritance & grouping). |
+| `isSetSplitWithTabId`| **Open in split view with an existing tab? (Chrome 155+)** | `switch` | `false` | Enables split view creation with an existing tab. |
+| `splitWithTabId` | **Split-with Tab ID** | `text` / `variable` | `""` | Existing Tab ID to open side-by-side in split view. |
+
+### Usage Notes
+
+- **URL Value**: Specify a valid web URL (e.g. `https://example.com`) or extension variable (e.g. `{$target_url$}`).
+- **Split View (Chrome 155+)**: When supported by your browser version, pairing the new tab with an active `splitWithTabId` allows simultaneous side-by-side form validation and data entry.
+
+---
+
+## Open a new Window
+
+The **Open a new Window** field type creates and launches a new browser window with custom dimensions, desktop coordinates, display state, presentation type, or incognito mode. You can set the initial URL in the **field value** or **default value**.
+
+| Option Key | Label / Switch Text | Type | Default | Description |
+|---|---|---|---|---|
+| `url` | **Field Value** / **Default Value** | String | `""` | Initial URL (or array of URLs) to open in the new window. |
+| `isFocused` | **Open window in focused (active) state?** | `switch` | `true` | When enabled, brings the new window into focus on screen. |
+| `isIncognito` | **Open as an incognito (private) window?** | `switch` | `false` | When enabled, opens the window in private/incognito mode. |
+| `isSetType` | **Specify Window Type (Normal, Popup, Panel)?** | `switch` | `false` | Enables window presentation type selection. |
+| `windowType` | **Window Type** | `select` | `"normal"` | Options: `Normal` (standard window), `Popup` (minimal without address bar), or `Panel`. |
+| `isSetState` | **Specify Initial Window State?** | `switch` | `false` | Enables initial window state selection. |
+| `windowState` | **Initial Window State** | `select` | `"normal"` | Options: `Normal`, `Minimized`, `Maximized`, or `Fullscreen`. |
+| `isSetPosition` | **Set Window Position (Left / Top)?** | `switch` | `false` | Enables custom screen coordinates. |
+| `left` / `top` | **Left / Top (pixels)** | `text` / `number` | `""` | Distance from screen top and left edges in pixels. |
+| `isSetSize` | **Set Window Dimensions (Width / Height)?** | `switch` | `false` | Enables custom window width & height. |
+| `width` / `height` | **Width / Height (pixels)** | `text` / `number` | `""` | Width and height of the new window in pixels. |
+| `isSetTabId` | **Move an existing Tab into this Window (Tab ID)?** | `switch` | `false` | Moves an existing tab into this window instead of creating a new blank tab. |
+| `tabId` | **Tab ID to move** | `text` / `number` | `""` | Existing Tab ID to detach and move into the new window. |
+| `setSelfAsOpener` | **Set current window as opener context?** | `switch` | `false` | Marks the current window as the opener for context inheritance. |
+
+### Usage Notes
+
+- **Popup Windows**: Use `windowType: "popup"` to create compact, distraction-free dialogs without browser toolbars or tab strips.
+- **Detaching Tabs**: Combine `isSetTabId` with an existing Tab ID (retrieved via [Get Tab ID](#get-tab-id)) to pop out an active tab into its own dedicated window during automated workflows.
 
 ---
 

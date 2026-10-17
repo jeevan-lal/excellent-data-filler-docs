@@ -127,5 +127,5 @@ This makes it easy to identify which field captured the request data and allows 
 - <img src="/svg/form.svg" class="doc-icon" /> [Field Settings](/documentation/form-fields/field-settings) — Advanced field configuration
 - <img src="/svg/form.svg" class="doc-icon" /> [JavaScript Code - Request Monitoring](/documentation/field-types/javascript-code.html#request-monitoring) — Request monitoring via script
 - <img src="/svg/excel.svg" class="doc-icon" /> [Excel Template](/documentation/site/site-excel-template) — Excel (.xlsx) template structure
-- <img src="/svg/browser.svg" class="doc-icon" /> [Web Request Completed](/documentation/field-types/web-request-completed) — Wait for web request completion
+- <img src="/svg/browser.svg" class="doc-icon" /> [Capture Web Request](/documentation/field-types/capture-web-request) — Wait for and capture web requests
 

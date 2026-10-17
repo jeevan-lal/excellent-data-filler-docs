@@ -316,6 +316,41 @@
           <strong>//button[@prompt]</strong> <br />
         </td>
       </tr>
+      <tr>
+        <td>
+          <ul style="display: block; margin: 0 0 8px 0; padding-left: 20px;">
+            <li>Visible Option 1</li>
+            <li>Visible Option 2</li>
+          </ul>
+          <ul style="margin: 0; padding-left: 20px;">
+            <li>Default Option</li>
+          </ul>
+        </td>
+        <td>
+          <code>
+            &lt;ul style="display: block;"&gt;<br />
+            &nbsp; &lt;li&gt;Visible Option 1&lt;/li&gt;<br />
+            &nbsp; &lt;li&gt;Visible Option 2&lt;/li&gt;<br />
+            &lt;/ul&gt;<br />
+            &lt;ul style="display: none;"&gt;<br />
+            &nbsp; &lt;li&gt;Hidden Option&lt;/li&gt;<br />
+            &lt;/ul&gt;<br />
+            &lt;ul&gt;<br />
+            &nbsp; &lt;li&gt;Default Option&lt;/li&gt;<br />
+            &lt;/ul&gt;
+          </code>
+        </td>
+        <td>
+          <strong>ul:not([style*="display: none"]) &gt; li</strong> <br />
+          <strong>ul[style*="display: block"] &gt; li</strong> <br />
+          <strong>ul:not([style]) &gt; li</strong> <br />
+        </td>
+        <td>
+          <strong>//ul[not(contains(@style, "display: none"))]/li</strong> <br />
+          <strong>//ul[contains(@style, "display: block")]/li</strong> <br />
+          <strong>//ul[not(@style)]/li</strong> <br />
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>

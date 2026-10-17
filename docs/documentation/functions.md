@@ -581,6 +581,10 @@ If you want to remove all element style then set value `remove-all-css-text`.
 
 The `insertElementAttribute` method sets the value of an attribute on the element. If the attribute already exists, the value is updated otherwise a new attribute is added with the specified **name** and **value**.
 
+> [!NOTE]
+> **Editing `<option>` elements in dropdowns**:
+> When targeting an `<option>` element (such as XPath `//select/option[@value="100"]` and Field Value `value,1000`), you **must turn OFF** the field option **`Wait until element is visible in the page.`** in Field Settings. Browser dropdown options are not rendered with visible layout boxes when the dropdown is closed, which will otherwise cause a visibility timeout error.
+
 | Options                                                 | Required | Description                   | Value            |
 | ------------------------------------------------------- | -------- | ----------------------------- | ---------------- |
 | Selector Type                                           | true     | Element Selector Type         |                  |
@@ -666,6 +670,31 @@ If you want to check whether the current window is a child window or not, then y
 ## isWindowIframe
 
 If you want to check whether the current window is an iframe or not, then you can use it. This function returns `true` (1) if it is an iframe, `false` (0) otherwise.
+
+## isTabIncognito {#istabincognito}
+
+Validates whether the specified tab (or active tab) is operating inside an **Incognito (Private)** browsing session.
+
+| Options | Required | Description | Value |
+| --- | --- | --- | --- |
+| Selector Type | false | Not required | |
+| Selector Query | false | Not required | |
+| Default Value / Field Value | false | Optional target **Tab ID** | Tab ID (e.g., `123` or `{$tab_id$}`) |
+
+### Behavior
+
+- **With Tab ID**: If a **Tab ID** is specified in the field's **Default Value** (or **Field Value**), the function checks the incognito status of that specific tab.
+- **Without Tab ID (Empty)**: If no Tab ID is provided, it checks the **currently active tab** by default.
+- **Returns**: `true` (1) if the tab is operating inside an incognito/private window, `false` (0) otherwise.
+
+### Use Cases
+
+- Checking incognito mode for specific background or newly opened tabs before performing actions.
+- Conditional automation flows depending on private vs normal browsing mode.
+- Skipping actions (such as cookie exports or local caching) when running inside an incognito context.
+
+
+
 
 ## countElementLength
 
