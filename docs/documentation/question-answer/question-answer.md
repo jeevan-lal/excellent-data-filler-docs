@@ -2,6 +2,20 @@
 prev:
   text: "Browser Bus"
   link: "/documentation/browser-bus"
+head:
+  - - script
+    - type: application/ld+json
+    - |
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is Excellent Data Filler?", "acceptedAnswer": { "@type": "Answer", "text": "Excellent Data Filler is a browser extension for automated web form filling, data scraping, and workflow automation with Excel (.xlsx) integration. Works on Chrome, Firefox, Edge, Opera." } },
+          { "@type": "Question", "name": "Which spreadsheet formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Only .xlsx files are supported for local uploads. CSV is not supported. Google Sheets (Beta) is also supported." } },
+          { "@type": "Question", "name": "What is the shortcut to start or pause automation?", "acceptedAnswer": { "@type": "Answer", "text": "Alt+Q starts or pauses automation. Automation also triggers automatically on page load if site and form match." } },
+          { "@type": "Question", "name": "How do I automate my first form?", "acceptedAnswer": { "@type": "Answer", "text": "1. Press Alt+Shift+S or right-click Insert Site. 2. Inspect fields with Alt+Shift+I. 3. Upload .xlsx template. 4. Refresh page or press Alt+Q." } }
+        ]
+      }
 ---
 
 # Frequently Asked Questions (FAQ) {#faq}

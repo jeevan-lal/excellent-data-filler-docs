@@ -4,8 +4,9 @@
   "description": "Documentation site for Excellent Data Filler - a powerful browser extension that automates form filling and data scraping",
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs"
+    "build": "node scripts/generate-llms-full.mjs && vitepress build docs",
+    "serve": "vitepress serve docs",
+    "llms": "node scripts/generate-llms-full.mjs"
   },
   "keywords": [
     "ctechhindi",
@@ -24,7 +25,7 @@
   },
   "dependencies": {
     "extra-javascript-functions": "file:../../../Javascript/_lib/_extra-javascript-funs",
-    "vitepress": "^2.0.0-alpha.18",
+    "vitepress": "^2.0.0-alpha.21",
     "vue": "^3.4.15"
   },
   "author": "Jeevan Lal",

@@ -336,6 +336,9 @@ export default {
   appearance: true,
   lastUpdated: true,
   outDir: '../dist',
+  sitemap: {
+    hostname: 'https://docs.edfiller.in'
+  },
   head: [
     ['meta', { charset: 'utf-8' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
@@ -351,6 +354,20 @@ export default {
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap' }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    ['meta', { name: 'author', content: 'Jeevan Lal (C Tech Hindi)' }],
+    ['link', { rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM documentation index' }],
+    ['script', { type: 'application/ld+json' }, JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Excellent Data Filler',
+      applicationCategory: 'BrowserApplication',
+      operatingSystem: 'Chrome, Firefox, Edge, Opera',
+      url: 'https://docs.edfiller.in/',
+      author: { '@type': 'Person', name: 'Jeevan Lal', url: 'https://ctechhindi.in/' },
+      description: 'Browser extension that automates form filling and data scraping with Excel (.xlsx) integration.',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+    })],
   ],
   themeConfig: {
     search: {
@@ -402,6 +419,19 @@ export default {
       pattern: 'https://github.com/jeevan-lal/excellent-data-filler-docs/blob/master/docs/:path',
       text: 'Edit this page on GitHub'
     },
+  },
+  transformPageData(pageData) {
+    // Auto-generate meta description for LLMs/SEO if not set in frontmatter
+    if (!pageData.description && pageData.content) {
+      const text = pageData.content
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/[#>*`\[\]()!|]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 160);
+      if (text) pageData.description = text;
+    }
+    return pageData;
   },
   vite: {
   }

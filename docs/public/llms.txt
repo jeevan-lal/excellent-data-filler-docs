@@ -1,0 +1,79 @@
+# Excellent Data Filler — Documentation
+
+> Excellent Data Filler is a Manifest V3 browser extension for automated web form filling, data scraping, and workflow automation with Excel (.xlsx) integration. Works on Chrome, Firefox, Edge, Opera. Automation triggers on page load, toggled with Alt+Q. Data sources: Upload Excel (.xlsx) or Google Sheets (Beta). Live docs: https://docs.edfiller.in/
+
+Full text dump for LLMs: https://docs.edfiller.in/llms-full.txt
+
+## Get Started
+
+- [Introduction](https://docs.edfiller.in/documentation/): What Excellent Data Filler is, key features, browser availability, quick start (4 steps), common use cases.
+- [Structure](https://docs.edfiller.in/documentation/structure): Site → Form → Field hierarchy overview.
+- [Testing Site](https://docs.edfiller.in/documentation/testing-site): Interactive sandbox to test rules with live sample forms.
+
+## Extension
+
+- [Icon](https://docs.edfiller.in/documentation/icon): Toolbar icon, ON/OFF toggle, pinning.
+- [Settings](https://docs.edfiller.in/documentation/settings): Global extension settings, advanced options, Allow Right Click.
+- [Logs](https://docs.edfiller.in/documentation/logs): Execution logging dashboard, row indexing, error diagnostics.
+- [Context Menu](https://docs.edfiller.in/documentation/extension/context-menu): Insert Site, Insert Form, Inspect Elements, copy selector/XPath/text/HTML, Download select box options. No "Fill Data" item.
+- [Keyboard Shortcuts](https://docs.edfiller.in/documentation/extension/keyboard-shortcuts): Alt+Q start/pause, Alt+Shift+I inspect, Alt+Shift+S insert site, Alt+Shift+F insert form, Alt+C copy field, Alt+Shift+R/C/X/T/H/N/M copy helpers. Alt+F does NOT exist.
+
+## Site
+
+- [Site Overview](https://docs.edfiller.in/documentation/site/site): Site container, Auto vs Manual mode, Insert Site (Alt+Shift+S), dashboard controls.
+- [Excel Template](https://docs.edfiller.in/documentation/site/site-excel-template): .xlsx template download/upload, row-by-row batch processing. .xlsx ONLY, never .csv.
+- [Scraper Data](https://docs.edfiller.in/documentation/site/site-scraper-data): Extract text/tables from websites.
+- [Site Settings](https://docs.edfiller.in/documentation/site/site-settings): Execution toggles, environment variables, Import/Export backup.
+
+## Form & Fields
+
+- [Form Overview](https://docs.edfiller.in/documentation/form/form): Site Form pages, URL match types (Full URL, Pathname, Hostname, RegEx), delays.
+- [Field Overview](https://docs.edfiller.in/documentation/form-fields/field): Insert Field, selector, value assignment.
+- [Field Types](https://docs.edfiller.in/documentation/form-fields/field-types): All field types — Basic (Text, Select, Radio, Checkbox, Textarea), Advanced (Date Picker, Upload File, Button, JavaScript Code, CKEditor, Send Request), AI, Google/Microsoft/SurveyCake, Scraper, Browser Actions, Math, String, etc.
+- [Field Settings](https://docs.edfiller.in/documentation/form-fields/field-settings): Per-field configuration.
+- [Field Response Action](https://docs.edfiller.in/documentation/form-fields/field-response-action): Actions after field execution.
+- [Form Response](https://docs.edfiller.in/documentation/form-response/form-response): Success/error response rules.
+- [Success Response](https://docs.edfiller.in/documentation/form-response/form-success-response): Success detection.
+- [Error Response](https://docs.edfiller.in/documentation/form-response/form-error-response): Error detection.
+
+## Field Types (detailed)
+
+- [AI](https://docs.edfiller.in/documentation/field-types/ai): AI-powered responses via Google Gemini or OpenRouter, prompt from Default Value or Excel column, auto-fill to selector.
+- [Upload File](https://docs.edfiller.in/documentation/field-types/upload-file): Automatic file uploading, Google/Microsoft Forms support.
+- [Date Picker](https://docs.edfiller.in/documentation/field-types/date-picker): Date/time manipulation, format conversion.
+- [JavaScript Code](https://docs.edfiller.in/documentation/field-types/javascript-code): Custom JS execution with predefined functions.
+- [URL Matching](https://docs.edfiller.in/documentation/field-types/url-matching): URL pattern matching rules.
+- [URL Open](https://docs.edfiller.in/documentation/field-types/url-open): Open URLs automatically.
+- [Send Request](https://docs.edfiller.in/documentation/field-types/send-request): HTTP requests.
+- [Timer Action](https://docs.edfiller.in/documentation/field-types/timer-action): Delayed actions.
+- [String Matching](https://docs.edfiller.in/documentation/field-types/string-matching): Text matching rules.
+- [String Manipulation](https://docs.edfiller.in/documentation/field-types/string-manipulation): Regex, case conversion, text processing.
+- [Save as PDF](https://docs.edfiller.in/documentation/field-types/save-as-pdf): Generate PDFs from web content.
+- [Browser Actions](https://docs.edfiller.in/documentation/field-types/browser-actions): Tab/window control, dialogs, downloads.
+- [Math Actions](https://docs.edfiller.in/documentation/field-types/math-actions): Calculations on extracted data.
+- [Material Single Select](https://docs.edfiller.in/documentation/field-types/material-single-select): Material Design (Vuetify, MUI) support.
+
+## Advanced
+
+- [Segment](https://docs.edfiller.in/documentation/segment): Reusable field routines.
+- [Functions](https://docs.edfiller.in/documentation/functions): Predefined JS functions (checkAttributeExists, checkElementExists, cleanSessionStorage, cleanLocalStorage, etc.).
+- [Keys](https://docs.edfiller.in/documentation/keys): Public/private keys, insert key.
+- [Variable](https://docs.edfiller.in/documentation/variable): Dynamic variables (timestamps, UUIDs, counters).
+- [Locate Element](https://docs.edfiller.in/documentation/locate-element): Element location strategies.
+- [RegEx](https://docs.edfiller.in/documentation/regex): Regex testing tool.
+- [Browser Bus](https://docs.edfiller.in/documentation/browser-bus): Browser communication.
+- [Program](https://docs.edfiller.in/documentation/program): Program helper.
+- [Google Service](https://docs.edfiller.in/documentation/services/google-service): Google Sheets/Gmail integration.
+- [Local Server](https://docs.edfiller.in/documentation/local-server/local-server): Desktop integration via local server.
+- [Scheduler](https://docs.edfiller.in/documentation/scheduler/scheduler): Task scheduling.
+- [Question & Answer](https://docs.edfiller.in/documentation/question-answer/question-answer): FAQ.
+
+## Key Facts for LLMs
+
+- Product: Excellent Data Filler by C Tech Hindi (Jeevan Lal)
+- Docs: https://docs.edfiller.in/
+- Extension: Manifest V3, Chrome/Firefox/Edge/Opera (Safari coming soon)
+- Trigger: Auto on page load if site+form match and extension enabled. Toggle: Alt+Q or toolbar.
+- Data: .xlsx ONLY (never .csv), or Google Sheets (Beta)
+- Shortcuts customizable via chrome://extensions/shortcuts
+- Support: YouTube @ctechhindi, Google Group, WhatsApp, GitHub Issues
