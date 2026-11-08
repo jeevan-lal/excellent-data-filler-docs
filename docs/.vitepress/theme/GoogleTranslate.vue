@@ -1,7 +1,7 @@
 <template>
   <div class="custom-translate-container notranslate" ref="containerRef">
     <!-- Trigger Button -->
-    <button class="translate-trigger-btn" :class="{ 'is-active': isOpen }" @click="toggleDropdown" type="button" aria-label="Select Language">
+    <button class="translate-trigger-btn" :class="{ 'is-active': isOpen }" @click="toggleDropdown" @keydown="onTriggerKeydown" type="button" aria-label="Select Language" aria-haspopup="listbox" :aria-expanded="isOpen">
       <svg class="globe-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10" />
         <line x1="2" y1="12" x2="22" y2="12" />
@@ -15,19 +15,20 @@
 
     <!-- Custom Dropdown Panel -->
     <transition name="dropdown-fade">
-      <div v-if="isOpen" class="translate-dropdown-menu">
+      <div v-if="isOpen" class="translate-dropdown-menu" role="listbox" aria-label="Languages">
         <!-- Search input -->
         <div class="search-box">
           <svg class="search-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
-          <input v-model="searchQuery" type="text" placeholder="Search language..." class="search-input" ref="searchInputRef" @click.stop />
+          <input v-model="searchQuery" type="text" placeholder="Search language..." class="search-input" ref="searchInputRef" @click.stop @keydown="onSearchKeydown" aria-label="Search language" />
         </div>
+        <p v-if="!translateReady" class="translate-error">Translation unavailable — check connection.</p>
 
         <!-- Language options list -->
-        <ul class="lang-list">
-          <li v-for="lang in filteredLanguages" :key="lang.code" class="lang-item" :class="{ 'is-selected': currentLang.code === lang.code }" @click="selectLanguage(lang)">
+        <ul class="lang-list" role="presentation">
+          <li v-for="(lang, idx) in filteredLanguages" :key="lang.code" class="lang-item" :class="{ 'is-selected': currentLang.code === lang.code, 'is-active': idx === activeIndex }" role="option" :aria-selected="currentLang.code === lang.code" :tabindex="idx === activeIndex ? 0 : -1" @click="selectLanguage(lang)" @keydown="onItemKeydown($event, idx)" @mouseenter="activeIndex = idx">
             <div class="lang-info">
               <span class="lang-native">{{ lang.native }}</span>
               <span v-if="lang.native !== lang.name" class="lang-english">{{ lang.name }}</span>
@@ -55,6 +56,8 @@ const containerRef = ref(null)
 const searchInputRef = ref(null)
 const isOpen = ref(false)
 const searchQuery = ref('')
+const activeIndex = ref(0)
+const translateReady = ref(false)
 
 const languages = [
   { code: 'en', name: 'English', native: 'English' },
@@ -97,10 +100,32 @@ function toggleDropdown() {
   isOpen.value = !isOpen.value
   if (isOpen.value) {
     searchQuery.value = ''
+    activeIndex.value = 0
     nextTick(() => {
       searchInputRef.value?.focus()
     })
   }
+}
+
+function onTriggerKeydown(e) {
+  if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault()
+    if (!isOpen.value) toggleDropdown()
+  }
+}
+
+function onSearchKeydown(e) {
+  if (e.key === 'Escape') { isOpen.value = false; return; }
+  if (e.key === 'ArrowDown') { e.preventDefault(); activeIndex.value = Math.min(activeIndex.value + 1, filteredLanguages.value.length - 1); }
+  if (e.key === 'ArrowUp') { e.preventDefault(); activeIndex.value = Math.max(activeIndex.value - 1, 0); }
+  if (e.key === 'Enter') { e.preventDefault(); const lang = filteredLanguages.value[activeIndex.value]; if (lang) selectLanguage(lang); }
+}
+
+function onItemKeydown(e, idx) {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectLanguage(filteredLanguages.value[idx]); }
+  if (e.key === 'Escape') { isOpen.value = false; }
+  if (e.key === 'ArrowDown') { e.preventDefault(); activeIndex.value = Math.min(idx + 1, filteredLanguages.value.length - 1); }
+  if (e.key === 'ArrowUp') { e.preventDefault(); activeIndex.value = Math.max(idx - 1, 0); }
 }
 
 function handleClickOutside(e) {
@@ -114,9 +139,11 @@ function selectLanguage(lang) {
   isOpen.value = false
 
   if (lang.code === 'en') {
-    // Reset to English
+    // Reset to English — must clear cookie AND reload, Google's DOM translation won't undo without reload
     document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`
+    window.location.reload()
+    return
   } else {
     // Set cookie for persistence
     const val = `/en/${lang.code}`
@@ -127,8 +154,12 @@ function selectLanguage(lang) {
   // Trigger Google Translate engine
   const select = document.querySelector('.goog-te-combo')
   if (select) {
-    select.value = lang.code === 'en' ? '' : lang.code
+    select.value = lang.code
     select.dispatchEvent(new Event('change'))
+  } else if (!translateReady.value) {
+    // Offline / blocked — don't reload, keep English
+    currentLang.value = languages[0]
+    return
   } else {
     window.location.reload()
   }
@@ -183,6 +214,7 @@ onMounted(() => {
         },
         'google_translate_element'
       )
+      translateReady.value = true
     }
   }
 
@@ -191,9 +223,16 @@ onMounted(() => {
     script.id = 'google-translate-script'
     script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
     script.async = true
+    script.onerror = () => { translateReady.value = false; }
     document.body.appendChild(script)
+    // Timeout: if script doesn't load in 5s, mark unavailable
+    setTimeout(() => {
+      if (!window.google?.translate) translateReady.value = false;
+      else translateReady.value = true;
+    }, 5000);
   } else if (window.google && window.google.translate) {
     window.googleTranslateElementInit()
+    translateReady.value = true
   }
 })
 
@@ -272,6 +311,7 @@ onUnmounted(() => {
   top: calc(100% + 8px);
   right: 0;
   width: 256px;
+  max-width: calc(100vw - 32px);
   max-height: 380px;
   background-color: var(--vp-c-bg-elv);
   border: 1px solid var(--vp-c-border);
@@ -345,6 +385,20 @@ onUnmounted(() => {
   background-color: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
   font-weight: 600;
+}
+
+.lang-item.is-active {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: -2px;
+}
+
+.translate-error {
+  padding: 8px 12px;
+  margin: 0;
+  font-size: 12px;
+  color: #c73c5a;
+  background: var(--vp-c-bg-soft);
+  border-bottom: 1px solid var(--vp-c-border);
 }
 
 .lang-info {

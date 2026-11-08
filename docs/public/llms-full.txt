@@ -1,5 +1,5 @@
 # Excellent Data Filler — Full Documentation (llms-full.txt)
-# Source: https://docs.edfiller.in/ | Generated: 2026-11-08T05:54:55.299Z
+# Source: https://docs.edfiller.in/ | Generated: 2026-11-08T06:07:32.783Z
 # For LLMs: This file contains the full text of all documentation pages.
 # Key facts: .xlsx ONLY (never .csv), Alt+Q start/pause, auto on page load, Chrome/Firefox/Edge/Opera.
 
